@@ -108,6 +108,9 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tile:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
 .tile .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--red-soft);border:1px solid var(--red-line);color:var(--red-hi)}
 .tile .ic svg{width:18px;height:18px}
+.tile .ic.img{width:84px;height:84px;margin:-8px 0 -4px -8px;border:0;border-radius:50%;background:radial-gradient(circle at 50% 55%,rgba(225,6,0,.22),rgba(225,6,0,0) 68%)}
+.tile .ic.img img{width:100%;height:100%;mix-blend-mode:lighten;transition:transform .45s var(--ease)}
+.tile:hover .ic.img img{transform:scale(1.07) rotate(-2deg)}
 .tile b{font-size:15.5px;font-weight:600;line-height:1.35}
 .tile small{color:var(--muted);font-size:14px;line-height:1.5;flex:1}
 .tile em{font-style:normal;font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
@@ -572,12 +575,12 @@ function render(){
   CATS.forEach(c => {
     const n = F.filter(x => x.c === c.id).length;
     const t = el("button", "tile"); t.type = "button";
-    t.innerHTML = '<span class="ic">' + svg(ICONS[c.id]) + '</span><b>' + esc(c.t[lang]) + '</b><small>' + esc(c.i[lang]) + '</small><em>' + n + ' ' + (n > 1 ? T.sols : T.sol) + '</em>';
+    t.innerHTML = '<span class="ic img"><img src="icons/cat-' + c.id + '.webp" alt="" width="84" height="84" loading="lazy"></span><b>' + esc(c.t[lang]) + '</b><small>' + esc(c.i[lang]) + '</small><em>' + n + ' ' + (n > 1 ? T.sols : T.sol) + '</em>';
     t.onclick = () => { activeCat = c.id; document.getElementById("q").value = ""; filter(); document.getElementById("faq").scrollIntoView({behavior:"smooth"}); };
     grid.append(t);
   });
   const tb = el("button", "tile"); tb.type = "button";
-  tb.innerHTML = '<span class="ic">' + svg(ICONS.avant) + '</span><b>' + esc(T.beforeH) + '</b><small>' + esc(T.beforeP) + '</small><em>&nbsp;</em>';
+  tb.innerHTML = '<span class="ic img"><img src="icons/cat-avant.webp" alt="" width="84" height="84" loading="lazy"></span><b>' + esc(T.beforeH) + '</b><small>' + esc(T.beforeP) + '</small><em>&nbsp;</em>';
   tb.onclick = () => document.getElementById("avant").scrollIntoView({behavior:"smooth"});
   grid.append(tb);
 
