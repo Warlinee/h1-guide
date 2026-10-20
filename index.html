@@ -291,11 +291,6 @@ const F = [
  f:{fr:["Sécurité Windows > Contrôle des applications et du navigateur > Paramètres du contrôle intelligent des applications > Désactivé.","Relancer le jeu."],en:["Windows Security > App & browser control > Smart App Control settings > Off.","Launch the game again."]},
  n:{fr:"Une fois désactivé, Windows ne laisse pas le réactiver sans réinitialiser le PC.",en:"Once it's off, Windows won't let you turn it back on without resetting the PC."},
  m:{fr:"c'est smart app control qui bloque un fichier rotk. sécurité windows > contrôle des applications et du navigateur > paramètres du contrôle intelligent > désactivé, puis relance",en:"that's smart app control blocking a rotk file. windows security > app & browser control > smart app control settings > off, then relaunch"}},
-{c:"lancement", s:"known", k:["0xC0000005","rotkc.dll"],
- t:{fr:"« Fermé X s après son lancement » (0xC0000005), au bout de 3 à 9 s",en:"\"Closed X s after it started\" (0xC0000005), after 3 to 9 s"},
- f:{fr:["Smart App Control désactivé (fiche du dessus). Une popup qui parle de rotkc.dll bloqué, c'est ça.","Installer le dernier Visual C++ x64 et redémarrer.","Fermer tout ce qui tourne en fond : macros, overlays, outils, et réessayer."],en:["Smart App Control off (card above). A popup about rotkc.dll being blocked means that's it.","Install the latest Visual C++ x64 and restart.","Close everything running in the background: macros, overlays, tools, and try again."]},
- n:{fr:"Si tout ça est fait et que ça plante encore, il n'y a rien à réparer sur le PC. Pour une question sur ton compte : banappeals@rotk.app. Pas de Smart App Control sous Windows 10.",en:"If all that is done and it still crashes, there's nothing to fix on the PC. For a question about your account: banappeals@rotk.app. Windows 10 has no Smart App Control."},
- m:{fr:"vérifie smart app control désactivé, installe le dernier vc++ x64 https://aka.ms/vc14/vc_redist.x64.exe et ferme tout ce qui tourne en fond. redémarre et réessaie. si ça plante encore, y'a rien à réparer de ton côté",en:"check smart app control is off, install the latest vc++ x64 https://aka.ms/vc14/vc_redist.x64.exe and close background tools. restart and try again. if it still crashes, there's nothing to fix on ur side"}},
 {c:"lancement", s:"ok", k:["MSVCP140.dll","vcruntime140","14.40"],
  t:{fr:"Crash dans MSVCP140.dll ou « runtime Visual C++ trop ancien »",en:"Crash in MSVCP140.dll or \"Visual C++ runtime too old\""},
  f:{fr:["Installer le dernier Visual C++ x64 (la 14, pas la 2013). Déjà installé : « Réparer ».","Redémarrer le PC."],en:["Install the latest Visual C++ x64 (version 14, not 2013). Already installed: \"Repair\".","Restart the PC."]},
@@ -514,7 +509,7 @@ const ICONS = {
 };
 const svg = (p) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>';
 const CHEV = svg('<path d="m9 6 6 6-6 6"/>');
-const QUICK = ["0xC0000005","0xC0E90002","Vivox","JSON","G9","exitCode=18","Steam level"];
+const QUICK = ["0xC0E90002","Vivox","JSON","G9","exitCode=18","Steam level"];
 const STATUS = {ok:"s-ok", lead:"s-lead", known:"s-known"};
 
 let lang = "fr", activeCat = "all";
