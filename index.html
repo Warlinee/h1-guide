@@ -310,7 +310,7 @@ const F = [
 {c:"lancement", s:"ok", k:["dinput8.dll"],
  t:{fr:"« Un dinput8.dll inconnu est présent dans le client ROTK »",en:"\"An unknown dinput8.dll is present in the ROTK client\""},
  f:{fr:["Fermer le launcher et le jeu.","Sortir dinput8.dll du dossier du jeu (là où est H1Z1.exe) en le déplaçant ailleurs.","Relancer : le launcher remet le sien."],en:["Close the launcher and the game.","Move dinput8.dll out of the game folder (where H1Z1.exe is).","Relaunch: the launcher puts its own back."]},
- n:{fr:"Souvent laissé par ReShade ou un mod. C'est celui du dossier du jeu, pas celui des fichiers du launcher.",en:"Often left by ReShade or a mod. It's the one in the game folder, not in the launcher's files."},
+ n:{fr:"Souvent laissé par ReShade (interdit) ou un mod. C'est celui du dossier du jeu, pas celui des fichiers du launcher.",en:"Often left by ReShade (forbidden) or a mod. It's the one in the game folder, not in the launcher's files."},
  m:{fr:"ferme le launcher et le jeu, sors dinput8.dll de ton dossier rotk (là où y'a H1Z1.exe) et relance, le launcher remet le sien",en:"close the launcher and game, move dinput8.dll out of ur rotk folder (where H1Z1.exe is) and relaunch, the launcher puts its own back"}},
 {c:"lancement", s:"known", k:["Ã©","accents","2.0.43"],
  t:{fr:"Messages d'erreur avec des accents cassés (prÃ©sent, nâ€™a pas pu…)",en:"Error messages with broken characters (prÃ©sent, nâ€™a pas pu…)"},
@@ -489,10 +489,10 @@ const F = [
  t:{fr:"Norton",en:"Norton"},
  f:{fr:["Sécurité > Historique > filtre Quarantaine : restaurer les fichiers ROTK.","Paramètres > Antivirus > Analyses et risques : ajouter le dossier du jeu et du launcher dans les deux listes d'exclusion."],en:["Security > History > Quarantine filter: restore ROTK files.","Settings > Antivirus > Scans and Risks: add the game and launcher folders to both exclusion lists."]},
  m:{fr:"norton l'a sûrement mis en quarantaine, restaure-le dans l'historique et ajoute ton dossier de jeu et celui du launcher en exclusion",en:"norton prob quarantined it, restore it from history and add ur game and launcher folders as exclusions"}},
-{c:"antivirus", s:"ok", k:["ReShade","outils","tools"],
- t:{fr:"ReShade, overlays et outils qui s'injectent",en:"ReShade, overlays and injected tools"},
- f:{fr:["Déconseillé : ReShade remplace souvent dinput8.dll et s'injecte dans le jeu.","Pour de meilleures couleurs : la vibrance de la carte graphique (NVIDIA : vibrance numérique, AMD : saturation)."],en:["Not recommended: ReShade often replaces dinput8.dll and injects into the game.","For better colors: your GPU's vibrance (NVIDIA: digital vibrance, AMD: saturation)."]},
- n:{fr:"Rien d'officiel sur ce sujet. Dans le doute, demande au staff avant.",en:"Nothing official on this. When in doubt, ask the staff first."},
+{c:"antivirus", s:"ok", k:["ReShade","interdit","forbidden"],
+ t:{fr:"ReShade est interdit",en:"ReShade is forbidden"},
+ f:{fr:["ReShade est interdit sur ROTK (confirmé par le staff le 19/10). Désinstalle-le et supprime ses fichiers du dossier du jeu.","Évite aussi les autres outils qui s'injectent dans le jeu (filtres, traducteurs en jeu…).","Pour de meilleures couleurs : la vibrance de la carte graphique (NVIDIA : vibrance numérique, AMD : saturation), qui ne touche pas au jeu."],en:["ReShade is forbidden on ROTK (confirmed by the staff on 19/10). Uninstall it and remove its files from the game folder.","Also avoid other tools that inject into the game (filters, in-game translators…).","For better colors: your GPU's vibrance (NVIDIA: digital vibrance, AMD: saturation), which doesn't touch the game."]},
+ n:{fr:"Pour tout autre outil, demande au staff avant de l'utiliser.",en:"For any other tool, ask the staff before using it."},
  m:{fr:"je te le déconseille, reshade s'injecte dans le jeu. pour les couleurs, monte plutôt la vibrance de ta carte graphique",en:"i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead"}}
 ];
 
