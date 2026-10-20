@@ -24,6 +24,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 | Recherche (sans accents, synonymes, classement) | `norm`, `STOP`, `SYN`, `queryTokens`, `scoreRow`, `filter()` |
 | Liens directs vers une fiche | `#slug` du titre FR, voir `slugOf()` et `openCard()` |
 | Réponses rapides pour le support (`?support`) | champ `m` de chaque fiche + `SUP_GENERAL` : pas de lien depuis la page publique, `noindex` |
+| Patch notes (bouton dans la barre, `#patch-notes`) | tableau `PATCH_NOTES`, version la plus récente en premier : **ajoute une ligne à chaque changement visible** |
 
 ### Format d'une fiche (`F`)
 
