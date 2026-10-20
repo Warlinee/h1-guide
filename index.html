@@ -516,7 +516,11 @@ const QUICK = ["0xC0E90002","Vivox","JSON","G9","exitCode=18","Steam level"];
 const STATUS = {ok:"s-ok", lead:"s-lead", known:"s-known"};
 
 let lang = "fr", activeCat = "all";
-try { const v = localStorage.getItem("h1wiki-lang"); if (v === "fr" || v === "en") lang = v; else if (!/^fr/i.test(navigator.language || "")) lang = "en"; } catch (e) { if (!/^fr/i.test(navigator.language || "")) lang = "en"; }
+// Priorité : ?lang= dans le lien, puis le drapeau choisi, puis la langue du navigateur.
+const browserLang = () => /^fr/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "fr" : "en";
+const urlLang = new URLSearchParams(location.search).get("lang");
+let saved = null; try { saved = localStorage.getItem("h1wiki-lang"); } catch (e) {}
+lang = urlLang === "fr" || urlLang === "en" ? urlLang : saved === "fr" || saved === "en" ? saved : browserLang();
 
 function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
@@ -620,6 +624,7 @@ function filter(){
 document.getElementById("q").addEventListener("input", filter);
 document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
   lang = b.dataset.lang; try { localStorage.setItem("h1wiki-lang", lang); } catch (e) {}
+  if (urlLang) { try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) {} }
   const q = document.getElementById("q").value; render(); document.getElementById("q").value = q; filter();
 }));
 render();
