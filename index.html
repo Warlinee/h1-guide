@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Wiki communautaire non officiel : solutions aux problèmes courants du launcher et du jeu H1Z1 (ROTK). Unofficial community wiki.">
 <title>ROTK Wiki non officiel</title>
+<meta name="theme-color" content="#e10600">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ROTK Wiki (non officiel)">
+<meta property="og:description" content="Solutions aux problèmes courants du launcher et du jeu, en FR et EN, avec vidéos tuto. Wiki communautaire, pas affilié à ROTK.">
+<meta property="og:url" content="https://warlinee.github.io/h1-guide/">
+<meta property="og:image" content="https://warlinee.github.io/h1-guide/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e10600'/%3E%3Cpath d='M19.6 8.4a5.3 5.3 0 0 0-7.2 7.2L5.3 22.7l4 4 7.1-7.1a5.3 5.3 0 0 0 7.2-7.2l-3.3 3.3-2.8-.5-.5-2.8z' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
@@ -28,6 +36,9 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f);font-s
 a{color:inherit}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--red-hi);outline-offset:2px;border-radius:8px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--red);color:#fff;font-weight:600;padding:10px 16px;border-radius:10px;text-decoration:none}
+.skip:focus{top:12px}
+main:focus{outline:none}
 .wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 
 /* bandeau non officiel */
@@ -168,11 +179,12 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
+<a class="skip" href="#contenu" data-i="skip"></a>
 
-<div class="notice" role="note"><div class="wrap">
+<aside class="notice" data-al="noticeL"><div class="wrap">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5"/><circle cx="12" cy="18" r=".6" fill="currentColor"/></svg>
   <span data-i="notice"></span>
-</div></div>
+</div></aside>
 
 <header class="hero">
   <div class="art" aria-hidden="true"><div class="streak a"></div><div class="streak b"></div><div class="streak c"></div><div class="streak d"></div></div>
@@ -193,13 +205,13 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     <label class="search" for="q">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="q" type="search" autocomplete="off">
-      <span class="count" id="count"></span>
+      <span class="count" id="count" aria-live="polite"></span>
     </label>
     <div class="chips" id="chips"></div>
   </div>
 </header>
 
-<div class="wrap">
+<main class="wrap" id="contenu" tabindex="-1">
   <section class="block">
     <div class="block-head"><div><h2 data-i="quickH"></h2><p data-i="quickP"></p></div></div>
     <div class="grid" id="grid"></div>
@@ -207,7 +219,7 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
 
   <section class="block" id="faq">
     <div class="block-head"><div><h2 data-i="faqH"></h2><p data-i="faqP"></p></div></div>
-    <div class="tabs" id="tabs" role="group"></div>
+    <div class="tabs" id="tabs" role="group" data-al="tabsL"></div>
     <div class="list" id="list"></div>
     <div class="empty" id="empty" hidden data-i="empty"></div>
   </section>
@@ -221,7 +233,7 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     <div class="block-head"><div><h2 data-i="linksH"></h2><p data-i="linksP"></p></div></div>
     <div class="links" id="links"></div>
   </section>
-</div>
+</main>
 
 <footer><div class="wrap"><div class="foot"><span data-i="foot1"></span><span data-i="foot2"></span></div></div></footer>
 
@@ -231,7 +243,7 @@ const UI = {
     notice:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : bans, tickets et annonces passent par les canaux officiels.",
     brand:"ROTK Wiki", badge:"Non officiel", kicker:"Wiki communautaire, non officiel",
     h1:"Aide et solutions", lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
-    placeholder:"Message ou code d'erreur", chips:"Fréquents :",
+    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", tabsL:"Catégories", noticeL:"Avertissement",
     quickH:"Accès rapide", quickP:"Choisis le type de problème pour voir les solutions.",
     faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
@@ -245,7 +257,7 @@ const UI = {
     notice:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.",
     brand:"ROTK Wiki", badge:"Unofficial", kicker:"Community wiki, unofficial",
     h1:"Help and fixes", lede:"The most common launcher and game problems, with what actually worked for players.",
-    placeholder:"Message or error code", chips:"Common:",
+    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", tabsL:"Categories", noticeL:"Notice",
     quickH:"Quick access", quickP:"Pick the kind of problem to see the fixes.",
     faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
@@ -534,6 +546,8 @@ function render(){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i]").forEach(n => { const v = T[n.dataset.i]; if (v != null) n.innerHTML = v; });
   document.getElementById("q").placeholder = T.placeholder;
+  document.getElementById("q").setAttribute("aria-label", T.placeholder);
+  document.querySelectorAll("[data-al]").forEach(n => n.setAttribute("aria-label", T[n.dataset.al]));
   document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
 
   const chips = document.getElementById("chips"); chips.innerHTML = "";
@@ -597,7 +611,7 @@ function row(x, T){
   if (x.v) {
     const v = el("video", "vid"); v.controls = true; v.preload = "none"; v.playsInline = true;
     v.poster = "videos/" + x.v + "-" + lang + ".jpg"; v.src = "videos/" + x.v + "-" + lang + ".mp4";
-    v.setAttribute("aria-label", lang === "fr" ? "Vidéo tutoriel" : "Video tutorial");
+    v.setAttribute("aria-label", (lang === "fr" ? "Vidéo tutoriel : " : "Video tutorial: ") + x.t[lang].replace(/[«»"]/g, "").replace(/\s+/g, " ").trim());
     b.append(v);
   }
   d.append(b); r.append(d);
