@@ -7,181 +7,218 @@
 <title>Wiki H1 non officiel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
-/* Layout : centre d'aide sobre. Bandeau "non officiel" en tête, en-tête avec recherche, colonne de catégories à gauche, problèmes en liste dépliable à droite. Une seule famille de caractères, le rouge seulement pour l'interaction. */
+/* Layout : centre d'aide sombre. Bannière encadrée avec traînées de lumière rouge (clin d'œil à la diagonale du launcher), accès rapide en grille de cartes, puis liste de problèmes dépliables avec onglets et tags. Noir + rouge signal de ROTK, aucun logo officiel. */
 :root{
-  --bg:#ffffff; --surface:#f6f6f7; --text:#18181b; --muted:#66666e; --line:#e6e6e9; --line-2:#d6d6db;
-  --accent:#c8102e; --accent-soft:#fbeaec;
-  --note-bg:#fff6dc; --note-line:#efd58a; --note-text:#5c4500;
-  --ok:#1f7a3d; --lead:#2558a8; --known:#a3590a;
-  --code-bg:#f1f1f3; --code-text:#3b3b42;
-  --f:"Geist","Segoe UI",system-ui,sans-serif; --mono:"Geist Mono",ui-monospace,Consolas,monospace;
+  --bg:#070708; --s1:#0e0e10; --s2:#141417; --s3:#1b1b1f;
+  --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.12); --line-3:rgba(255,255,255,.2);
+  --text:#f3f3f5; --dim:#c4c4cb; --muted:#8a8a94;
+  --red:#e10600; --red-hi:#ff3b2f; --red-soft:rgba(225,6,0,.13); --red-line:rgba(255,59,47,.35);
+  --amber:#f2b838; --amber-soft:rgba(242,184,56,.1);
+  --ok:#7fd99a; --lead:#8fb6ff; --known:#f2b05c;
+  --f-display:"Archivo","Arial",sans-serif; --f:"Geist","Segoe UI",system-ui,sans-serif; --mono:"Geist Mono",ui-monospace,Consolas,monospace;
+  --ease:cubic-bezier(.22,.8,.2,1);
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#131315; --surface:#1b1b1e; --text:#ececee; --muted:#9d9da6; --line:#26262b; --line-2:#34343a;
-  --accent:#ff4d5e; --accent-soft:#3a1a1f; --note-bg:#2b2410; --note-line:#5e4c16; --note-text:#f2d892;
-  --ok:#6cc98a; --lead:#8db4f5; --known:#f0a95c; --code-bg:#202024; --code-text:#d6d6dc; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#131315; --surface:#1b1b1e; --text:#ececee; --muted:#9d9da6; --line:#26262b; --line-2:#34343a;
-  --accent:#ff4d5e; --accent-soft:#3a1a1f; --note-bg:#2b2410; --note-line:#5e4c16; --note-text:#f2d892;
-  --ok:#6cc98a; --lead:#8db4f5; --known:#f0a95c; --code-bg:#202024; --code-text:#d6d6dc; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px;border-radius:8px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 
 /* bandeau non officiel */
-.tape{background:var(--note-bg);border-bottom:1px solid var(--note-line);color:var(--note-text);font-size:14px}
-.tape .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
-.tape svg{width:17px;height:17px;flex:none}
-.tape-inner span{font-weight:500}
+.notice{border-bottom:1px solid rgba(242,184,56,.22);background:linear-gradient(90deg,rgba(242,184,56,.09),rgba(242,184,56,.04));color:#f5d891;font-size:13.5px}
+.notice .wrap{display:flex;align-items:center;justify-content:center;gap:10px;padding-block:9px;text-align:center}
+.notice svg{width:16px;height:16px;flex:none;color:var(--amber)}
+.notice b{color:var(--amber);font-weight:600}
 
-/* en-tête */
-.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px;border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
-.brand-mark{width:28px;height:28px;border-radius:7px;background:var(--text);color:var(--bg);display:grid;place-items:center}
-.brand-mark svg{width:15px;height:15px}
-.brand small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
-.lang{display:flex;gap:4px}
-.lang button{border:1px solid transparent;background:transparent;padding:5px 7px;border-radius:7px;cursor:pointer;display:grid;place-items:center;opacity:.5;transition:opacity .2s,border-color .2s}
-.lang button svg{width:24px;height:16px;border-radius:2px;box-shadow:0 0 0 1px var(--line-2)}
+/* bannière */
+.hero{margin:14px max(14px,env(safe-area-inset-left,0px)) 0;border-radius:28px;position:relative;overflow:hidden;isolation:isolate;background:#0b0809;box-shadow:inset 0 0 0 1px var(--line-2)}
+.art{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.art::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(42rem 22rem at 78% 8%,rgba(225,6,0,.38),transparent 62%),
+  radial-gradient(30rem 18rem at 12% 110%,rgba(225,6,0,.22),transparent 60%),
+  radial-gradient(24rem 14rem at 50% 50%,rgba(255,80,40,.06),transparent 70%)}
+.streak{position:absolute;left:-20%;width:150%;transform-origin:center;border-radius:999px}
+.streak.a{top:8%;height:130px;transform:rotate(-24deg);background:linear-gradient(90deg,transparent 0,rgba(225,6,0,.0) 20%,rgba(225,6,0,.55) 52%,rgba(255,96,64,.22) 70%,transparent 90%);filter:blur(26px)}
+.streak.b{top:34%;height:4px;transform:rotate(-24deg);background:linear-gradient(90deg,transparent 10%,rgba(255,120,90,.9) 55%,transparent 85%);filter:blur(1.5px);opacity:.75}
+.streak.c{top:52%;height:70px;transform:rotate(-24deg);background:linear-gradient(90deg,transparent 15%,rgba(136,0,0,.75) 55%,transparent 88%);filter:blur(18px)}
+.streak.d{top:62%;height:2px;transform:rotate(-24deg);background:linear-gradient(90deg,transparent 20%,rgba(255,255,255,.35) 58%,transparent 80%);opacity:.6}
+.art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,8,0) 40%,rgba(7,7,8,.75) 100%)}
+
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px clamp(18px,3vw,28px)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-mark{width:32px;height:32px;border-radius:10px;background:var(--red);display:grid;place-items:center;box-shadow:0 6px 20px -6px rgba(225,6,0,.7),inset 0 1px 0 rgba(255,255,255,.25)}
+.brand-mark svg{width:16px;height:16px;color:#fff}
+.brand-name{font-family:var(--f-display);font-stretch:118%;font-weight:700;font-size:15px;letter-spacing:.01em}
+.badge{font-size:11.5px;font-weight:600;color:var(--amber);background:var(--amber-soft);border:1px solid rgba(242,184,56,.3);padding:2px 9px;border-radius:999px;margin-left:4px}
+.lang{display:flex;gap:4px;background:rgba(255,255,255,.05);border:1px solid var(--line-2);border-radius:999px;padding:4px}
+.lang button{border:0;background:transparent;padding:5px 8px;border-radius:999px;cursor:pointer;display:grid;place-items:center;opacity:.45;transition:opacity .3s,background .3s}
+.lang button svg{width:22px;height:15px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.2)}
 .lang button:hover{opacity:.85}
-.lang button[aria-pressed="true"]{opacity:1;border-color:var(--line-2);background:var(--surface)}
+.lang button[aria-pressed="true"]{opacity:1;background:rgba(255,255,255,.1)}
 
-.hero{padding-block:clamp(36px,6vw,64px) 28px;max-width:720px}
-.hero h1{font-size:clamp(30px,4.2vw,42px);line-height:1.15;letter-spacing:-.022em;font-weight:600;margin:0 0 12px;text-wrap:balance}
-.hero h1 .stroke{color:var(--muted)}
-.hero p.lede{color:var(--muted);font-size:17px;margin:0 0 26px;max-width:58ch}
-.warn{display:none}
-.search-shell{max-width:720px}
-.search-core label{display:block;font-size:14px;font-weight:500;margin-bottom:8px}
-.search-box{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line-2);border-radius:10px;padding:4px 6px 4px 14px;transition:border-color .2s,box-shadow .2s}
-.search-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.search-box svg{width:18px;height:18px;color:var(--muted);flex:none}
-.search-box input{flex:1;min-width:0;background:transparent;border:0;color:var(--text);font:inherit;font-size:16px;padding:10px 0}
-.search-box input:focus{outline:none}
-.count{font-size:13px;color:var(--muted);padding:0 8px;white-space:nowrap;font-variant-numeric:tabular-nums}
-.quick{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.quick p{margin:0;font-size:14px;color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip-btn{font:inherit;font-size:13.5px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:4px 10px;cursor:pointer;transition:border-color .2s,background .2s}
-.chip-btn:hover{border-color:var(--line-2);background:var(--bg)}
+.hero-body{text-align:center;padding:clamp(36px,7vw,84px) clamp(18px,4vw,40px) clamp(40px,6vw,64px);max-width:760px;margin:0 auto}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);background:rgba(255,255,255,.05);border:1px solid var(--line-2);border-radius:999px;padding:5px 12px 5px 8px;margin-bottom:22px}
+.kicker i{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(242,184,56,.15)}
+.hero h1{font-family:var(--f-display);font-stretch:120%;font-weight:700;font-size:clamp(32px,5.2vw,56px);line-height:1.04;letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+.hero p.lede{color:var(--dim);font-size:17px;margin:0 auto 28px;max-width:52ch}
+.search{display:flex;align-items:center;gap:10px;max-width:560px;margin:0 auto;background:rgba(14,14,16,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-3);border-radius:999px;padding:6px 6px 6px 18px;transition:border-color .3s,box-shadow .3s}
+.search:focus-within{border-color:var(--red-hi);box-shadow:0 0 0 4px var(--red-soft)}
+.search svg{width:18px;height:18px;color:var(--dim);flex:none}
+.search input{flex:1;min-width:0;background:transparent;border:0;color:var(--text);font:inherit;font-size:16px;padding:9px 0}
+.search input::placeholder{color:var(--muted)}
+.search input:focus{outline:none}
+.count{font-size:12.5px;font-weight:500;color:var(--dim);background:rgba(255,255,255,.07);padding:7px 12px;border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:16px}
+.chips span{font-size:13px;color:var(--muted);align-self:center;margin-right:2px}
+.chip{border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:var(--dim);font-size:13px;padding:5px 12px;border-radius:999px;cursor:pointer;transition:border-color .3s,color .3s,background .3s}
+.chip:hover{border-color:var(--red-line);color:#fff;background:var(--red-soft)}
 
-/* corps */
-.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px;padding-block:36px 64px;border-top:1px solid var(--line)}
-.catbar{position:sticky;top:20px;align-self:start}
-.catbar nav{display:grid;gap:2px}
-.catbar a{text-decoration:none;font-size:14.5px;color:var(--muted);padding:6px 10px;border-radius:7px;display:flex;justify-content:space-between;gap:10px;transition:background .2s,color .2s}
-.catbar a:hover{color:var(--text);background:var(--surface)}
-.catbar a span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
-main{display:grid;gap:56px;min-width:0}
-.cat{scroll-margin-top:20px;min-width:0}
-.cat-head{margin-bottom:14px}
-.cat-head h2{font-size:21px;font-weight:600;letter-spacing:-.012em;line-height:1.3;margin:0 0 4px}
-.cat-head p{margin:0;color:var(--muted);font-size:15px}
-.list{border-top:1px solid var(--line)}
+/* sections */
+section.block{padding-block:clamp(48px,7vw,80px) 0}
+.block-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.block-head h2{font-family:var(--f-display);font-stretch:115%;font-weight:700;font-size:clamp(24px,3vw,30px);letter-spacing:-.015em;line-height:1.15;margin:0 0 6px}
+.block-head p{margin:0;color:var(--muted);font-size:15.5px;max-width:58ch}
 
-.card{border-bottom:1px solid var(--line)}
-.card summary{list-style:none;cursor:pointer;padding:16px 4px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center}
-.card summary::-webkit-details-marker{display:none}
-.card summary:hover h3{color:var(--accent)}
-.card summary h3{margin:0;font-size:16px;line-height:1.45;font-weight:500;transition:color .2s}
-.toggle{width:20px;height:20px;color:var(--muted);display:grid;place-items:center;grid-row:span 2;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
-.toggle svg{width:15px;height:15px}
-details[open] .toggle{transform:rotate(45deg);color:var(--accent)}
-.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
-.pill{font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
-.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-.s-ok{color:var(--ok)} .s-lead{color:var(--lead)} .s-known{color:var(--known)}
-.code{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
-.body{padding:0 4px 22px;display:grid;gap:12px;max-width:68ch}
-details[open] .body{animation:open .3s cubic-bezier(.2,.7,.2,1)}
+/* accès rapide */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tile{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:10px;background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:20px;min-height:100%;transition:border-color .35s var(--ease),transform .35s var(--ease),background .35s var(--ease)}
+.tile:hover{border-color:var(--red-line);background:linear-gradient(180deg,rgba(225,6,0,.06),var(--s1) 60%);transform:translateY(-2px)}
+.tile:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
+.tile .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--red-soft);border:1px solid var(--red-line);color:var(--red-hi)}
+.tile .ic svg{width:18px;height:18px}
+.tile b{font-size:15.5px;font-weight:600;line-height:1.35}
+.tile small{color:var(--muted);font-size:14px;line-height:1.5;flex:1}
+.tile em{font-style:normal;font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+
+/* liste */
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:var(--s1);border:1px solid var(--line);border-radius:999px;padding:4px;max-width:100%}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:0;background:transparent;color:var(--muted);font-size:13.5px;font-weight:500;padding:7px 14px;border-radius:999px;cursor:pointer;transition:background .3s,color .3s}
+.tab:hover{color:var(--text)}
+.tab[aria-pressed="true"]{background:var(--s3);color:#fff;box-shadow:inset 0 0 0 1px var(--line-2)}
+.list{display:grid;gap:8px;margin-top:18px}
+.group{font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px;margin:18px 0 2px}
+.group:first-child{margin-top:0}
+.group svg{width:15px;height:15px;color:var(--red-hi)}
+.row{background:var(--s1);border:1px solid var(--line);border-radius:16px;transition:border-color .3s}
+.row:hover{border-color:var(--line-2)}
+.row:has(details[open]){border-color:var(--red-line);background:linear-gradient(180deg,rgba(225,6,0,.05),var(--s1) 120px)}
+.row summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 14px 12px 12px}
+.row summary::-webkit-details-marker{display:none}
+.chev{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--s3);border:1px solid var(--line-2);color:var(--dim);transition:transform .35s var(--ease),background .3s,color .3s}
+.chev svg{width:14px;height:14px}
+details[open] .chev{transform:rotate(90deg);background:var(--red);border-color:var(--red);color:#fff}
+.row h3{margin:0;font-size:15.5px;font-weight:500;line-height:1.45}
+.tags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
+.tag{font-size:12px;color:var(--dim);border:1px solid var(--line-2);background:rgba(255,255,255,.02);border-radius:999px;padding:3px 10px;white-space:nowrap;font-family:var(--mono)}
+.st{font-family:var(--f);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.s-ok{color:var(--ok);border-color:rgba(127,217,154,.28)}
+.s-lead{color:var(--lead);border-color:rgba(143,182,255,.28)}
+.s-known{color:var(--known);border-color:rgba(242,176,92,.3)}
+.body{padding:2px 20px 20px 58px;display:grid;gap:12px;max-width:820px}
+details[open] .body{animation:open .4s var(--ease)}
 @keyframes open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
-.body h4{display:none}
-.body ol,.body ul{margin:0;padding-left:22px;display:grid;gap:6px}
-.body li::marker{color:var(--muted);font-variant-numeric:tabular-nums}
-.note{font-size:14.5px;color:var(--muted);background:var(--surface);border-radius:8px;padding:10px 14px;margin:0}
-code.p{font-family:var(--mono);font-size:.84em;background:var(--code-bg);color:var(--code-text);padding:1px 5px;border-radius:5px;overflow-wrap:anywhere}
+.body ol,.body ul{margin:0;padding-left:20px;display:grid;gap:7px;color:var(--dim)}
+.body li::marker{color:var(--red-hi);font-weight:600;font-variant-numeric:tabular-nums}
+.note{margin:0;font-size:14.5px;color:var(--muted);background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+code.p{font-family:var(--mono);font-size:.84em;background:var(--s3);color:#ffc2bc;border:1px solid var(--line);padding:1px 6px;border-radius:6px;overflow-wrap:anywhere}
+.empty{text-align:center;color:var(--muted);padding:40px 16px;border:1px dashed var(--line-2);border-radius:16px;margin-top:18px}
 
-.panel-core{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px 40px;border-top:1px solid var(--line);padding-top:16px}
-.panel-core h3{margin:0 0 8px;font-size:15px;font-weight:600}
-.panel-core ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
-.links{display:grid}
-.links div{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:16px;padding-block:11px;border-bottom:1px solid var(--line)}
+/* avant de demander + liens */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.panel{background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:22px 24px}
+.panel h3{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:16px;font-weight:600}
+.panel h3 i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--s3);border:1px solid var(--line-2)}
+.panel h3 i svg{width:15px;height:15px}
+.panel.do h3 i{color:var(--ok)} .panel.dont h3 i{color:var(--red-hi)}
+.panel ul{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--dim);font-size:15px}
+.links{background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:6px 22px}
+.links div{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:16px;padding-block:13px;border-bottom:1px solid var(--line)}
+.links div:last-child{border-bottom:0}
 .links b{font-weight:500;font-size:15px}
-.links a{color:var(--accent);text-decoration:none;overflow-wrap:anywhere}
+.links a{color:var(--red-hi);text-decoration:none;overflow-wrap:anywhere}
 .links a:hover{text-decoration:underline}
-.links span{font-size:15px;color:var(--muted);overflow-wrap:anywhere}
-.empty{padding:28px 0;color:var(--muted)}
+.links span{font-size:15px;color:var(--dim);overflow-wrap:anywhere}
 
-footer{border-top:1px solid var(--line)}
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-block:24px 40px;color:var(--muted);font-size:14px}
-.foot b{color:var(--text);font-weight:600}
+footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-block:26px 44px;color:var(--muted);font-size:14px}
+.foot b{color:var(--amber);font-weight:600}
 
-@media (max-width:860px){
-  .layout{grid-template-columns:minmax(0,1fr);gap:24px}
-  .catbar{position:sticky;top:0;z-index:2;background:var(--bg);margin-inline:-20px;padding:8px 20px;border-bottom:1px solid var(--line)}
-  .catbar nav{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px}
-  .catbar nav::-webkit-scrollbar{display:none}
-  .catbar a{flex:none;background:var(--surface)}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){
+  .hero{margin:10px 10px 0;border-radius:22px}
+  .badge{display:none}
+  .row summary{grid-template-columns:32px minmax(0,1fr)}
+  .tags{grid-column:2;justify-content:flex-start}
+  .body{padding-left:20px}
+  .duo{grid-template-columns:minmax(0,1fr)}
   .links div{grid-template-columns:minmax(0,1fr);gap:2px}
 }
+@media (max-width:460px){.grid{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
-<div class="tape" role="note"><div class="wrap">
+<div class="notice" role="note"><div class="wrap">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5"/><circle cx="12" cy="18" r=".6" fill="currentColor"/></svg>
-  <div class="tape-inner" id="tape"></div>
+  <span data-i="notice"></span>
 </div></div>
 
-<div class="wrap">
-  <div class="top">
+<header class="hero">
+  <div class="art" aria-hidden="true"><div class="streak a"></div><div class="streak b"></div><div class="streak c"></div><div class="streak d"></div></div>
+  <div class="nav">
     <div class="brand">
       <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.1-.4-.4-2.1z"/></svg></div>
-      <div><span data-i="brand"></span><small data-i="brandSub"></small></div>
+      <span class="brand-name" data-i="brand"></span><span class="badge" data-i="badge"></span>
     </div>
     <div class="lang" role="group" aria-label="Langue / Language">
-      <button type="button" id="lang-fr" data-lang="fr" aria-label="Français" title="Français"><svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#0055a4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg></button>
-      <button type="button" id="lang-en" data-lang="en" aria-label="English" title="English"><svg viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><g fill="#fff"><rect y="0.77" width="19" height="0.77"/><rect y="2.31" width="19" height="0.77"/><rect y="3.85" width="19" height="0.77"/><rect y="5.38" width="19" height="0.77"/><rect y="6.92" width="19" height="0.77"/><rect y="8.46" width="19" height="0.77"/></g><rect width="7.6" height="5.38" fill="#3c3b6e"/></svg></button>
+      <button type="button" data-lang="fr" aria-label="Français" title="Français"><svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#0055a4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg></button>
+      <button type="button" data-lang="en" aria-label="English" title="English"><svg viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><g fill="#fff"><rect y="0.77" width="19" height="0.77"/><rect y="2.31" width="19" height="0.77"/><rect y="3.85" width="19" height="0.77"/><rect y="5.38" width="19" height="0.77"/><rect y="6.92" width="19" height="0.77"/><rect y="8.46" width="19" height="0.77"/></g><rect width="7.6" height="5.38" fill="#3c3b6e"/></svg></button>
     </div>
   </div>
-
-  <section class="hero">
-    <h1><span data-i="h1a"></span> <span class="stroke" data-i="h1b"></span></h1>
+  <div class="hero-body">
+    <div class="kicker"><i></i><span data-i="kicker"></span></div>
+    <h1 data-i="h1"></h1>
     <p class="lede" data-i="lede"></p>
-    <p class="warn" data-i="warn"></p>
-    <div class="search-shell"><div class="search-core">
-      <label for="q" data-i="searchLabel"></label>
-      <div class="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" autocomplete="off">
-        <span class="count" id="count"></span>
-      </div>
-      <div class="quick"><p data-i="quick"></p><div class="chips" id="chips"></div></div>
-    </div></div>
+    <label class="search" for="q">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" autocomplete="off">
+      <span class="count" id="count"></span>
+    </label>
+    <div class="chips" id="chips"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="block">
+    <div class="block-head"><div><h2 data-i="quickH"></h2><p data-i="quickP"></p></div></div>
+    <div class="grid" id="grid"></div>
   </section>
 
-  <div class="layout">
-    <aside class="catbar"><nav id="catnav" aria-label="Catégories"></nav></aside>
-    <main id="main">
-      <section class="cat" id="avant">
-        <div class="cat-head"><h2 data-i="beforeH"></h2><p data-i="beforeP"></p></div>
-        <div class="panel-core" id="rules"></div>
-      </section>
-      <div id="cats" style="display:grid;gap:56px"></div>
-      <div class="empty" id="empty" hidden data-i="empty"></div>
-      <section class="cat" id="liens">
-        <div class="cat-head"><h2 data-i="linksH"></h2><p data-i="linksP"></p></div>
-        <div class="links" id="links" style="border-top:1px solid var(--line)"></div>
-      </section>
-    </main>
-  </div>
+  <section class="block" id="faq">
+    <div class="block-head"><div><h2 data-i="faqH"></h2><p data-i="faqP"></p></div></div>
+    <div class="tabs" id="tabs" role="group"></div>
+    <div class="list" id="list"></div>
+    <div class="empty" id="empty" hidden data-i="empty"></div>
+  </section>
+
+  <section class="block" id="avant">
+    <div class="block-head"><div><h2 data-i="beforeH"></h2><p data-i="beforeP"></p></div></div>
+    <div class="duo" id="rules"></div>
+  </section>
+
+  <section class="block" id="liens">
+    <div class="block-head"><div><h2 data-i="linksH"></h2><p data-i="linksP"></p></div></div>
+    <div class="links" id="links"></div>
+  </section>
 </div>
 
 <footer><div class="wrap"><div class="foot"><span data-i="foot1"></span><span data-i="foot2"></span></div></div></footer>
@@ -189,34 +226,30 @@ footer{border-top:1px solid var(--line)}
 <script>
 const UI = {
   fr:{
-    tape:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : pour les bans, les tickets et les annonces, passe par les canaux officiels.",
-    brand:"Wiki H1 communautaire", brandSub:"Non officiel",
-    eyebrow:"Wiki communautaire non officiel", h1a:"Un problème avec le launcher ou le jeu ?", h1b:"",
-    lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
-    warn:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK et ça ne remplace pas le staff. Bans, tickets et annonces : uniquement par les canaux officiels.",
-    searchLabel:"Cherche un message, un code ou un mot", placeholder:"0xC0000005, Vivox, JSON, G9, tuto…",
-    quick:"Les plus demandés", one:"fiche", many:"fiches",
-    beforeH:"Avant de demander", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
+    notice:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : bans, tickets et annonces passent par les canaux officiels.",
+    brand:"H1 Wiki", badge:"Non officiel", kicker:"Wiki communautaire, non officiel",
+    h1:"Aide et solutions", lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
+    placeholder:"Message ou code d'erreur", chips:"Fréquents :",
+    quickH:"Accès rapide", quickP:"Choisis le type de problème pour voir les solutions.",
+    faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
+    beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
     linksH:"Liens utiles", linksP:"Téléchargements, chemins de fichiers et adresses à connaître.",
-    ask:"À vérifier d'abord", fix:"Ce qui règle", fix1:"La réponse",
-    st:{ok:"Confirmé",lead:"Piste",known:"Connu, pas de fix"},
-    copy:"Copier", copied:"Copié", empty:"Rien trouvé. Essaie juste le code d'erreur, ou un mot plus court.",
+    st:{ok:"Confirmé",lead:"Piste",known:"Connu, pas de fix"}, one:"résultat", many:"résultats", sol:"solution", sols:"solutions",
+    empty:"Rien trouvé. Essaie juste le code d'erreur, ou un mot plus court.",
     foot1:"Wiki communautaire non officiel, écrit par Warline à partir de cas réels du Discord et du code public du launcher.",
     foot2:"<b>Pas affilié à ROTK.</b> Une info a changé ? Dis-le sur le Discord."
   },
   en:{
-    tape:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: for bans, tickets and announcements, use the official channels.",
-    brand:"H1 community wiki", brandSub:"Unofficial",
-    eyebrow:"Unofficial community wiki", h1a:"Trouble with the launcher or the game?", h1b:"",
-    lede:"The most common launcher and game problems, with what actually worked for players.",
-    warn:"<b>Unofficial wiki.</b> Made by a volunteer player from real cases on the Discord. This is not a ROTK website and it doesn't replace the staff. Bans, tickets and announcements: official channels only.",
-    searchLabel:"Search a message, a code or a word", placeholder:"0xC0000005, Vivox, JSON, G9, tutorial…",
-    quick:"Most asked", one:"card", many:"cards",
-    beforeH:"Before asking", beforeP:"What to always tell, and what never to do.",
+    notice:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.",
+    brand:"H1 Wiki", badge:"Unofficial", kicker:"Community wiki, unofficial",
+    h1:"Help and fixes", lede:"The most common launcher and game problems, with what actually worked for players.",
+    placeholder:"Message or error code", chips:"Common:",
+    quickH:"Quick access", quickP:"Pick the kind of problem to see the fixes.",
+    faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
+    beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
     linksH:"Useful links", linksP:"Downloads, file paths and addresses worth knowing.",
-    ask:"Check first", fix:"What fixes it", fix1:"The answer",
-    st:{ok:"Confirmed",lead:"Lead",known:"Known, no fix"},
-    copy:"Copy", copied:"Copied", empty:"Nothing found. Try just the error code, or a shorter word.",
+    st:{ok:"Confirmed",lead:"Lead",known:"Known, no fix"}, one:"result", many:"results", sol:"fix", sols:"fixes",
+    empty:"Nothing found. Try just the error code, or a shorter word.",
     foot1:"Unofficial community wiki, written by Warline from real Discord cases and the launcher's public code.",
     foot2:"<b>Not affiliated with ROTK.</b> Something changed? Say it on the Discord."
   }
@@ -466,84 +499,115 @@ const F = [
  m:{fr:"je te le déconseille, reshade s'injecte dans le jeu. pour les couleurs, monte plutôt la vibrance de ta carte graphique",en:"i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead"}}
 ];
 
-let lang = "fr";
-try { const saved = localStorage.getItem("h1wiki-lang"); if (saved === "fr" || saved === "en") lang = saved; else if (!/^fr/i.test(navigator.language || "")) lang = "en"; } catch (e) { if (!/^fr/i.test(navigator.language || "")) lang = "en"; }
 
-const STATUS_CLASS = {ok:"s-ok", lead:"s-lead", known:"s-known"};
-const ICON_PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>';
-const ICON_COPY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>';
-const ICON_DONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5 9-10"/></svg>';
-const QUICK = ["0xC0000005","0xC0E90002","Vivox","JSON","G9","exitCode=18","Steam level","tuto","0%"];
+
+const ICONS = {
+  lancement:'<path d="M12 3v8"/><path d="M6.3 7.2a8 8 0 1 0 11.4 0"/>',
+  launcher:'<path d="M12 4v10"/><path d="m7.5 10 4.5 4.5 4.5-4.5"/><path d="M5 19h14"/>',
+  compte:'<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c1.2-3.6 4-5.2 7-5.2s5.8 1.6 7 5.2"/>',
+  vocal:'<rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v2.5"/>',
+  perfs:'<path d="M4.5 16a7.5 7.5 0 1 1 15 0"/><path d="m12 16 3.5-4.5"/>',
+  enjeu:'<rect x="3" y="8" width="18" height="10" rx="5"/><path d="M8 11.5v3M6.5 13h3"/><circle cx="15.5" cy="12.5" r=".7" fill="currentColor"/><circle cx="17.5" cy="14.5" r=".7" fill="currentColor"/>',
+  antivirus:'<path d="M12 3.5 5 6v5.5c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9V6l-7-2.5z"/><path d="m9 12 2 2 4-4"/>',
+  avant:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".7" fill="currentColor"/>',
+  liens:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
+};
+const svg = (p) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>';
+const CHEV = svg('<path d="m9 6 6 6-6 6"/>');
+const QUICK = ["0xC0000005","0xC0E90002","Vivox","JSON","G9","exitCode=18","Steam level"];
+const STATUS = {ok:"s-ok", lead:"s-lead", known:"s-known"};
+
+let lang = "fr", activeCat = "all";
+try { const v = localStorage.getItem("h1wiki-lang"); if (v === "fr" || v === "en") lang = v; else if (!/^fr/i.test(navigator.language || "")) lang = "en"; } catch (e) { if (!/^fr/i.test(navigator.language || "")) lang = "en"; }
 
 function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-function esc(s){ return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
 function codeify(s){
   return esc(s).replace(/([A-Z]:\\Program Files\\ROTK Launcher\\ROTK Launcher\.exe|(?:[A-Z]:\\Program Files\\ROTK Launcher|%APPDATA%\\ROTK Launcher)[^\s,)]*|[A-Z]:\\[^\s,)]+|%APPDATA%[^\s,)]*|\b[\w.-]+\.(?:exe|dll|xml|log|json|ini)(?:\.old)?\b|\.ROTK-assets|0x[0-9A-Fa-f]{5,}|--no-sandbox)/g, '<code class="p">$1</code>');
 }
+const techTags = (k) => k.filter(t => /^[\x20-\x7E]+$/.test(t) && /[0-9.\\=%_]|^[A-Z0-9 ]+$/.test(t)).slice(0, 2);
 
 function render(){
   const T = UI[lang];
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i]").forEach(n => { const v = T[n.dataset.i]; if (v != null) n.innerHTML = v; });
-  document.getElementById("tape").innerHTML = '<span>' + T.tape + '</span>';
   document.getElementById("q").placeholder = T.placeholder;
   document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
 
   const chips = document.getElementById("chips"); chips.innerHTML = "";
-  QUICK.forEach(qv => { const b = el("button","chip-btn", esc(qv)); b.type = "button"; b.onclick = () => { const q = document.getElementById("q"); q.value = qv; filter(); q.focus(); }; chips.append(b); });
+  chips.append(el("span", null, esc(T.chips)));
+  QUICK.forEach(v => { const b = el("button", "chip", esc(v)); b.type = "button"; b.onclick = () => { const q = document.getElementById("q"); q.value = v; activeCat = "all"; filter(); document.getElementById("faq").scrollIntoView({behavior:"smooth"}); }; chips.append(b); });
+
+  const grid = document.getElementById("grid"); grid.innerHTML = "";
+  CATS.forEach(c => {
+    const n = F.filter(x => x.c === c.id).length;
+    const t = el("button", "tile"); t.type = "button";
+    t.innerHTML = '<span class="ic">' + svg(ICONS[c.id]) + '</span><b>' + esc(c.t[lang]) + '</b><small>' + esc(c.i[lang]) + '</small><em>' + n + ' ' + (n > 1 ? T.sols : T.sol) + '</em>';
+    t.onclick = () => { activeCat = c.id; document.getElementById("q").value = ""; filter(); document.getElementById("faq").scrollIntoView({behavior:"smooth"}); };
+    grid.append(t);
+  });
+  const tb = el("button", "tile"); tb.type = "button";
+  tb.innerHTML = '<span class="ic">' + svg(ICONS.avant) + '</span><b>' + esc(T.beforeH) + '</b><small>' + esc(T.beforeP) + '</small><em>&nbsp;</em>';
+  tb.onclick = () => document.getElementById("avant").scrollIntoView({behavior:"smooth"});
+  grid.append(tb);
+
+  const tabs = document.getElementById("tabs"); tabs.innerHTML = "";
+  [{id:"all", t:{fr:T.all, en:T.all}}, ...CATS].forEach(c => {
+    const b = el("button", "tab", esc(c.t[lang])); b.type = "button"; b.dataset.cat = c.id;
+    b.onclick = () => { activeCat = c.id; filter(); };
+    tabs.append(b);
+  });
+
+  const list = document.getElementById("list"); list.innerHTML = "";
+  CATS.forEach(c => {
+    const g = el("div", "group", svg(ICONS[c.id]) + esc(c.t[lang])); g.dataset.group = c.id; list.append(g);
+    F.filter(x => x.c === c.id).forEach(x => list.append(row(x, T)));
+  });
 
   const rules = document.getElementById("rules"); rules.innerHTML = "";
-  RULES[lang].forEach(([h, items]) => { const d = el("div"); d.append(el("h3", null, esc(h))); const ul = el("ul"); items.forEach(i => ul.append(el("li", null, codeify(i)))); d.append(ul); rules.append(d); });
+  RULES[lang].forEach(([h, items], i) => {
+    const p = el("div", "panel " + (i === 0 ? "do" : "dont"));
+    p.innerHTML = '<h3><i>' + svg(i === 0 ? '<path d="m5 12.5 4.5 4.5L19 7.5"/>' : '<path d="M7 7l10 10M17 7 7 17"/>') + '</i>' + esc(h) + '</h3>';
+    const ul = el("ul"); items.forEach(it => ul.append(el("li", null, codeify(it)))); p.append(ul); rules.append(p);
+  });
 
   const links = document.getElementById("links"); links.innerHTML = "";
-  LINKS.forEach(([lab, v]) => { const d = el("div"); d.append(el("b", null, esc(lab[lang]))); if (v.a) { const a = el("a", null, esc(v.a.replace(/^https:\/\//,""))); a.href = v.a; a.target = "_blank"; a.rel = "noopener"; d.append(a); } else d.append(el("span", null, codeify(v.t[lang]))); links.append(d); });
+  LINKS.forEach(([lab, v]) => { const d = el("div"); d.append(el("b", null, esc(lab[lang]))); if (v.a) { const a = el("a", null, esc(v.a.replace(/^https:\/\//, ""))); a.href = v.a; a.target = "_blank"; a.rel = "noopener"; d.append(a); } else d.append(el("span", null, codeify(v.t[lang]))); links.append(d); });
 
-  const holder = document.getElementById("cats"); holder.innerHTML = "";
-  const nav = document.getElementById("catnav"); nav.innerHTML = "";
-  const navLink = (id, label, n) => { const a = el("a", null, esc(label) + (n != null ? '<span>' + n + '</span>' : "")); a.href = "#" + id; nav.append(a); return a; };
-  navLink("avant", T.beforeH);
-  CATS.forEach(cat => {
-    const items = F.filter(x => x.c === cat.id);
-    const sec = el("section","cat"); sec.id = cat.id;
-    const head = el("div","cat-head"); head.append(el("h2", null, esc(cat.t[lang]))); head.append(el("p", null, esc(cat.i[lang]))); sec.append(head);
-    const list = el("div","list");
-    items.forEach(x => list.append(card(x, T)));
-    sec.append(list); holder.append(sec);
-    cat.sec = sec; cat.badge = navLink(cat.id, cat.t[lang], items.length).querySelector("span");
-  });
-  navLink("liens", T.linksH);
   filter();
 }
 
-function card(x, T){
-  const shell = el("article","card");
-  shell.dataset.search = [x.t.fr, x.t.en, ...x.k, ...x.f.fr, ...x.f.en, x.n ? x.n.fr + " " + x.n.en : ""].join(" ").toLowerCase();
-  const d = el("details");
-  const sum = el("summary");
-  sum.append(el("h3", null, esc(x.t[lang])));
-  const tg = el("span","toggle", ICON_PLUS); tg.setAttribute("aria-hidden","true"); sum.append(tg);
-  const meta = el("div","meta");
-  meta.append(el("span","pill " + STATUS_CLASS[x.s], esc(T.st[x.s])));
-  x.k.filter(k => /^[\x20-\x7E]+$/.test(k) && /[0-9.\\=%_]|^[A-Z0-9 ]+$/.test(k)).slice(0,3).forEach(k => meta.append(el("span","code", esc(k))));
-  sum.append(meta); d.append(sum);
-  const body = el("div","body");
-  const steps = x.f[lang];
-  const sec = el("div"); sec.append(el("h4", null, esc(steps.length > 1 ? T.fix : T.fix1)));
-  const ol = el(steps.length > 1 ? "ol" : "ul"); steps.forEach(s => ol.append(el("li", null, codeify(s)))); sec.append(ol); body.append(sec);
-  if (x.n) body.append(el("p","note", codeify(x.n[lang])));
-  d.append(body); shell.append(d);
-  return shell;
+function row(x, T){
+  const r = el("article", "row"); r.dataset.cat = x.c;
+  r.dataset.search = [x.t.fr, x.t.en, ...x.k, ...x.f.fr, ...x.f.en, x.n ? x.n.fr + " " + x.n.en : ""].join(" ").toLowerCase();
+  const d = el("details"), s = el("summary");
+  s.append(el("span", "chev", CHEV));
+  s.append(el("h3", null, esc(x.t[lang])));
+  const tags = el("div", "tags");
+  tags.append(el("span", "tag st " + STATUS[x.s], esc(T.st[x.s])));
+  techTags(x.k).forEach(k => tags.append(el("span", "tag", esc(k))));
+  s.append(tags); d.append(s);
+  const b = el("div", "body");
+  const steps = x.f[lang], ol = el(steps.length > 1 ? "ol" : "ul");
+  steps.forEach(st => ol.append(el("li", null, codeify(st)))); b.append(ol);
+  if (x.n) b.append(el("p", "note", codeify(x.n[lang])));
+  d.append(b); r.append(d);
+  return r;
 }
 
 function filter(){
   const T = UI[lang];
   const words = document.getElementById("q").value.toLowerCase().trim().split(/\s+/).filter(Boolean);
-  let total = 0;
-  CATS.forEach(cat => {
-    let shown = 0;
-    cat.sec.querySelectorAll(".card").forEach(c => { const ok = words.every(w => c.dataset.search.includes(w)); c.hidden = !ok; if (ok) shown++; if (ok && words.length) c.querySelector("details").open = shown <= 2; });
-    cat.sec.hidden = shown === 0; cat.badge.textContent = shown; total += shown;
+  if (words.length) activeCat = "all";
+  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cat === activeCat)));
+  let total = 0, opened = 0;
+  const seen = {};
+  document.querySelectorAll("#list .row").forEach(r => {
+    const ok = (activeCat === "all" || r.dataset.cat === activeCat) && words.every(w => r.dataset.search.includes(w));
+    r.hidden = !ok;
+    if (ok) { total++; seen[r.dataset.cat] = true; if (words.length && opened < 2) { r.querySelector("details").open = true; opened++; } }
   });
+  document.querySelectorAll("#list .group").forEach(g => g.hidden = !seen[g.dataset.group] || activeCat !== "all");
   document.getElementById("count").textContent = total + " " + (total > 1 ? T.many : T.one);
   document.getElementById("empty").hidden = total !== 0;
 }
