@@ -122,6 +122,25 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tab:hover{color:var(--text)}
 .tab[aria-pressed="true"]{background:var(--s3);color:#fff;box-shadow:inset 0 0 0 1px var(--line-2)}
 .list{display:grid;gap:8px;margin-top:18px}
+.search-wrap{position:relative;max-width:560px;margin:0 auto}
+.sug{position:relative;margin-top:8px;z-index:2;background:rgba(14,14,16,.97);border:1px solid var(--line-3);border-radius:18px;padding:6px;box-shadow:0 24px 60px -20px rgba(0,0,0,.9);text-align:left}
+.sg{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-size:14.5px;color:var(--text)}
+.sg:hover,.sg:focus-visible{background:rgba(255,255,255,.07)}
+.sg .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sg .vv{font-size:11px;color:var(--red-hi)}
+.sg.more{justify-content:center;color:var(--dim);font-size:13.5px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:none;background:var(--muted)}
+.dot.s-ok{background:var(--ok)} .dot.s-lead{background:var(--lead)} .dot.s-known{background:var(--known)}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:14px 2px 0;font-size:13px;color:var(--muted)}
+.legend .dot{margin-right:-8px}
+.approx{margin:12px 2px 0;font-size:14px;color:var(--amber)}
+.share{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 12px;border-radius:999px;border:1px solid var(--line-2);font-size:13px;color:var(--dim);cursor:pointer}
+.share svg{width:15px;height:15px}
+.share:hover{border-color:var(--line-3);color:#fff}
+.share.ok{border-color:rgba(127,217,154,.5);color:var(--ok)}
+.row.flash{animation:flash 1.6s var(--ease)}
+@keyframes flash{0%,40%{box-shadow:0 0 0 2px var(--red-hi),0 0 40px rgba(255,59,47,.35)}100%{box-shadow:none}}
+.row{scroll-margin-top:90px}
 .group{font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px;margin:18px 0 2px}
 .group:first-child{margin-top:0}
 .group svg{width:15px;height:15px;color:var(--red-hi)}
@@ -186,7 +205,7 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
   .duo{grid-template-columns:minmax(0,1fr)}
   .links div{grid-template-columns:minmax(0,1fr);gap:2px}
 }
-@media (max-width:460px){.grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:460px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{padding:14px;gap:6px}.tile small{display:none}.tile b{font-size:14.5px;line-height:1.3}.tile .ic.img{width:60px;height:60px;margin:-6px 0 -2px -6px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -218,11 +237,12 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     <div class="kicker"><i></i><span data-i="kicker"></span></div>
     <h1 data-i="h1"></h1>
     <p class="lede" data-i="lede"></p>
-    <label class="search" for="q">
+    <div class="search-wrap"><label class="search" for="q">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="q" type="search" autocomplete="off">
       <span class="count" id="count" aria-live="polite"></span>
     </label>
+    <div class="sug" id="sug" hidden></div></div>
     <div class="chips" id="chips"></div>
   </div>
 </header>
@@ -236,6 +256,8 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
   <section class="block" id="faq">
     <div class="block-head"><div><h2 data-i="faqH"></h2><p data-i="faqP"></p></div></div>
     <div class="tabs" id="tabs" role="group" data-al="tabsL"></div>
+    <p class="legend" data-i="legend"></p>
+    <p class="approx" id="approx" hidden data-i="approx"></p>
     <div class="list" id="list"></div>
     <div class="empty" id="empty" hidden data-i="empty"></div>
   </section>
@@ -259,7 +281,7 @@ const UI = {
     notice:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : bans, tickets et annonces passent par les canaux officiels.",
     brand:"ROTK Wiki", badge:"Non officiel", kicker:"Wiki communautaire, non officiel",
     h1:"Aide et solutions", lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
-    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
+    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
     quickH:"Accès rapide", quickP:"Choisis le type de problème pour voir les solutions.",
     faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
@@ -273,7 +295,7 @@ const UI = {
     notice:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.",
     brand:"ROTK Wiki", badge:"Unofficial", kicker:"Community wiki, unofficial",
     h1:"Help and fixes", lede:"The most common launcher and game problems, with what actually worked for players.",
-    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
+    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
     quickH:"Quick access", quickP:"Pick the kind of problem to see the fixes.",
     faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
@@ -610,9 +632,67 @@ function render(){
   filter();
 }
 
+/* Recherche : sans accents, mots courants FR/EN ignorés, synonymes du Discord, résultats classés. */
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’'`´«»"()\[\],;!?]/g, " ");
+const STOP = new Set(("le la les l de des du d un une et ou a au aux en je j tu il elle on nous vous ils ne n pas plus mon ma mes ton ta tes son sa ses se s " +
+  "ce c ca cela ceci qui que qu quoi est es suis sont ai as avoir etre avec sans sur sous dans par pour mais tout tous toujours jamais rien quand comment pourquoi y " +
+  "the an and or of to in on at my is are it its i im i'm can cant can't not no dont don't doesnt wont won't do does did with for this that me you your u ur when why how get got").split(" "));
+const SYN = [
+  ["vocal","voice","micro","mic","micros","entend","entends","entendre","hear","parle","parler","talk","proximite","proximity","vivox","son","sound","audio","ptt"],
+  ["crash","crashe","crashes","crashing","plante","plantage","ferme","close","closes","closed"],
+  ["lance","lancer","demarre","demarrer","ouvre","ouvrir","open","opens","start","starts","launch"],
+  ["maj","mise","jour","update","updating","patch"],
+  ["ban","banni","bannis","banned","suspendu","suspended","unban","deban","debannir"],
+  ["deconnecte","deconnexion","deco","disconnect","disconnected","kick","kicked","dc"],
+  ["noir","black"], ["ecran","screen"],
+  ["lag","ping","latence","latency","desync"],
+  ["fps","saccade","saccades","stutter","stutters","freeze","freezes","ralenti","rame","lent"],
+  ["telecharger","telechargement","download","downloading","assets"],
+  ["installer","install","installation"],
+  ["cle","password","mdp","identifiants","login"],
+  ["antivirus","defender","avast","avg","norton","bitdefender","virus"],
+  ["tuto","tutorial","recrue","recruit"],
+  ["carburant","essence","fuel","bidon","refuel"],
+  ["voiture","vehicule","vehicle"],
+  ["footsteps","footstep"],
+  ["compte","account","inscription","signup","register"],
+];
+const SYNMAP = new Map(); SYN.forEach(g => g.forEach(w => SYNMAP.set(w, g)));
+const PHRASES = [[/mot de passe/g, "mdp"], [/mise a jour/g, "maj"], [/ne se lance pas|se lance pas|lance pas/g, "lance"], [/won t open|wont open|doesn t open/g, "open"], [/son des pas|bruits? de pas|entends? (pas|plus) les pas/g, " footsteps "], [/pas de son|aucun son|no sound/g, " son "]];
+const words = s => norm(s).split(/[^a-z0-9.=_\\:+-]+/).map(w => w.replace(/^[.=_:+-]+|[.=_:+-]+$/g, "")).filter(w => w && !STOP.has(w));
+function queryTokens(q){
+  let s = norm(q); PHRASES.forEach(([re, to]) => s = s.replace(re, " " + to + " "));
+  const toks = norm(s).split(/[^a-z0-9.=_\:+-]+/).filter(Boolean).filter(w => SYNMAP.has(w) || !STOP.has(w));
+  return [...new Set(toks)].map(t => SYNMAP.has(t) ? {own:t, alts:SYNMAP.get(t)} : {own:t, alts:[t]});
+}
+function indexRow(x){
+  const idx = {t:new Set(words(x.t.fr + " " + x.t.en)), k:new Set(words(x.k.join(" "))), b:new Set(words([...x.f.fr, ...x.f.en, x.n ? x.n.fr + " " + x.n.en : ""].join(" ")))};
+  idx.all = [...idx.t, ...idx.k, ...idx.b];
+  return idx;
+}
+const hit = (set, g) => [...set].some(w => (g.own.length >= 3 ? w.startsWith(g.own) : w === g.own) || g.alts.some(a => w === a || w === a + "s"));
+function scoreRow(idx, groups){
+  let score = 0, matched = 0;
+  for (const alts of groups) {
+    const s = hit(idx.t, alts) ? 6 : hit(idx.k, alts) ? 4 : hit(idx.b, alts) ? 1.5 : 0;
+    if (s) { matched++; score += s; }
+  }
+  return {score, matched};
+}
+
+/* Liens directs : #slug du titre français, identique en FR et en EN */
+const SLUGS = new Map();
+function slugOf(x){
+  if (SLUGS.has(x)) return SLUGS.get(x);
+  let b = ""; for (const w of norm(x.t.fr).split(/[^a-z0-9]+/).filter(Boolean)) { if ((b + "-" + w).length > 56 && b) break; b = b ? b + "-" + w : w; }
+  let sl = b, i = 2; while ([...SLUGS.values()].includes(sl)) sl = b + "-" + i++;
+  SLUGS.set(x, sl); return sl;
+}
+const cardURL = sl => location.origin + location.pathname + (lang === "en" ? "?lang=en" : "") + "#" + sl;
+
 function row(x, T){
   const r = el("article", "row"); r.dataset.cat = x.c;
-  r.dataset.search = [x.t.fr, x.t.en, ...x.k, ...x.f.fr, ...x.f.en, x.n ? x.n.fr + " " + x.n.en : ""].join(" ").toLowerCase();
+  r.id = slugOf(x); r._idx = indexRow(x); r._x = x;
   const d = el("details"), s = el("summary");
   s.append(el("span", "chev", CHEV));
   s.append(el("h3", null, esc(x.t[lang])));
@@ -631,34 +711,74 @@ function row(x, T){
     v.setAttribute("aria-label", (lang === "fr" ? "Vidéo tutoriel : " : "Video tutorial: ") + x.t[lang].replace(/[«»"]/g, "").replace(/\s+/g, " ").trim());
     b.append(v);
   }
+  const share = el("button", "share", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>' + esc(T.copyLink) + '</span>');
+  share.type = "button";
+  share.onclick = async () => { const u = cardURL(r.id); try { await navigator.clipboard.writeText(u); } catch (e) { const t = document.createElement("textarea"); t.value = u; document.body.append(t); t.select(); try { document.execCommand("copy"); } catch (_) {} t.remove(); } share.querySelector("span").textContent = T.copied; share.classList.add("ok"); setTimeout(() => { share.querySelector("span").textContent = T.copyLink; share.classList.remove("ok"); }, 1800); };
+  b.append(share);
+  d.addEventListener("toggle", () => { if (d.open && !r._silent) { try { history.replaceState(null, "", location.pathname + location.search + "#" + r.id); } catch (e) {} } });
   d.append(b); r.append(d);
   return r;
 }
 
 function filter(){
   const T = UI[lang];
-  const words = document.getElementById("q").value.toLowerCase().trim().split(/\s+/).filter(Boolean);
-  if (words.length) activeCat = "all";
+  const q = document.getElementById("q").value.trim();
+  const groups = q ? queryTokens(q) : [];
+  if (groups.length) activeCat = "all";
   document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cat === activeCat)));
-  let total = 0, opened = 0;
-  const seen = {};
-  document.querySelectorAll("#list .row").forEach(r => {
-    const ok = (activeCat === "all" || r.dataset.cat === activeCat) && words.every(w => r.dataset.search.includes(w));
-    r.hidden = !ok;
-    if (ok) { total++; seen[r.dataset.cat] = true; if (words.length && opened < 2) { r.querySelector("details").open = true; opened++; } }
-  });
-  document.querySelectorAll("#list .group").forEach(g => g.hidden = !seen[g.dataset.group] || activeCat !== "all");
-  document.getElementById("count").textContent = total + " " + (total > 1 ? T.many : T.one);
-  document.getElementById("empty").hidden = total !== 0;
+  const rows = [...document.querySelectorAll("#list .row")];
+  let res = rows.map(r => ({r, ...(groups.length ? scoreRow(r._idx, groups) : {score:0, matched:0})}));
+  let strict = true;
+  if (groups.length) {
+    let ok = res.filter(o => o.matched === groups.length);
+    if (!ok.length) { strict = false; ok = res.filter(o => o.matched > 0); }
+    const keep = new Set(ok.map(o => o.r));
+    res.forEach(o => { o.show = keep.has(o.r); });
+  } else res.forEach(o => { o.show = activeCat === "all" || o.r.dataset.cat === activeCat; });
+  const shown = res.filter(o => o.show).sort((a, b) => b.score - a.score);
+  rows.forEach(r => { r.hidden = true; r.style.order = ""; r._silent = true; r.querySelector("details").open = false; r._silent = false; });
+  shown.forEach((o, i) => { o.r.hidden = false; if (groups.length) o.r.style.order = i; });
+  if (groups.length && shown[0]) { shown[0].r._silent = true; shown[0].r.querySelector("details").open = true; shown[0].r._silent = false; }
+  const seen = {}; shown.forEach(o => seen[o.r.dataset.cat] = true);
+  document.querySelectorAll("#list .group").forEach(g => g.hidden = groups.length > 0 || !seen[g.dataset.group] || activeCat !== "all");
+  document.getElementById("count").textContent = shown.length + " " + (shown.length > 1 ? T.many : T.one);
+  document.getElementById("empty").hidden = shown.length !== 0;
+  document.getElementById("approx").hidden = strict || !shown.length;
+  // suggestions sous la barre de recherche
+  const sug = document.getElementById("sug"); sug.innerHTML = "";
+  if (groups.length && shown.length) {
+    shown.slice(0, 5).forEach(o => {
+      const b = el("button", "sg"); b.type = "button";
+      b.innerHTML = '<span class="dot ' + STATUS[o.r._x.s] + '"></span><span class="tt">' + esc(o.r._x.t[lang]) + '</span>' + (o.r._x.v ? '<span class="vv">▶</span>' : '');
+      b.onclick = () => openCard(o.r.id, true);
+      sug.append(b);
+    });
+    if (shown.length > 5) { const m = el("button", "sg more", esc(T.seeAll.replace("{n}", shown.length))); m.type = "button"; m.onclick = () => document.getElementById("faq").scrollIntoView({behavior:"smooth"}); sug.append(m); }
+  }
+  sug.hidden = !sug.children.length;
+}
+
+function openCard(id, scroll){
+  const r = document.getElementById(id); if (!r || !r.classList.contains("row")) return false;
+  if (r.hidden) { document.getElementById("q").value = ""; activeCat = "all"; filter(); }
+  r.querySelector("details").open = true;
+  r.classList.remove("flash"); void r.offsetWidth; r.classList.add("flash");
+  if (scroll) r.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+  return true;
 }
 
 document.getElementById("q").addEventListener("input", filter);
+document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); const f = document.querySelector("#sug .sg:not(.more)"); if (f) f.click(); else document.getElementById("faq").scrollIntoView({behavior:"smooth"}); } if (e.key === "Escape") { document.getElementById("sug").hidden = true; } });
+document.addEventListener("click", e => { if (!e.target.closest(".search-wrap")) document.getElementById("sug").hidden = true; });
+document.getElementById("q").addEventListener("focus", () => { if (document.getElementById("sug").children.length) document.getElementById("sug").hidden = false; });
+window.addEventListener("hashchange", () => openCard(decodeURIComponent(location.hash.slice(1)), true));
 document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
   lang = b.dataset.lang; try { localStorage.setItem("h1wiki-lang", lang); } catch (e) {}
   if (urlLang) { try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) {} }
   const q = document.getElementById("q").value; render(); document.getElementById("q").value = q; filter();
 }));
 render();
+if (location.hash) setTimeout(() => openCard(decodeURIComponent(location.hash.slice(1)), true), 60);
 matchMedia("(max-width:480px)").addEventListener("change", () => { const T = UI[lang]; document.getElementById("q").placeholder = matchMedia("(max-width:480px)").matches ? T.phShort : T.placeholder; });
 </script>
 </body>
