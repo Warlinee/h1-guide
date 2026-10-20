@@ -65,8 +65,13 @@ main:focus{outline:none}
 .brand{display:flex;align-items:center;gap:11px}
 .brand-mark{width:32px;height:32px;border-radius:10px;background:var(--red);display:grid;place-items:center;box-shadow:0 6px 20px -6px rgba(225,6,0,.7),inset 0 1px 0 rgba(255,255,255,.25)}
 .brand-mark svg{width:16px;height:16px;color:#fff}
-.brand-name{font-family:var(--f-display);font-stretch:118%;font-weight:700;font-size:15px;letter-spacing:.01em}
+.brand-name{white-space:nowrap;font-family:var(--f-display);font-stretch:118%;font-weight:700;font-size:15px;letter-spacing:.01em}
 .badge{font-size:11.5px;font-weight:600;color:var(--amber);background:var(--amber-soft);border:1px solid rgba(242,184,56,.3);padding:2px 9px;border-radius:999px;margin-left:4px}
+.nav-r{display:flex;align-items:center;gap:8px}
+.olink{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:rgba(255,255,255,.05);color:var(--text);font-size:13.5px;font-weight:500;text-decoration:none;transition:border-color .3s,background .3s}
+.olink svg{width:16px;height:16px;flex:none}
+.olink.dc svg{color:#8b95ff}
+.olink:hover{border-color:var(--line-3);background:rgba(255,255,255,.09)}
 .lang{display:flex;gap:4px;background:rgba(255,255,255,.05);border:1px solid var(--line-2);border-radius:999px;padding:4px}
 .lang button{border:0;background:transparent;padding:5px 8px;border-radius:999px;cursor:pointer;display:grid;place-items:center;opacity:.45;transition:opacity .3s,background .3s}
 .lang button svg{width:22px;height:15px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.2)}
@@ -163,10 +168,14 @@ code.p{font-family:var(--mono);font-size:.84em;background:var(--s3);color:#ffc2b
 footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-block:26px 44px;color:var(--muted);font-size:14px}
 .foot b{color:var(--amber);font-weight:600}
+.foot a,.empty a{color:var(--red-hi);text-decoration:underline;text-underline-offset:3px}
 
 @media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){
   .hero{margin:10px 10px 0;border-radius:22px}
+  .olink{width:40px;height:40px;padding:0;justify-content:center}
+  .olink span{display:none}
+  .nav-r{gap:6px}
   .badge{display:none}
   .row summary{grid-template-columns:32px minmax(0,1fr)}
   .tags{grid-column:2;justify-content:flex-start}
@@ -193,9 +202,13 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
       <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.1-.4-.4-2.1z"/></svg></div>
       <span class="brand-name" data-i="brand"></span><span class="badge" data-i="badge"></span>
     </div>
+    <div class="nav-r">
+      <a class="olink" href="https://rotk.app" target="_blank" rel="noopener" data-al="siteL"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg><span>rotk.app</span></a>
+      <a class="olink dc" href="https://discord.gg/JTr9NHTmCU" target="_blank" rel="noopener" data-al="dcL"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52.07.07 0 0 0-.08.04c-.21.38-.44.87-.61 1.25a18.27 18.27 0 0 0-5.49 0 12.6 12.6 0 0 0-.62-1.25.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-4.88 1.52.07.07 0 0 0-.03.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .09-.03c.46-.63.87-1.3 1.22-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1 0-.13l.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01l.37.29a.08.08 0 0 1 0 .13 12.3 12.3 0 0 1-1.87.89.08.08 0 0 0-.04.11c.36.7.77 1.36 1.22 1.99a.08.08 0 0 0 .09.03 19.84 19.84 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z"/></svg><span>Discord</span></a>
     <div class="lang" role="group" aria-label="Langue / Language">
       <button type="button" data-lang="fr" aria-label="Français" title="Français"><svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#0055a4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg></button>
       <button type="button" data-lang="en" aria-label="English" title="English"><svg viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><g fill="#fff"><rect y="0.77" width="19" height="0.77"/><rect y="2.31" width="19" height="0.77"/><rect y="3.85" width="19" height="0.77"/><rect y="5.38" width="19" height="0.77"/><rect y="6.92" width="19" height="0.77"/><rect y="8.46" width="19" height="0.77"/></g><rect width="7.6" height="5.38" fill="#3c3b6e"/></svg></button>
+    </div>
     </div>
   </div>
   <div class="hero-body">
@@ -243,29 +256,29 @@ const UI = {
     notice:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : bans, tickets et annonces passent par les canaux officiels.",
     brand:"ROTK Wiki", badge:"Non officiel", kicker:"Wiki communautaire, non officiel",
     h1:"Aide et solutions", lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
-    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", tabsL:"Catégories", noticeL:"Avertissement",
+    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
     quickH:"Accès rapide", quickP:"Choisis le type de problème pour voir les solutions.",
     faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
     linksH:"Liens utiles", linksP:"Téléchargements, chemins de fichiers et adresses à connaître.",
     st:{ok:"Confirmé",lead:"Piste",known:"Connu, pas de fix"}, one:"résultat", many:"résultats", sol:"solution", sols:"solutions",
-    empty:"Rien trouvé. Essaie juste le code d'erreur, ou un mot plus court.",
+    empty:"Rien trouvé. Essaie juste le code d'erreur, ou un mot plus court. Toujours rien ? Demande sur le <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">Discord officiel</a>.",
     foot1:"Wiki communautaire non officiel, écrit par Warline à partir de cas réels du Discord et du code public du launcher.",
-    foot2:"<b>Pas affilié à ROTK.</b> Une info a changé ? Dis-le sur le Discord."
+    foot2:"<b>Pas affilié à ROTK.</b> Une info a changé ? Dis-le sur le <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">Discord</a>."
   },
   en:{
     notice:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.",
     brand:"ROTK Wiki", badge:"Unofficial", kicker:"Community wiki, unofficial",
     h1:"Help and fixes", lede:"The most common launcher and game problems, with what actually worked for players.",
-    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", tabsL:"Categories", noticeL:"Notice",
+    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
     quickH:"Quick access", quickP:"Pick the kind of problem to see the fixes.",
     faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
     linksH:"Useful links", linksP:"Downloads, file paths and addresses worth knowing.",
     st:{ok:"Confirmed",lead:"Lead",known:"Known, no fix"}, one:"result", many:"results", sol:"fix", sols:"fixes",
-    empty:"Nothing found. Try just the error code, or a shorter word.",
+    empty:"Nothing found. Try just the error code, or a shorter word. Still nothing? Ask on the <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">official Discord</a>.",
     foot1:"Unofficial community wiki, written by Warline from real Discord cases and the launcher's public code.",
-    foot2:"<b>Not affiliated with ROTK.</b> Something changed? Say it on the Discord."
+    foot2:"<b>Not affiliated with ROTK.</b> Something changed? Say it on the <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">Discord</a>."
   }
 };
 
@@ -279,7 +292,8 @@ const RULES = {
 const LINKS = [
   [{fr:"Visual C++ x64 (Microsoft)",en:"Visual C++ x64 (Microsoft)"},{a:"https://aka.ms/vc14/vc_redist.x64.exe"}],
   [{fr:"Vérifier l'heure du PC",en:"Check your PC clock"},{a:"https://time.is"}],
-  [{fr:"Site ROTK (compte, clé, tenue, caisses)",en:"ROTK site (account, key, outfit, cases)"},{a:"https://rotk.app"}],
+  [{fr:"Site officiel ROTK (compte, clé, tenue, caisses)",en:"Official ROTK site (account, key, outfit, cases)"},{a:"https://rotk.app"}],
+  [{fr:"Discord officiel ROTK (aide, tickets, annonces)",en:"Official ROTK Discord (help, tickets, announcements)"},{a:"https://discord.gg/JTr9NHTmCU"}],
   [{fr:"Bans",en:"Bans"},{t:{fr:"banappeals@rotk.app, par mail uniquement",en:"banappeals@rotk.app, by email only"}}],
   [{fr:"Bugs du launcher",en:"Launcher bugs"},{a:"https://github.com/ROTK-Team/rotk-launcher/issues"}],
   [{fr:"Log du launcher",en:"Launcher log"},{t:{fr:"%APPDATA%\\ROTK Launcher\\startup.log (à copier avant de relancer)",en:"%APPDATA%\\ROTK Launcher\\startup.log (copy it before restarting)"}}],
@@ -545,7 +559,7 @@ function render(){
   const T = UI[lang];
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i]").forEach(n => { const v = T[n.dataset.i]; if (v != null) n.innerHTML = v; });
-  document.getElementById("q").placeholder = T.placeholder;
+  document.getElementById("q").placeholder = matchMedia("(max-width:480px)").matches ? T.phShort : T.placeholder;
   document.getElementById("q").setAttribute("aria-label", T.placeholder);
   document.querySelectorAll("[data-al]").forEach(n => n.setAttribute("aria-label", T[n.dataset.al]));
   document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
@@ -642,6 +656,7 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
   const q = document.getElementById("q").value; render(); document.getElementById("q").value = q; filter();
 }));
 render();
+matchMedia("(max-width:480px)").addEventListener("change", () => { const T = UI[lang]; document.getElementById("q").placeholder = matchMedia("(max-width:480px)").matches ? T.phShort : T.placeholder; });
 </script>
 </body>
 </html>
