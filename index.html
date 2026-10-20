@@ -122,6 +122,25 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tab:hover{color:var(--text)}
 .tab[aria-pressed="true"]{background:var(--s3);color:#fff;box-shadow:inset 0 0 0 1px var(--line-2)}
 .list{display:grid;gap:8px;margin-top:18px}
+.topnav{position:sticky;top:0;z-index:30;margin-top:10px;background:rgba(7,7,8,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+.topnav.stuck{border-bottom-color:var(--line-2)}
+.tn-in{max-width:1180px;margin:0 auto;padding:8px clamp(14px,3vw,28px);display:flex;align-items:center;gap:10px}
+.tn-brand{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .3s}
+.topnav.stuck .tn-brand{opacity:1;pointer-events:auto}
+.tn-mark{width:30px;height:30px;border-radius:9px;background:var(--red);display:grid;place-items:center}
+.tn-mark svg{width:15px;height:15px;color:#fff}
+.tn-links{list-style:none;margin:0;padding:0;display:flex;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;mask-image:linear-gradient(90deg,#000 92%,transparent)}
+.tn-links::-webkit-scrollbar{display:none}
+.tn-links a{display:block;white-space:nowrap;padding:8px 13px;border-radius:999px;font-size:14px;font-weight:500;color:var(--dim);text-decoration:none;transition:color .2s,background .2s}
+.tn-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.tn-links a[aria-current="true"]{color:#fff;background:var(--red-soft);box-shadow:inset 0 0 0 1px var(--red-line)}
+.tn-search{all:unset;box-sizing:border-box;flex:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:rgba(255,255,255,.05);font-size:13.5px;color:var(--text)}
+.tn-search svg{width:16px;height:16px}
+.tn-search:hover{border-color:var(--line-3)}
+.tn-search:focus-visible,.tn-links a:focus-visible,.tn-brand:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
+section.block{scroll-margin-top:72px}
+@media (max-width:640px){.tn-search span{display:none}.tn-search{width:36px;padding:0;justify-content:center}.tn-brand{display:none}}
+
 .fold{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:14px}
 .ftree{background:var(--s1);border:1px solid var(--line);border-radius:20px;padding:22px 24px;font-size:14.5px}
 .fnode{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:10px 0 10px 26px}
@@ -185,7 +204,7 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .share.ok{border-color:rgba(127,217,154,.5);color:var(--ok)}
 .row.flash{animation:flash 1.6s var(--ease)}
 @keyframes flash{0%,40%{box-shadow:0 0 0 2px var(--red-hi),0 0 40px rgba(255,59,47,.35)}100%{box-shadow:none}}
-.row{scroll-margin-top:90px}
+.row{scroll-margin-top:110px}
 .group{font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px;margin:18px 0 2px}
 .group:first-child{margin-top:0}
 .group svg{width:15px;height:15px;color:var(--red-hi)}
@@ -262,7 +281,7 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
   <span data-i="notice"></span>
 </div></aside>
 
-<header class="hero">
+<header class="hero" id="top">
   <div class="art" aria-hidden="true"><div class="streak a"></div><div class="streak b"></div><div class="streak c"></div><div class="streak d"></div></div>
   <div class="nav">
     <div class="brand">
@@ -271,7 +290,7 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     </div>
     <div class="nav-r">
       <a class="olink" href="https://rotk.app" target="_blank" rel="noopener" data-al="siteL"><img src="icons/rotk.svg" alt="" width="16" height="16"><span>rotk.app</span></a>
-      <a class="olink dc" href="https://discord.gg/JTr9NHTmCU" target="_blank" rel="noopener" data-al="dcL"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52.07.07 0 0 0-.08.04c-.21.38-.44.87-.61 1.25a18.27 18.27 0 0 0-5.49 0 12.6 12.6 0 0 0-.62-1.25.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-4.88 1.52.07.07 0 0 0-.03.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .09-.03c.46-.63.87-1.3 1.22-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1 0-.13l.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01l.37.29a.08.08 0 0 1 0 .13 12.3 12.3 0 0 1-1.87.89.08.08 0 0 0-.04.11c.36.7.77 1.36 1.22 1.99a.08.08 0 0 0 .09.03 19.84 19.84 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z"/></svg><span>Discord</span></a>
+      <a class="olink dc" href="https://discord.gg/rotk" target="_blank" rel="noopener" data-al="dcL"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52.07.07 0 0 0-.08.04c-.21.38-.44.87-.61 1.25a18.27 18.27 0 0 0-5.49 0 12.6 12.6 0 0 0-.62-1.25.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-4.88 1.52.07.07 0 0 0-.03.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .09-.03c.46-.63.87-1.3 1.22-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1 0-.13l.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01l.37.29a.08.08 0 0 1 0 .13 12.3 12.3 0 0 1-1.87.89.08.08 0 0 0-.04.11c.36.7.77 1.36 1.22 1.99a.08.08 0 0 0 .09.03 19.84 19.84 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z"/></svg><span>Discord</span></a>
     <div class="lang" role="group" aria-label="Langue / Language">
       <button type="button" data-lang="fr" aria-label="Français" title="Français"><svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#0055a4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg></button>
       <button type="button" data-lang="en" aria-label="English" title="English"><svg viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><g fill="#fff"><rect y="0.77" width="19" height="0.77"/><rect y="2.31" width="19" height="0.77"/><rect y="3.85" width="19" height="0.77"/><rect y="5.38" width="19" height="0.77"/><rect y="6.92" width="19" height="0.77"/><rect y="8.46" width="19" height="0.77"/></g><rect width="7.6" height="5.38" fill="#3c3b6e"/></svg></button>
@@ -292,13 +311,27 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     <a class="hero-cta" href="#installation" data-i="installCta"></a>
   </div>
 </header>
+<nav class="topnav" data-al="navL">
+  <div class="tn-in">
+    <a class="tn-brand" href="#top" data-al="navTop"><span class="tn-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.1-.4-.4-2.1z"/></svg></span></a>
+    <ul class="tn-links">
+      <li><a href="#installation" data-i="navInstall"></a></li>
+      <li><a href="#creer-un-compte-niveau-steam-et-tuto" data-i="navAccount"></a></li>
+      <li><a href="#dossier" data-i="navFolder"></a></li>
+      <li><a href="#faq" data-i="navFaq"></a></li>
+      <li><a href="#avant" data-i="navBefore"></a></li>
+      <li><a href="#liens" data-i="navLinks"></a></li>
+    </ul>
+    <button class="tn-search" type="button" id="tnSearch" data-al="navSearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span data-i="navSearchT"></span></button>
+  </div>
+</nav>
 
 <main class="wrap" id="contenu" tabindex="-1">
   <section class="block" id="installation">
     <div class="block-head"><div><h2 data-i="installH"></h2><p data-i="installP"></p></div></div>
     <ol class="isteps" id="installSteps"></ol>
   </section>
-  <section class="block">
+  <section class="block" id="acces">
     <div class="block-head"><div><h2 data-i="quickH"></h2><p data-i="quickP"></p></div></div>
     <div class="grid" id="grid"></div>
   </section>
@@ -350,29 +383,29 @@ const UI = {
     notice:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : bans, tickets et annonces passent par les canaux officiels.",
     brand:"ROTK Wiki", badge:"Non officiel", kicker:"Wiki communautaire, non officiel",
     h1:"Aide et solutions", lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
-    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", folderH:"Où est ton jeu ?", folderP:"Le launcher et le jeu sont dans deux dossiers différents. Quand une solution parle du « dossier du jeu », c'est celui où se trouve H1Z1.exe.", treeL:"Arborescence : le launcher dans C:\\Program Files\\ROTK Launcher, le jeu dans C:\\Games\\ROTK, et le cache des assets dans C:\\Games\\.ROTK-assets, juste à côté.", treeLauncher:"Le launcher. Rien à modifier ici.", treeNot:"Pas ici", treeChosen:"Le dossier choisi à l'installation du client (chez toi, il peut s'appeler autrement).", treeGame:"Ton jeu : H1Z1.exe, rotk-shotgun-sprint.ini, dinput8.dll.", treeYes:"Dossier du jeu", treeAssets:"Juste à côté du jeu, avec un point devant.", treeCache:"Le dossier à vider quand les assets bloquent.", findH:"Tu ne sais plus où il est ?", findSteps:["Ouvre l'Explorateur de fichiers et clique sur « Ce PC » à gauche.","Tape <code class=\"p\">rotk-shotgun-sprint.ini</code> dans la recherche, en haut à droite, et attends.","Clic droit sur le résultat > « Ouvrir l'emplacement du fichier » : tu es dans ton dossier de jeu. Le dossier des assets est un cran au-dessus."], findNote:"Autre moyen : dans le launcher, ouvre l'installation du client, le chemin est écrit sous « Installation ROTK ». Si ton dossier de jeu s'appelle ROTK2, le cache s'appelle .ROTK2-assets.", installCta:"Nouveau sur ROTK ? <b>Suis le parcours d'installation</b> →", installH:"Première installation", installP:"Nouveau sur ROTK ? Les 6 étapes, dans l'ordre, avec les fiches et vidéos qui vont avec.", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
+    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", navL:"Sections du wiki", navTop:"Haut de la page", navInstall:"Installation", navAccount:"Créer un compte", navFolder:"Où est ton jeu ?", navFaq:"Problèmes", navBefore:"Avant de demander", navLinks:"Liens utiles", navSearch:"Rechercher un problème", navSearchT:"Rechercher", folderH:"Où est ton jeu ?", folderP:"Le launcher et le jeu sont dans deux dossiers différents. Quand une solution parle du « dossier du jeu », c'est celui où se trouve H1Z1.exe.", treeL:"Arborescence : le launcher dans C:\\Program Files\\ROTK Launcher, le jeu dans C:\\Games\\ROTK, et le cache des assets dans C:\\Games\\.ROTK-assets, juste à côté.", treeLauncher:"Le launcher. Rien à modifier ici.", treeNot:"Pas ici", treeChosen:"Le dossier choisi à l'installation du client (chez toi, il peut s'appeler autrement).", treeGame:"Ton jeu : H1Z1.exe, rotk-shotgun-sprint.ini, dinput8.dll.", treeYes:"Dossier du jeu", treeAssets:"Juste à côté du jeu, avec un point devant.", treeCache:"Le dossier à vider quand les assets bloquent.", findH:"Tu ne sais plus où il est ?", findSteps:["Ouvre l'Explorateur de fichiers et clique sur « Ce PC » à gauche.","Tape <code class=\"p\">rotk-shotgun-sprint.ini</code> dans la recherche, en haut à droite, et attends.","Clic droit sur le résultat > « Ouvrir l'emplacement du fichier » : tu es dans ton dossier de jeu. Le dossier des assets est un cran au-dessus."], findNote:"Autre moyen : dans le launcher, ouvre l'installation du client, le chemin est écrit sous « Installation ROTK ». Si ton dossier de jeu s'appelle ROTK2, le cache s'appelle .ROTK2-assets.", installCta:"Nouveau sur ROTK ? <b>Suis le parcours d'installation</b> →", installH:"Première installation", installP:"Nouveau sur ROTK ? Les 6 étapes, dans l'ordre, avec les fiches et vidéos qui vont avec.", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
     quickH:"Accès rapide", quickP:"Choisis le type de problème pour voir les solutions.",
     faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
     linksH:"Liens utiles", linksP:"Téléchargements, chemins de fichiers et adresses à connaître.",
     st:{ok:"Confirmé",lead:"Piste",known:"Connu, pas de fix"}, one:"résultat", many:"résultats", sol:"solution", sols:"solutions",
-    empty:"Rien trouvé. Essaie juste le code d'erreur, ou un mot plus court. Toujours rien ? Demande sur le <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">Discord officiel</a>.",
+    empty:"Rien trouvé. Essaie juste le code d'erreur, ou un mot plus court. Toujours rien ? Demande sur le <a href=\"https://discord.gg/rotk\" target=\"_blank\" rel=\"noopener\">Discord officiel</a>.",
     foot1:"Wiki communautaire non officiel, écrit par Warline à partir de cas réels du Discord et du code public du launcher.",
-    foot2:"<b>Pas affilié à ROTK.</b> Une info a changé ? Dis-le sur le <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">Discord</a>."
+    foot2:"<b>Pas affilié à ROTK.</b> Une info a changé ? Dis-le sur le <a href=\"https://discord.gg/rotk\" target=\"_blank\" rel=\"noopener\">Discord</a>."
   },
   en:{
     notice:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.",
     brand:"ROTK Wiki", badge:"Unofficial", kicker:"Community wiki, unofficial",
     h1:"Help and fixes", lede:"The most common launcher and game problems, with what actually worked for players.",
-    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", folderH:"Where is your game?", folderP:"The launcher and the game live in two different folders. When a fix says \"game folder\", it means the one with H1Z1.exe in it.", treeL:"Folder tree: the launcher in C:\\Program Files\\ROTK Launcher, the game in C:\\Games\\ROTK, and the asset cache in C:\\Games\\.ROTK-assets, right next to it.", treeLauncher:"The launcher. Nothing to change here.", treeNot:"Not here", treeChosen:"The folder you picked during client setup (yours may have another name).", treeGame:"Your game: H1Z1.exe, rotk-shotgun-sprint.ini, dinput8.dll.", treeYes:"Game folder", treeAssets:"Right next to the game, with a dot in front.", treeCache:"The folder to empty when assets get stuck.", findH:"Lost track of it?", findSteps:["Open File Explorer and click \"This PC\" on the left.","Type <code class=\"p\">rotk-shotgun-sprint.ini</code> in the search box, top right, and wait.","Right-click the result > \"Open file location\": you're in your game folder. The assets folder is one level up."], findNote:"Another way: in the launcher, open the client setup, the path is written under \"ROTK installation\". If your game folder is called ROTK2, the cache is called .ROTK2-assets.", installCta:"New to ROTK? <b>Follow the install guide</b> →", installH:"First install", installP:"New to ROTK? The 6 steps, in order, with the matching cards and videos.", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
+    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", navL:"Wiki sections", navTop:"Top of the page", navInstall:"Install", navAccount:"Create an account", navFolder:"Where is your game?", navFaq:"Problems", navBefore:"Before asking", navLinks:"Useful links", navSearch:"Search a problem", navSearchT:"Search", folderH:"Where is your game?", folderP:"The launcher and the game live in two different folders. When a fix says \"game folder\", it means the one with H1Z1.exe in it.", treeL:"Folder tree: the launcher in C:\\Program Files\\ROTK Launcher, the game in C:\\Games\\ROTK, and the asset cache in C:\\Games\\.ROTK-assets, right next to it.", treeLauncher:"The launcher. Nothing to change here.", treeNot:"Not here", treeChosen:"The folder you picked during client setup (yours may have another name).", treeGame:"Your game: H1Z1.exe, rotk-shotgun-sprint.ini, dinput8.dll.", treeYes:"Game folder", treeAssets:"Right next to the game, with a dot in front.", treeCache:"The folder to empty when assets get stuck.", findH:"Lost track of it?", findSteps:["Open File Explorer and click \"This PC\" on the left.","Type <code class=\"p\">rotk-shotgun-sprint.ini</code> in the search box, top right, and wait.","Right-click the result > \"Open file location\": you're in your game folder. The assets folder is one level up."], findNote:"Another way: in the launcher, open the client setup, the path is written under \"ROTK installation\". If your game folder is called ROTK2, the cache is called .ROTK2-assets.", installCta:"New to ROTK? <b>Follow the install guide</b> →", installH:"First install", installP:"New to ROTK? The 6 steps, in order, with the matching cards and videos.", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
     quickH:"Quick access", quickP:"Pick the kind of problem to see the fixes.",
     faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
     linksH:"Useful links", linksP:"Downloads, file paths and addresses worth knowing.",
     st:{ok:"Confirmed",lead:"Lead",known:"Known, no fix"}, one:"result", many:"results", sol:"fix", sols:"fixes",
-    empty:"Nothing found. Try just the error code, or a shorter word. Still nothing? Ask on the <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">official Discord</a>.",
+    empty:"Nothing found. Try just the error code, or a shorter word. Still nothing? Ask on the <a href=\"https://discord.gg/rotk\" target=\"_blank\" rel=\"noopener\">official Discord</a>.",
     foot1:"Unofficial community wiki, written by Warline from real Discord cases and the launcher's public code.",
-    foot2:"<b>Not affiliated with ROTK.</b> Something changed? Say it on the <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">Discord</a>."
+    foot2:"<b>Not affiliated with ROTK.</b> Something changed? Say it on the <a href=\"https://discord.gg/rotk\" target=\"_blank\" rel=\"noopener\">Discord</a>."
   }
 };
 
@@ -387,7 +420,7 @@ const LINKS = [
   [{fr:"Visual C++ x64 (Microsoft)",en:"Visual C++ x64 (Microsoft)"},{a:"https://aka.ms/vc14/vc_redist.x64.exe"}],
   [{fr:"Vérifier l'heure du PC",en:"Check your PC clock"},{a:"https://time.is"}],
   [{fr:"Site officiel ROTK (compte, clé, tenue, caisses)",en:"Official ROTK site (account, key, outfit, cases)"},{a:"https://rotk.app"}],
-  [{fr:"Discord officiel ROTK (aide, tickets, annonces)",en:"Official ROTK Discord (help, tickets, announcements)"},{a:"https://discord.gg/JTr9NHTmCU"}],
+  [{fr:"Discord officiel ROTK (aide, tickets, annonces)",en:"Official ROTK Discord (help, tickets, announcements)"},{a:"https://discord.gg/rotk"}],
   [{fr:"Bans",en:"Bans"},{t:{fr:"banappeals@rotk.app, par mail uniquement",en:"banappeals@rotk.app, by email only"}}],
   [{fr:"Bugs du launcher",en:"Launcher bugs"},{a:"https://github.com/ROTK-Team/rotk-launcher/issues"}],
   [{fr:"Log du launcher",en:"Launcher log"},{t:{fr:"%APPDATA%\\ROTK Launcher\\startup.log (à copier avant de relancer)",en:"%APPDATA%\\ROTK Launcher\\startup.log (copy it before restarting)"}}],
@@ -898,6 +931,24 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
 }));
 render();
 if (location.hash) setTimeout(() => openCard(decodeURIComponent(location.hash.slice(1)), true), 60);
+
+/* Barre de navigation : bouton recherche et section active */
+document.getElementById("tnSearch").addEventListener("click", () => {
+  const q = document.getElementById("q");
+  window.scrollTo({top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+  setTimeout(() => q.focus({preventScroll: true}), 350);
+});
+(() => {
+  const nav = document.querySelector(".topnav");
+  const links = [...nav.querySelectorAll(".tn-links a")].filter(a => document.getElementById(a.hash.slice(1))?.tagName === "SECTION");
+  const byId = Object.fromEntries(links.map(a => [a.hash.slice(1), a]));
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { links.forEach(a => a.removeAttribute("aria-current")); const a = byId[e.target.id]; if (a) { a.setAttribute("aria-current", "true"); a.scrollIntoView({block: "nearest", inline: "nearest"}); } } });
+  }, {rootMargin: "-45% 0px -50% 0px"});
+  Object.keys(byId).forEach(id => io.observe(document.getElementById(id)));
+  const hero = document.querySelector(".hero");
+  new IntersectionObserver(([e]) => nav.classList.toggle("stuck", !e.isIntersecting), {threshold: 0}).observe(hero);
+})();
 matchMedia("(max-width:480px)").addEventListener("change", () => { const T = UI[lang]; document.getElementById("q").placeholder = matchMedia("(max-width:480px)").matches ? T.phShort : T.placeholder; });
 </script>
 </body>
