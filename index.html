@@ -122,6 +122,32 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tab:hover{color:var(--text)}
 .tab[aria-pressed="true"]{background:var(--s3);color:#fff;box-shadow:inset 0 0 0 1px var(--line-2)}
 .list{display:grid;gap:8px;margin-top:18px}
+.diag-cta{display:inline-block;margin-top:22px;font-size:14.5px;color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
+.diag-cta b{color:#fff;font-weight:600}
+.diag-cta:hover{color:#fff;border-bottom-color:var(--red-line)}
+.diag{background:linear-gradient(180deg,rgba(225,6,0,.05),var(--s1) 140px);border:1px solid var(--line-2);border-radius:22px;padding:clamp(18px,3vw,30px)}
+.dq{margin:0 0 16px;font-family:var(--f-display);font-stretch:112%;font-size:clamp(20px,2.4vw,26px);line-height:1.2;outline:none}
+.dans{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.dbtn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;min-height:56px;padding:14px 18px;border-radius:14px;background:var(--s2);border:1px solid var(--line-2);font-size:15.5px;line-height:1.35;transition:border-color .25s,background .25s}
+.dbtn:hover{border-color:var(--red-line);background:var(--s3)}
+.dbtn:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
+.dbtn.pri{background:var(--red);border-color:var(--red);color:#fff;font-weight:600;min-height:48px}
+.dcrumbs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.dcrumb{all:unset;cursor:pointer;font-size:13px;color:var(--dim);background:rgba(255,255,255,.05);border:1px solid var(--line-2);border-radius:999px;padding:4px 12px}
+.dcrumb:hover{color:#fff;border-color:var(--line-3)}
+.dcrumb:not(:last-child)::after{content:" ›";color:var(--muted)}
+.dres{display:grid;gap:8px}
+.dcard{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;padding:15px 18px;border-radius:14px;background:var(--s2);border:1px solid var(--line-2);font-size:15.5px;font-weight:500}
+.dcard:hover{border-color:var(--red-line);background:var(--s3)}
+.dcard:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
+.dcard .tt{flex:1;min-width:0}
+.dcard .go{color:var(--red-hi);font-size:18px}
+.dhint{margin:14px 0 0;color:var(--muted);font-size:14px}
+.dhint a{color:var(--red-hi);text-decoration:underline;text-underline-offset:3px}
+.dnav{display:flex;gap:18px;margin-top:16px}
+.dnav:empty{display:none}
+.dlink{all:unset;cursor:pointer;font-size:14px;color:var(--dim)}
+.dlink:hover{color:#fff}
 .search-wrap{position:relative;max-width:560px;margin:0 auto}
 .sug{position:relative;margin-top:8px;z-index:2;background:rgba(14,14,16,.97);border:1px solid var(--line-3);border-radius:18px;padding:6px;box-shadow:0 24px 60px -20px rgba(0,0,0,.9);text-align:left}
 .sg{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-size:14.5px;color:var(--text)}
@@ -244,10 +270,15 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     </label>
     <div class="sug" id="sug" hidden></div></div>
     <div class="chips" id="chips"></div>
+    <a class="diag-cta" href="#diag" data-i="diagCta"></a>
   </div>
 </header>
 
 <main class="wrap" id="contenu" tabindex="-1">
+  <section class="block" id="diag">
+    <div class="block-head"><div><h2 data-i="diagH"></h2><p data-i="diagP"></p></div></div>
+    <div class="diag" id="diagBox" aria-live="polite"></div>
+  </section>
   <section class="block">
     <div class="block-head"><div><h2 data-i="quickH"></h2><p data-i="quickP"></p></div></div>
     <div class="grid" id="grid"></div>
@@ -281,7 +312,7 @@ const UI = {
     notice:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : bans, tickets et annonces passent par les canaux officiels.",
     brand:"ROTK Wiki", badge:"Non officiel", kicker:"Wiki communautaire, non officiel",
     h1:"Aide et solutions", lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
-    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
+    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", diagCta:"Tu ne sais pas quoi chercher ? <b>Fais le diagnostic guidé</b> →", diagH:"Diagnostic guidé", diagP:"Réponds à 2 ou 3 questions, on te montre la bonne fiche.", diagBack:"Retour", diagRestart:"Recommencer", diagResH:"Ça devrait être l'une de ces fiches :", diagNot:"Ce n'est pas ça ? Tape le message exact dans la recherche, ou demande sur le <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">Discord officiel</a>.", diagSearchH:"Recopie le message d'erreur", diagSearchP:"Tape juste le code ou les premiers mots du message dans la recherche : c'est le plus rapide.", diagSearchBtn:"Aller à la recherche", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
     quickH:"Accès rapide", quickP:"Choisis le type de problème pour voir les solutions.",
     faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
@@ -295,7 +326,7 @@ const UI = {
     notice:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.",
     brand:"ROTK Wiki", badge:"Unofficial", kicker:"Community wiki, unofficial",
     h1:"Help and fixes", lede:"The most common launcher and game problems, with what actually worked for players.",
-    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
+    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", diagCta:"Not sure what to search? <b>Try the guided check</b> →", diagH:"Guided check", diagP:"Answer 2 or 3 questions and we show you the right card.", diagBack:"Back", diagRestart:"Start over", diagResH:"It should be one of these cards:", diagNot:"Not it? Type the exact message in the search, or ask on the <a href=\"https://discord.gg/JTr9NHTmCU\" target=\"_blank\" rel=\"noopener\">official Discord</a>.", diagSearchH:"Copy the error message", diagSearchP:"Just type the code or the first words of the message in the search: it's the fastest way.", diagSearchBtn:"Go to search", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
     quickH:"Quick access", quickP:"Pick the kind of problem to see the fixes.",
     faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
@@ -630,6 +661,7 @@ function render(){
   LINKS.forEach(([lab, v]) => { const d = el("div"); d.append(el("b", null, esc(lab[lang]))); if (v.a) { const a = el("a", null, esc(v.a.replace(/^https:\/\//, ""))); a.href = v.a; a.target = "_blank"; a.rel = "noopener"; d.append(a); } else d.append(el("span", null, codeify(v.t[lang]))); links.append(d); });
 
   filter();
+  diagRender(false);
 }
 
 /* Recherche : sans accents, mots courants FR/EN ignorés, synonymes du Discord, résultats classés. */
@@ -689,6 +721,115 @@ function slugOf(x){
   SLUGS.set(x, sl); return sl;
 }
 const cardURL = sl => location.origin + location.pathname + (lang === "en" ? "?lang=en" : "") + "#" + sl;
+
+/* Diagnostic guidé : questions simples, réponses qui mènent aux fiches (par leur #slug). */
+const L = (fr, en) => ({fr, en});
+const DIAG = {
+  root:{q:L("Où est-ce que ça bloque ?","Where does it get stuck?"), a:[
+    {t:L("Le launcher ne s'ouvre pas","The launcher won't open"), go:"noopen"},
+    {t:L("Le launcher s'ouvre, mais je n'arrive pas en jeu","The launcher opens, but I can't get in game"), go:"prelaunch"},
+    {t:L("Le jeu se ferme ou crashe","The game closes or crashes"), go:"crash"},
+    {t:L("Compte, connexion, déconnexions","Account, login, disconnects"), go:"account"},
+    {t:L("Le vocal","Voice chat"), go:"voice"},
+    {t:L("FPS, saccades, freezes","FPS, stutters, freezes"), go:"perf"},
+    {t:L("Un bug pendant la partie","A bug during a match"), go:"ingame"}]},
+  noopen:{q:L("Tu vois un message ?","Do you see a message?"), a:[
+    {t:L("« launch-failed » ou la fenêtre ne s'ouvre jamais","\"launch-failed\" or the window never opens"), res:["le-launcher-ne-s-ouvre-pas-launch-failed"]},
+    {t:L("« Les droits administrateur n'ont pas pu être vérifiés »","\"Administrator rights could not be verified\""), res:["les-droits-administrateur-n-ont-pas-pu-etre-verifies"]},
+    {t:L("Rien du tout, il se ferme tout de suite","Nothing at all, it closes right away"), res:["avg-ou-avast-bloque-powershell-exe","windows-defender","les-droits-administrateur-n-ont-pas-pu-etre-verifies"]}]},
+  prelaunch:{q:L("Qu'est-ce qui se passe ?","What happens?"), a:[
+    {t:L("C'est ma première installation","It's my first install"), res:["installation-du-client-quel-dossier-choisir","creer-un-compte-niveau-steam-et-tuto"]},
+    {t:L("Les assets restent à 0 % ou « fetch failed »","Assets stay at 0% or \"fetch failed\""), res:["les-assets-restent-bloques-a-0"]},
+    {t:L("La mise à jour du launcher bloque","The launcher update gets stuck"), res:["la-mise-a-jour-bloque-rotk-ne-peut-pas-etre-ferme","le-jeu-se-trouve-dans-le-dossier-de-rotk-launcher"]},
+    {t:L("Le bouton reste sur « EN JEU »","The button stays on \"IN GAME\""), res:["le-bouton-affiche-in-game-alors-que-le-jeu-est-ferme"]},
+    {t:L("Un message d'erreur quand je clique sur Jouer","An error message when I press Play"), go:"playerr"}]},
+  playerr:{q:L("Le message parle de…","The message mentions…"), a:[
+    {t:L("« is not valid JSON »","\"is not valid JSON\""), res:["unexpected-token-is-not-valid-json-en-cliquant-sur-jouer"]},
+    {t:L("Visual C++ ou MSVCP140","Visual C++ or MSVCP140"), res:["crash-dans-msvcp140-dll-ou-runtime-visual-c-trop-ancien"]},
+    {t:L("dinput8.dll","dinput8.dll"), res:["un-dinput8-dll-inconnu-est-present-dans-le-client-rotk"]},
+    {t:L("Installation incomplète ou marqueur","Incomplete install or marker"), res:["l-installation-rotk-est-incomplete-son-marqueur-est"]},
+    {t:L("Le dossier de ROTK Launcher","The ROTK Launcher folder"), res:["le-jeu-se-trouve-dans-le-dossier-de-rotk-launcher"]},
+    {t:L("Le niveau Steam","Steam level"), res:["your-steam-level-could-not-be-verified","creer-un-compte-niveau-steam-et-tuto"]},
+    {t:L("Le vocal ou Vivox","Voice or Vivox"), res:["le-sdk-vivox-historique-est-introuvable"]},
+    {t:L("Autre chose","Something else"), search:true}]},
+  crash:{q:L("Quand est-ce que ça arrive ?","When does it happen?"), a:[
+    {t:L("Dès le lancement (« fermé pendant son initialisation »)","Right at launch (\"closed during initialization\")"), res:["ferme-pendant-son-initialisation-0xc0e90002","crash-dans-msvcp140-dll-ou-runtime-visual-c-trop-ancien"]},
+    {t:L("En pleine partie, toujours au même endroit","Mid-match, always at the same spot"), res:["crash-c000001d-toujours-au-meme-endroit-en-pleine-partie","crash-0xc0000005-a-0x2a31abc"]},
+    {t:L("Écran noir, le pilote graphique redémarre","Black screen, the graphics driver restarts"), res:["ecran-noir-en-jeu-erreur-g12-pilote-graphique-qui"]},
+    {t:L("Tout le PC freeze ou s'éteint","The whole PC freezes or shuts down"), res:["le-pc-entier-freeze-ou-s-eteint-apres-un-moment"]}]},
+  account:{q:L("C'est plutôt…","It's more like…"), a:[
+    {t:L("Créer un compte ou finir le tuto","Creating an account or finishing the tutorial"), res:["creer-un-compte-niveau-steam-et-tuto","tuto-bloque-a-l-etape-du-carburant"]},
+    {t:L("Erreur G9 ou chargement infini","G9 error or endless loading"), res:["erreur-g9-ou-chargement-infini"]},
+    {t:L("« You have been disconnected » en partie","\"You have been disconnected\" mid-match"), res:["you-have-been-disconnected-en-partie"]},
+    {t:L("CONNECTING ou menu qui clignote","CONNECTING or a flickering menu"), res:["connecting-ou-menu-qui-clignote-au-demarrage"]},
+    {t:L("Le site ou le launcher ne répond plus","The site or launcher stops responding"), res:["le-site-ou-le-launcher-ne-repond-plus-espagne-soirs-de"]},
+    {t:L("Je suis banni","I'm banned"), res:["ban-ou-compte-suspendu"]}]},
+  voice:{q:L("Qu'est-ce qui ne marche pas ?","What doesn't work?"), a:[
+    {t:L("Personne ne m'entend et je n'entends personne","Nobody hears me and I hear nobody"), res:["aucun-vocal-personne-ne-t-entend-tu-n-entends-personne"]},
+    {t:L("Le groupe marche, mais jamais la proximité","Group works, but proximity never does"), res:["le-vocal-de-groupe-marche-la-proximite-jamais"]},
+    {t:L("« Le SDK Vivox historique est introuvable »","\"The legacy Vivox SDK could not be found\""), res:["le-sdk-vivox-historique-est-introuvable"]},
+    {t:L("Je n'entends pas les pas des autres","I can't hear other players' footsteps"), res:["on-n-entend-plus-les-pas-de-certains-joueurs"]}]},
+  perf:{q:L("Ça ressemble à quoi ?","What does it look like?"), a:[
+    {t:L("Les FPS chutent en combat","FPS drop in fights"), res:["chutes-de-fps-ou-saccades-en-combat"]},
+    {t:L("Bloqué vers 30 FPS, souvent sur portable","Stuck around 30 FPS, often on a laptop"), res:["30-fps-partout-ou-le-jeu-tourne-sur-la-puce-graphique"]},
+    {t:L("Une petite saccade toutes les 11 secondes","A small hitch every 11 seconds"), res:["petite-saccade-toutes-les-11-secondes-meme-au-menu"]},
+    {t:L("Des freezes après un Alt+Tab","Freezes after an Alt+Tab"), res:["micro-freezes-apres-un-alt-tab-en-plein-ecran"]},
+    {t:L("Écran noir ou PC qui freeze complètement","Black screen or the whole PC freezing"), res:["ecran-noir-en-jeu-erreur-g12-pilote-graphique-qui","le-pc-entier-freeze-ou-s-eteint-apres-un-moment"]}]},
+  ingame:{q:L("Quel bug ?","Which bug?"), a:[
+    {t:L("Le tuto bloque à l'étape du carburant","The tutorial is stuck at the fuel step"), res:["tuto-bloque-a-l-etape-du-carburant"]},
+    {t:L("Mon perso avance tout seul","My character keeps walking"), res:["le-perso-continue-d-avancer-tout-seul"]},
+    {t:L("Après un reboot en trio, je reste spectateur","After a trio reboot, I stay a spectator"), res:["reboot-en-trio-tu-restes-spectateur-invisible","verifier-qu-on-a-bien-le-dernier-correctif-2-0-43"]},
+    {t:L("Je n'entends pas les pas","I can't hear footsteps"), res:["on-n-entend-plus-les-pas-de-certains-joueurs"]},
+    {t:L("Une caisse ou un skin n'apparaît pas","A crate or skin doesn't show up"), res:["caisse-ou-skin-qui-n-apparait-pas"]},
+    {t:L("Le jeu est en anglais","The game is in English"), res:["le-launcher-est-en-francais-mais-le-jeu-en-anglais"]}]},
+};
+
+let diagPath = [];   // pile des nœuds visités : [{node, answer}]
+function diagRender(focus){
+  const T = UI[lang], box = document.getElementById("diagBox");
+  const cur = diagPath.length ? diagPath[diagPath.length - 1] : null;
+  box.innerHTML = "";
+  // fil d'Ariane
+  const crumbs = el("div", "dcrumbs");
+  diagPath.forEach((p, i) => { const c = el("button", "dcrumb", esc(DIAG[p.node].a[p.answer].t[lang])); c.type = "button"; c.onclick = () => { diagPath = diagPath.slice(0, i); diagRender(true); }; crumbs.append(c); });
+  if (diagPath.length) box.append(crumbs);
+  const last = cur ? DIAG[cur.node].a[cur.answer] : null;
+  if (last && (last.res || last.search)) {
+    // résultat
+    const h = el("h3", "dq", esc(last.search ? T.diagSearchH : T.diagResH)); h.tabIndex = -1; box.append(h);
+    if (last.search) {
+      box.append(el("p", "dhint", esc(T.diagSearchP)));
+      const go = el("button", "dbtn pri", esc(T.diagSearchBtn)); go.type = "button";
+      go.onclick = () => { const q = document.getElementById("q"); q.focus(); q.scrollIntoView({behavior:"smooth", block:"center"}); };
+      box.append(go);
+    } else {
+      const list = el("div", "dres");
+      last.res.forEach(id => {
+        const r = document.getElementById(id); if (!r) return;
+        const x = r._x, b = el("button", "dcard"); b.type = "button";
+        b.innerHTML = '<span class="dot ' + STATUS[x.s] + '"></span><span class="tt">' + esc(x.t[lang]) + '</span>' + (x.v ? '<span class="tag vtag">' + (lang === "fr" ? "▶ Vidéo" : "▶ Video") + '</span>' : '') + '<span class="go">→</span>';
+        b.onclick = () => openCard(id, true);
+        list.append(b);
+      });
+      box.append(list);
+      box.append(el("p", "dhint", T.diagNot));
+    }
+  } else {
+    const node = DIAG[cur ? DIAG[cur.node].a[cur.answer].go : "root"];
+    const nodeId = cur ? DIAG[cur.node].a[cur.answer].go : "root";
+    const h = el("h3", "dq", esc(node.q[lang])); h.tabIndex = -1; box.append(h);
+    const grid = el("div", "dans");
+    node.a.forEach((a, i) => { const b = el("button", "dbtn", esc(a.t[lang])); b.type = "button"; b.onclick = () => { diagPath.push({node:nodeId, answer:i}); diagRender(true); }; grid.append(b); });
+    box.append(grid);
+  }
+  const nav = el("div", "dnav");
+  if (diagPath.length) {
+    const back = el("button", "dlink", "← " + esc(T.diagBack)); back.type = "button"; back.onclick = () => { diagPath.pop(); diagRender(true); }; nav.append(back);
+    const re = el("button", "dlink", esc(T.diagRestart)); re.type = "button"; re.onclick = () => { diagPath = []; diagRender(true); }; nav.append(re);
+  }
+  box.append(nav);
+  if (focus) { const h = box.querySelector(".dq"); if (h) h.focus({preventScroll:true}); }
+}
 
 function row(x, T){
   const r = el("article", "row"); r.dataset.cat = x.c;

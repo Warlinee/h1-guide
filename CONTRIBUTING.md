@@ -23,6 +23,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 | Liens utiles | `LINKS` |
 | Recherche (sans accents, synonymes, classement) | `norm`, `STOP`, `SYN`, `queryTokens`, `scoreRow`, `filter()` |
 | Liens directs vers une fiche | `#slug` du titre FR, voir `slugOf()` et `openCard()` |
+| Diagnostic guidé (questions puis fiches) | objet `DIAG` : chaque réponse a `go` (question suivante) ou `res` (liste de slugs) |
 
 ### Format d'une fiche (`F`)
 
@@ -38,6 +39,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 - `k` : mots-clés et codes (servent à la recherche et aux étiquettes).
 - `v` : facultatif. Vidéo `videos/<v>-fr.mp4` / `-en.mp4` + affiche `.jpg`.
 - Toujours remplir **FR et EN**.
+- Changer le titre FR d'une fiche change son `#slug` : mets aussi à jour `DIAG` et préviens, car les liens déjà partagés sur Discord ne marcheront plus.
 
 Les vidéos sont fabriquées hors du dépôt. Seuls les `.mp4` et `.jpg` finaux sont publiés : les sources (`videos/*.html`, `videos/src/`) restent locales et sont dans `.gitignore`.
 
