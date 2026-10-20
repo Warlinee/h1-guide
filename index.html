@@ -557,9 +557,10 @@ const F = [
  t:{fr:"Windows Defender",en:"Windows Defender"},
  f:{fr:["Sécurité Windows > Protection contre les virus et menaces > Gérer les paramètres > Exclusions > Ajouter un dossier.","Ajouter le dossier du jeu et C:\\Program Files\\ROTK Launcher.","Fichier disparu : Historique de protection > l'élément > Actions > Restaurer."],en:["Windows Security > Virus & threat protection > Manage settings > Exclusions > Add a folder.","Add the game folder and C:\\Program Files\\ROTK Launcher.","File gone: Protection history > the item > Actions > Restore."]},
  m:{fr:"ajoute ton dossier de jeu et C:\\Program Files\\ROTK Launcher en exclusion dans sécurité windows, et restaure le fichier dans l'historique de protection s'il a disparu",en:"add ur game folder and C:\\Program Files\\ROTK Launcher as exclusions in windows security, and restore the file from protection history if it's gone"}},
-{c:"antivirus", s:"ok", k:["accès contrôlé","ransomware","controlled folder"], v:"cfa",
- t:{fr:"Accès contrôlé aux dossiers (anti-ransomware)",en:"Controlled folder access (ransomware protection)"},
- f:{fr:["Protection contre les ransomwares > Autoriser une application.","Ajouter H1Z1.exe de la copie ROTK et ROTK Launcher.exe."],en:["Ransomware protection > Allow an app.","Add the ROTK copy's H1Z1.exe and ROTK Launcher.exe."]},
+{c:"antivirus", s:"ok", k:["accès contrôlé","ransomware","controlled folder","EPERM","Accès refusé","Access denied"], v:"cfa",
+ t:{fr:"Accès contrôlé aux dossiers bloque le jeu (« Accès refusé », EPERM)",en:"Controlled folder access blocks the game (\"Access denied\", EPERM)"},
+ f:{fr:["Ouvre Sécurité Windows (touche Windows, tape « Sécurité Windows »).","Va dans Protection contre les virus et menaces, puis tout en bas : Gérer la protection contre les ransomwares.","Si « Accès contrôlé aux dossiers » est Activé : clique sur Autoriser une application via l'accès contrôlé aux dossiers.","Ajouter une application autorisée > Parcourir toutes les applications : choisis H1Z1.exe dans ton dossier de jeu ROTK (ex. C:\\Games\\ROTK\\H1Z1.exe).","Recommence pour C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe, puis relance le launcher."],en:["Open Windows Security (Windows key, type \"Windows Security\").","Go to Virus & threat protection, then at the very bottom: Manage ransomware protection.","If \"Controlled folder access\" is On: click Allow an app through Controlled folder access.","Add an allowed app > Browse all apps: pick H1Z1.exe in your ROTK game folder (e.g. C:\\Games\\ROTK\\H1Z1.exe).","Do it again for C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe, then relaunch the launcher."]},
+ n:{fr:"Si « Accès contrôlé aux dossiers » est déjà Désactivé, ce n'est pas lui : regarde ton antivirus (fiches Defender, Norton, Avast) et vérifie que ton dossier d'installation n'est pas C:\\ tout court mais un dossier dedans, comme C:\\Games.",en:"If \"Controlled folder access\" is already Off, it's not this: check your antivirus (Defender, Norton, Avast cards) and make sure your install folder isn't just C:\\ but a folder inside it, like C:\\Games."},
  m:{fr:"dans protection contre les ransomwares > autoriser une application, ajoute ton H1Z1.exe et ROTK Launcher.exe",en:"in ransomware protection > allow an app, add ur H1Z1.exe and ROTK Launcher.exe"}},
 {c:"antivirus", s:"lead", k:["Norton"],
  t:{fr:"Norton",en:"Norton"},
@@ -600,7 +601,7 @@ lang = urlLang === "fr" || urlLang === "en" ? urlLang : saved === "fr" || saved 
 function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
 function codeify(s){
-  return esc(s).replace(/([A-Z]:\\Program Files\\ROTK Launcher\\ROTK Launcher\.exe|(?:[A-Z]:\\Program Files\\ROTK Launcher|%APPDATA%\\ROTK Launcher)[^\s,)]*|[A-Z]:\\[^\s,)]+|%APPDATA%[^\s,)]*|\b[\w.-]+\.(?:exe|dll|xml|log|json|ini)(?:\.old)?\b|\.ROTK-assets|0x[0-9A-Fa-f]{5,}|--no-sandbox)/g, '<code class="p">$1</code>');
+  return esc(s).replace(/([A-Z]:\\Program Files\\ROTK Launcher\\ROTK Launcher\.exe|ROTK Launcher\.exe|(?:[A-Z]:\\Program Files\\ROTK Launcher|%APPDATA%\\ROTK Launcher)[^\s,)]*|[A-Z]:\\[^\s,)]+|%APPDATA%[^\s,)]*|\b[\w.-]+\.(?:exe|dll|xml|log|json|ini)(?:\.old)?\b|\.ROTK-assets|0x[0-9A-Fa-f]{5,}|--no-sandbox)/g, '<code class="p">$1</code>');
 }
 const techTags = (k) => k.filter(t => /^[\x20-\x7E]+$/.test(t) && /[0-9.\\=%_]|^[A-Z0-9 ]+$/.test(t)).slice(0, 2);
 
