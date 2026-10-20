@@ -954,12 +954,27 @@ document.getElementById("tnSearch").addEventListener("click", () => {
 });
 (() => {
   const nav = document.querySelector(".topnav");
-  const links = [...nav.querySelectorAll(".tn-links a")].filter(a => document.getElementById(a.hash.slice(1))?.tagName === "SECTION");
-  const byId = Object.fromEntries(links.map(a => [a.hash.slice(1), a]));
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { links.forEach(a => a.removeAttribute("aria-current")); const a = byId[e.target.id]; if (a) { a.setAttribute("aria-current", "true"); a.scrollIntoView({block: "nearest", inline: "nearest"}); } } });
-  }, {rootMargin: "-45% 0px -50% 0px"});
-  Object.keys(byId).forEach(id => io.observe(document.getElementById(id)));
+  const links = [...nav.querySelectorAll(".tn-links a")];
+  const tgt = a => document.getElementById(a.hash.slice(1));
+  // les liens vers une fiche passent devant la section qui la contient
+  const pick = () => {
+    const mid = innerHeight * .45;
+    let best = null;
+    for (const a of links) {
+      const el = tgt(a); if (!el || el.hidden) continue;
+      const r = el.getBoundingClientRect();
+      if (r.top <= mid && r.bottom >= mid) { if (!best || el.classList.contains("row")) best = a; }
+    }
+    links.forEach(a => a === best ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
+    if (best) best.scrollIntoView({block: "nearest", inline: "nearest"});
+  };
+  const io = new IntersectionObserver(pick, {threshold: [0, .25, .5, .75, 1]});
+  links.forEach(a => { const el = tgt(a); if (el) io.observe(el); });
+  // un clic ouvre toujours la cible, même si l'adresse ne change pas
+  links.forEach(a => a.addEventListener("click", e => {
+    const el = tgt(a);
+    if (el && el.classList.contains("row")) { e.preventDefault(); try { history.replaceState(null, "", location.pathname + location.search + a.hash); } catch (_) {} openCard(el.id, true); setTimeout(pick, 700); }
+  }));
   const hero = document.querySelector(".hero");
   new IntersectionObserver(([e]) => nav.classList.toggle("stuck", !e.isIntersecting), {threshold: 0}).observe(hero);
 })();
