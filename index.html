@@ -69,7 +69,7 @@ main:focus{outline:none}
 .badge{font-size:11.5px;font-weight:600;color:var(--amber);background:var(--amber-soft);border:1px solid rgba(242,184,56,.3);padding:2px 9px;border-radius:999px;margin-left:4px}
 .nav-r{display:flex;align-items:center;gap:8px}
 .olink{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:rgba(255,255,255,.05);color:var(--text);font-size:13.5px;font-weight:500;text-decoration:none;transition:border-color .3s,background .3s}
-.olink svg{width:16px;height:16px;flex:none}
+.olink svg,.olink img{width:16px;height:16px;flex:none;object-fit:contain}
 .olink.dc svg{color:#8b95ff}
 .olink:hover{border-color:var(--line-3);background:rgba(255,255,255,.09)}
 .lang{display:flex;gap:4px;background:rgba(255,255,255,.05);border:1px solid var(--line-2);border-radius:999px;padding:4px}
@@ -203,7 +203,7 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
       <span class="brand-name" data-i="brand"></span><span class="badge" data-i="badge"></span>
     </div>
     <div class="nav-r">
-      <a class="olink" href="https://rotk.app" target="_blank" rel="noopener" data-al="siteL"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg><span>rotk.app</span></a>
+      <a class="olink" href="https://rotk.app" target="_blank" rel="noopener" data-al="siteL"><img src="icons/rotk.svg" alt="" width="16" height="16"><span>rotk.app</span></a>
       <a class="olink dc" href="https://discord.gg/JTr9NHTmCU" target="_blank" rel="noopener" data-al="dcL"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52.07.07 0 0 0-.08.04c-.21.38-.44.87-.61 1.25a18.27 18.27 0 0 0-5.49 0 12.6 12.6 0 0 0-.62-1.25.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-4.88 1.52.07.07 0 0 0-.03.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .09-.03c.46-.63.87-1.3 1.22-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1 0-.13l.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01l.37.29a.08.08 0 0 1 0 .13 12.3 12.3 0 0 1-1.87.89.08.08 0 0 0-.04.11c.36.7.77 1.36 1.22 1.99a.08.08 0 0 0 .09.03 19.84 19.84 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z"/></svg><span>Discord</span></a>
     <div class="lang" role="group" aria-label="Langue / Language">
       <button type="button" data-lang="fr" aria-label="Français" title="Français"><svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#0055a4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg></button>
