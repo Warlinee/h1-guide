@@ -23,6 +23,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 | Liens utiles | `LINKS` |
 | Recherche (sans accents, synonymes, classement) | `norm`, `STOP`, `SYN`, `queryTokens`, `scoreRow`, `filter()` |
 | Liens directs vers une fiche | `#slug` du titre FR, voir `slugOf()` et `openCard()` |
+| Réponses rapides pour le support (`?support`) | champ `m` de chaque fiche + `SUP_GENERAL` : pas de lien depuis la page publique, `noindex` |
 
 ### Format d'une fiche (`F`)
 
