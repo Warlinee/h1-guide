@@ -122,6 +122,21 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tab:hover{color:var(--text)}
 .tab[aria-pressed="true"]{background:var(--s3);color:#fff;box-shadow:inset 0 0 0 1px var(--line-2)}
 .list{display:grid;gap:8px;margin-top:18px}
+.hero-cta{display:inline-block;margin-top:22px;font-size:14.5px;color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
+.hero-cta b{color:#fff;font-weight:600}
+.hero-cta:hover{color:#fff;border-bottom-color:var(--red-line)}
+.isteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:none}
+.istep{position:relative;display:flex;flex-direction:column;gap:8px;background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px}
+.istep h3{margin:0;font-size:16.5px;font-weight:600;padding-right:4px}
+.istep p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.55;flex:1}
+.inum{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--red);color:#fff;font-family:var(--f-display);font-stretch:115%;font-weight:700;font-size:14px;box-shadow:0 6px 18px -8px rgba(225,6,0,.8)}
+.ilinks{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.ilink{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:10px;background:var(--s2);border:1px solid var(--line-2);font-size:13.5px;color:var(--text);line-height:1.35}
+.ilink:hover{border-color:var(--red-line);background:var(--s3)}
+.ilink:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
+.ilink .iv{font-size:10px;color:var(--red-hi);flex:none;width:8px}
+@media (max-width:980px){.isteps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.isteps{grid-template-columns:minmax(0,1fr)}}
 .search-wrap{position:relative;max-width:560px;margin:0 auto}
 .sug{position:relative;margin-top:8px;z-index:2;background:rgba(14,14,16,.97);border:1px solid var(--line-3);border-radius:18px;padding:6px;box-shadow:0 24px 60px -20px rgba(0,0,0,.9);text-align:left}
 .sg{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-size:14.5px;color:var(--text)}
@@ -244,10 +259,15 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     </label>
     <div class="sug" id="sug" hidden></div></div>
     <div class="chips" id="chips"></div>
+    <a class="hero-cta" href="#installation" data-i="installCta"></a>
   </div>
 </header>
 
 <main class="wrap" id="contenu" tabindex="-1">
+  <section class="block" id="installation">
+    <div class="block-head"><div><h2 data-i="installH"></h2><p data-i="installP"></p></div></div>
+    <ol class="isteps" id="installSteps"></ol>
+  </section>
   <section class="block">
     <div class="block-head"><div><h2 data-i="quickH"></h2><p data-i="quickP"></p></div></div>
     <div class="grid" id="grid"></div>
@@ -281,7 +301,7 @@ const UI = {
     notice:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : bans, tickets et annonces passent par les canaux officiels.",
     brand:"ROTK Wiki", badge:"Non officiel", kicker:"Wiki communautaire, non officiel",
     h1:"Aide et solutions", lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
-    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
+    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", installCta:"Nouveau sur ROTK ? <b>Suis le parcours d'installation</b> →", installH:"Première installation", installP:"Nouveau sur ROTK ? Les 6 étapes, dans l'ordre, avec les fiches et vidéos qui vont avec.", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
     quickH:"Accès rapide", quickP:"Choisis le type de problème pour voir les solutions.",
     faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
@@ -295,7 +315,7 @@ const UI = {
     notice:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.",
     brand:"ROTK Wiki", badge:"Unofficial", kicker:"Community wiki, unofficial",
     h1:"Help and fixes", lede:"The most common launcher and game problems, with what actually worked for players.",
-    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
+    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", installCta:"New to ROTK? <b>Follow the install guide</b> →", installH:"First install", installP:"New to ROTK? The 6 steps, in order, with the matching cards and videos.", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
     quickH:"Quick access", quickP:"Pick the kind of problem to see the fixes.",
     faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
@@ -630,6 +650,7 @@ function render(){
   LINKS.forEach(([lab, v]) => { const d = el("div"); d.append(el("b", null, esc(lab[lang]))); if (v.a) { const a = el("a", null, esc(v.a.replace(/^https:\/\//, ""))); a.href = v.a; a.target = "_blank"; a.rel = "noopener"; d.append(a); } else d.append(el("span", null, codeify(v.t[lang]))); links.append(d); });
 
   filter();
+  installRender();
 }
 
 /* Recherche : sans accents, mots courants FR/EN ignorés, synonymes du Discord, résultats classés. */
@@ -689,6 +710,45 @@ function slugOf(x){
   SLUGS.set(x, sl); return sl;
 }
 const cardURL = sl => location.origin + location.pathname + (lang === "en" ? "?lang=en" : "") + "#" + sl;
+
+/* Parcours « Première installation » : étapes dans l'ordre réel, avec les fiches liées (#slug). */
+const INSTALL = [
+  {t:{fr:"Prépare Steam", en:"Get Steam ready"},
+   d:{fr:"Installe H1Z1 sur Steam (il s'appelle « Z1 Battle Royale », gratuit). Ton compte Steam doit être niveau 1 au minimum, avec le profil en Public.", en:"Install H1Z1 on Steam (listed as \"Z1 Battle Royale\", free). Your Steam account needs level 1 or more, with the profile set to Public."},
+   c:["creer-un-compte-niveau-steam-et-tuto","your-steam-level-could-not-be-verified"]},
+  {t:{fr:"Crée ton compte ROTK", en:"Create your ROTK account"},
+   d:{fr:"Inscris-toi sur rotk.app, puis récupère ta clé : Avatar › Account settings › ROTK launcher key. Ne la donne jamais à personne.", en:"Sign up on rotk.app, then get your key: Avatar › Account settings › ROTK launcher key. Never give it to anyone."},
+   c:["creer-un-compte-niveau-steam-et-tuto"]},
+  {t:{fr:"Installe le launcher", en:"Install the launcher"},
+   d:{fr:"Télécharge le launcher sur rotk.app et installe-le. Si Windows ou l'antivirus le bloque, regarde les fiches ci-dessous.", en:"Download the launcher from rotk.app and install it. If Windows or your antivirus blocks it, check the cards below."},
+   c:["ferme-pendant-son-initialisation-0xc0e90002","windows-defender","les-droits-administrateur-n-ont-pas-pu-etre-verifies"]},
+  {t:{fr:"Configure le client", en:"Set up the client"},
+   d:{fr:"Au premier lancement : Client H1Z1 = ton dossier Steam du jeu, Installation ROTK = un dossier hors de Steam (ex. C:\\Games). Puis « Créer une copie séparée ».", en:"On first launch: H1Z1 client = your Steam game folder, ROTK installation = a folder outside Steam (e.g. C:\\Games). Then \"Create separate copy\"."},
+   c:["installation-du-client-quel-dossier-choisir"]},
+  {t:{fr:"Ajoute ta clé", en:"Add your key"},
+   d:{fr:"Dans le launcher, clique sur « Ajouter la clé ROTK », colle la clé copiée à l'étape 2 et enregistre-la.", en:"In the launcher, click \"Add ROTK key\", paste the key from step 2 and save it."},
+   c:[]},
+  {t:{fr:"Lance ta première partie", en:"Play your first match"},
+   d:{fr:"Clique une seule fois sur Jouer : les assets se téléchargent (5 à 10 min, garde 4 à 5 Go libres). Ensuite, le tuto Operation Recruit est obligatoire (environ 10 min).", en:"Press Play once: assets download (5 to 10 min, keep 4 to 5 GB free). Then the Operation Recruit tutorial is required (about 10 min)."},
+   c:["les-assets-restent-bloques-a-0","tuto-bloque-a-l-etape-du-carburant"]},
+];
+function installRender(){
+  const T = UI[lang], box = document.getElementById("installSteps"); box.innerHTML = "";
+  INSTALL.forEach((st, i) => {
+    const li = el("li", "istep");
+    li.innerHTML = '<span class="inum">' + (i + 1) + '</span><h3>' + esc(st.t[lang]) + '</h3><p>' + esc(st.d[lang]) + '</p>';
+    const links = el("div", "ilinks");
+    st.c.forEach(id => {
+      const r = document.getElementById(id); if (!r) return;
+      const x = r._x, b = el("button", "ilink"); b.type = "button";
+      b.innerHTML = (x.v ? '<span class="iv">▶</span>' : '<span class="dot ' + STATUS[x.s] + '"></span>') + '<span>' + esc(x.t[lang].replace(/[«»"]/g, "").trim()) + '</span>';
+      b.onclick = () => openCard(id, true);
+      links.append(b);
+    });
+    if (links.children.length) li.append(links);
+    box.append(li);
+  });
+}
 
 function row(x, T){
   const r = el("article", "row"); r.dataset.cat = x.c;
