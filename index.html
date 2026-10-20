@@ -560,7 +560,7 @@ const F = [
 {c:"antivirus", s:"ok", k:["accès contrôlé","ransomware","controlled folder","EPERM","Accès refusé","Access denied"], v:"cfa",
  t:{fr:"Accès contrôlé aux dossiers bloque le jeu (« Accès refusé », EPERM)",en:"Controlled folder access blocks the game (\"Access denied\", EPERM)"},
  f:{fr:["Ouvre Sécurité Windows (touche Windows, tape « Sécurité Windows »).","Va dans Protection contre les virus et menaces, puis tout en bas : Gérer la protection contre les ransomwares.","Si « Accès contrôlé aux dossiers » est Activé : clique sur Autoriser une application via l'accès contrôlé aux dossiers.","Ajouter une application autorisée > Parcourir toutes les applications : choisis H1Z1.exe dans ton dossier de jeu ROTK (ex. C:\\Games\\ROTK\\H1Z1.exe).","Recommence pour C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe, puis relance le launcher."],en:["Open Windows Security (Windows key, type \"Windows Security\").","Go to Virus & threat protection, then at the very bottom: Manage ransomware protection.","If \"Controlled folder access\" is On: click Allow an app through Controlled folder access.","Add an allowed app > Browse all apps: pick H1Z1.exe in your ROTK game folder (e.g. C:\\Games\\ROTK\\H1Z1.exe).","Do it again for C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe, then relaunch the launcher."]},
- n:{fr:"Si « Accès contrôlé aux dossiers » est déjà Désactivé, ce n'est pas lui : regarde ton antivirus (fiches Defender, Norton, Avast) et vérifie que ton dossier d'installation n'est pas C:\\ tout court mais un dossier dedans, comme C:\\Games.",en:"If \"Controlled folder access\" is already Off, it's not this: check your antivirus (Defender, Norton, Avast cards) and make sure your install folder isn't just C:\\ but a folder inside it, like C:\\Games."},
+ n:{fr:"Si « Accès contrôlé aux dossiers » est déjà Désactivé, ce n'est pas lui : regarde ton antivirus (fiches Defender, Norton, Avast) et vérifie que ton dossier d'installation n'est pas C:\\ tout court mais un dossier dedans (ex. C:\\Games).",en:"If \"Controlled folder access\" is already Off, it's not this: check your antivirus (Defender, Norton, Avast cards) and make sure your install folder isn't just C:\\ but a folder inside it (e.g. C:\\Games)."},
  m:{fr:"dans protection contre les ransomwares > autoriser une application, ajoute ton H1Z1.exe et ROTK Launcher.exe",en:"in ransomware protection > allow an app, add ur H1Z1.exe and ROTK Launcher.exe"}},
 {c:"antivirus", s:"lead", k:["Norton"],
  t:{fr:"Norton",en:"Norton"},
@@ -823,7 +823,10 @@ function filter(){
   sug.hidden = !sug.children.length;
 }
 
+/* Anciens liens encore valides après un changement de titre */
+const SLUG_ALIASES = {"acces-controle-aux-dossiers-anti-ransomware":"acces-controle-aux-dossiers-bloque-le-jeu-acces-refuse"};
 function openCard(id, scroll){
+  id = SLUG_ALIASES[id] || id;
   const r = document.getElementById(id); if (!r || !r.classList.contains("row")) return false;
   if (r.hidden) { document.getElementById("q").value = ""; activeCat = "all"; filter(); }
   r.querySelector("details").open = true;
