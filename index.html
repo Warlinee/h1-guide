@@ -125,18 +125,22 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .hero-cta{display:inline-block;margin-top:22px;font-size:14.5px;color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
 .hero-cta b{color:#fff;font-weight:600}
 .hero-cta:hover{color:#fff;border-bottom-color:var(--red-line)}
-.isteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:none}
-.istep{position:relative;display:flex;flex-direction:column;gap:8px;background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px}
-.istep h3{margin:0;font-size:16.5px;font-weight:600;padding-right:4px}
-.istep p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.55;flex:1}
-.inum{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--red);color:#fff;font-family:var(--f-display);font-stretch:115%;font-weight:700;font-size:14px;box-shadow:0 6px 18px -8px rgba(225,6,0,.8)}
-.ilinks{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.isteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 14px}
+.istep{position:relative;display:flex;flex-direction:column;gap:8px;padding:16px 20px 20px;border-radius:20px;border:1px solid var(--line);background:radial-gradient(14rem 9rem at 20% 0%,rgba(225,6,0,.10),transparent 70%),var(--s1)}
+.iart{width:112px;height:112px;margin:-4px 0 -6px -10px;mix-blend-mode:lighten}
+.irail{position:relative;display:flex;align-items:center;height:32px;margin:4px 0 6px}
+.irail::after{content:"";position:absolute;left:40px;right:-36px;top:50%;border-top:2px dashed rgba(255,59,47,.55)}
+.istep:nth-child(3n) .irail::after,.istep:last-child .irail::after{right:0;border-top-color:rgba(255,59,47,.18)}
+.inum{position:relative;z-index:1;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--red);color:#fff;font-family:var(--f-display);font-stretch:118%;font-weight:700;font-size:15px;box-shadow:0 0 0 5px var(--s1),0 0 0 6px rgba(255,59,47,.35)}
+.istep h3{margin:0;font-family:var(--f-display);font-stretch:112%;font-size:18px;font-weight:700;line-height:1.25}
+.istep p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.6;flex:1;max-width:46ch}
+.ilinks{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 .ilink{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:10px;background:var(--s2);border:1px solid var(--line-2);font-size:13.5px;color:var(--text);line-height:1.35}
 .ilink:hover{border-color:var(--red-line);background:var(--s3)}
 .ilink:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
 .ilink .iv{font-size:10px;color:var(--red-hi);flex:none;width:8px}
-@media (max-width:980px){.isteps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.isteps{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:980px){.isteps{grid-template-columns:repeat(2,minmax(0,1fr))}.istep:nth-child(3n) .irail::after{right:-36px;border-top-color:rgba(255,59,47,.55)}.istep:nth-child(2n) .irail::after,.istep:last-child .irail::after{right:0;border-top-color:rgba(255,59,47,.18)}}
+@media (max-width:640px){.isteps{grid-template-columns:minmax(0,1fr);gap:14px}.istep{padding:16px 18px 18px}.iart{position:absolute;right:8px;top:6px;width:84px;height:84px;margin:0}.irail{margin:0 0 4px}.irail::after{display:none}.istep h3{padding-right:84px}.istep:not(:last-child)::after{content:"";position:absolute;left:33px;top:100%;height:15px;border-left:2px dashed rgba(255,59,47,.55)}}
 .search-wrap{position:relative;max-width:560px;margin:0 auto}
 .sug{position:relative;margin-top:8px;z-index:2;background:rgba(14,14,16,.97);border:1px solid var(--line-3);border-radius:18px;padding:6px;box-shadow:0 24px 60px -20px rgba(0,0,0,.9);text-align:left}
 .sg{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-size:14.5px;color:var(--text)}
@@ -736,7 +740,7 @@ function installRender(){
   const T = UI[lang], box = document.getElementById("installSteps"); box.innerHTML = "";
   INSTALL.forEach((st, i) => {
     const li = el("li", "istep");
-    li.innerHTML = '<span class="inum">' + (i + 1) + '</span><h3>' + esc(st.t[lang]) + '</h3><p>' + esc(st.d[lang]) + '</p>';
+    li.innerHTML = '<img class="iart" src="icons/inst-' + (i + 1) + '.webp" alt="" width="112" height="112" loading="lazy"><div class="irail"><span class="inum">' + (i + 1) + '</span></div><h3>' + esc(st.t[lang]) + '</h3><p>' + esc(st.d[lang]) + '</p>';
     const links = el("div", "ilinks");
     st.c.forEach(id => {
       const r = document.getElementById(id); if (!r) return;
