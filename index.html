@@ -122,7 +122,7 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tab:hover{color:var(--text)}
 .tab[aria-pressed="true"]{background:var(--s3);color:#fff;box-shadow:inset 0 0 0 1px var(--line-2)}
 .list{display:grid;gap:8px;margin-top:18px}
-.topnav{position:sticky;top:10px;z-index:30;display:flex;justify-content:center;margin:14px 0 0;padding:0 12px;pointer-events:none}
+.topnav{position:sticky;top:10px;z-index:30;display:flex;justify-content:center;margin:12px 0 0;padding:0 12px;pointer-events:none}
 .tn-shell{pointer-events:auto;max-width:100%;padding:5px;border-radius:999px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);transition:background .6s cubic-bezier(.32,.72,0,1),box-shadow .6s cubic-bezier(.32,.72,0,1),transform .6s cubic-bezier(.32,.72,0,1)}
 .topnav.stuck .tn-shell{background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),0 24px 60px -24px rgba(0,0,0,.9),0 0 0 1px rgba(225,6,0,.06)}
 .tn-core{display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:rgba(9,9,11,.74);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
@@ -289,6 +289,21 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
   <span data-i="notice"></span>
 </div></aside>
 
+<nav class="topnav" data-al="navL">
+  <div class="tn-shell"><div class="tn-core">
+    <a class="tn-brand" href="#top" data-al="navTop"><span class="tn-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.1-.4-.4-2.1z"/></svg></span></a>
+    <ul class="tn-links">
+      <li><a href="#installation" data-i="navInstall"></a></li>
+      <li><a href="#creer-un-compte-niveau-steam-et-tuto" data-i="navAccount"></a></li>
+      <li><a href="#dossier" data-i="navFolder"></a></li>
+      <li><a href="#faq" data-i="navFaq"></a></li>
+      <li><a href="#avant" data-i="navBefore"></a></li>
+      <li><a href="#liens" data-i="navLinks"></a></li>
+    </ul>
+    <button class="tn-search" type="button" id="tnSearch" data-al="navSearch"><span class="tn-st" data-i="navSearchT"></span><kbd class="tn-kbd" aria-hidden="true">/</kbd><span class="tn-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg></span></button>
+  </div></div>
+</nav>
+
 <header class="hero" id="top">
   <div class="art" aria-hidden="true"><div class="streak a"></div><div class="streak b"></div><div class="streak c"></div><div class="streak d"></div></div>
   <div class="nav">
@@ -319,20 +334,6 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     <a class="hero-cta" href="#installation" data-i="installCta"></a>
   </div>
 </header>
-<nav class="topnav" data-al="navL">
-  <div class="tn-shell"><div class="tn-core">
-    <a class="tn-brand" href="#top" data-al="navTop"><span class="tn-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.1-.4-.4-2.1z"/></svg></span></a>
-    <ul class="tn-links">
-      <li><a href="#installation" data-i="navInstall"></a></li>
-      <li><a href="#creer-un-compte-niveau-steam-et-tuto" data-i="navAccount"></a></li>
-      <li><a href="#dossier" data-i="navFolder"></a></li>
-      <li><a href="#faq" data-i="navFaq"></a></li>
-      <li><a href="#avant" data-i="navBefore"></a></li>
-      <li><a href="#liens" data-i="navLinks"></a></li>
-    </ul>
-    <button class="tn-search" type="button" id="tnSearch" data-al="navSearch"><span class="tn-st" data-i="navSearchT"></span><kbd class="tn-kbd" aria-hidden="true">/</kbd><span class="tn-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg></span></button>
-  </div></div>
-</nav>
 
 <main class="wrap" id="contenu" tabindex="-1">
   <section class="block" id="installation">
