@@ -293,7 +293,7 @@ const F = [
  f:{fr:["Sécurité Windows > Contrôle des applications et du navigateur > Paramètres du contrôle intelligent des applications > Désactivé.","Relancer le jeu."],en:["Windows Security > App & browser control > Smart App Control settings > Off.","Launch the game again."]},
  n:{fr:"Une fois désactivé, Windows ne laisse pas le réactiver sans réinitialiser le PC.",en:"Once it's off, Windows won't let you turn it back on without resetting the PC."},
  m:{fr:"c'est smart app control qui bloque un fichier rotk. sécurité windows > contrôle des applications et du navigateur > paramètres du contrôle intelligent > désactivé, puis relance",en:"that's smart app control blocking a rotk file. windows security > app & browser control > smart app control settings > off, then relaunch"}},
-{c:"lancement", s:"ok", k:["MSVCP140.dll","vcruntime140","14.40"],
+{c:"lancement", s:"ok", k:["MSVCP140.dll","vcruntime140","14.40"], v:"vcpp",
  t:{fr:"Crash dans MSVCP140.dll ou « runtime Visual C++ trop ancien »",en:"Crash in MSVCP140.dll or \"Visual C++ runtime too old\""},
  f:{fr:["Installer le dernier Visual C++ x64 (la 14, pas la 2013). Déjà installé : « Réparer ».","Redémarrer le PC."],en:["Install the latest Visual C++ x64 (version 14, not 2013). Already installed: \"Repair\".","Restart the PC."]},
  n:{fr:"Minimum 14.40. Si le message parle d'une « ancienne copie de msvcp140.dll dans le dossier du jeu », supprime ce fichier-là du dossier du jeu.",en:"Minimum 14.40. If the message mentions an \"old copy of msvcp140.dll in the game folder\", delete that file from the game folder."},
@@ -374,7 +374,7 @@ const F = [
  m:{fr:"c'est leur serveur qui refuse le rapport, rien à voir avec ton pc",en:"their server is refusing the report, nothing to do with ur pc"}},
 
 /* COMPTE */
-{c:"compte", s:"ok", k:["inscription","niveau Steam","tuto","Steam level"],
+{c:"compte", s:"ok", k:["inscription","niveau Steam","tuto","Steam level"], v:"account",
  t:{fr:"Créer un compte : niveau Steam et tuto",en:"Creating an account: Steam level and tutorial"},
  f:{fr:["Inscriptions ouvertes depuis le 17/10.","Compte Steam niveau 1 minimum (Profil > Badges > Pilier de la communauté). Mettre 5 € ne donne pas le niveau.","Les nouveaux comptes doivent finir le tuto (environ 10 min) avant les parties publiques."],en:["Sign-ups open since 17/10.","Steam level 1 minimum (Profile > Badges > Pillar of the Community). Adding funds doesn't give levels.","New accounts must finish the tutorial (about 10 min) before public matches."]},
  m:{fr:"il te faut un compte steam niveau 1 (profil > badges > pilier de la communauté) puis le tuto d'environ 10 min avant de jouer en public",en:"u need steam level 1 (profile > badges > pillar of the community) then the ~10 min tutorial before public games"}},
@@ -477,11 +477,11 @@ const F = [
  m:{fr:"c'est normal pour l'instant, le jeu reste en anglais même avec le launcher en français",en:"that's normal for now, the game stays in english even with the launcher in french"}},
 
 /* ANTIVIRUS */
-{c:"antivirus", s:"ok", k:["Defender","exclusion"],
+{c:"antivirus", s:"ok", k:["Defender","exclusion"], v:"defender",
  t:{fr:"Windows Defender",en:"Windows Defender"},
  f:{fr:["Sécurité Windows > Protection contre les virus et menaces > Gérer les paramètres > Exclusions > Ajouter un dossier.","Ajouter le dossier du jeu et C:\\Program Files\\ROTK Launcher.","Fichier disparu : Historique de protection > l'élément > Actions > Restaurer."],en:["Windows Security > Virus & threat protection > Manage settings > Exclusions > Add a folder.","Add the game folder and C:\\Program Files\\ROTK Launcher.","File gone: Protection history > the item > Actions > Restore."]},
  m:{fr:"ajoute ton dossier de jeu et C:\\Program Files\\ROTK Launcher en exclusion dans sécurité windows, et restaure le fichier dans l'historique de protection s'il a disparu",en:"add ur game folder and C:\\Program Files\\ROTK Launcher as exclusions in windows security, and restore the file from protection history if it's gone"}},
-{c:"antivirus", s:"ok", k:["accès contrôlé","ransomware","controlled folder"],
+{c:"antivirus", s:"ok", k:["accès contrôlé","ransomware","controlled folder"], v:"cfa",
  t:{fr:"Accès contrôlé aux dossiers (anti-ransomware)",en:"Controlled folder access (ransomware protection)"},
  f:{fr:["Protection contre les ransomwares > Autoriser une application.","Ajouter H1Z1.exe de la copie ROTK et ROTK Launcher.exe."],en:["Ransomware protection > Allow an app.","Add the ROTK copy's H1Z1.exe and ROTK Launcher.exe."]},
  m:{fr:"dans protection contre les ransomwares > autoriser une application, ajoute ton H1Z1.exe et ROTK Launcher.exe",en:"in ransomware protection > allow an app, add ur H1Z1.exe and ROTK Launcher.exe"}},
