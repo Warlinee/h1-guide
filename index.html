@@ -127,6 +127,8 @@ details[open] .body{animation:open .4s var(--ease)}
 @keyframes open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .body ol,.body ul{margin:0;padding-left:20px;display:grid;gap:7px;color:var(--dim)}
 .body li::marker{color:var(--red-hi);font-weight:600;font-variant-numeric:tabular-nums}
+.vid{width:100%;max-width:760px;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--line-2);background:#000;display:block}
+.tag.vtag{color:#fff;border-color:var(--red-line);background:var(--red-soft);font-family:var(--f);font-weight:600}
 .note{margin:0;font-size:14.5px;color:var(--muted);background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
 code.p{font-family:var(--mono);font-size:.84em;background:var(--s3);color:#ffc2bc;border:1px solid var(--line);padding:1px 6px;border-radius:6px;overflow-wrap:anywhere}
 .empty{text-align:center;color:var(--muted);padding:40px 16px;border:1px dashed var(--line-2);border-radius:16px;margin-top:18px}
@@ -410,8 +412,8 @@ const F = [
  t:{fr:"Le vocal de groupe marche, la proximité jamais",en:"Group voice works, proximity never"},
  f:{fr:["Échap > Audio : vérifier que la proximité est activée.","Push-to-talk de proximité sur un bouton de souris : le mettre sur une touche clavier.","Alt+M coupe la proximité : appuyer une fois."],en:["Esc > Audio: check proximity is enabled.","Proximity push-to-talk on a mouse button: move it to a keyboard key.","Alt+M mutes proximity: press it once."]},
  m:{fr:"vérifie que la proxi est activée dans échap > audio, et si ton push to talk proxi est sur la souris mets-le sur une touche clavier",en:"check proximity is enabled in esc > audio, and if ur proximity push to talk is on a mouse button move it to a keyboard key"}},
-{c:"vocal", s:"ok", k:["Vivox","vivoxsdk_x64.dll","legacy Vivox SDK"],
- t:{fr:"« The legacy Vivox SDK could not be found »",en:"\"The legacy Vivox SDK could not be found\""},
+{c:"vocal", s:"ok", k:["Vivox","vivoxsdk_x64.dll","legacy Vivox SDK","SDK Vivox historique"], v:"vivox",
+ t:{fr:"« Le SDK Vivox historique est introuvable »",en:"\"The legacy Vivox SDK could not be found\""},
  f:{fr:["Fermer le launcher.","Dans le dossier du jeu, copier vivoxsdk_x64.original.dll et renommer la copie en vivoxsdk_x64.dll.","Pas de .original.dll : prendre vivoxsdk_x64.dll dans le dossier Steam de H1Z1.","Ajouter le dossier du jeu en exclusion antivirus."],en:["Close the launcher.","In the game folder, copy vivoxsdk_x64.original.dll and rename the copy to vivoxsdk_x64.dll.","No .original.dll: take vivoxsdk_x64.dll from the Steam H1Z1 folder.","Add the game folder to your antivirus exclusions."]},
  n:{fr:"Réinstaller le launcher ne règle pas ça. Affiche les extensions de fichiers pour ne pas créer un vivoxsdk_x64.dll.dll.",en:"Reinstalling the launcher doesn't fix it. Show file extensions so you don't end up with vivoxsdk_x64.dll.dll."},
  m:{fr:"ton antivirus a viré un fichier du jeu. dans ton dossier rotk, copie vivoxsdk_x64.original.dll, renomme la copie en vivoxsdk_x64.dll et relance",en:"ur antivirus removed a game file. in ur rotk folder, copy vivoxsdk_x64.original.dll, rename the copy to vivoxsdk_x64.dll and relaunch"}},
@@ -580,12 +582,19 @@ function row(x, T){
   s.append(el("h3", null, esc(x.t[lang])));
   const tags = el("div", "tags");
   tags.append(el("span", "tag st " + STATUS[x.s], esc(T.st[x.s])));
+  if (x.v) tags.append(el("span", "tag vtag", lang === "fr" ? "▶ Vidéo" : "▶ Video"));
   techTags(x.k).forEach(k => tags.append(el("span", "tag", esc(k))));
   s.append(tags); d.append(s);
   const b = el("div", "body");
   const steps = x.f[lang], ol = el(steps.length > 1 ? "ol" : "ul");
   steps.forEach(st => ol.append(el("li", null, codeify(st)))); b.append(ol);
   if (x.n) b.append(el("p", "note", codeify(x.n[lang])));
+  if (x.v) {
+    const v = el("video", "vid"); v.controls = true; v.preload = "none"; v.playsInline = true;
+    v.poster = "videos/" + x.v + "-" + lang + ".jpg"; v.src = "videos/" + x.v + "-" + lang + ".mp4";
+    v.setAttribute("aria-label", lang === "fr" ? "Vidéo tutoriel" : "Video tutorial");
+    b.append(v);
+  }
   d.append(b); r.append(d);
   return r;
 }
