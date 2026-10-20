@@ -288,7 +288,7 @@ const CATS = [
 
 const F = [
 /* LANCEMENT */
-{c:"lancement", s:"ok", k:["0xC0E90002","Smart App Control"],
+{c:"lancement", s:"ok", k:["0xC0E90002","Smart App Control"], v:"sac",
  t:{fr:"« Fermé pendant son initialisation » (0xC0E90002)",en:"\"Closed during initialization\" (0xC0E90002)"},
  f:{fr:["Sécurité Windows > Contrôle des applications et du navigateur > Paramètres du contrôle intelligent des applications > Désactivé.","Relancer le jeu."],en:["Windows Security > App & browser control > Smart App Control settings > Off.","Launch the game again."]},
  n:{fr:"Une fois désactivé, Windows ne laisse pas le réactiver sans réinitialiser le PC.",en:"Once it's off, Windows won't let you turn it back on without resetting the PC."},
@@ -318,12 +318,12 @@ const F = [
  m:{fr:"c'est juste un bug d'accents dans la 2.0.43, le message veut dire la même chose",en:"it's just a broken-characters bug in 2.0.43, the message means the same thing"}},
 
 /* LAUNCHER */
-{c:"launcher", s:"known", k:["exitCode=18","launch-failed","--no-sandbox"],
+{c:"launcher", s:"known", k:["exitCode=18","launch-failed","--no-sandbox"], v:"nosandbox",
  t:{fr:"Le launcher ne s'ouvre pas : « launch-failed »",en:"Launcher won't open: \"launch-failed\""},
  f:{fr:["Bug connu sur certains PC, pas encore de correctif.","Invite de commandes en administrateur, puis coller (avec les guillemets) : \"C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe\" --no-sandbox"],en:["Known bug on some PCs, no fix yet.","Command prompt as administrator, then paste (with the quotes): \"C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe\" --no-sandbox"]},
  n:{fr:"Les guillemets sont obligatoires à cause de l'espace. Tape les deux tirets à la main : Discord les transforme parfois en tiret long. C'est temporaire, ça coupe une protection du launcher.",en:"The quotes are required because of the space. Type the two dashes by hand: Discord sometimes turns them into one long dash. It's temporary, it turns off a launcher protection."},
  m:{fr:"bug connu, pas encore de fix. ouvre l'invite de commandes en admin et colle \"C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe\" --no-sandbox (avec les guillemets, tirets tapés à la main)",en:"known bug, no fix yet. open command prompt as admin and paste \"C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe\" --no-sandbox (with the quotes, type the dashes by hand)"}},
-{c:"launcher", s:"ok", k:["is not valid JSON","Unexpected token","weapon-stance.v1.json"],
+{c:"launcher", s:"ok", k:["is not valid JSON","Unexpected token","weapon-stance.v1.json"], v:"json",
  t:{fr:"« Unexpected token … is not valid JSON » en cliquant sur Jouer",en:"\"Unexpected token … is not valid JSON\" when pressing Play"},
  f:{fr:["Fermer le launcher.","Windows + R, coller %APPDATA%\\ROTK Launcher\\logs et valider.","Ouvrir le dossier au nom aléatoire, puis input-profile.","Renommer weapon-stance.v1.json en weapon-stance.v1.json.old, relancer."],en:["Close the launcher.","Windows + R, paste %APPDATA%\\ROTK Launcher\\logs and press Enter.","Open the randomly named folder, then input-profile.","Rename weapon-stance.v1.json to weapon-stance.v1.json.old, relaunch."]},
  n:{fr:"Fichier de sauvegarde des touches corrompu. Réinstaller le launcher ne le touche pas.",en:"Corrupted keybind save file. Reinstalling the launcher doesn't touch it."},
