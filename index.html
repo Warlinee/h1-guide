@@ -122,7 +122,42 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tab:hover{color:var(--text)}
 .tab[aria-pressed="true"]{background:var(--s3);color:#fff;box-shadow:inset 0 0 0 1px var(--line-2)}
 .list{display:grid;gap:8px;margin-top:18px}
-.topnav{position:sticky;top:10px;z-index:30;display:flex;justify-content:center;margin:12px 0 0;padding:0 12px;pointer-events:none}
+.pal{position:fixed;inset:0;z-index:60;display:flex;justify-content:center;align-items:flex-start;padding:clamp(56px,12vh,120px) 14px 20px}
+.pal[hidden]{display:none}
+.pal-back{position:absolute;inset:0;background:rgba(3,3,4,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transition:opacity .35s cubic-bezier(.32,.72,0,1)}
+.pal-box{position:relative;width:min(640px,100%);opacity:0;transform:translateY(-14px) scale(.97);transition:opacity .35s cubic-bezier(.32,.72,0,1),transform .5s cubic-bezier(.32,.72,0,1)}
+.pal.in .pal-back{opacity:1}
+.pal.in .pal-box{opacity:1;transform:none}
+html.pal-open{overflow:hidden}
+.pal-shell{padding:6px;border-radius:26px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 40px 120px -30px rgba(0,0,0,.95),0 0 0 1px rgba(225,6,0,.08)}
+.pal-core{border-radius:20px;background:#0c0c0e;box-shadow:inset 0 1px 0 rgba(255,255,255,.07);overflow:hidden}
+.pal-in{display:flex;align-items:center;gap:12px;padding:0 16px;height:60px;border-bottom:1px solid var(--line)}
+.pal-in svg{width:20px;height:20px;color:var(--red-hi);flex:none}
+.pal-in input{flex:1;min-width:0;background:transparent;border:0;color:var(--text);font:inherit;font-size:17px;outline:none}
+.pal-in input::placeholder{color:var(--muted)}
+.pal-in input::-webkit-search-cancel-button{display:none}
+.pal-esc,.pal-foot kbd{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line-3);border-radius:6px;padding:1px 6px}
+.pal-h{margin:12px 18px 6px;font-size:12.5px;font-weight:500;color:var(--muted)}
+.pal-h:empty{display:none}
+.pal-list{max-height:min(420px,52vh);overflow-y:auto;padding:4px 8px 8px;scrollbar-width:thin}
+.pal-it{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;transition:background .25s cubic-bezier(.32,.72,0,1)}
+.pal-it.on{background:linear-gradient(90deg,rgba(225,6,0,.16),rgba(225,6,0,.05));box-shadow:inset 0 0 0 1px rgba(255,59,47,.28)}
+.pal-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pal-tx b{font-weight:500;font-size:15px;line-height:1.35;color:var(--text)}
+.pal-tx small{font-size:12.5px;color:var(--muted)}
+.pal-v{color:var(--red-hi)}
+.pal-go{font-size:14px;color:var(--muted);opacity:0;transition:opacity .2s}
+.pal-it.on .pal-go{opacity:1;color:var(--red-hi)}
+.pal-none{margin:10px 12px 14px;color:var(--muted);font-size:14px}
+.pal-none a{color:var(--red-hi)}
+.pal-foot{margin:0;padding:10px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+@media (max-width:640px){.pal{padding-top:14px}.pal-foot{display:none}.pal-esc{display:none}}
+
+.tn-slot{position:relative;z-index:5;height:58px;margin:4px 0 0}
+.hero{z-index:20}
+.topnav{position:absolute;inset:0 0 auto;z-index:30;display:flex;justify-content:center;padding:0 12px;pointer-events:none}
+.topnav.stuck{position:fixed;top:10px;animation:tnDrop .5s cubic-bezier(.32,.72,0,1)}
+@keyframes tnDrop{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
 .tn-shell{pointer-events:auto;max-width:100%;padding:5px;border-radius:999px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);transition:background .6s cubic-bezier(.32,.72,0,1),box-shadow .6s cubic-bezier(.32,.72,0,1),transform .6s cubic-bezier(.32,.72,0,1)}
 .topnav.stuck .tn-shell{background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),0 24px 60px -24px rgba(0,0,0,.9),0 0 0 1px rgba(225,6,0,.06)}
 .tn-core{display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:rgba(9,9,11,.74);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
@@ -147,7 +182,7 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tn-search:focus-visible,.tn-links a:focus-visible,.tn-brand:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
 section.block{scroll-margin-top:84px}
 @media (max-width:820px){.tn-kbd{display:none}}
-@media (max-width:640px){.topnav{padding:0 10px;top:8px}.tn-shell{width:100%}.tn-links{flex:1;mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 18px),transparent)}.tn-links a{padding:9px 13px;font-size:13.5px}.tn-st{display:none}.tn-search{padding:0 4px;margin-left:2px}.topnav.stuck .tn-brand{width:0;margin:0;opacity:0}}
+@media (max-width:640px){.topnav{padding:0 10px}.topnav.stuck{top:8px}.tn-shell{width:100%}.tn-links{flex:1;mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 18px),transparent)}.tn-links a{padding:9px 13px;font-size:13.5px}.tn-st{display:none}.tn-search{padding:0 4px;margin-left:2px}.topnav.stuck .tn-brand{width:0;margin:0;opacity:0}}
 
 .fold{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:14px}
 .ftree{background:var(--s1);border:1px solid var(--line);border-radius:20px;padding:22px 24px;font-size:14.5px}
@@ -289,20 +324,6 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
   <span data-i="notice"></span>
 </div></aside>
 
-<nav class="topnav" data-al="navL">
-  <div class="tn-shell"><div class="tn-core">
-    <a class="tn-brand" href="#top" data-al="navTop"><span class="tn-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.1-.4-.4-2.1z"/></svg></span></a>
-    <ul class="tn-links">
-      <li><a href="#installation" data-i="navInstall"></a></li>
-      <li><a href="#creer-un-compte-niveau-steam-et-tuto" data-i="navAccount"></a></li>
-      <li><a href="#dossier" data-i="navFolder"></a></li>
-      <li><a href="#faq" data-i="navFaq"></a></li>
-      <li><a href="#avant" data-i="navBefore"></a></li>
-      <li><a href="#liens" data-i="navLinks"></a></li>
-    </ul>
-    <button class="tn-search" type="button" id="tnSearch" data-al="navSearch"><span class="tn-st" data-i="navSearchT"></span><kbd class="tn-kbd" aria-hidden="true">/</kbd><span class="tn-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg></span></button>
-  </div></div>
-</nav>
 
 <header class="hero" id="top">
   <div class="art" aria-hidden="true"><div class="streak a"></div><div class="streak b"></div><div class="streak c"></div><div class="streak d"></div></div>
@@ -319,6 +340,22 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
       <button type="button" data-lang="en" aria-label="English" title="English"><svg viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><g fill="#fff"><rect y="0.77" width="19" height="0.77"/><rect y="2.31" width="19" height="0.77"/><rect y="3.85" width="19" height="0.77"/><rect y="5.38" width="19" height="0.77"/><rect y="6.92" width="19" height="0.77"/><rect y="8.46" width="19" height="0.77"/></g><rect width="7.6" height="5.38" fill="#3c3b6e"/></svg></button>
     </div>
     </div>
+  </div>
+  <div class="tn-slot" id="tnSlot">
+<nav class="topnav" data-al="navL">
+  <div class="tn-shell"><div class="tn-core">
+    <a class="tn-brand" href="#top" data-al="navTop"><span class="tn-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.1-.4-.4-2.1z"/></svg></span></a>
+    <ul class="tn-links">
+      <li><a href="#installation" data-i="navInstall"></a></li>
+      <li><a href="#creer-un-compte-niveau-steam-et-tuto" data-i="navAccount"></a></li>
+      <li><a href="#dossier" data-i="navFolder"></a></li>
+      <li><a href="#faq" data-i="navFaq"></a></li>
+      <li><a href="#avant" data-i="navBefore"></a></li>
+      <li><a href="#liens" data-i="navLinks"></a></li>
+    </ul>
+    <button class="tn-search" type="button" id="tnSearch" data-al="navSearch"><span class="tn-st" data-i="navSearchT"></span><kbd class="tn-kbd" aria-hidden="true">/</kbd><span class="tn-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg></span></button>
+  </div></div>
+</nav>
   </div>
   <div class="hero-body">
     <div class="kicker"><i></i><span data-i="kicker"></span></div>
@@ -384,6 +421,17 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
   </section>
 </main>
 
+<div class="pal" id="pal" hidden>
+  <div class="pal-back" id="palBack"></div>
+  <div class="pal-box" role="dialog" aria-modal="true" data-al="palL">
+    <div class="pal-shell"><div class="pal-core">
+      <label class="pal-in" for="palQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><input id="palQ" type="search" aria-label="Rechercher" autocomplete="off" spellcheck="false" aria-controls="palList" aria-autocomplete="list"><kbd class="pal-esc" aria-hidden="true">Échap</kbd></label>
+      <p class="pal-h" id="palH"></p>
+      <div class="pal-list" id="palList" role="listbox" aria-labelledby="palH"></div>
+      <p class="pal-foot" id="palFoot"></p>
+    </div></div>
+  </div>
+</div>
 <footer><div class="wrap"><div class="foot"><span data-i="foot1"></span><span data-i="foot2"></span></div></div></footer>
 
 <script>
@@ -392,7 +440,7 @@ const UI = {
     notice:"<b>Wiki non officiel.</b> Fait par un joueur bénévole à partir de cas réels du Discord. Ce n'est pas un site de ROTK : bans, tickets et annonces passent par les canaux officiels.",
     brand:"ROTK Wiki", badge:"Non officiel", kicker:"Wiki communautaire, non officiel",
     h1:"Aide et solutions", lede:"Les problèmes les plus fréquents du launcher et du jeu, avec ce qui a vraiment marché chez les joueurs.",
-    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", navL:"Sections du wiki", navTop:"Haut de la page", navInstall:"Installation", navAccount:"Créer un compte", navFolder:"Où est ton jeu ?", navFaq:"Problèmes", navBefore:"Avant de demander", navLinks:"Liens utiles", navSearch:"Rechercher un problème", navSearchT:"Rechercher", folderH:"Où est ton jeu ?", folderP:"Le launcher et le jeu sont dans deux dossiers différents. Quand une solution parle du « dossier du jeu », c'est celui où se trouve H1Z1.exe.", treeL:"Arborescence : le launcher dans C:\\Program Files\\ROTK Launcher, le jeu dans C:\\Games\\ROTK, et le cache des assets dans C:\\Games\\.ROTK-assets, juste à côté.", treeLauncher:"Le launcher. Rien à modifier ici.", treeNot:"Pas ici", treeChosen:"Le dossier choisi à l'installation du client (chez toi, il peut s'appeler autrement).", treeGame:"Ton jeu : H1Z1.exe, rotk-shotgun-sprint.ini, dinput8.dll.", treeYes:"Dossier du jeu", treeAssets:"Juste à côté du jeu, avec un point devant.", treeCache:"Le dossier à vider quand les assets bloquent.", findH:"Tu ne sais plus où il est ?", findSteps:["Ouvre l'Explorateur de fichiers et clique sur « Ce PC » à gauche.","Tape <code class=\"p\">rotk-shotgun-sprint.ini</code> dans la recherche, en haut à droite, et attends.","Clic droit sur le résultat > « Ouvrir l'emplacement du fichier » : tu es dans ton dossier de jeu. Le dossier des assets est un cran au-dessus."], findNote:"Autre moyen : dans le launcher, ouvre l'installation du client, le chemin est écrit sous « Installation ROTK ». Si ton dossier de jeu s'appelle ROTK2, le cache s'appelle .ROTK2-assets.", installCta:"Nouveau sur ROTK ? <b>Suis le parcours d'installation</b> →", installH:"Première installation", installP:"Nouveau sur ROTK ? Les 6 étapes, dans l'ordre, avec les fiches et vidéos qui vont avec.", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
+    placeholder:"Message ou code d'erreur", chips:"Fréquents :", skip:"Aller au contenu", palL:"Rechercher un problème", palPop:"Les plus demandés", palRes:"Résultats", palFoot:'<kbd>↑</kbd><kbd>↓</kbd> pour choisir · <kbd>Entrée</kbd> pour ouvrir · <kbd>Échap</kbd> pour fermer', navL:"Sections du wiki", navTop:"Haut de la page", navInstall:"Installation", navAccount:"Créer un compte", navFolder:"Où est ton jeu ?", navFaq:"Problèmes", navBefore:"Avant de demander", navLinks:"Liens utiles", navSearch:"Rechercher un problème", navSearchT:"Rechercher", folderH:"Où est ton jeu ?", folderP:"Le launcher et le jeu sont dans deux dossiers différents. Quand une solution parle du « dossier du jeu », c'est celui où se trouve H1Z1.exe.", treeL:"Arborescence : le launcher dans C:\\Program Files\\ROTK Launcher, le jeu dans C:\\Games\\ROTK, et le cache des assets dans C:\\Games\\.ROTK-assets, juste à côté.", treeLauncher:"Le launcher. Rien à modifier ici.", treeNot:"Pas ici", treeChosen:"Le dossier choisi à l'installation du client (chez toi, il peut s'appeler autrement).", treeGame:"Ton jeu : H1Z1.exe, rotk-shotgun-sprint.ini, dinput8.dll.", treeYes:"Dossier du jeu", treeAssets:"Juste à côté du jeu, avec un point devant.", treeCache:"Le dossier à vider quand les assets bloquent.", findH:"Tu ne sais plus où il est ?", findSteps:["Ouvre l'Explorateur de fichiers et clique sur « Ce PC » à gauche.","Tape <code class=\"p\">rotk-shotgun-sprint.ini</code> dans la recherche, en haut à droite, et attends.","Clic droit sur le résultat > « Ouvrir l'emplacement du fichier » : tu es dans ton dossier de jeu. Le dossier des assets est un cran au-dessus."], findNote:"Autre moyen : dans le launcher, ouvre l'installation du client, le chemin est écrit sous « Installation ROTK ». Si ton dossier de jeu s'appelle ROTK2, le cache s'appelle .ROTK2-assets.", installCta:"Nouveau sur ROTK ? <b>Suis le parcours d'installation</b> →", installH:"Première installation", installP:"Nouveau sur ROTK ? Les 6 étapes, dans l'ordre, avec les fiches et vidéos qui vont avec.", copyLink:"Copier le lien", copied:"Lien copié ✓", seeAll:"Voir les {n} résultats", approx:"Pas de correspondance exacte : voici les fiches les plus proches.", legend:'<span class="dot s-ok"></span>Confirmé : a réglé le problème chez des joueurs <span class="dot s-lead"></span>Piste : à essayer, pas encore sûr <span class="dot s-known"></span>Connu, pas de fix : bug connu, rien à faire de ton côté pour l\'instant', tabsL:"Catégories", noticeL:"Avertissement", siteL:"Site officiel ROTK, rotk.app (nouvel onglet)", dcL:"Discord officiel ROTK (nouvel onglet)", phShort:"Code d'erreur",
     quickH:"Accès rapide", quickP:"Choisis le type de problème pour voir les solutions.",
     faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
@@ -406,7 +454,7 @@ const UI = {
     notice:"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.",
     brand:"ROTK Wiki", badge:"Unofficial", kicker:"Community wiki, unofficial",
     h1:"Help and fixes", lede:"The most common launcher and game problems, with what actually worked for players.",
-    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", navL:"Wiki sections", navTop:"Top of the page", navInstall:"Install", navAccount:"Create an account", navFolder:"Where is your game?", navFaq:"Problems", navBefore:"Before asking", navLinks:"Useful links", navSearch:"Search a problem", navSearchT:"Search", folderH:"Where is your game?", folderP:"The launcher and the game live in two different folders. When a fix says \"game folder\", it means the one with H1Z1.exe in it.", treeL:"Folder tree: the launcher in C:\\Program Files\\ROTK Launcher, the game in C:\\Games\\ROTK, and the asset cache in C:\\Games\\.ROTK-assets, right next to it.", treeLauncher:"The launcher. Nothing to change here.", treeNot:"Not here", treeChosen:"The folder you picked during client setup (yours may have another name).", treeGame:"Your game: H1Z1.exe, rotk-shotgun-sprint.ini, dinput8.dll.", treeYes:"Game folder", treeAssets:"Right next to the game, with a dot in front.", treeCache:"The folder to empty when assets get stuck.", findH:"Lost track of it?", findSteps:["Open File Explorer and click \"This PC\" on the left.","Type <code class=\"p\">rotk-shotgun-sprint.ini</code> in the search box, top right, and wait.","Right-click the result > \"Open file location\": you're in your game folder. The assets folder is one level up."], findNote:"Another way: in the launcher, open the client setup, the path is written under \"ROTK installation\". If your game folder is called ROTK2, the cache is called .ROTK2-assets.", installCta:"New to ROTK? <b>Follow the install guide</b> →", installH:"First install", installP:"New to ROTK? The 6 steps, in order, with the matching cards and videos.", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
+    placeholder:"Message or error code", chips:"Common:", skip:"Skip to content", palL:"Search a problem", palPop:"Most asked", palRes:"Results", palFoot:'<kbd>↑</kbd><kbd>↓</kbd> to choose · <kbd>Enter</kbd> to open · <kbd>Esc</kbd> to close', navL:"Wiki sections", navTop:"Top of the page", navInstall:"Install", navAccount:"Create an account", navFolder:"Where is your game?", navFaq:"Problems", navBefore:"Before asking", navLinks:"Useful links", navSearch:"Search a problem", navSearchT:"Search", folderH:"Where is your game?", folderP:"The launcher and the game live in two different folders. When a fix says \"game folder\", it means the one with H1Z1.exe in it.", treeL:"Folder tree: the launcher in C:\\Program Files\\ROTK Launcher, the game in C:\\Games\\ROTK, and the asset cache in C:\\Games\\.ROTK-assets, right next to it.", treeLauncher:"The launcher. Nothing to change here.", treeNot:"Not here", treeChosen:"The folder you picked during client setup (yours may have another name).", treeGame:"Your game: H1Z1.exe, rotk-shotgun-sprint.ini, dinput8.dll.", treeYes:"Game folder", treeAssets:"Right next to the game, with a dot in front.", treeCache:"The folder to empty when assets get stuck.", findH:"Lost track of it?", findSteps:["Open File Explorer and click \"This PC\" on the left.","Type <code class=\"p\">rotk-shotgun-sprint.ini</code> in the search box, top right, and wait.","Right-click the result > \"Open file location\": you're in your game folder. The assets folder is one level up."], findNote:"Another way: in the launcher, open the client setup, the path is written under \"ROTK installation\". If your game folder is called ROTK2, the cache is called .ROTK2-assets.", installCta:"New to ROTK? <b>Follow the install guide</b> →", installH:"First install", installP:"New to ROTK? The 6 steps, in order, with the matching cards and videos.", copyLink:"Copy link", copied:"Link copied ✓", seeAll:"See all {n} results", approx:"No exact match: here are the closest cards.", legend:'<span class="dot s-ok"></span>Confirmed: fixed it for players <span class="dot s-lead"></span>Lead: worth trying, not sure yet <span class="dot s-known"></span>Known, no fix: known bug, nothing to do on your side for now', tabsL:"Categories", noticeL:"Notice", siteL:"Official ROTK site, rotk.app (new tab)", dcL:"Official ROTK Discord (new tab)", phShort:"Error code",
     quickH:"Quick access", quickP:"Pick the kind of problem to see the fixes.",
     faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
@@ -943,15 +991,80 @@ if (location.hash) setTimeout(() => openCard(decodeURIComponent(location.hash.sl
 
 /* Barre de navigation : bouton recherche et section active */
 document.addEventListener("keydown", e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); palShow(); return; }
   if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
   const t = e.target; if (t.closest && t.closest("input,textarea,select,[contenteditable]")) return;
-  e.preventDefault(); document.getElementById("tnSearch").click();
+  e.preventDefault(); palShow();
 });
-document.getElementById("tnSearch").addEventListener("click", () => {
-  const q = document.getElementById("q");
-  window.scrollTo({top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
-  setTimeout(() => q.focus({preventScroll: true}), 350);
+
+/* Fenêtre de recherche (bouton Rechercher ou touche /) */
+const PAL_POPULAR = ["installation-du-client-quel-dossier-choisir","creer-un-compte-niveau-steam-et-tuto","les-assets-restent-bloques-a-0","erreur-g9-ou-chargement-infini","aucun-vocal-personne-ne-t-entend-tu-n-entends-personne","je-ne-trouve-pas-mon-dossier-de-jeu-ou-rotk-assets"];
+let palSel = 0, palItems = [], palReturn = null;
+function palResults(q){
+  const rows = [...document.querySelectorAll("#list .row")];
+  const groups = q.trim() ? queryTokens(q) : [];
+  if (!groups.length) return {items: PAL_POPULAR.map(id => document.getElementById(id)).filter(Boolean), exact: true, empty: true};
+  let res = rows.map(r => ({r, ...scoreRow(r._idx, groups)}));
+  let ok = res.filter(o => o.matched === groups.length), exact = true;
+  if (!ok.length) { ok = res.filter(o => o.matched > 0); exact = false; }
+  return {items: ok.sort((a, b) => b.score - a.score).slice(0, 8).map(o => o.r), exact, empty: false};
+}
+function palRender(){
+  const T = UI[lang], q = document.getElementById("palQ").value;
+  const {items, exact, empty} = palResults(q);
+  palItems = items; palSel = Math.min(palSel, Math.max(0, items.length - 1));
+  document.getElementById("palH").textContent = empty ? T.palPop : items.length ? (exact ? T.palRes : T.approx) : "";
+  const list = document.getElementById("palList"); list.innerHTML = "";
+  if (!items.length) list.append(el("p", "pal-none", T.empty));
+  items.forEach((r, i) => {
+    const x = r._x, cat = CATS.find(c => c.id === x.c);
+    const b = el("button", "pal-it" + (i === palSel ? " on" : "")); b.type = "button"; b.id = "palIt" + i;
+    b.setAttribute("role", "option"); b.setAttribute("aria-selected", String(i === palSel));
+    b.innerHTML = '<span class="dot ' + STATUS[x.s] + '"></span><span class="pal-tx"><b>' + esc(x.t[lang]) + '</b><small>' + esc(cat ? cat.t[lang] : "") + (x.v ? ' · <span class="pal-v">' + (lang === "fr" ? "▶ Vidéo" : "▶ Video") + '</span>' : '') + '</small></span><span class="pal-go" aria-hidden="true">↵</span>';
+    b.onmouseenter = () => { palSel = i; palMark(); };
+    b.onclick = () => palOpen(r.id);
+    list.append(b);
+  });
+  document.getElementById("palQ").setAttribute("aria-activedescendant", items.length ? "palIt" + palSel : "");
+  document.getElementById("palFoot").innerHTML = T.palFoot;
+}
+function palMark(){
+  [...document.querySelectorAll("#palList .pal-it")].forEach((b, i) => { b.classList.toggle("on", i === palSel); b.setAttribute("aria-selected", String(i === palSel)); if (i === palSel) b.scrollIntoView({block: "nearest"}); });
+  document.getElementById("palQ").setAttribute("aria-activedescendant", palItems.length ? "palIt" + palSel : "");
+}
+function palShow(){
+  const pal = document.getElementById("pal"); if (!pal.hidden) return;
+  palReturn = document.activeElement; palSel = 0;
+  const q = document.getElementById("palQ"); q.value = ""; q.placeholder = UI[lang].placeholder; q.setAttribute("aria-label", UI[lang].palL);
+  pal.hidden = false; document.documentElement.classList.add("pal-open");
+  palRender(); requestAnimationFrame(() => { pal.classList.add("in"); q.focus(); });
+}
+function palHide(back){
+  const pal = document.getElementById("pal"); if (pal.hidden) return;
+  pal.classList.remove("in"); document.documentElement.classList.remove("pal-open");
+  setTimeout(() => { pal.hidden = true; }, 220);
+  if (back && palReturn && palReturn.focus) palReturn.focus();
+}
+function palOpen(id){
+  palHide(false);
+  try { history.replaceState(null, "", location.pathname + location.search + "#" + id); } catch (e) {}
+  setTimeout(() => openCard(id, true), 60);
+}
+document.getElementById("palQ").addEventListener("input", () => { palSel = 0; palRender(); });
+document.getElementById("palQ").addEventListener("keydown", e => {
+  if (e.key === "ArrowDown") { e.preventDefault(); if (palItems.length) { palSel = (palSel + 1) % palItems.length; palMark(); } }
+  else if (e.key === "ArrowUp") { e.preventDefault(); if (palItems.length) { palSel = (palSel - 1 + palItems.length) % palItems.length; palMark(); } }
+  else if (e.key === "Enter") { e.preventDefault(); if (palItems[palSel]) palOpen(palItems[palSel].id); }
 });
+document.getElementById("pal").addEventListener("keydown", e => {
+  if (e.key === "Escape") { e.preventDefault(); palHide(true); }
+  if (e.key === "Tab") { // garder le focus dans la fenêtre
+    const f = [...document.querySelectorAll("#pal input, #pal button")]; const i = f.indexOf(document.activeElement);
+    if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+  }
+});
+document.getElementById("palBack").addEventListener("click", () => palHide(true));
+document.getElementById("tnSearch").addEventListener("click", palShow);
 (() => {
   const nav = document.querySelector(".topnav");
   const links = [...nav.querySelectorAll(".tn-links a")];
@@ -966,7 +1079,7 @@ document.getElementById("tnSearch").addEventListener("click", () => {
       if (r.top <= mid && r.bottom >= mid) { if (!best || el.classList.contains("row")) best = a; }
     }
     links.forEach(a => a === best ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
-    if (best) best.scrollIntoView({block: "nearest", inline: "nearest"});
+    if (best) { const ul = best.closest(".tn-links"), l = best.offsetLeft, r = l + best.offsetWidth; if (l < ul.scrollLeft) ul.scrollLeft = l - 12; else if (r > ul.scrollLeft + ul.clientWidth) ul.scrollLeft = r - ul.clientWidth + 12; }
   };
   const io = new IntersectionObserver(pick, {threshold: [0, .25, .5, .75, 1]});
   links.forEach(a => { const el = tgt(a); if (el) io.observe(el); });
@@ -975,8 +1088,8 @@ document.getElementById("tnSearch").addEventListener("click", () => {
     const el = tgt(a);
     if (el && el.classList.contains("row")) { e.preventDefault(); try { history.replaceState(null, "", location.pathname + location.search + a.hash); } catch (_) {} openCard(el.id, true); setTimeout(pick, 700); }
   }));
-  const hero = document.querySelector(".hero");
-  new IntersectionObserver(([e]) => nav.classList.toggle("stuck", !e.isIntersecting), {threshold: 0}).observe(hero);
+  const slot = document.getElementById("tnSlot");
+  new IntersectionObserver(([e]) => nav.classList.toggle("stuck", !e.isIntersecting && e.boundingClientRect.top < 0), {threshold: 0, rootMargin: "-10px 0px 0px 0px"}).observe(slot);
 })();
 matchMedia("(max-width:480px)").addEventListener("change", () => { const T = UI[lang]; document.getElementById("q").placeholder = matchMedia("(max-width:480px)").matches ? T.phShort : T.placeholder; });
 </script>
