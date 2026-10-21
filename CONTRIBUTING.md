@@ -1,6 +1,6 @@
 # Contribuer au ROTK Wiki (non officiel)
 
-Wiki communautaire FR/EN d'aide aux joueurs de ROTK (H1Z1). **Il n'est pas affilié à ROTK** et doit le rester visiblement : le bandeau « non officiel » reste, et aucune page ne doit imiter un outil ou une page du staff.
+Wiki communautaire FR/EN (et chinois) d'aide aux joueurs de ROTK (H1Z1). **Il n'est pas affilié à ROTK** et doit le rester visiblement : le bandeau « non officiel » reste, et aucune page ne doit imiter un outil ou une page du staff.
 
 Site en ligne : https://warlinee.github.io/h1-guide/ (GitHub Pages, branche `main`, racine du dépôt). Chaque push sur `main` est en ligne en environ 1 minute.
 
@@ -12,18 +12,19 @@ Site en ligne : https://warlinee.github.io/h1-guide/ (GitHub Pages, branche `mai
 
 ## Structure
 
-Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépendance externe : le lecteur de captures utilise une copie de Tesseract.js rangée dans le dossier `vendor/tesseract/`, pas de CDN) :
+Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépendance externe : le lecteur de captures utilise une copie de Tesseract.js rangée dans le dossier `vendor/tesseract/`, pas de CDN). La version chinoise est à part, dans `zh.js`, chargé seulement en chinois :
 
 | Élément | Où |
 |---|---|
 | Textes de l'interface FR/EN | objet `UI` (`UI.fr`, `UI.en`) |
+| Version chinoise (bouton 中文, `?lang=zh`) | `zh.js` : chaque texte anglais avec sa traduction. Dans `index.html` : `ZH_ROOTS` et `zhApply()` (textes), `zhTokens()` (recherche en chinois) |
 | Catégories (accès rapide et onglets) | tableau `CATS` (+ icônes `icons/cat-<id>.webp`) |
 | Fiches problème / solution | tableau `F` |
 | « Avant de demander » | `RULES` |
 | Liens utiles | `LINKS` |
 | Recherche (sans accents, synonymes, classement) | `norm`, `STOP`, `SYN`, `queryTokens`, `scoreRow`, `filter()` |
 | Liens directs vers une fiche | `#slug` du titre FR, voir `slugOf()` et `openCard()` |
-| Aperçus Discord des liens de fiche | pages `c/<slug>.html` et `c/<slug>.en.html`, générées par `tools/build_card_pages.py` ; `404.html` renvoie vers la fiche si une page manque |
+| Aperçus Discord des liens de fiche | pages `c/<slug>.html`, `c/<slug>.en.html` et `c/<slug>.zh.html`, générées par `tools/build_card_pages.py` ; `404.html` renvoie vers la fiche si une page manque |
 | Réponses rapides pour le support (`?support`) | champ `m` de chaque fiche + `SUP_GENERAL` : pas de lien depuis la page publique, `noindex` |
 | Lecteur de captures (OCR dans le navigateur) | `ocrRun()`, `prepImage()`, `ocrMatch()` + les fichiers de `vendor/tesseract/` : pour les mettre à jour, suis `vendor/tesseract/README.md` |
 | Patch notes (bouton dans la barre, `#patch-notes`) | tableau `PATCH_NOTES`, version la plus récente en premier : **ajoute une ligne à chaque changement visible** |
@@ -42,6 +43,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 - `k` : mots-clés et codes (servent à la recherche et aux étiquettes).
 - `v` : facultatif. Vidéo `videos/<v>-fr.mp4` / `-en.mp4` + affiche `.jpg`.
 - Toujours remplir **FR et EN**.
+- Le chinois ne se remplit pas ici : il est dans `zh.js`, tenu par Wazlyy. Quand tu changes le texte anglais d'une fiche, ce texte repasse tout seul en anglais dans la version chinoise en attendant sa traduction : tu n'as rien à faire de plus.
 
 Après avoir ajouté, renommé ou modifié une fiche, régénère les aperçus Discord :
 
@@ -69,7 +71,7 @@ python -m http.server 8765
 
 Puis ouvre http://127.0.0.1:8765/ et vérifie :
 
-- la version FR et la version EN (`?lang=fr`, `?lang=en`) ;
+- la version FR et la version EN (`?lang=fr`, `?lang=en`), et la version chinoise (`?lang=zh`) ;
 - un écran de 375 px de large (rien ne déborde sur le côté) ;
 - la console sans erreur ;
 - quelques recherches (« ecran noir », « pas de son », « crash ») ;
