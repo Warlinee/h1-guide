@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROTK Wiki (non officiel)</title>
+<meta name="robots" content="noindex">
+<script>
+/* Lien de fiche sans page d'aperçu (fiche ajoutée sans relancer tools/build_card_pages.py) : on renvoie vers la fiche. */
+(function(){
+  var m = location.pathname.match(/^(.*\/)c\/([a-z0-9-]+?)(\.en)?(?:\.html)?$/);
+  if (m) location.replace(m[1] + (m[3] ? "?lang=en" : "") + "#" + m[2]);
+})();
+</script>
+<style>body{margin:0;background:#0c0b09;color:#efede7;font:16px/1.6 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;text-align:center;padding:20px}a{color:#ff3b2f}</style>
+</head>
+<body><p>Page introuvable. <a href="/h1-guide/">Retour au wiki</a><br>Page not found. <a href="/h1-guide/?lang=en">Back to the wiki</a></p></body>
+</html>
