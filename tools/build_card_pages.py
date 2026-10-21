@@ -35,7 +35,7 @@ def summary(steps, limit=300):
 def page(slug, card, lang):
     title = card["t"][lang]
     desc = summary(card["f"][lang])
-    image = BASE + (f"videos/{card['v']}-{'fr' if lang == 'fr' else 'en'}.jpg" if card.get("v") else "og.png")  # vidéo anglaise en chinois
+    image = BASE + (f"videos/{card['v']}-{lang}.jpg" if card.get("v") else "og.png")
     target = "../" + ("" if lang == "fr" else "?lang=" + lang) + "#" + slug
     own = BASE + "c/" + slug + SUFFIX[lang] + ".html"
     e = lambda s: html.escape(s, quote=True)
