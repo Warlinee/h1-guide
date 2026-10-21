@@ -428,7 +428,7 @@ t: {
 "In your mouse software, set the polling rate to 1000 Hz max, never 4000 or 8000; 500 Hz if your CPU is modest.": "在鼠标驱动软件里把回报率设为最高 1000 Hz，千万别用 4000 或 8000；CPU 比较一般的话就设 500 Hz。",
 "Cap your FPS just under your monitor's refresh rate (in the NVIDIA or AMD panel).": "把帧数上限设得略低于显示器刷新率（在 NVIDIA 或 AMD 控制面板里设置）。",
 "In the game settings, switch to borderless windowed.": "在游戏“设定”里把“显示模式”改成“全屏窗口模式”。",
-"Windows Settings > System > Display > Graphics: set H1Z1.exe from your ROTK folder to High performance.": "Windows 设置 > 系统 > 显示 > 图形设置：把 ROTK 文件夹里的 H1Z1.exe 设为“高性能”。",
+"Windows Settings > System > Display > Graphics: set H1Z1.exe from your ROTK folder to High performance.": "Windows 设置 > 系统 > 屏幕 > 显示卡：把 ROTK 文件夹里的 H1Z1.exe 设为“高性能”。",
 "Measured on 21/10 on a strong PC: at 8,000 Hz the game loses about 17% FPS as soon as the mouse moves, nothing when it's still (https://github.com/ROTK-Team/rotk-launcher/issues/215). 20/10 announcement: staff know some players get FPS drops and freezes in game and are looking for the cause server-side. If these settings change nothing, it's not necessarily your PC.": "10 月 21 日在一台高配电脑上实测：回报率 8000 Hz 时，鼠标一动游戏帧数就掉约 17%，鼠标不动时没有影响 (https://github.com/ROTK-Team/rotk-launcher/issues/215). 10 月 20 日公告：官方人员知道部分玩家在游戏中会掉帧和卡死，正在服务器端排查原因。如果这些设置都没用，不一定是你电脑的问题。",
 "set ur mouse to 1000 Hz max, cap ur fps just under ur monitor's hz and use borderless windowed": "鼠标回报率最高设 1000 Hz，帧数上限设得比显示器刷新率低一点，再用全屏窗口模式",
 
@@ -443,10 +443,10 @@ t: {
 
 // Fiche : 30-fps-partout-ou-le-jeu-tourne-sur-la-puce-graphique
 "30 fps everywhere or the game runs on the integrated GPU": "到哪都是 30 fps，或者游戏跑在核显上",
-"Settings > System > Display > Graphics > Browse: pick H1Z1.exe from the ROTK folder (not ROTK Launcher.exe, not the Steam one) > High performance.": "设置 > 系统 > 显示 > 图形设置 > 浏览：选择 ROTK 文件夹里的 H1Z1.exe （不是 ROTK Launcher.exe 也不是 Steam 里的那个）> 高性能。",
+"Settings > System > Display > Graphics > Browse: pick H1Z1.exe from the ROTK folder (not ROTK Launcher.exe, not the Steam one) > High performance.": "设置 > 系统 > 屏幕 > 显示卡 > 浏览：选择 ROTK 文件夹里的 H1Z1.exe （不是 ROTK Launcher.exe 也不是 Steam 里的那个）> GPU 首选项 > 高性能。",
 "Monitor plugged into the graphics card, laptop plugged in.": "显示器要接在独立显卡上，笔记本要插着电源。",
 "To find the right folder: with the game running, Task Manager, right-click H1Z1 > Open file location.": "找到正确文件夹的方法：游戏运行时打开任务管理器，右键 H1Z1 > 打开文件所在的位置。",
-"in settings > display > graphics, add the H1Z1.exe from ur rotk folder (not the launcher) and set it to high performance": "在 设置 > 显示 > 图形设置 里，把你 rotk 文件夹里的 H1Z1.exe 加进去（不是启动器那个），设成高性能",
+"in settings > display > graphics, add the H1Z1.exe from ur rotk folder (not the launcher) and set it to high performance": "在 设置 > 系统 > 屏幕 > 显示卡 里，把你 rotk 文件夹里的 H1Z1.exe 加进去（不是启动器那个），GPU 首选项设成高性能",
 
 // Fiche : petite-saccade-toutes-les-11-secondes-meme-au-menu
 "Small hitch every 11 seconds, even in the menu": "每 11 秒轻微卡一下，菜单里也会",
@@ -570,6 +570,9 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"All 22 tutorial videos now exist in Chinese, with the launcher and Windows in Chinese.": "22 个视频教程现在都有中文版了，视频里的启动器和 Windows 也都是中文界面。",
+"\"Administrator rights could not be verified\" video redone: first restore ROTK.Diagnostics.exe from quarantine, turning the antivirus off comes as a last resort.": "重做了“无法确认 Windows 管理员权限”的视频：先从隔离区还原 ROTK.Diagnostics.exe，关闭杀毒软件只是最后的办法。",
+"Clearer language switch: flags on a black background, active language underlined in red, Chinese flag added.": "语言切换更清楚了：国旗放在黑色背景上，当前语言下面有红色下划线，并加上了中国国旗。",
 "Chinese version (简体中文): 中文 button top right, or ?lang=zh. It opens by itself if your browser is in Chinese.": "中文版（简体中文）：点右上角的“中文”按钮，或在链接后加 ?lang=zh。浏览器是中文时会自动打开中文版。",
 "Search in Chinese: type a word or a sentence in Chinese, the wiki finds the cards about it.": "支持中文搜索：输入中文词语或句子，Wiki 会找到相关的条目。",
 "Links copied from the Chinese version get a Chinese preview on Discord.": "从中文版复制的链接，在 Discord 上会显示中文预览。",
