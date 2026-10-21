@@ -12,7 +12,7 @@ Site en ligne : https://warlinee.github.io/h1-guide/ (GitHub Pages, branche `mai
 
 ## Structure
 
-Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépendance) :
+Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépendance externe : le lecteur de captures utilise une copie de Tesseract.js rangée dans le dossier `vendor/tesseract/`, pas de CDN) :
 
 | Élément | Où |
 |---|---|
@@ -24,6 +24,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 | Recherche (sans accents, synonymes, classement) | `norm`, `STOP`, `SYN`, `queryTokens`, `scoreRow`, `filter()` |
 | Liens directs vers une fiche | `#slug` du titre FR, voir `slugOf()` et `openCard()` |
 | Réponses rapides pour le support (`?support`) | champ `m` de chaque fiche + `SUP_GENERAL` : pas de lien depuis la page publique, `noindex` |
+| Lecteur de captures (OCR dans le navigateur) | `ocrRun()`, `prepImage()`, `ocrMatch()` + les fichiers de `vendor/tesseract/` : pour les mettre à jour, suis `vendor/tesseract/README.md` |
 | Patch notes (bouton dans la barre, `#patch-notes`) | tableau `PATCH_NOTES`, version la plus récente en premier : **ajoute une ligne à chaque changement visible** |
 
 ### Format d'une fiche (`F`)
@@ -63,4 +64,5 @@ Puis ouvre http://127.0.0.1:8765/ et vérifie :
 - un écran de 375 px de large (rien ne déborde sur le côté) ;
 - la console sans erreur ;
 - quelques recherches (« ecran noir », « pas de son », « crash ») ;
-- un lien direct (`#chutes-de-fps-ou-saccades-en-combat`).
+- un lien direct (`#chutes-de-fps-ou-saccades-en-combat`) ;
+- le lecteur de captures (colle une capture d'erreur) : il ne marche qu'avec ce serveur local, pas en ouvrant le fichier `index.html` directement.

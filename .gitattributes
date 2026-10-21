@@ -1,0 +1,2 @@
+# Files vendored tels quels (sha256 dans vendor/tesseract/README.md) : Git ne touche pas aux line endings
+vendor/** -text
