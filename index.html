@@ -122,6 +122,23 @@ section.block{padding-block:clamp(48px,7vw,80px) 0}
 .tab:hover{color:var(--text)}
 .tab[aria-pressed="true"]{background:var(--s3);color:#fff;box-shadow:inset 0 0 0 1px var(--line-2)}
 .list{display:grid;gap:8px;margin-top:18px}
+.now{margin:28px 0 8px;padding:18px 20px 8px;border-radius:20px;background:linear-gradient(180deg,rgba(225,6,0,.06),rgba(255,255,255,.015));border:1px solid var(--line-2)}
+.now-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.now-head h2{margin:0;font-family:var(--f-display);font-stretch:112%;font-weight:700;font-size:20px;letter-spacing:-.01em}
+.now-d{font-size:13px;color:var(--muted)}
+.now-list{list-style:none;margin:0;padding:0}
+.now-it{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.now-it:first-child{border-top:0}
+.now-dot{flex:none;width:9px;height:9px;border-radius:50%;margin-top:7px;background:var(--lead)}
+.now-it.ok .now-dot{background:var(--ok)}
+.now-it.wip .now-dot{background:var(--known)}
+.now-it p{flex:1;min-width:0;margin:0;font-size:14.5px;line-height:1.55;color:var(--dim);overflow-wrap:anywhere}
+.now-it p b{color:var(--text);font-weight:600}
+.now-go{flex:none;font-size:13px;color:var(--red-hi);text-decoration:none;white-space:nowrap;margin-top:2px}
+.now-go:hover{text-decoration:underline}
+.now-go:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px;border-radius:4px}
+@media (max-width:560px){.now-it{flex-wrap:wrap}.now-it p{flex-basis:calc(100% - 21px)}.now-go{margin-left:21px;margin-top:-4px}}
+
 .tn-notes{all:unset;box-sizing:border-box;position:relative;flex:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;margin-left:4px;border-radius:999px;font-size:14px;font-weight:500;color:var(--dim);transition:color .4s cubic-bezier(.32,.72,0,1),background .4s cubic-bezier(.32,.72,0,1)}
 .tn-notes:hover{color:#fff;background:rgba(255,255,255,.06)}
 .tn-notes:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
@@ -459,6 +476,10 @@ footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
     <h2 class="sup-sub" data-i="supCards"></h2>
     <div class="sup-list" id="supCards"></div>
   </section>
+  <section class="now" id="etat" aria-labelledby="nowH">
+    <div class="now-head"><h2 id="nowH"></h2><span class="now-d" id="nowD"></span></div>
+    <ul class="now-list" id="nowList"></ul>
+  </section>
   <section class="block" id="installation">
     <div class="block-head"><div><h2 data-i="installH"></h2><p data-i="installP"></p></div></div>
     <ol class="isteps" id="installSteps"></ol>
@@ -662,8 +683,8 @@ const F = [
  f:{fr:["Ouvre le Gestionnaire des tâches (Ctrl + Maj + Échap), onglet Détails.", "Clic droit sur H1Z1.exe et sur chaque ROTK Launcher.exe > Fin de tâche.", "Rouvre le launcher. Rien dans la liste : redémarre le PC."],en:["Open Task Manager (Ctrl + Shift + Esc), Details tab.", "Right-click H1Z1.exe and every ROTK Launcher.exe > End task.", "Open the launcher again. Nothing in the list: restart the PC."]},
  n:{fr:"En français, le bouton affiche « EN JEU ».",en:"In French, the button says \"EN JEU\"."},
  m:{fr:"le launcher croit que le jeu tourne encore. gestionnaire des tâches > détails, termine H1Z1.exe et ROTK Launcher.exe, sinon redémarre",en:"the launcher thinks the game is still running. task manager > details, end H1Z1.exe and ROTK Launcher.exe, or restart"}},
-{c:"launcher", s:"ok", k:["UPDATING ASSETS","0%","INSTALLING",".ROTK-assets","fetch failed"], v:"assets",
- t:{fr:"Les assets restent bloqués à 0 %",en:"Assets stuck at 0%"},
+{c:"launcher", s:"ok", k:["UPDATING ASSETS","0%","1%","INSTALLING",".ROTK-assets","fetch failed"], v:"assets",
+ t:{fr:"Les assets restent bloqués à 0 % (ou 1 %)",en:"Assets stuck at 0% (or 1%)"},
  f:{fr:["Clique une seule fois sur Jouer et attends 5 à 10 min : le gros pack fait 1,3 Go et il est vérifié avant de bouger.", "Pendant « INSTALLATION », le pourcentage ne bouge qu'à la fin de chaque pack : c'est normal.", "Toujours bloqué : ferme le launcher, ouvre le dossier .ROTK-assets (juste à côté de ton dossier de jeu), puis asset-cache, supprime tout dedans et relance."],en:["Press Play once and wait 5 to 10 min: the big pack is 1.3 GB and gets checked before it moves.", "During \"INSTALLING\", the percentage only moves when a pack is done: that's normal.", "Still stuck: close the launcher, open the .ROTK-assets folder (right next to your game folder), then asset-cache, delete everything inside and relaunch."]},
  n:{fr:"Il faut 4 à 5 Go libres sur le disque du jeu à chaque mise à jour des assets. Tu ne trouves pas .ROTK-assets ? Regarde la section « Où est ton jeu ? ».",en:"You need 4 to 5 GB free on the game's drive for each asset update. Can't find .ROTK-assets? Check the \"Where is your game?\" section."},
  m:{fr:"clique une fois sur jouer et laisse tourner 5-10 min. si t'es toujours à 0 : ferme tout, vide le dossier asset-cache dans .ROTK-assets à côté de ton jeu et relance",en:"press play once and let it run 5-10 min. still at 0: close everything, empty the asset-cache folder in .ROTK-assets next to ur game and relaunch"}},
@@ -847,6 +868,44 @@ function codeify(s){
 }
 const techTags = (k) => k.filter(t => /^[\x20-\x7E]+$/.test(t) && /[0-9.\\=%_]|^[A-Z0-9 ]+$/.test(t)).slice(0, 2);
 
+
+/* État actuel : à mettre à jour à chaque annonce (version du launcher, bugs en cours). s = ok (réglé), wip (correctif en préparation), info. */
+const NOW = {d:"21/10/2026",
+  fr:{h:"État actuel", upd:"Mis à jour le ", see:"Voir la fiche"},
+  en:{h:"Current status", upd:"Updated ", see:"See the card"},
+  i:[
+    {s:"ok", c:"verifier-qu-on-a-bien-le-dernier-correctif-2-0-43",
+     fr:"Version à avoir : <b>launcher 2.0.43</b> (sorti le 19/10). Regarde « BUILD 2.0.43 » en haut à droite du launcher.",
+     en:"Version to have: <b>launcher 2.0.43</b> (out since 19/10). Check \"BUILD 2.0.43\" top right in the launcher."},
+    {s:"ok", c:"reboot-en-trio-tu-restes-spectateur-invisible",
+     fr:"Corrigé : le reboot en trio qui te laissait spectateur, et la visée (ADS) près d'un mur.",
+     en:"Fixed: trio reboot leaving you spectating, and aiming (ADS) near cover."},
+    {s:"wip", c:"installation-du-client-quel-dossier-choisir",
+     fr:"Un dossier ROTK à la racine d'un disque (comme D:\\ROTK) bloque l'installation avec « Accès refusé ». Correctif en préparation : en attendant, choisis un dossier comme D:\\Games.",
+     en:"A ROTK folder right on a drive (like D:\\ROTK) blocks the install with \"Access denied\". Fix on the way: until then, pick a folder like D:\\Games."},
+    {s:"wip",
+     fr:"Sortie de véhicule au mauvais endroit et messages d'erreur du launcher avec des caractères bizarres en français : correctifs en préparation.",
+     en:"Getting out of a vehicle at the wrong spot, and launcher error messages with garbled characters in French: fixes on the way."},
+    {s:"info", c:"creer-un-compte-niveau-steam-et-tuto",
+     fr:"Nouveau compte : tuto d'environ 10 min et niveau Steam 1 obligatoires avant les parties.",
+     en:"New account: a ~10 min tutorial and Steam level 1 are required before matches."}
+  ]};
+function nowRender(){
+  const L = NOW[lang];
+  document.getElementById("nowH").textContent = L.h;
+  document.getElementById("nowD").textContent = L.upd + NOW.d;
+  const ul = document.getElementById("nowList"); ul.innerHTML = "";
+  NOW.i.forEach(x => {
+    const li = el("li", "now-it " + x.s);
+    li.innerHTML = '<span class="now-dot" aria-hidden="true"></span><p>' + x[lang] + '</p>';
+    if (x.c && document.getElementById(x.c)) {
+      const a = el("a", "now-go", esc(L.see)); a.href = "#" + x.c;
+      a.onclick = e => { e.preventDefault(); openCard(x.c, true); };
+      li.append(a);
+    }
+    ul.append(li);
+  });
+}
 function render(){
   const T = UI[lang];
   document.documentElement.lang = lang;
@@ -899,6 +958,7 @@ function render(){
   filter();
   installRender();
   supportRender();
+  nowRender();
   if (typeof notesRender === "function" && !document.getElementById("notes").hidden) notesRender();
   document.querySelectorAll(".notes-btn").forEach(b => b.classList.toggle("unseen", typeof notesUnseen === "function" && notesUnseen()));
   const fs = document.getElementById("findSteps"); fs.innerHTML = ""; T.findSteps.forEach(x => fs.append(el("li", null, x)));
@@ -981,7 +1041,7 @@ const INSTALL = [
    c:[]},
   {t:{fr:"Lance ta première partie", en:"Play your first match"},
    d:{fr:"Clique une seule fois sur Jouer : les assets se téléchargent (5 à 10 min, garde 4 à 5 Go libres). Ensuite, le tuto Operation Recruit est obligatoire (environ 10 min).", en:"Press Play once: assets download (5 to 10 min, keep 4 to 5 GB free). Then the Operation Recruit tutorial is required (about 10 min)."},
-   c:["les-assets-restent-bloques-a-0","tuto-bloque-a-l-etape-du-carburant"]},
+   c:["les-assets-restent-bloques-a-0-ou-1","tuto-bloque-a-l-etape-du-carburant"]},
 ];
 function installRender(){
   const T = UI[lang], box = document.getElementById("installSteps"); box.innerHTML = "";
@@ -1133,7 +1193,7 @@ function filter(){
 }
 
 /* Anciens liens encore valides après un changement de titre */
-const SLUG_ALIASES = {"acces-controle-aux-dossiers-anti-ransomware":"acces-controle-aux-dossiers-bloque-le-jeu-acces-refuse", "avoir-l-animation-d-ouverture-des-caisses":"pas-d-animation-quand-tu-ouvres-une-caisse"};
+const SLUG_ALIASES = {"acces-controle-aux-dossiers-anti-ransomware":"acces-controle-aux-dossiers-bloque-le-jeu-acces-refuse", "avoir-l-animation-d-ouverture-des-caisses":"pas-d-animation-quand-tu-ouvres-une-caisse", "les-assets-restent-bloques-a-0":"les-assets-restent-bloques-a-0-ou-1"};
 function openCard(id, scroll){
   id = SLUG_ALIASES[id] || id;
   const r = document.getElementById(id); if (!r || !r.classList.contains("row")) return false;
@@ -1166,7 +1226,7 @@ document.addEventListener("keydown", e => {
 });
 
 /* Fenêtre de recherche (bouton Rechercher ou touche /) */
-const PAL_POPULAR = ["installation-du-client-quel-dossier-choisir","creer-un-compte-niveau-steam-et-tuto","les-assets-restent-bloques-a-0","erreur-g9-ou-chargement-infini","aucun-vocal-personne-ne-t-entend-tu-n-entends-personne","je-ne-trouve-pas-mon-dossier-de-jeu-ou-rotk-assets"];
+const PAL_POPULAR = ["installation-du-client-quel-dossier-choisir","creer-un-compte-niveau-steam-et-tuto","les-assets-restent-bloques-a-0-ou-1","erreur-g9-ou-chargement-infini","aucun-vocal-personne-ne-t-entend-tu-n-entends-personne","je-ne-trouve-pas-mon-dossier-de-jeu-ou-rotk-assets"];
 let palSel = 0, palItems = [], palReturn = null;
 function palResults(q){
   const rows = [...document.querySelectorAll("#list .row")];
