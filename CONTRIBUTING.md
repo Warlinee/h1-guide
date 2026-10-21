@@ -23,6 +23,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 | Liens utiles | `LINKS` |
 | Recherche (sans accents, synonymes, classement) | `norm`, `STOP`, `SYN`, `queryTokens`, `scoreRow`, `filter()` |
 | Liens directs vers une fiche | `#slug` du titre FR, voir `slugOf()` et `openCard()` |
+| Aperçus Discord des liens de fiche | pages `c/<slug>.html` et `c/<slug>.en.html`, générées par `tools/build_card_pages.py` ; `404.html` renvoie vers la fiche si une page manque |
 | Réponses rapides pour le support (`?support`) | champ `m` de chaque fiche + `SUP_GENERAL` : pas de lien depuis la page publique, `noindex` |
 | Lecteur de captures (OCR dans le navigateur) | `ocrRun()`, `prepImage()`, `ocrMatch()` + les fichiers de `vendor/tesseract/` : pour les mettre à jour, suis `vendor/tesseract/README.md` |
 | Patch notes (bouton dans la barre, `#patch-notes`) | tableau `PATCH_NOTES`, version la plus récente en premier : **ajoute une ligne à chaque changement visible** |
@@ -41,6 +42,14 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 - `k` : mots-clés et codes (servent à la recherche et aux étiquettes).
 - `v` : facultatif. Vidéo `videos/<v>-fr.mp4` / `-en.mp4` + affiche `.jpg`.
 - Toujours remplir **FR et EN**.
+
+Après avoir ajouté, renommé ou modifié une fiche, régénère les aperçus Discord :
+
+```bash
+python tools/build_card_pages.py
+```
+
+Il faut Playwright (`pip install playwright`) et Microsoft Edge ou Chromium. Sans ça, le lien de la fiche marche quand même, seul l'aperçu sur Discord reste générique.
 
 Les vidéos sont fabriquées hors du dépôt. Seuls les `.mp4` et `.jpg` finaux sont publiés : les sources (`videos/*.html`, `videos/src/`) restent locales et sont dans `.gitignore`.
 
