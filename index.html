@@ -522,6 +522,13 @@ code.p{border-radius:2px}
 .panel.do h3 i{border-color:rgba(127,217,154,.38)}
 .panel.dont h3 i{border-color:var(--red-line)}
 .share.rep:hover{color:#fff;border-color:var(--red-hi);background:var(--red-soft)}
+/* Chinois : polices système seulement, aucune police téléchargée. Nos polices n'ont que le latin, les caractères chinois passent à YaHei (Windows), PingFang (Mac) ou Noto (Linux, Android). */
+:root{--zh:"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","Source Han Sans SC",sans-serif}
+:root:lang(zh){--f-display:"Archivo",var(--zh);--f:"Geist",var(--zh);--f-label:"Barlow Condensed",var(--zh);--mono:"Geist Mono",ui-monospace,Consolas,var(--zh)}
+.lang .lang-zh{display:block;width:22px;height:15px;font:700 10.5px/15px var(--zh);letter-spacing:0;text-align:center}
+:lang(zh) .eb,:lang(zh) .kicker,:lang(zh) .badge,:lang(zh) .olink,:lang(zh) .chips span,:lang(zh) .tn-links a,:lang(zh) .tn-notes,:lang(zh) .tn-search,:lang(zh) .now-head h2,:lang(zh) .now-go,:lang(zh) .tab,:lang(zh) .group,:lang(zh) .pal-h{letter-spacing:.04em}
+:lang(zh) .hero h1,:lang(zh) .block-head h1,:lang(zh) .block-head h2{line-height:1.15;letter-spacing:0}
+:lang(zh) .pt::after{content:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -544,9 +551,10 @@ code.p{border-radius:2px}
     <div class="nav-r">
       <a class="olink" href="https://rotk.app" target="_blank" rel="noopener" data-al="siteL"><img src="icons/rotk.svg" alt="" width="16" height="16"><span>rotk.app</span></a>
       <a class="olink dc" href="https://discord.gg/rotk" target="_blank" rel="noopener" data-al="dcL"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52.07.07 0 0 0-.08.04c-.21.38-.44.87-.61 1.25a18.27 18.27 0 0 0-5.49 0 12.6 12.6 0 0 0-.62-1.25.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-4.88 1.52.07.07 0 0 0-.03.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .09-.03c.46-.63.87-1.3 1.22-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1 0-.13l.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01l.37.29a.08.08 0 0 1 0 .13 12.3 12.3 0 0 1-1.87.89.08.08 0 0 0-.04.11c.36.7.77 1.36 1.22 1.99a.08.08 0 0 0 .09.03 19.84 19.84 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z"/></svg><span>Discord</span></a>
-    <div class="lang" role="group" aria-label="Langue / Language">
+    <div class="lang" role="group" aria-label="Langue / Language / 语言">
       <button type="button" data-lang="fr" aria-label="Français" title="Français"><svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#0055a4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg></button>
       <button type="button" data-lang="en" aria-label="English" title="English"><svg viewBox="0 0 19 10" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><g fill="#fff"><rect y="0.77" width="19" height="0.77"/><rect y="2.31" width="19" height="0.77"/><rect y="3.85" width="19" height="0.77"/><rect y="5.38" width="19" height="0.77"/><rect y="6.92" width="19" height="0.77"/><rect y="8.46" width="19" height="0.77"/></g><rect width="7.6" height="5.38" fill="#3c3b6e"/></svg></button>
+      <button type="button" data-lang="zh" aria-label="简体中文" title="简体中文" lang="zh-CN"><span class="lang-zh" aria-hidden="true">中文</span></button>
     </div>
     </div>
   </div>
@@ -982,20 +990,24 @@ const svg = (p) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 const CHEV = svg('<path d="m9 6 6 6-6 6"/>');
 const QUICK = ["0xC0E90002","Vivox","JSON","G9","exitCode=18","Steam level"];
 const STATUS = {ok:"s-ok", lead:"s-lead", known:"s-known"};
+const VTXT = {tag:{fr:"▶ Vidéo", en:"▶ Video"}, aria:{fr:"Vidéo tutoriel : ", en:"Video tutorial: "}};
 
 let lang = "fr", activeCat = "all";
 // Priorité : ?lang= dans le lien, puis le drapeau choisi, puis la langue du navigateur.
-const browserLang = () => /^fr/i.test((navigator.languages && navigator.languages[0]) || navigator.language || "") ? "fr" : "en";
+const LANGS = ["fr", "en", "zh"];
+const browserLang = () => { const l = (navigator.languages && navigator.languages[0]) || navigator.language || ""; return /^fr/i.test(l) ? "fr" : /^zh/i.test(l) ? "zh" : "en"; };
 const urlLang = new URLSearchParams(location.search).get("lang");
 let saved = null; try { saved = localStorage.getItem("h1wiki-lang"); } catch (e) {}
-lang = urlLang === "fr" || urlLang === "en" ? urlLang : saved === "fr" || saved === "en" ? saved : browserLang();
+lang = LANGS.includes(urlLang) ? urlLang : LANGS.includes(saved) ? saved : browserLang();
 
 function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
 function codeify(s){
-  return esc(s).replace(/([A-Z]:\\Program Files\\ROTK Launcher\\ROTK Launcher\.exe|ROTK Launcher\.exe|(?:[A-Z]:\\Program Files\\ROTK Launcher|%APPDATA%\\ROTK Launcher)[^\s,)]*|[A-Z]:\\[^\s,)]+|%APPDATA%[^\s,)]*|\b[\w.-]+\.(?:exe|dll|xml|log|json|ini)(?:\.old)?\b|\.ROTK-assets|0x[0-9A-Fa-f]{5,}|--no-sandbox)/g, '<code class="p">$1</code>')
-    .replace(/https:\/\/[^\s<]*[^\s<.,;:!?)]/g, u => '<a class="lk" href="' + u + '" target="_blank" rel="noopener">' + u.replace(/^https:\/\//, "") + '</a>');
+  // un chemin ou un lien s'arrête aussi au premier caractère chinois (texte zh sans espace après le chemin)
+  return esc(s).replace(/([A-Z]:\\Program Files\\ROTK Launcher\\ROTK Launcher\.exe|ROTK Launcher\.exe|(?:[A-Z]:\\Program Files\\ROTK Launcher|%APPDATA%\\ROTK Launcher)[^\s,)\u3000-\u9fff\uff00-\uffef]*|[A-Z]:\\[^\s,)\u3000-\u9fff\uff00-\uffef]+|%APPDATA%[^\s,)\u3000-\u9fff\uff00-\uffef]*|\b[\w.-]+\.(?:exe|dll|xml|log|json|ini)(?:\.old)?\b|\.ROTK-assets|0x[0-9A-Fa-f]{5,}|--no-sandbox)/g, '<code class="p">$1</code>')
+    .replace(/https:\/\/[^\s<\u3000-\u9fff\uff00-\uffef]*[^\s<.,;:!?)\u3000-\u9fff\uff00-\uffef]/g, u => '<a class="lk" href="' + u + '" target="_blank" rel="noopener">' + u.replace(/^https:\/\//, "") + '</a>');
 }
+const dateL = d => lang === "zh" ? d.replace(/^(\d+)\/(\d+)\/(\d+)$/, "$3/$2/$1") : d; // 21/10/2026 devient 2026/10/21 en chinois
 const techTags = (k) => k.filter(t => /^[\x20-\x7E]+$/.test(t) && /[0-9.\\=%_]|^[A-Z0-9 ]+$/.test(t)).slice(0, 2);
 
 
@@ -1023,7 +1035,7 @@ const NOW = {d:"21/10/2026",
 function nowRender(){
   const L = NOW[lang];
   document.getElementById("nowH").textContent = L.h;
-  document.getElementById("nowD").textContent = L.upd + NOW.d;
+  document.getElementById("nowD").textContent = L.upd + dateL(NOW.d);
   const ul = document.getElementById("nowList"); ul.innerHTML = "";
   NOW.i.forEach(x => {
     const li = el("li", "now-it " + x.s);
@@ -1038,7 +1050,7 @@ function nowRender(){
 }
 function render(){
   const T = UI[lang];
-  document.documentElement.lang = lang;
+  document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
   document.querySelectorAll("[data-i]").forEach(n => { const v = T[n.dataset.i]; if (v != null) n.innerHTML = v; });
   document.querySelectorAll(".hero h1,.block-head h1,.block-head h2").forEach(h => h.classList.toggle("pt", !/[?!.…]\s*$/.test(h.textContent)));
   document.getElementById("q").placeholder = matchMedia("(max-width:480px)").matches ? T.phShort : T.placeholder;
@@ -1064,7 +1076,7 @@ function render(){
   grid.append(tb);
 
   const tabs = document.getElementById("tabs"); tabs.innerHTML = "";
-  [{id:"all", t:{fr:T.all, en:T.all}}, ...CATS].forEach(c => {
+  [{id:"all", t:{[lang]:T.all}}, ...CATS].forEach(c => {
     const b = el("button", "tab", esc(c.t[lang])); b.type = "button"; b.dataset.cat = c.id;
     b.onclick = () => { activeCat = c.id; filter(); };
     tabs.append(b);
@@ -1126,18 +1138,38 @@ const words = s => norm(s).split(/[^a-z0-9.=_\\:+-]+/).map(w => w.replace(/^[.=_
 function queryTokens(q){
   let s = norm(q); PHRASES.forEach(([re, to]) => s = s.replace(re, " " + to + " "));
   const toks = norm(s).split(/[^a-z0-9.=_\:+-]+/).filter(Boolean).filter(w => SYNMAP.has(w) || !STOP.has(w));
-  return [...new Set(toks)].map(t => SYNMAP.has(t) ? {own:t, alts:SYNMAP.get(t)} : {own:t, alts:[t]});
+  return [...new Set(toks)].map(t => SYNMAP.has(t) ? {own:t, alts:SYNMAP.get(t)} : {own:t, alts:[t]}).concat(zhTokens(q));
+}
+/* Recherche en chinois (pas d'espaces entre les mots) : les synonymes de zh.js d'abord, puis le reste coupé en paires de caractères.
+   Une paire absente de toutes les fiches (à cheval sur deux mots) ou trop courante (ZH.stop) est ignorée. Un groupe chinois a cjk:true et se cherche dans le texte zh. */
+const CJK = /[\u3400-\u9fff\uf900-\ufaff]+/g, isCJK = s => /[\u3400-\u9fff\uf900-\ufaff]/.test(s);
+function zhTokens(q){
+  if (lang !== "zh" || !window.ZH) return [];
+  const syn = ZH.syn || [], stop = new Set(ZH.stop || []), out = [], seen = new Set();
+  const corpus = [...document.querySelectorAll("#list .row")].map(r => r._idx.zt + r._idx.zb).join(" ");
+  const add = (own, alts) => { if (!seen.has(own)) { seen.add(own); out.push({own, alts, cjk:true}); } };
+  const terms = syn.flat().filter(isCJK).sort((a, b) => b.length - a.length);
+  for (let run of q.toLowerCase().match(CJK) || []) {
+    for (const w of terms) if (run.includes(w)) { add(w, syn.find(g => g.includes(w))); run = run.split(w).join(" "); }
+    for (const part of run.split(" ").filter(Boolean)) {
+      if (part.length === 1) { if (!stop.has(part) && corpus.includes(part)) add(part, [part]); continue; }
+      for (let i = 0; i < part.length - 1; i++) { const b = part.slice(i, i + 2); if (!stop.has(b) && corpus.includes(b)) add(b, [b]); }
+    }
+  }
+  return out;
 }
 function indexRow(x){
   const idx = {t:new Set(words(x.t.fr + " " + x.t.en)), k:new Set(words(x.k.join(" "))), b:new Set(words([...x.f.fr, ...x.f.en, x.n ? x.n.fr + " " + x.n.en : ""].join(" ")))};
   idx.all = [...idx.t, ...idx.k, ...idx.b];
+  idx.zt = (x.t.zh || "").toLowerCase(); idx.zb = x.f.zh ? (x.f.zh.join(" ") + " " + (x.n ? x.n.zh : "")).toLowerCase() : "";
   return idx;
 }
 const hit = (set, g) => [...set].some(w => (g.own.length >= 3 ? w.startsWith(g.own) : w === g.own) || g.alts.some(a => w === a || w === a + "s"));
+const hitZh = (s, g) => g.alts.some(a => s.includes(a));
 function scoreRow(idx, groups){
   let score = 0, matched = 0;
   for (const alts of groups) {
-    const s = hit(idx.t, alts) ? 6 : hit(idx.k, alts) ? 4 : hit(idx.b, alts) ? 1.5 : 0;
+    const s = alts.cjk ? (hitZh(idx.zt, alts) ? 6 : hitZh(idx.zb, alts) ? 1.5 : 0) : hit(idx.t, alts) ? 6 : hit(idx.k, alts) ? 4 : hit(idx.b, alts) ? 1.5 : 0;
     if (s) { matched++; score += s; }
   }
   return {score, matched};
@@ -1153,7 +1185,7 @@ function slugOf(x){
 }
 /* Lien à partager : la page c/<slug>.html porte le titre et la solution pour l'aperçu Discord, puis renvoie vers la fiche.
    Générée par tools/build_card_pages.py ; si elle manque, 404.html redirige quand même vers la fiche. */
-const shareURL = (sl, l) => location.origin + location.pathname.replace(/[^/]*$/, "") + "c/" + sl + (l === "en" ? ".en" : "") + ".html";
+const shareURL = (sl, l) => location.origin + location.pathname.replace(/[^/]*$/, "") + "c/" + sl + (l === "fr" ? "" : "." + l) + ".html";
 const cardURL = sl => shareURL(sl, lang);
 
 /* Parcours « Première installation » : étapes dans l'ordre réel, avec les fiches liées (#slug). */
@@ -1186,7 +1218,7 @@ function installRender(){
     st.c.forEach(id => {
       const r = document.getElementById(id); if (!r) return;
       const x = r._x, b = el("button", "ilink"); b.type = "button";
-      b.innerHTML = (x.v ? '<span class="iv">▶</span>' : '<span class="dot ' + STATUS[x.s] + '"></span>') + '<span>' + esc(x.t[lang].replace(/[«»"]/g, "").trim()) + '</span>';
+      b.innerHTML = (x.v ? '<span class="iv">▶</span>' : '<span class="dot ' + STATUS[x.s] + '"></span>') + '<span>' + esc(x.t[lang].replace(/[«»"“”]/g, "").trim()) + '</span>';
       b.onclick = () => openCard(id, true);
       links.append(b);
     });
@@ -1215,18 +1247,20 @@ const SUP_GENERAL = [
    r:{fr:"tu peux m'envoyer une capture du message exact ? et dis-moi depuis quand ça le fait, et si c'est juste après une mise à jour",
       en:"can u send a screenshot of the exact message? and tell me since when it happens, and if it's right after an update"}},
 ];
-function cardLink(id, l){ return location.origin + location.pathname + (l === "en" ? "?lang=en" : "") + "#" + id; }
+function cardLink(id, l){ return location.origin + location.pathname + (l === "fr" ? "" : "?lang=" + l) + "#" + id; }
 async function copyText(t, btn, T){
   try { await navigator.clipboard.writeText(t); } catch (e) { const a = document.createElement("textarea"); a.value = t; document.body.append(a); a.select(); try { document.execCommand("copy"); } catch (_) {} a.remove(); }
   const old = btn.textContent; btn.textContent = T.supCopied; btn.classList.add("ok"); setTimeout(() => { btn.textContent = old; btn.classList.remove("ok"); }, 1600);
 }
-function supItem(title, fr, en, T, meta){
+// réponses à copier : FR et EN, plus ZH en chinois quand la réponse est traduite
+function supTexts(o, link){ const t = [["fr", o.fr + link("fr")], ["en", o.en + link("en")]]; if (lang === "zh" && o.zh !== o.en) t.push(["zh", o.zh + link("zh")]); return t; }
+function supItem(title, texts, T, meta){
   const d = el("article", "sup-it");
   d.innerHTML = '<div class="sup-top"><h3>' + esc(title) + '</h3>' + (meta || "") + '</div>';
-  [["fr", fr, "FR"], ["en", en, "EN"]].forEach(([l, txt, flag]) => {
+  texts.forEach(([l, txt]) => {
     const row = el("div", "sup-row");
-    row.innerHTML = '<span class="sup-flag" aria-hidden="true">' + flag + '</span><p lang="' + l + '">' + esc(txt) + '</p>';
-    const b = el("button", "sup-copy", esc(l === "fr" ? T.supCopyFr : T.supCopyEn)); b.type = "button";
+    row.innerHTML = '<span class="sup-flag" aria-hidden="true">' + l.toUpperCase() + '</span><p lang="' + (l === "zh" ? "zh-CN" : l) + '">' + esc(txt) + '</p>';
+    const b = el("button", "sup-copy", esc(T[{fr:"supCopyFr", en:"supCopyEn", zh:"supCopyZh"}[l]])); b.type = "button";
     b.onclick = () => copyText(txt, b, T);
     row.append(b); d.append(row);
   });
@@ -1239,15 +1273,15 @@ function supportRender(){
   const q = document.getElementById("supQ").value.trim();
   const groups = q ? queryTokens(q) : [];
   const g = document.getElementById("supGeneral"); g.innerHTML = "";
-  SUP_GENERAL.filter(x => !groups.length || groups.every(gr => (norm(x.t.fr + " " + x.t.en + " " + x.r.fr + " " + x.r.en)).split(/[^a-z0-9.@-]+/).some(w => w.startsWith(gr.own) || gr.alts.includes(w))))
-    .forEach(x => g.append(supItem(x.t[lang], x.r.fr, x.r.en, T)));
+  SUP_GENERAL.filter(x => !groups.length || groups.every(gr => gr.cjk ? hitZh(x.t.zh + " " + x.r.zh, gr) : (norm(x.t.fr + " " + x.t.en + " " + x.r.fr + " " + x.r.en)).split(/[^a-z0-9.@-]+/).some(w => w.startsWith(gr.own) || gr.alts.includes(w))))
+    .forEach(x => g.append(supItem(x.t[lang], supTexts(x.r, () => ""), T)));
   const c = document.getElementById("supCards"); c.innerHTML = "";
   let rows = [...document.querySelectorAll("#list .row")].filter(r => r._x.m);
   if (groups.length) rows = rows.map(r => ({r, ...scoreRow(r._idx, groups)})).filter(o => o.matched === groups.length).sort((a, b) => b.score - a.score).map(o => o.r);
   rows.forEach(r => {
     const x = r._x;
     const meta = '<span class="tag st ' + STATUS[x.s] + '">' + esc(T.st[x.s]) + '</span><a class="sup-open" href="#' + r.id + '">' + esc(T.supOpen) + '</a>';
-    c.append(supItem(x.t[lang], x.m.fr + " " + shareURL(r.id, "fr"), x.m.en + " " + shareURL(r.id, "en"), T, meta));
+    c.append(supItem(x.t[lang], supTexts(x.m, l => " " + shareURL(r.id, l)), T, meta));
   });
   if (!rows.length) c.append(el("p", "empty", esc(T.supNone)));
 }
@@ -1266,7 +1300,7 @@ function row(x, T){
   s.append(el("h3", null, esc(x.t[lang])));
   const tags = el("div", "tags");
   tags.append(el("span", "tag st " + STATUS[x.s], esc(T.st[x.s])));
-  if (x.v) tags.append(el("span", "tag vtag", lang === "fr" ? "▶ Vidéo" : "▶ Video"));
+  if (x.v) tags.append(el("span", "tag vtag", VTXT.tag[lang]));
   techTags(x.k).forEach(k => tags.append(el("span", "tag", esc(k))));
   s.append(tags); d.append(s);
   const b = el("div", "body");
@@ -1275,8 +1309,8 @@ function row(x, T){
   if (x.n) b.append(el("p", "note", codeify(x.n[lang])));
   if (x.v) {
     const v = el("video", "vid"); v.controls = true; v.preload = "none"; v.playsInline = true;
-    v.dataset.src = "videos/" + x.v + "-" + lang; // poster et src posés seulement à la première ouverture de la fiche
-    v.setAttribute("aria-label", (lang === "fr" ? "Vidéo tutoriel : " : "Video tutorial: ") + x.t[lang].replace(/[«»"]/g, "").replace(/\s+/g, " ").trim());
+    v.dataset.src = "videos/" + x.v + "-" + (lang === "fr" ? "fr" : "en"); // poster et src posés seulement à la première ouverture de la fiche ; en chinois, la vidéo anglaise
+    v.setAttribute("aria-label", VTXT.aria[lang] + x.t[lang].replace(/[«»"“”]/g, "").replace(/\s+/g, " ").trim());
     b.append(v);
   }
   const share = el("button", "share", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>' + esc(T.copyLink) + '</span>');
@@ -1346,7 +1380,36 @@ document.getElementById("q").addEventListener("keydown", e => { if (e.key === "E
 document.addEventListener("click", e => { if (!e.target.closest(".search-wrap")) document.getElementById("sug").hidden = true; });
 document.getElementById("q").addEventListener("focus", () => { if (document.getElementById("sug").children.length) document.getElementById("sug").hidden = false; });
 window.addEventListener("hashchange", () => { if (location.hash === "#patch-notes") { notesShow(); return; } if (SUPPORT) { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(id)?.classList.contains("row")) { location.href = cardLink(id, lang); return; } } openCard(decodeURIComponent(location.hash.slice(1)), true); });
-document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+/* Version chinoise (bouton 中文, ?lang=zh) : les textes sont dans zh.js, chargé seulement en chinois.
+   zh.js associe chaque texte anglais à sa traduction : un texte pas encore traduit, ou dont l'anglais a changé depuis, s'affiche en anglais.
+   Nouvel objet avec des textes fr/en : ajoute-le à ZH_ROOTS. zhStatus() dans la console liste ce qui reste à traduire. */
+const ZH_ROOTS = () => [UI, RULES, LINKS, CATS, F, NOW, INSTALL, SUP_GENERAL, VTXT, PATCH_NOTES || []];
+let zhMissing = [], zhUnused = [], zhLoading = null;
+function zhApply(){
+  const dict = new Map(Object.entries((window.ZH && ZH.t) || {})), used = new Set(), miss = new Set();
+  const tr = v => typeof v === "string" ? (dict.has(v) ? (used.add(v), dict.get(v)) : (miss.add(v), v))
+    : Array.isArray(v) ? v.map(tr) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, tr(x)])) : v;
+  const walk = o => {
+    if (!o || typeof o !== "object") return;
+    if (Array.isArray(o)) { o.forEach(walk); return; }
+    if ("fr" in o && "en" in o) o.zh = tr(o.en);
+    for (const k in o) if (k !== "fr" && k !== "en" && k !== "zh") walk(o[k]);
+  };
+  ZH_ROOTS().forEach(walk);
+  Object.assign(UI.zh, window.ZH && ZH.ui);
+  zhMissing = [...miss]; zhUnused = [...dict.keys()].filter(k => !used.has(k));
+}
+function zhStatus(){ return {missing: zhMissing, unused: zhUnused}; }
+function loadZh(){
+  if (!zhLoading) zhLoading = new Promise(ok => { const sc = document.createElement("script"); sc.src = "zh.js"; sc.onload = sc.onerror = ok; document.head.append(sc); }).then(zhApply);
+  return zhLoading;
+}
+// en chinois, la page attend zh.js avant de s'afficher (sinon elle s'afficherait d'abord en anglais)
+const zhBoot = lang === "zh" ? (zhApply(), loadZh()) : null;
+const whenReady = fn => zhBoot ? zhBoot.then(fn) : fn();
+
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", async () => {
+  if (b.dataset.lang === "zh") await loadZh();
   lang = b.dataset.lang; try { localStorage.setItem("h1wiki-lang", lang); } catch (e) {}
   if (urlLang) { try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) {} }
   // language switch : la fiche ouverte (celle du #hash) reste ouverte, sans scroll
@@ -1354,8 +1417,10 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
   const q = document.getElementById("q").value; render(); document.getElementById("q").value = q; filter();
   const r = cur && document.getElementById(cur.id); if (r && !r.hidden) r.querySelector("details").open = true;
 }));
-render();
-if (location.hash) setTimeout(() => openCard(decodeURIComponent(location.hash.slice(1)), true), 60);
+whenReady(() => {
+  render();
+  if (location.hash) setTimeout(() => openCard(decodeURIComponent(location.hash.slice(1)), true), 60);
+});
 
 /* Barre de navigation : bouton recherche et section active */
 document.addEventListener("keydown", e => {
@@ -1388,7 +1453,7 @@ function palRender(){
     const x = r._x, cat = CATS.find(c => c.id === x.c);
     const b = el("button", "pal-it" + (i === palSel ? " on" : "")); b.type = "button"; b.id = "palIt" + i;
     b.setAttribute("role", "option"); b.setAttribute("aria-selected", String(i === palSel));
-    b.innerHTML = '<span class="dot ' + STATUS[x.s] + '"></span><span class="pal-tx"><b>' + esc(x.t[lang]) + '</b><small>' + esc(cat ? cat.t[lang] : "") + (x.v ? ' · <span class="pal-v">' + (lang === "fr" ? "▶ Vidéo" : "▶ Video") + '</span>' : '') + '</small></span><span class="pal-go" aria-hidden="true">↵</span>';
+    b.innerHTML = '<span class="dot ' + STATUS[x.s] + '"></span><span class="pal-tx"><b>' + esc(x.t[lang]) + '</b><small>' + esc(cat ? cat.t[lang] : "") + (x.v ? ' · <span class="pal-v">' + VTXT.tag[lang] + '</span>' : '') + '</small></span><span class="pal-go" aria-hidden="true">↵</span>';
     b.onmouseenter = () => { palSel = i; palMark(); };
     b.onclick = () => palOpen(r.id);
     list.append(b);
@@ -1502,7 +1567,7 @@ async function ocrRun(file){
     const out = el("div", "ocr-out");
     if (list.length) list.forEach((o, i) => {
       const x = o.r._x, b = el("button", "pal-it" + (i === 0 ? " on" : "")); b.type = "button"; b.id = "palIt" + i; b.setAttribute("role", "option");
-      b.innerHTML = '<span class="dot ' + STATUS[x.s] + '"></span><span class="pal-tx"><b>' + esc(x.t[lang]) + '</b><small>' + esc(i === 0 ? T.ocrBest : T.ocrAlso) + (x.v ? ' · <span class="pal-v">' + (lang === "fr" ? "▶ Vidéo" : "▶ Video") + '</span>' : '') + '</small></span><span class="pal-go" aria-hidden="true">↵</span>';
+      b.innerHTML = '<span class="dot ' + STATUS[x.s] + '"></span><span class="pal-tx"><b>' + esc(x.t[lang]) + '</b><small>' + esc(i === 0 ? T.ocrBest : T.ocrAlso) + (x.v ? ' · <span class="pal-v">' + VTXT.tag[lang] + '</span>' : '') + '</small></span><span class="pal-go" aria-hidden="true">↵</span>';
       b.onclick = () => palOpen(o.r.id); b.onmouseenter = () => { palSel = i; palMark(); };
       out.append(b);
     });
@@ -1530,7 +1595,7 @@ document.addEventListener("dragover", e => { if (isFileDrag(e)) e.preventDefault
 document.addEventListener("drop", e => { if (!isFileDrag(e)) return; e.preventDefault(); dragN = 0; document.documentElement.classList.remove("dragging"); const f = [...e.dataTransfer.files].find(f => f.type.startsWith("image/")); if (f) ocrRun(f); });
 
 document.getElementById("tnSearch").addEventListener("click", palShow);
-var PATCH_NOTES = [{"v": "1.9", "d": "21/10/2026", "i": [{"t": "add", "fr": "Bouton « Signaler une erreur » sur chaque fiche : il ouvre un ticket GitHub déjà rempli.", "en": "\"Report a mistake\" button on every card: it opens a pre-filled GitHub issue."}, {"t": "add", "fr": "Les liens copiés depuis une fiche affichent maintenant son titre et sa solution en aperçu sur Discord.", "en": "Links copied from a card now show its title and fix as a preview on Discord."}, {"t": "add", "fr": "Fiche « Un skin tout juste sorti ne s'affiche pas en jeu ».", "en": "\"A brand-new skin doesn't show in game\" card."}, {"t": "change", "fr": "Fiche des assets : gros téléchargement après une mise à jour, et retéléchargement à chaque lancement. Fiche FPS : nos mesures à 8 000 Hz.", "en": "Assets card: big download after an update, and redownloading at every launch. FPS card: our 8,000 Hz measurements."}]}, {"v": "1.8", "d": "21/10/2026", "i": [{"t": "change", "fr": "Nouveau look aligné sur rotk.app : titres en majuscules, coins carrés, menus condensés. Le wiki reste non officiel.", "en": "New look matching rotk.app: uppercase titles, square corners, condensed menus. The wiki is still unofficial."}, {"t": "add", "fr": "Encadré « État actuel » en haut de la page : la version du launcher à avoir, ce qui est corrigé et ce qui est en préparation.", "en": "\"Current status\" box at the top of the page: the launcher version to have, what's fixed and what's on the way."}, {"t": "add", "fr": "Fiche « Pas d'animation quand tu ouvres une caisse » : la cause (Effets d'animation de Windows), la réparation, et une vidéo.", "en": "\"No animation when you open a crate\" card: the cause (Windows animation effects), the fix, and a video."}, {"t": "change", "fr": "Fiche des assets bloqués : elle couvre aussi le blocage à 1 %.", "en": "Stuck assets card: it now covers being stuck at 1% too."}, {"t": "add", "fr": "Fiche « Optimiser ses réglages graphiques » et lien vers l'outil UserOptions.ini d'AngA. Les liens dans les fiches sont maintenant cliquables.", "en": "\"Optimize your graphics settings\" card and a link to AngA's UserOptions.ini tool. Links in cards are now clickable."}, {"t": "add", "fr": "Crédit à Wazlyy dans le pied de page, et lien vers le dépôt GitHub pour proposer des modifs.", "en": "Credit to Wazlyy in the footer, and a link to the GitHub repo to suggest changes."}]}, {"v": "1.7", "d": "21/10/2026", "i": [{"t": "fix", "fr": "Installation du client : en launcher 2.0.43, un dossier ROTK posé directement sur un disque, comme D:\\ROTK, bloque lui aussi avec « Accès refusé » (EPERM), pas seulement C:\\ tout seul. La fiche Accès contrôlé aux dossiers renvoie vers cette cause.", "en": "Client setup: on launcher 2.0.43, a ROTK folder sitting right on a drive, like D:\\ROTK, also fails with \"Access denied\" (EPERM), not only a bare C:\\. The Controlled folder access card now points to this cause."}, {"t": "change", "fr": "Fiche « dernier correctif » : regarde d'abord la version du launcher en haut à droite, puis rotk-shotgun-sprint.ini pour le correctif de jeu. Pas de .ini ne veut pas dire pas à jour.", "en": "\"Latest patch\" card: check the launcher version top right first, then rotk-shotgun-sprint.ini for the game patch. No .ini doesn't mean you're outdated."}, {"t": "change", "fr": "Fiche droits administrateur : restaure d'abord ROTK.Diagnostics.exe depuis ton antivirus. Couper l'antivirus ne vient qu'en dernier recours.", "en": "Administrator rights card: restore ROTK.Diagnostics.exe from your antivirus first. Turning the antivirus off is only a last resort."}, {"t": "fix", "fr": "Fiche « Report not sent » : le rapport n'est renvoyé qu'au redémarrage du launcher, avec Debug coché.", "en": "\"Report not sent\" card: the report is only resent when the launcher restarts, with Debug ticked."}, {"t": "change", "fr": "Fiche launch-failed : comment trouver le dossier du launcher s'il n'est pas installé à l'endroit par défaut.", "en": "launch-failed card: how to find the launcher folder if it isn't installed in the default place."}, {"t": "change", "fr": "La fiche reboot en trio est maintenant rangée dans Bugs en jeu.", "en": "The trio reboot card now sits under In-game bugs."}, {"t": "fix", "fr": "Nom du dossier des assets : il suit le nom du dossier de jeu, donc c'est presque toujours .ROTK-assets. Exemple C:\\Games\\ROTK2 précisé dans la fiche 0x2a31abc.", "en": "Asset folder name: it follows the game folder's name, so it's almost always .ROTK-assets. The C:\\Games\\ROTK2 example is clarified in the 0x2a31abc card."}, {"t": "change", "fr": "Chargement plus léger : les images des vidéos ne se chargent plus à l'ouverture du wiki, seulement quand tu ouvres la fiche. La première visite passe d'environ 1,7 Mo à 0,2 Mo.", "en": "Lighter first load: video posters no longer load up front, only when you open the card. The first visit goes from about 1.7 MB to 0.2 MB."}, {"t": "change", "fr": "Les polices sont hébergées sur le wiki : plus aucune requête vers Google Fonts.", "en": "Fonts are self-hosted on the wiki: no more requests to Google Fonts."}, {"t": "fix", "fr": "Changer de langue (drapeaux FR / EN) ne referme plus la fiche que tu lisais.", "en": "Switching language (FR / EN flags) no longer closes the card you were reading."}, {"t": "change", "fr": "Lecteur de captures : il ne passe plus par un CDN, tout est hébergé sur le wiki. Ta capture est toujours lue sur ton PC.", "en": "Screenshot reader: it no longer goes through an outside CDN, everything is hosted on the wiki. Your screenshot is still read on your PC."}, {"t": "change", "fr": "Lecteur de captures : les grandes images (photo de l'écran prise au téléphone, capture 4K) sont lues plus vite et utilisent moins de mémoire.", "en": "Screenshot reader: large images (a phone photo of the screen, a 4K screenshot) are read faster and use less memory."}]}, {"v": "1.6", "d": "20/10/2026", "i": [{"t": "add", "fr": "Lecteur de captures d'écran : envoie, colle (Ctrl+V) ou glisse une capture de ton erreur, le wiki lit le message et propose la bonne fiche. La capture est lue sur ton PC et n'est envoyée nulle part.", "en": "Screenshot reader: send, paste (Ctrl+V) or drop a screenshot of your error, the wiki reads the message and suggests the right card. The screenshot is read on your PC and isn't sent anywhere."}, {"t": "add", "fr": "Bouton Patch notes, avec un point rouge quand il y a du nouveau.", "en": "Patch notes button, with a red dot when there's something new."}]}, {"v": "1.5", "d": "20/10/2026", "i": [{"t": "add", "fr": "Barre de navigation : Installation, Créer un compte, Où est ton jeu ?, Problèmes, Avant de demander, Liens utiles. Elle reste en haut de l'écran quand tu descends.", "en": "Navigation bar: Install, Create an account, Where is your game?, Problems, Before asking, Useful links. It stays at the top of the screen as you scroll."}, {"t": "add", "fr": "Fenêtre de recherche rapide : touche / ou Ctrl+K depuis n'importe où, flèches pour choisir, Entrée pour ouvrir.", "en": "Quick search window: / or Ctrl+K from anywhere, arrows to choose, Enter to open."}, {"t": "change", "fr": "Lien Discord officiel : discord.gg/rotk partout sur le site.", "en": "Official Discord link: discord.gg/rotk everywhere on the site."}, {"t": "fix", "fr": "« Créer un compte » se met bien en surbrillance dans la barre.", "en": "\"Create an account\" now highlights correctly in the bar."}, {"t": "fix", "fr": "La page ne remonte plus toute seule pendant le défilement.", "en": "The page no longer jumps back up while scrolling."}]}, {"v": "1.4", "d": "20/10/2026", "i": [{"t": "add", "fr": "Parcours « Première installation » en 6 étapes illustrées, avec les fiches et vidéos de chaque étape.", "en": "\"First install\" path in 6 illustrated steps, with the cards and videos for each step."}, {"t": "add", "fr": "Section « Où est ton jeu ? » : la différence entre le dossier du launcher et celui du jeu, et comment le retrouver.", "en": "\"Where is your game?\" section: the difference between the launcher folder and the game folder, and how to find it."}, {"t": "add", "fr": "Fiche « Je ne trouve pas mon dossier de jeu ou .ROTK-assets ».", "en": "\"I can't find my game folder or .ROTK-assets\" card."}, {"t": "change", "fr": "23 fiches réécrites : chaque étape dit où cliquer, avec les vrais libellés du launcher en français.", "en": "23 cards rewritten: each step says where to click, with the launcher's real labels."}, {"t": "change", "fr": "Fiche Accès contrôlé aux dossiers : étapes détaillées et reconnaissance de l'erreur « Accès refusé » (EPERM).", "en": "Controlled folder access card: detailed steps, and the \"Access denied\" (EPERM) error is now recognized."}, {"t": "change", "fr": "Fiche crash 0x2a31abc : étapes plus claires, avec la vidéo d'installation du client.", "en": "0x2a31abc crash card: clearer steps, with the client setup video."}, {"t": "fix", "fr": "Les anciens liens vers une fiche renommée marchent toujours.", "en": "Old links to a renamed card still work."}]}, {"v": "1.3", "d": "20/10/2026", "i": [{"t": "add", "fr": "Recherche intelligente : sans accents, avec les mots du Discord (micro, maj, banni, crash…), résultats classés et suggestions sous la barre.", "en": "Smart search: accent-free, understands Discord wording (mic, update, banned, crash…), ranked results and suggestions under the bar."}, {"t": "add", "fr": "Lien direct vers chaque fiche et bouton « Copier le lien ».", "en": "Direct link to every card and a \"Copy link\" button."}, {"t": "add", "fr": "Légende des statuts : Confirmé, Piste, Connu sans correctif.", "en": "Status legend: Confirmed, Lead, Known with no fix."}, {"t": "add", "fr": "Icônes illustrées pour les 8 catégories.", "en": "Illustrated icons for the 8 categories."}, {"t": "change", "fr": "Accès rapide sur 2 colonnes sur mobile.", "en": "Quick access in 2 columns on mobile."}]}, {"v": "1.2", "d": "20/10/2026", "i": [{"t": "add", "fr": "Langue choisie automatiquement selon ton navigateur, ou forcée avec ?lang=fr / ?lang=en.", "en": "Language picked from your browser, or forced with ?lang=fr / ?lang=en."}, {"t": "add", "fr": "Liens vers le site officiel rotk.app et le Discord officiel.", "en": "Links to the official rotk.app site and the official Discord."}, {"t": "add", "fr": "Aperçu propre quand le lien est collé sur Discord.", "en": "Clean preview when the link is pasted on Discord."}, {"t": "change", "fr": "Accessibilité : navigation au clavier, lecteurs d'écran, contrastes vérifiés.", "en": "Accessibility: keyboard navigation, screen readers, checked contrast."}]}, {"v": "1.1", "d": "20/10/2026", "i": [{"t": "add", "fr": "Vidéos tuto en FR et EN sur 24 fiches (Vivox, JSON, Smart App Control, assets, Defender, installation du client…).", "en": "FR and EN video tutorials on 24 cards (Vivox, JSON, Smart App Control, assets, Defender, client setup…)."}, {"t": "add", "fr": "Vidéo de l'étape carburant du tuto, filmée en jeu.", "en": "In-game video of the tutorial fuel step."}, {"t": "add", "fr": "Note sur les pertes de FPS : le staff cherche la cause (annonce du 20/10).", "en": "Note on FPS drops: staff are looking for the cause (20/10 announcement)."}]}, {"v": "1.0", "d": "19/10/2026", "i": [{"t": "add", "fr": "Lancement du wiki : 44 fiches problème / solution en FR et EN, classées en 7 catégories.", "en": "Wiki launch: 44 problem / fix cards in FR and EN, in 7 categories."}, {"t": "change", "fr": "ReShade signalé comme interdit sur ROTK.", "en": "ReShade marked as forbidden on ROTK."}, {"t": "remove", "fr": "Retrait d'une fiche à la demande du staff.", "en": "One card removed at the staff's request."}]}];
+var PATCH_NOTES = [{"v": "2.0", "d": "21/10/2026", "i": [{"t": "add", "fr": "Version chinoise (简体中文) : bouton 中文 en haut à droite, ou ?lang=zh. Elle s'ouvre toute seule si ton navigateur est en chinois.", "en": "Chinese version (简体中文): 中文 button top right, or ?lang=zh. It opens by itself if your browser is in Chinese."}, {"t": "add", "fr": "Recherche en chinois : tape un mot ou une phrase en chinois, le wiki trouve les fiches qui en parlent.", "en": "Search in Chinese: type a word or a sentence in Chinese, the wiki finds the cards about it."}, {"t": "add", "fr": "Les liens copiés depuis la version chinoise ont leur aperçu Discord en chinois.", "en": "Links copied from the Chinese version get a Chinese preview on Discord."}, {"t": "change", "fr": "En chinois, les vidéos restent en anglais, et un texte pas encore traduit s'affiche en anglais.", "en": "In Chinese, videos stay in English, and any text not translated yet shows in English."}]}, {"v": "1.9", "d": "21/10/2026", "i": [{"t": "add", "fr": "Bouton « Signaler une erreur » sur chaque fiche : il ouvre un ticket GitHub déjà rempli.", "en": "\"Report a mistake\" button on every card: it opens a pre-filled GitHub issue."}, {"t": "add", "fr": "Les liens copiés depuis une fiche affichent maintenant son titre et sa solution en aperçu sur Discord.", "en": "Links copied from a card now show its title and fix as a preview on Discord."}, {"t": "add", "fr": "Fiche « Un skin tout juste sorti ne s'affiche pas en jeu ».", "en": "\"A brand-new skin doesn't show in game\" card."}, {"t": "change", "fr": "Fiche des assets : gros téléchargement après une mise à jour, et retéléchargement à chaque lancement. Fiche FPS : nos mesures à 8 000 Hz.", "en": "Assets card: big download after an update, and redownloading at every launch. FPS card: our 8,000 Hz measurements."}]}, {"v": "1.8", "d": "21/10/2026", "i": [{"t": "change", "fr": "Nouveau look aligné sur rotk.app : titres en majuscules, coins carrés, menus condensés. Le wiki reste non officiel.", "en": "New look matching rotk.app: uppercase titles, square corners, condensed menus. The wiki is still unofficial."}, {"t": "add", "fr": "Encadré « État actuel » en haut de la page : la version du launcher à avoir, ce qui est corrigé et ce qui est en préparation.", "en": "\"Current status\" box at the top of the page: the launcher version to have, what's fixed and what's on the way."}, {"t": "add", "fr": "Fiche « Pas d'animation quand tu ouvres une caisse » : la cause (Effets d'animation de Windows), la réparation, et une vidéo.", "en": "\"No animation when you open a crate\" card: the cause (Windows animation effects), the fix, and a video."}, {"t": "change", "fr": "Fiche des assets bloqués : elle couvre aussi le blocage à 1 %.", "en": "Stuck assets card: it now covers being stuck at 1% too."}, {"t": "add", "fr": "Fiche « Optimiser ses réglages graphiques » et lien vers l'outil UserOptions.ini d'AngA. Les liens dans les fiches sont maintenant cliquables.", "en": "\"Optimize your graphics settings\" card and a link to AngA's UserOptions.ini tool. Links in cards are now clickable."}, {"t": "add", "fr": "Crédit à Wazlyy dans le pied de page, et lien vers le dépôt GitHub pour proposer des modifs.", "en": "Credit to Wazlyy in the footer, and a link to the GitHub repo to suggest changes."}]}, {"v": "1.7", "d": "21/10/2026", "i": [{"t": "fix", "fr": "Installation du client : en launcher 2.0.43, un dossier ROTK posé directement sur un disque, comme D:\\ROTK, bloque lui aussi avec « Accès refusé » (EPERM), pas seulement C:\\ tout seul. La fiche Accès contrôlé aux dossiers renvoie vers cette cause.", "en": "Client setup: on launcher 2.0.43, a ROTK folder sitting right on a drive, like D:\\ROTK, also fails with \"Access denied\" (EPERM), not only a bare C:\\. The Controlled folder access card now points to this cause."}, {"t": "change", "fr": "Fiche « dernier correctif » : regarde d'abord la version du launcher en haut à droite, puis rotk-shotgun-sprint.ini pour le correctif de jeu. Pas de .ini ne veut pas dire pas à jour.", "en": "\"Latest patch\" card: check the launcher version top right first, then rotk-shotgun-sprint.ini for the game patch. No .ini doesn't mean you're outdated."}, {"t": "change", "fr": "Fiche droits administrateur : restaure d'abord ROTK.Diagnostics.exe depuis ton antivirus. Couper l'antivirus ne vient qu'en dernier recours.", "en": "Administrator rights card: restore ROTK.Diagnostics.exe from your antivirus first. Turning the antivirus off is only a last resort."}, {"t": "fix", "fr": "Fiche « Report not sent » : le rapport n'est renvoyé qu'au redémarrage du launcher, avec Debug coché.", "en": "\"Report not sent\" card: the report is only resent when the launcher restarts, with Debug ticked."}, {"t": "change", "fr": "Fiche launch-failed : comment trouver le dossier du launcher s'il n'est pas installé à l'endroit par défaut.", "en": "launch-failed card: how to find the launcher folder if it isn't installed in the default place."}, {"t": "change", "fr": "La fiche reboot en trio est maintenant rangée dans Bugs en jeu.", "en": "The trio reboot card now sits under In-game bugs."}, {"t": "fix", "fr": "Nom du dossier des assets : il suit le nom du dossier de jeu, donc c'est presque toujours .ROTK-assets. Exemple C:\\Games\\ROTK2 précisé dans la fiche 0x2a31abc.", "en": "Asset folder name: it follows the game folder's name, so it's almost always .ROTK-assets. The C:\\Games\\ROTK2 example is clarified in the 0x2a31abc card."}, {"t": "change", "fr": "Chargement plus léger : les images des vidéos ne se chargent plus à l'ouverture du wiki, seulement quand tu ouvres la fiche. La première visite passe d'environ 1,7 Mo à 0,2 Mo.", "en": "Lighter first load: video posters no longer load up front, only when you open the card. The first visit goes from about 1.7 MB to 0.2 MB."}, {"t": "change", "fr": "Les polices sont hébergées sur le wiki : plus aucune requête vers Google Fonts.", "en": "Fonts are self-hosted on the wiki: no more requests to Google Fonts."}, {"t": "fix", "fr": "Changer de langue (drapeaux FR / EN) ne referme plus la fiche que tu lisais.", "en": "Switching language (FR / EN flags) no longer closes the card you were reading."}, {"t": "change", "fr": "Lecteur de captures : il ne passe plus par un CDN, tout est hébergé sur le wiki. Ta capture est toujours lue sur ton PC.", "en": "Screenshot reader: it no longer goes through an outside CDN, everything is hosted on the wiki. Your screenshot is still read on your PC."}, {"t": "change", "fr": "Lecteur de captures : les grandes images (photo de l'écran prise au téléphone, capture 4K) sont lues plus vite et utilisent moins de mémoire.", "en": "Screenshot reader: large images (a phone photo of the screen, a 4K screenshot) are read faster and use less memory."}]}, {"v": "1.6", "d": "20/10/2026", "i": [{"t": "add", "fr": "Lecteur de captures d'écran : envoie, colle (Ctrl+V) ou glisse une capture de ton erreur, le wiki lit le message et propose la bonne fiche. La capture est lue sur ton PC et n'est envoyée nulle part.", "en": "Screenshot reader: send, paste (Ctrl+V) or drop a screenshot of your error, the wiki reads the message and suggests the right card. The screenshot is read on your PC and isn't sent anywhere."}, {"t": "add", "fr": "Bouton Patch notes, avec un point rouge quand il y a du nouveau.", "en": "Patch notes button, with a red dot when there's something new."}]}, {"v": "1.5", "d": "20/10/2026", "i": [{"t": "add", "fr": "Barre de navigation : Installation, Créer un compte, Où est ton jeu ?, Problèmes, Avant de demander, Liens utiles. Elle reste en haut de l'écran quand tu descends.", "en": "Navigation bar: Install, Create an account, Where is your game?, Problems, Before asking, Useful links. It stays at the top of the screen as you scroll."}, {"t": "add", "fr": "Fenêtre de recherche rapide : touche / ou Ctrl+K depuis n'importe où, flèches pour choisir, Entrée pour ouvrir.", "en": "Quick search window: / or Ctrl+K from anywhere, arrows to choose, Enter to open."}, {"t": "change", "fr": "Lien Discord officiel : discord.gg/rotk partout sur le site.", "en": "Official Discord link: discord.gg/rotk everywhere on the site."}, {"t": "fix", "fr": "« Créer un compte » se met bien en surbrillance dans la barre.", "en": "\"Create an account\" now highlights correctly in the bar."}, {"t": "fix", "fr": "La page ne remonte plus toute seule pendant le défilement.", "en": "The page no longer jumps back up while scrolling."}]}, {"v": "1.4", "d": "20/10/2026", "i": [{"t": "add", "fr": "Parcours « Première installation » en 6 étapes illustrées, avec les fiches et vidéos de chaque étape.", "en": "\"First install\" path in 6 illustrated steps, with the cards and videos for each step."}, {"t": "add", "fr": "Section « Où est ton jeu ? » : la différence entre le dossier du launcher et celui du jeu, et comment le retrouver.", "en": "\"Where is your game?\" section: the difference between the launcher folder and the game folder, and how to find it."}, {"t": "add", "fr": "Fiche « Je ne trouve pas mon dossier de jeu ou .ROTK-assets ».", "en": "\"I can't find my game folder or .ROTK-assets\" card."}, {"t": "change", "fr": "23 fiches réécrites : chaque étape dit où cliquer, avec les vrais libellés du launcher en français.", "en": "23 cards rewritten: each step says where to click, with the launcher's real labels."}, {"t": "change", "fr": "Fiche Accès contrôlé aux dossiers : étapes détaillées et reconnaissance de l'erreur « Accès refusé » (EPERM).", "en": "Controlled folder access card: detailed steps, and the \"Access denied\" (EPERM) error is now recognized."}, {"t": "change", "fr": "Fiche crash 0x2a31abc : étapes plus claires, avec la vidéo d'installation du client.", "en": "0x2a31abc crash card: clearer steps, with the client setup video."}, {"t": "fix", "fr": "Les anciens liens vers une fiche renommée marchent toujours.", "en": "Old links to a renamed card still work."}]}, {"v": "1.3", "d": "20/10/2026", "i": [{"t": "add", "fr": "Recherche intelligente : sans accents, avec les mots du Discord (micro, maj, banni, crash…), résultats classés et suggestions sous la barre.", "en": "Smart search: accent-free, understands Discord wording (mic, update, banned, crash…), ranked results and suggestions under the bar."}, {"t": "add", "fr": "Lien direct vers chaque fiche et bouton « Copier le lien ».", "en": "Direct link to every card and a \"Copy link\" button."}, {"t": "add", "fr": "Légende des statuts : Confirmé, Piste, Connu sans correctif.", "en": "Status legend: Confirmed, Lead, Known with no fix."}, {"t": "add", "fr": "Icônes illustrées pour les 8 catégories.", "en": "Illustrated icons for the 8 categories."}, {"t": "change", "fr": "Accès rapide sur 2 colonnes sur mobile.", "en": "Quick access in 2 columns on mobile."}]}, {"v": "1.2", "d": "20/10/2026", "i": [{"t": "add", "fr": "Langue choisie automatiquement selon ton navigateur, ou forcée avec ?lang=fr / ?lang=en.", "en": "Language picked from your browser, or forced with ?lang=fr / ?lang=en."}, {"t": "add", "fr": "Liens vers le site officiel rotk.app et le Discord officiel.", "en": "Links to the official rotk.app site and the official Discord."}, {"t": "add", "fr": "Aperçu propre quand le lien est collé sur Discord.", "en": "Clean preview when the link is pasted on Discord."}, {"t": "change", "fr": "Accessibilité : navigation au clavier, lecteurs d'écran, contrastes vérifiés.", "en": "Accessibility: keyboard navigation, screen readers, checked contrast."}]}, {"v": "1.1", "d": "20/10/2026", "i": [{"t": "add", "fr": "Vidéos tuto en FR et EN sur 24 fiches (Vivox, JSON, Smart App Control, assets, Defender, installation du client…).", "en": "FR and EN video tutorials on 24 cards (Vivox, JSON, Smart App Control, assets, Defender, client setup…)."}, {"t": "add", "fr": "Vidéo de l'étape carburant du tuto, filmée en jeu.", "en": "In-game video of the tutorial fuel step."}, {"t": "add", "fr": "Note sur les pertes de FPS : le staff cherche la cause (annonce du 20/10).", "en": "Note on FPS drops: staff are looking for the cause (20/10 announcement)."}]}, {"v": "1.0", "d": "19/10/2026", "i": [{"t": "add", "fr": "Lancement du wiki : 44 fiches problème / solution en FR et EN, classées en 7 catégories.", "en": "Wiki launch: 44 problem / fix cards in FR and EN, in 7 categories."}, {"t": "change", "fr": "ReShade signalé comme interdit sur ROTK.", "en": "ReShade marked as forbidden on ROTK."}, {"t": "remove", "fr": "Retrait d'une fiche à la demande du staff.", "en": "One card removed at the staff's request."}]}];
 
 const NOTES_KEY = "h1wiki-notes-seen";
 function notesUnseen(){ if (!PATCH_NOTES) return false; try { return localStorage.getItem(NOTES_KEY) !== PATCH_NOTES[0].v; } catch (e) { return false; } }
@@ -1538,7 +1603,7 @@ function notesRender(){
   const T = UI[lang], box = document.getElementById("notesList"); box.innerHTML = "";
   PATCH_NOTES.forEach((n, i) => {
     const sec = el("section", "nt-ver");
-    sec.innerHTML = '<div class="nt-head"><span class="nt-v">v' + esc(n.v) + '</span>' + (i === 0 ? '<span class="nt-new">' + esc(T.notesLatest) + '</span>' : '') + '<time>' + esc(n.d) + '</time></div>';
+    sec.innerHTML = '<div class="nt-head"><span class="nt-v">v' + esc(n.v) + '</span>' + (i === 0 ? '<span class="nt-new">' + esc(T.notesLatest) + '</span>' : '') + '<time>' + esc(dateL(n.d)) + '</time></div>';
     const ul = el("ul");
     n.i.forEach(it => { const li = el("li", "nt-it"); li.innerHTML = '<span class="nt-tag nt-' + it.t + '">' + esc(T.notesTypes[it.t]) + '</span><span>' + esc(it[lang]) + '</span>'; ul.append(li); });
     sec.append(ul); box.append(sec);
@@ -1569,9 +1634,9 @@ document.getElementById("notes").addEventListener("keydown", e => {
   if (e.key === "Tab") { const f = [...document.querySelectorAll("#notes button, #notes [tabindex='0']")]; const i = f.indexOf(document.activeElement);
     if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); } }
 });
-if (location.hash === "#patch-notes") setTimeout(notesShow, 80);
+if (location.hash === "#patch-notes") whenReady(() => setTimeout(notesShow, 80));
 document.querySelectorAll(".notes-btn").forEach(b => b.classList.toggle("unseen", notesUnseen()));
-(() => {
+whenReady(() => {
   const nav = document.querySelector(".topnav");
   const links = [...nav.querySelectorAll(".tn-links a")];
   const tgt = a => document.getElementById(a.hash.slice(1));
@@ -1596,7 +1661,7 @@ document.querySelectorAll(".notes-btn").forEach(b => b.classList.toggle("unseen"
   }));
   const slot = document.getElementById("tnSlot");
   new IntersectionObserver(([e]) => nav.classList.toggle("stuck", !e.isIntersecting && e.boundingClientRect.top < 0), {threshold: 0, rootMargin: "-10px 0px 0px 0px"}).observe(slot);
-})();
+});
 matchMedia("(max-width:480px)").addEventListener("change", () => { const T = UI[lang]; document.getElementById("q").placeholder = matchMedia("(max-width:480px)").matches ? T.phShort : T.placeholder; });
 </script>
 </body>
