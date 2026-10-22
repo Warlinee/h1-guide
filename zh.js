@@ -570,6 +570,9 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"Search: an error code or a path now finds its card even when pasted as is, for example 0xC0E90002 with the sentence's period, C0000005 without the 0x, C:\\Games or --no-sandbox.": "搜索：直接粘贴的错误代码或路径现在也能找到对应的条目，比如后面带句点的 0xC0E90002、不带 0x 的 C0000005、C:\\Games 或 --no-sandbox。",
+"Screenshot reader: it recognizes the 0xC0E90002 code (Smart App Control) even when it reads it with the letter O instead of 0.": "截图识别：即使把 0xC0E90002（智能应用控制）里的 0 识别成了字母 O，也能认出这个代码。",
+"Small fixes: the search window shows \"Esc\" in English and Chinese, the \"ROTK\" folder in \"Where is your game?\" looks sharper, and a path at the end of a sentence no longer keeps the period inside its box.": "小修正：搜索窗口在英文版和中文版里显示“Esc”，“你的游戏在哪里？”里的“ROTK”文件夹显示得更清晰，句末的路径也不再把句点框进去。",
 "All 22 tutorial videos now exist in Chinese, with the launcher and Windows in Chinese.": "22 个视频教程现在都有中文版了，视频里的启动器和 Windows 也都是中文界面。",
 "\"Administrator rights could not be verified\" video redone: first restore ROTK.Diagnostics.exe from quarantine, turning the antivirus off comes as a last resort.": "重做了“无法确认 Windows 管理员权限”的视频：先从隔离区还原 ROTK.Diagnostics.exe，关闭杀毒软件只是最后的办法。",
 "Clearer language switch: flags on a black background, active language underlined in red, Chinese flag added.": "语言切换更清楚了：国旗放在黑色背景上，当前语言下面有红色下划线，并加上了中国国旗。",
