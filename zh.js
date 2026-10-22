@@ -5,7 +5,7 @@
    ui : textes qui n'existent qu'en chinois. syn : mots équivalents pour la recherche. stop : mots ignorés par la recherche. */
 window.ZH = {
 ui: {"supCopyZh":"复制 ZH"},
-syn: [["闪退", "崩溃", "崩了", "秒退"], ["打不开", "启动不了", "开不了", "无法启动", "没反应"], ["语音", "语音聊天", "麦克风", "麦", "说话", "听不到", "听不见", "vivox"], ["掉帧", "卡顿", "帧数", "帧率", "fps"], ["卡死", "死机", "冻结", "未响应"], ["卡住", "不动", "卡在"], ["黑屏"], ["封号", "封禁", "被封", "解封", "申诉"], ["掉线", "断线", "断开", "踢出", "被踢"], ["更新", "升级", "补丁"], ["下载", "资源文件", "资源"], ["杀毒软件", "杀毒", "防病毒", "报毒", "火绒", "安全中心"], ["白名单", "排除项", "信任"], ["安装", "重装"], ["账号", "注册", "登录", "登陆"], ["密钥", "激活码"], ["教程", "新手教程", "新兵"], ["燃料", "汽油", "油桶", "加油"], ["载具", "下车"], ["延迟", "高延迟", "网络"], ["脚步声", "脚步"], ["皮肤", "箱子", "开箱"], ["文件夹", "目录", "路径"], ["截图", "截屏"], ["管理员", "权限"]],
+syn: [["闪退", "崩溃", "崩了", "秒退"], ["打不开", "启动不了", "开不了", "无法启动", "没反应"], ["语音", "语音聊天", "麦克风", "麦", "说话", "听不到", "听不见", "vivox"], ["掉帧", "卡顿", "帧数", "帧率", "fps"], ["卡死", "死机", "冻结", "未响应"], ["卡住", "不动", "卡在"], ["黑屏"], ["复活", "召回"], ["封号", "封禁", "被封", "解封", "申诉"], ["掉线", "断线", "断开", "踢出", "被踢"], ["更新", "升级", "补丁"], ["下载", "资源文件", "资源"], ["杀毒软件", "杀毒", "防病毒", "报毒", "火绒", "安全中心"], ["白名单", "排除项", "信任"], ["安装", "重装"], ["账号", "注册", "登录", "登陆"], ["密钥", "激活码"], ["教程", "新手教程", "新兵"], ["燃料", "汽油", "油桶", "加油"], ["载具", "下车"], ["延迟", "高延迟", "网络"], ["脚步声", "脚步"], ["皮肤", "箱子", "开箱"], ["文件夹", "目录", "路径"], ["截图", "截屏"], ["管理员", "权限"]],
 stop: ["怎么", "么办", "为什", "什么", "一直", "我的", "可以", "请问", "不了", "还是", "就是", "这个", "那个", "没有", "总是", "老是", "一下", "求助", "大佬", "兄弟", "帮忙", "问题", "游戏", "不能", "无法", "出现", "显示", "的", "了", "吗", "呢", "啊", "吧", "我", "你", "是", "在", "有", "和", "就", "都", "也", "很", "还", "又", "被", "把", "个", "一", "不"],
 t: {
 // Interface
@@ -169,10 +169,13 @@ t: {
 // État actuel
 "Current status": "当前状态",
 "Updated ": "更新于 ",
-"Version to have: <b>launcher 2.0.43</b> (out since 19/10). Check \"BUILD 2.0.43\" top right in the launcher.": "需要的版本：<b>启动器 2.0.43</b>（10 月 19 日发布）。看启动器右上角的“版本 2.0.43”（BUILD 2.0.43）。",
+"Version to have: <b>launcher 2.0.45</b> (out since 22/10). Check \"BUILD 2.0.45\" top right in the launcher.": "需要的版本：<b>启动器 2.0.45</b>（10 月 22 日发布）。看启动器右上角的“版本 2.0.45”（BUILD 2.0.45）。",
+"New: the game is in French when the launcher is in French (since 2.0.44). For an English game, set the launcher to English.": "新变化：启动器是法语时，游戏也会是法语（2.0.44 起）。想要英文游戏，就把启动器切换成英语。",
 "Fixed: trio reboot leaving you spectating, and aiming (ADS) near cover.": "已修复：三排复活后一直停留在观战状态，以及靠近掩体时开镜（ADS）的问题。",
+"Getting out of a vehicle at the wrong spot while driving or turning: fix shipped in 2.0.44, not confirmed in game yet.": "行驶中或转弯时离开载具，位置不对：2.0.44 已发布修复，但还没在游戏里确认有效。",
+"Grenade held up like binoculars while walking: fix shipped in 2.0.45, not confirmed in game yet.": "走路时手雷像望远镜一样举在眼前：2.0.45 已发布修复，但还没在游戏里确认有效。",
 "A ROTK folder right on a drive (like D:\\ROTK) blocks the install with \"Access denied\". Fix on the way: until then, pick a folder like D:\\Games.": "ROTK 文件夹直接放在磁盘根目录下（比如 D:\\ROTK）时，安装会因“Access denied”（拒绝访问）而失败。修复正在路上：在那之前，请选 D:\\Games 这样的文件夹。",
-"Getting out of a vehicle at the wrong spot, and launcher error messages with garbled characters in French: fixes on the way.": "下载具时位置不对，以及启动器法语报错信息出现乱码：修复正在路上。",
+"Launcher error messages with garbled characters: still there in 2.0.45, also with the launcher in English or Chinese.": "启动器报错信息出现乱码：2.0.45 里仍然存在，启动器是英文或中文界面时也会出现。",
 "New account: a ~10 min tutorial and Steam level 1 are required before matches.": "新账号：打对局之前，必须先完成约 10 分钟的新手教程，并且 Steam 等级达到 1 级。",
 
 // Première installation
@@ -183,11 +186,11 @@ t: {
 "Install the launcher": "安装启动器",
 "Download the launcher from rotk.app and install it. If Windows or your antivirus blocks it, check the cards below.": "从 rotk.app 下载启动器并安装。如果 Windows 或杀毒软件拦截了它，看下面的条目。",
 "Set up the client": "设置客户端",
-"On first launch: H1Z1 client = your Steam game folder, ROTK installation = a folder outside Steam (e.g. C:\\Games, never just C:\\ or D:\\ROTK directly). Then \"Create separate copy\".": "第一次启动时：“H1Z1 客户端”（H1Z1 CLIENT）选你 Steam 里的游戏文件夹，“ROTK 安装位置”（ROTK INSTALLATION）选 Steam 以外的文件夹（例如 C:\\Games，千万不要只选 C:\\，也不要直接选 D:\\ROTK）。然后点“创建独立副本”（CREATE SEPARATE COPY）。",
+"On first launch: H1Z1 client = your Steam game folder, ROTK installation = a folder outside Steam (e.g. C:\\Games, never just C:\\ or D:\\ROTK directly). Then \"Create separate copy\". Plan for the size of the game's Steam folder plus 15 GB free on that drive: right after the copy, the launcher also downloads the assets.": "第一次启动时：“H1Z1 客户端”（H1Z1 CLIENT）选你 Steam 里的游戏文件夹，“ROTK 安装位置”（ROTK INSTALLATION）选 Steam 以外的文件夹（例如 C:\\Games，千万不要只选 C:\\，也不要直接选 D:\\ROTK）。然后点“创建独立副本”（CREATE SEPARATE COPY）。在这个磁盘上预留 Steam 里游戏文件夹的大小再加 15 GB 的可用空间：复制完成后，启动器紧接着还会下载资源文件。",
 "Add your key": "添加你的密钥",
 "In the launcher, click \"Add ROTK key\", paste the key from step 2 and save it.": "在启动器里点“添加 ROTK 密钥”（ADD ROTK KEY），粘贴第 2 步拿到的密钥，然后保存。",
 "Play your first match": "打你的第一局",
-"Press Play once: assets download (5 to 10 min, keep 4 to 5 GB free). Then the Operation Recruit tutorial is required (about 10 min).": "只点一次“开始游戏”（PLAY）：资源文件开始下载（5 到 10 分钟，留出 4 到 5 GB 空闲空间）。之后必须完成新手教程（Operation Recruit），大约 10 分钟。",
+"Press Play once: assets download (5 to 10 min, keep at least 15 GB free on the game's drive). Then the Operation Recruit tutorial is required (about 10 min).": "只点一次“开始游戏”（PLAY）：资源文件开始下载（5 到 10 分钟，游戏所在的磁盘上至少留出 15 GB 可用空间）。之后必须完成新手教程（Operation Recruit），大约 10 分钟。",
 
 // Réponses rapides (?support)
 "Ban appeal": "封禁申诉",
@@ -248,9 +251,12 @@ t: {
 
 // Fiche : messages-d-erreur-avec-des-accents-casses-pra-sent-na-a
 "Error messages with broken characters (prÃ©sent, nâ€™a pas pu…)": "错误提示里有乱码（prÃ©sent、nâ€™a pas pu…）",
-"Display bug in 2.0.43: the message means the same thing.": "2.0.43 版本的显示 bug：提示的意思没有变。",
-"Read it with the accents fixed and follow the matching card.": "按正确的重音字母理解提示内容，然后照对应的条目操作。",
-"it's just a broken-characters bug in 2.0.43, the message means the same thing": "只是 2.0.43 的乱码 bug，提示的意思还是一样的",
+"Launcher display bug (since 2.0.43, still there in 2.0.45): the message means the same thing. With the launcher in English or Chinese, these messages show up too, in French with these broken characters.": "启动器的显示 bug（2.0.43 起出现，2.0.45 里仍然存在）：提示的意思没有变。启动器是英文或中文界面时，这些提示也会出现，而且是带乱码的法语。",
+"\"Un dinput8.dll inconnu est prÃ©sent…\" (unknown dinput8.dll): a dinput8.dll the launcher doesn't recognize is in your game folder. Follow the dinput8.dll card.": "“Un dinput8.dll inconnu est prÃ©sent…”（未知的 dinput8.dll）：你的游戏文件夹里有一个启动器不认识的 dinput8.dll。按 dinput8.dll 条目操作。",
+"\"Le patch sprint ROTK embarquÃ© est absent ou modifiÃ©…\" (bundled patch missing or modified): the patch stored in the launcher's files is missing or changed, your antivirus may have quarantined it. Restore it (Windows Defender card) or reinstall the launcher.": "“Le patch sprint ROTK embarquÃ© est absent ou modifiÃ©…”（内置补丁丢失或被修改）：启动器文件里自带的补丁不见了或被改动了，可能被杀毒软件放进了隔离区。把它还原（看 Windows Defender 条目），或者重新安装启动器。",
+"\"Cette version de H1Z1 nâ€™est pas compatible avec le patch sprint ROTK…\" (H1Z1 version not compatible): the H1Z1.exe in your game folder isn't the expected one. Verify H1Z1 files in Steam, then redo the client setup (0x2a31abc card).": "“Cette version de H1Z1 nâ€™est pas compatible avec le patch sprint ROTK…”（H1Z1 版本不兼容）：你游戏文件夹里的 H1Z1.exe 不是启动器要求的那个。先在 Steam 里验证 H1Z1 的文件，再重新进行客户端安装（看 0x2a31abc 条目）。",
+"\"Le patch sprint ROTK nâ€™a pas pu Ãªtre installÃ©\" (or \"supprimÃ©\"), \"Le marqueur du patch sprint ROTK nâ€™a pas pu Ãªtre Ã©crit\" (could not be installed, removed or written): the launcher couldn't update its patch in your game folder. End H1Z1.exe (Task Manager > Details > End task) and try again. Still stuck: Controlled folder access card.": "“Le patch sprint ROTK nâ€™a pas pu Ãªtre installÃ©”（或“supprimÃ©”）、“Le marqueur du patch sprint ROTK nâ€™a pas pu Ãªtre Ã©crit”（无法安装、删除或写入）：启动器没能更新游戏文件夹里的补丁。结束 H1Z1.exe（“任务管理器” > “详细信息” > “结束任务”）后再试一次。还是不行：看“受控文件夹访问”条目。",
+"it's just a broken-characters bug in the launcher (still there in 2.0.45, in english and chinese too), the message means the same thing": "只是启动器的乱码 bug（2.0.45 里还在，英文和中文界面也一样），提示的意思还是一样的",
 
 // Fiche : le-launcher-ne-s-ouvre-pas-launch-failed
 "Launcher won't open: \"launch-failed\"": "启动器打不开：“launch-failed”",
@@ -322,17 +328,26 @@ t: {
 "Press Play once and wait 5 to 10 min: the big pack is 1.3 GB and gets checked before it moves.": "只点一次“开始游戏”（PLAY），然后等 5 到 10 分钟：大资源包有 1.3 GB，进度动之前要先校验。",
 "During \"INSTALLING\", the percentage only moves when a pack is done: that's normal.": "显示“正在安装”时，百分比只会在一个资源包装完后才变化：这是正常的。",
 "Still stuck: close the launcher, open the .ROTK-assets folder (right next to your game folder), then asset-cache, delete everything inside and relaunch.": "还是卡住：关闭启动器，打开 .ROTK-assets 文件夹（就在你的游戏文件夹旁边），再打开 asset-cache，把里面的东西全删掉，然后重新打开启动器。",
-"You need 4 to 5 GB free on the game's drive for each asset update. A big download right after an update is normal: only the changed packs are downloaded again (1.6 GB on 21/10). It downloads the same packs at every launch? Check your antivirus quarantine and add .ROTK-assets as an exclusion. Can't find .ROTK-assets? Check the \"Where is your game?\" section.": "每次资源更新，游戏所在的磁盘上都需要有 4 到 5 GB 的可用空间。更新后紧接着有一次大下载是正常的：只会重新下载改动过的资源包（10 月 21 日那次是 1.6 GB）。每次启动都在下载同样的资源包？检查一下杀毒软件的隔离区，并把 .ROTK-assets 添加为排除项。找不到 .ROTK-assets？看一下“你的游戏在哪里？”部分。",
+"You need 3 times the update size free on the game's drive (5 GB for the 22/10 one, 15 GB for a first install), otherwise the launcher shows \"Not enough disk space for the assets\". A big download right after an update is normal: only the changed packs are downloaded again (1.7 GB on 22/10). It downloads the same packs at every launch? Check your antivirus quarantine and add .ROTK-assets as an exclusion. Can't find .ROTK-assets? Check the \"Where is your game?\" section.": "游戏所在的磁盘上需要有更新大小 3 倍的可用空间（10 月 22 日那次要 5 GB，第一次安装要 15 GB），不然启动器会提示“Not enough disk space for the assets”。更新后紧接着有一次大下载是正常的：只会重新下载改动过的资源包（10 月 22 日那次是 1.7 GB）。每次启动都在下载同样的资源包？检查一下杀毒软件的隔离区，并把 .ROTK-assets 添加为排除项。找不到 .ROTK-assets？看一下“你的游戏在哪里？”部分。",
 "press play once and let it run 5-10 min. still at 0: close everything, empty the asset-cache folder in .ROTK-assets next to ur game and relaunch": "只点一次开始游戏，然后让它跑 5-10 分钟。还是 0 的话：全关掉，把游戏旁边 .ROTK-assets 里的 asset-cache 文件夹清空，再重开",
 
-// Fiche : verifier-qu-on-a-bien-le-dernier-correctif-2-0-43
-"Check you have the latest patch (2.0.43)": "确认你装的是最新补丁（2.0.43）",
-"Check the launcher version top right, next to the minimize button: BUILD 2.0.43. That's what counts.": "看启动器右上角、“最小化”按钮旁边的版本号：“版本 2.0.43”（BUILD 2.0.43）。以这个为准。",
+// Fiche : espace-disque-insuffisant-pour-les-assets-go-sont
+"\"Not enough disk space for the assets: … GB is required\"": "“Not enough disk space for the assets: … GB is required”（资源文件所需的磁盘空间不足）",
+"Before downloading the assets, the launcher wants 3 times their size free on the game's drive: it downloads them, extracts them, then keeps a copy of the files it replaces.": "下载资源文件之前，启动器要求游戏所在的磁盘上有资源文件大小 3 倍的可用空间：它要先下载、再解压，还要保留一份被替换文件的备份。",
+"First install: about 5 GB to download, so 15 GB free. 22/10 asset update: 1.7 GB, so 5 GB free.": "第一次安装：大约要下载 5 GB，所以需要 15 GB 可用空间。10 月 22 日的资源更新：1.7 GB，所以需要 5 GB 可用空间。",
+"Free some space on that drive, then press Play again.": "在这个磁盘上腾出空间，然后再点一次“开始游戏”（PLAY）。",
+"Can't free enough space: redo the client setup on another drive, in a folder like D:\\Games (\"Client setup: which folder to pick?\" card). You'll need the size of the game's Steam folder plus 15 GB free on that drive, since all the assets get installed again.": "实在腾不出足够空间：换一个磁盘重新进行客户端安装，选 D:\\Games 这样的文件夹（看“客户端安装：该选哪个文件夹？”条目）。新磁盘上需要有 Steam 里游戏文件夹的大小再加 15 GB 的可用空间，因为所有资源文件都要重新安装。",
+"In the French launcher this message reads \"Espace disque insuffisant pour les assets : … Go sont nécessaires.\", and the Chinese launcher shows it in English. During the client copy you get a different one, without \"for the assets\" (\"Espace disque insuffisant : … Go sont nécessaires.\" in French): then you need the size of the game's Steam folder free, plus 10% (at least 2 GB).": "资源文件的这条提示在法语启动器里是“Espace disque insuffisant pour les assets : … Go sont nécessaires.”，在中文启动器里则显示为英文。复制客户端时出现的是另一条不带“for the assets”的提示（中文启动器显示为“磁盘空间不足，需要 … GB。”，法语是“Espace disque insuffisant : … Go sont nécessaires.”）：这时需要 Steam 里游戏文件夹的大小再加 10%（至少 2 GB）的可用空间。",
+"the launcher wants 3 times the download size free on the game's drive: 15 GB for a first install, 5 GB for the 22/10 update. free some space on that drive then press play again": "启动器要求游戏所在的磁盘有下载大小 3 倍的可用空间：第一次安装要 15 GB，10 月 22 日的更新要 5 GB。在那个盘腾点空间出来，再点一次开始游戏",
+
+// Fiche : verifier-qu-on-a-bien-le-dernier-correctif
+"Check you have the latest patch": "确认你装的是最新补丁",
+"Check the launcher version top right, next to the minimize button: BUILD 2.0.45. That's what counts.": "看启动器右上角、“最小化”按钮旁边的版本号：“版本 2.0.45”（BUILD 2.0.45）。以这个为准。",
 "Older: update the launcher, then fully close the game and launch it again.": "版本更旧的话：先更新启动器，然后彻底关闭游戏，再重新启动。",
 "To check the game patch is in place: after launching the game, open your game folder, right-click rotk-shotgun-sprint.ini > Open with > Notepad.": "确认游戏补丁是否生效：启动游戏后，打开你的游戏文件夹，右键点击 rotk-shotgun-sprint.ini > “打开方式” > “记事本”。",
-"If the proxySha256= line starts with 7DE5B115, that's the 2.0.43 game patch.": "如果 proxySha256= 这一行以 7DE5B115 开头，那就是 2.0.43 的游戏补丁。",
-"No rotk-shotgun-sprint.ini? That doesn't mean you're outdated: the launcher only writes it when the game patch is turned on for that launch, the server decides. Fixes (trio reboot, vehicle exit, aiming) only load after closing and relaunching the game.": "没有 rotk-shotgun-sprint.ini 文件？这不代表你的版本过旧：只有当次启动启用了游戏补丁，启动器才会写入这个文件，这由服务器决定。修复内容（三排复活、离开载具、瞄准）只有在关闭并重新启动游戏后才会加载。",
-"check the version top right in the launcher, u need BUILD 2.0.43. to check the game patch, open rotk-shotgun-sprint.ini with notepad: if proxySha256= starts with 7DE5B115 it's the 2.0.43 one (no .ini doesn't always mean ur outdated)": "看启动器右上角的版本号，得是“版本 2.0.43”（BUILD 2.0.43）。想确认游戏补丁的话，用记事本打开 rotk-shotgun-sprint.ini 看看：如果 proxySha256= 开头是 7DE5B115 就是 2.0.43 的补丁（没有 .ini 文件也不一定是版本旧）",
+"If the proxySha256= line starts with 3D2319E6, that's the 2.0.45 game patch. If it starts with FFE3456B (2.0.44) or 7DE5B115 (2.0.43), relaunch the game from the updated launcher.": "如果 proxySha256= 这一行以 3D2319E6 开头，那就是 2.0.45 的游戏补丁。如果以 FFE3456B（2.0.44）或 7DE5B115（2.0.43）开头，就用更新后的启动器重新启动游戏。",
+"No rotk-shotgun-sprint.ini? That doesn't mean you're outdated: the launcher only writes it when the game patch is turned on for that launch, the server decides. Fixes (trio reboot, vehicle exit, aiming, grenade held like binoculars while walking) only load after closing and relaunching the game.": "没有 rotk-shotgun-sprint.ini 文件？这不代表你的版本过旧：只有当次启动启用了游戏补丁，启动器才会写入这个文件，这由服务器决定。修复内容（三排复活、离开载具、瞄准、走路时手雷像望远镜一样举在眼前）只有在关闭并重新启动游戏后才会加载。",
+"check the version top right in the launcher, u need BUILD 2.0.45. to check the game patch, open rotk-shotgun-sprint.ini with notepad: if proxySha256= starts with 3D2319E6 it's the 2.0.45 one (no .ini doesn't always mean ur outdated)": "看启动器右上角的版本号，得是“版本 2.0.45”（BUILD 2.0.45）。想确认游戏补丁的话，用记事本打开 rotk-shotgun-sprint.ini 看看：如果 proxySha256= 开头是 3D2319E6 就是 2.0.45 的补丁（没有 .ini 文件也不一定是版本旧）",
 
 // Fiche : les-droits-administrateur-n-ont-pas-pu-etre-verifies
 "\"Administrator rights could not be verified\"": "“无法确认 Windows 管理员权限”",
@@ -427,10 +442,10 @@ t: {
 "FPS drops or stutters in fights": "交火时掉帧或卡顿",
 "In your mouse software, set the polling rate to 1000 Hz max, never 4000 or 8000; 500 Hz if your CPU is modest.": "在鼠标驱动软件里把回报率设为最高 1000 Hz，千万别用 4000 或 8000；CPU 比较一般的话就设 500 Hz。",
 "Cap your FPS just under your monitor's refresh rate (in the NVIDIA or AMD panel).": "把帧数上限设得略低于显示器刷新率（在 NVIDIA 或 AMD 控制面板里设置）。",
-"In the game settings, switch to borderless windowed.": "在游戏“设定”里把“显示模式”改成“全屏窗口模式”。",
+"In the game settings, set Display Mode to \"Fullscreen Windowed\" (borderless).": "在游戏“设定”里把“显示模式”改成“全屏窗口模式”（无边框）。",
 "Windows Settings > System > Display > Graphics: set H1Z1.exe from your ROTK folder to High performance.": "Windows 设置 > 系统 > 屏幕 > 显示卡：把 ROTK 文件夹里的 H1Z1.exe 设为“高性能”。",
 "Measured on 21/10 on a strong PC: at 8,000 Hz the game loses about 17% FPS as soon as the mouse moves, nothing when it's still (https://github.com/ROTK-Team/rotk-launcher/issues/215). 20/10 announcement: staff know some players get FPS drops and freezes in game and are looking for the cause server-side. If these settings change nothing, it's not necessarily your PC.": "10 月 21 日在一台高配电脑上实测：回报率 8000 Hz 时，鼠标一动游戏帧数就掉约 17%，鼠标不动时没有影响 (https://github.com/ROTK-Team/rotk-launcher/issues/215). 10 月 20 日公告：官方人员知道部分玩家在游戏中会掉帧和卡死，正在服务器端排查原因。如果这些设置都没用，不一定是你电脑的问题。",
-"set ur mouse to 1000 Hz max, cap ur fps just under ur monitor's hz and use borderless windowed": "鼠标回报率最高设 1000 Hz，帧数上限设得比显示器刷新率低一点，再用全屏窗口模式",
+"set ur mouse to 1000 Hz max, cap ur fps just under ur monitor's hz and use fullscreen windowed": "鼠标回报率最高设 1000 Hz，帧数上限设得比显示器刷新率低一点，再用全屏窗口模式",
 
 // Fiche : optimiser-ses-reglages-graphiques-useroptions-ini
 "Optimize your graphics settings (UserOptions.ini)": "用 UserOptions.ini 优化画面设置",
@@ -458,15 +473,15 @@ t: {
 "Micro-freezes after Alt+Tab in fullscreen": "全屏时 Alt+Tab 后出现微卡顿",
 "Simplest: restart the game after an Alt+Tab, or avoid tabbing mid-match.": "最简单的办法：Alt+Tab 之后重启游戏，或者对局中别切出去。",
 "Right-click H1Z1.exe (game folder) > Properties > Compatibility tab: tick \"Disable fullscreen optimizations\".": "右键点击游戏文件夹里的 H1Z1.exe > 属性 > “兼容性”选项卡：勾选“禁用全屏优化”。",
-"To keep stretched without fullscreen: set the Windows desktop to 1440x1080 (NVIDIA panel, fullscreen scaling by the GPU), then the game to borderless windowed.": "想不用全屏又保留拉伸画面：先把 Windows 桌面分辨率设为 1440x1080（在 NVIDIA 控制面板里设为全屏缩放、由 GPU 执行缩放），再把游戏设为“全屏窗口模式”（Fullscreen Windowed）。",
-"exclusive fullscreen handles alt+tab badly. set ur desktop to 1440x1080 with gpu scaling and the game to borderless": "独占全屏对 alt+tab 的处理很差。把桌面设成 1440x1080，开 gpu 缩放，游戏改成全屏窗口模式",
+"To keep stretched without fullscreen: set the Windows desktop to 1440x1080 (NVIDIA panel, fullscreen scaling by the GPU), then the game to \"Fullscreen Windowed\" (borderless).": "想不用全屏又保留拉伸画面：先把 Windows 桌面分辨率设为 1440x1080（在 NVIDIA 控制面板里设为全屏缩放、由 GPU 执行缩放），再把游戏设为“全屏窗口模式”（Fullscreen Windowed，无边框）。",
+"exclusive fullscreen handles alt+tab badly. set ur desktop to 1440x1080 with gpu scaling and the game to fullscreen windowed": "独占全屏对 alt+tab 的处理很差。把桌面设成 1440x1080，开 gpu 缩放，游戏改成全屏窗口模式",
 
 // Fiche : ecran-noir-en-jeu-erreur-g12-pilote-graphique-qui
 "Black screen in game, G12 error, graphics driver reset": "游戏内黑屏、G12 错误、显卡驱动重启",
 "To test, unplug a 2nd monitor running at another refresh rate, or a capture card.": "测试一下：拔掉刷新率不同的第二块显示器，或者采集卡。",
 "Clean-install the graphics driver (NVIDIA or AMD \"clean install\" option).": "干净重装显卡驱动（NVIDIA 或 AMD 的“清洁安装”选项）。",
 "Old budget power supply: it was the cause for one player.": "老旧的低端电源：有一位玩家就是这个原因。",
-"switch to borderless, and if u have a 2nd monitor at a different refresh rate unplug it to test": "换成全屏窗口模式，如果你有第二块刷新率不一样的显示器，先拔掉试试",
+"switch to fullscreen windowed, and if u have a 2nd monitor at a different refresh rate unplug it to test": "换成全屏窗口模式，如果你有第二块刷新率不一样的显示器，先拔掉试试",
 
 // Fiche : le-pc-entier-freeze-ou-s-eteint-apres-un-moment
 "The whole PC freezes or shuts down after a while": "整台电脑卡死，或过一会儿自动关机",
@@ -526,16 +541,19 @@ t: {
 "Example: the Nautilus riot shotgun skin came with assets 1.13.51 on 21/10 (a 1.6 GB download).": "例如：防暴霰弹枪（Riot Shotgun）的 Nautilus 皮肤是 10 月 21 日随资源文件 1.13.51 推出的（需要下载 1.6 GB）。",
 "new skins come with the asset update: let the launcher finish it, then close and relaunch the game. if u still see the default look, say it in the help channel with the skin name": "新皮肤是跟着资源更新来的：等启动器更新完，然后关掉游戏重开。还是默认外观的话，去求助频道说一下皮肤名字",
 
-// Fiche : le-launcher-est-en-francais-mais-le-jeu-en-anglais
-"Launcher in French but the game in English": "启动器是法语，游戏却是英语",
-"Normal for now, it's on purpose.": "目前这是正常的，是故意这样设置的。",
-"Don't change the language by hand: it already broke the HUD display.": "不要手动改语言：之前这样做已经导致过 HUD 显示出错。",
-"that's normal for now, the game stays in english even with the launcher in french": "目前是正常的，就算启动器是法语，游戏也还是英语",
+// Fiche : changer-la-langue-du-jeu-francais-anglais-chinois
+"Change the game language (French, English, Chinese)": "更改游戏语言（法语、英语、中文）",
+"Since launcher 2.0.44, the game uses the launcher's language: launcher in French = game in French, Social included. Same for English and Chinese.": "从 2.0.44 版启动器开始，游戏使用启动器的语言：启动器是法语，游戏就是法语，“社交”面板也一样。英语和中文也是这样。",
+"To change it: click the flag top right in the launcher, just left of BUILD, and pick your language.": "更改方法：点启动器右上角、“版本”（BUILD）左边的国旗，然后选择你的语言。",
+"Fully close the game, then launch it again from the launcher: the language changes at the next launch.": "彻底关闭游戏，再从启动器重新启动：下次启动时语言就会改变。",
+"No other languages, and no English game with a French launcher: the launcher gives the game its language at every launch.": "没有其他语言可选，也不能启动器用法语、游戏用英语：每次启动时，启动器都会把它的语言设置给游戏。",
+"since 2.0.44 the game follows the launcher language. change it with the flag top right in the launcher (next to BUILD), then close and relaunch the game": "从 2.0.44 开始游戏跟着启动器的语言走。在启动器右上角（“版本”旁边）点国旗切换语言，然后关掉游戏再重开",
 
 // Fiche : reboot-en-trio-tu-restes-spectateur-invisible
 "Trio reboot: you stay spectating, invisible": "三排复活：一直处于观战状态，人物隐身",
-"Update to 2.0.43 and relaunch the game (fix released 18/10).": "更新到 2.0.43 版本并重新启动游戏（10 月 18 日已发布修复）。",
+"Update the launcher (2.0.42 or newer, fix released 18/10) and relaunch the game.": "更新启动器（2.0.42 或更新的版本，10 月 18 日已发布修复），然后重新启动游戏。",
 "If rotk-shotgun-sprint.log shows \"bridge allocation refused\": update the graphics driver and Windows.": "如果 rotk-shotgun-sprint.log 里出现“bridge allocation refused”：更新显卡驱动和 Windows。",
+"In game, reboot is now called \"Réintégration\" in French (\"RÉINTÉGRATION\" on the map) and \"召回\" in Chinese.": "游戏里的复活（reboot）现在中文显示为“召回”，法语显示为“Réintégration”（地图上是“RÉINTÉGRATION”）。",
 "update the launcher and relaunch the game, it's fixed since 18/10. if it continues, update ur graphics driver": "更新一下启动器再重开游戏，10 月 18 日就修好了。还这样的话就更新一下显卡驱动",
 
 // Fiche : windows-defender
@@ -570,6 +588,12 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"Language card rewritten: since launcher 2.0.44, the game uses the launcher's language (French, English or Chinese). Its old link still works.": "重写了语言条目：从 2.0.44 版启动器开始，游戏使用启动器的语言（法语、英语或中文）。这个条目的旧链接仍然可以用。",
+"\"Not enough disk space for the assets\" card: the launcher wants 3 times the download size free.": "新增“Not enough disk space for the assets”（资源文件磁盘空间不足）条目：启动器要求有下载大小 3 倍的可用空间。",
+"Free space to plan for: 15 GB for a first install, not 4 to 5 GB (First install path and assets card).": "需要预留的空间：第一次安装要 15 GB，而不是 4 到 5 GB（已在“首次安装”和资源文件条目里更正）。",
+"Current status and \"latest patch\" card updated for launcher 2.0.45 (BUILD 2.0.45, 3D2319E6). The card title no longer has a version number, its old link still works.": "“当前状态”和“最新补丁”条目已更新到 2.0.45 版启动器（“版本 2.0.45”，3D2319E6）。条目标题里不再写版本号，旧链接仍然可以用。",
+"Broken characters card: what each of the six messages means. They also show with the launcher in English or Chinese.": "乱码条目：说明了六条提示各自的意思。启动器是英文或中文界面时也会出现这些提示。",
+"The display setting is written as the game shows it: \"Fullscreen Windowed\". Trio reboot card: in French, reboot is now called \"Réintégration\".": "显示设置改成和游戏里一样的写法：“全屏窗口模式”（Fullscreen Windowed）。三排复活条目：法语里的复活（reboot）现在叫“Réintégration”。",
 "Search: an error code or a path now finds its card even when pasted as is, for example 0xC0E90002 with the sentence's period, C0000005 without the 0x, C:\\Games or --no-sandbox.": "搜索：直接粘贴的错误代码或路径现在也能找到对应的条目，比如后面带句点的 0xC0E90002、不带 0x 的 C0000005、C:\\Games 或 --no-sandbox。",
 "Screenshot reader: it recognizes the 0xC0E90002 code (Smart App Control) even when it reads it with the letter O instead of 0.": "截图识别：即使把 0xC0E90002（智能应用控制）里的 0 识别成了字母 O，也能认出这个代码。",
 "Small fixes: the search window shows \"Esc\" in English and Chinese, the \"ROTK\" folder in \"Where is your game?\" looks sharper, and a path at the end of a sentence no longer keeps the period inside its box.": "小修正：搜索窗口在英文版和中文版里显示“Esc”，“你的游戏在哪里？”里的“ROTK”文件夹显示得更清晰，句末的路径也不再把句点框进去。",
