@@ -1094,19 +1094,19 @@ function render(){
 
   const chips = document.getElementById("chips"); chips.innerHTML = "";
   chips.append(el("span", null, esc(T.chips)));
-  QUICK.forEach(v => { const b = el("button", "chip", esc(v)); b.type = "button"; b.onclick = () => { const q = document.getElementById("q"); q.value = v; activeCat = "all"; filter(); document.getElementById("faq").scrollIntoView({behavior:"smooth"}); }; chips.append(b); });
+  QUICK.forEach(v => { const b = el("button", "chip", esc(v)); b.type = "button"; b.onclick = () => { const q = document.getElementById("q"); q.value = v; activeCat = "all"; filter(); document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); }; chips.append(b); });
 
   const grid = document.getElementById("grid"); grid.innerHTML = "";
   CATS.forEach(c => {
     const n = F.filter(x => x.c === c.id).length;
     const t = el("button", "tile"); t.type = "button";
     t.innerHTML = '<span class="ic img"><img src="icons/cat-' + c.id + '.webp" alt="" width="84" height="84" loading="lazy"></span><b>' + esc(c.t[lang]) + '</b><small>' + esc(c.i[lang]) + '</small><em>' + n + ' ' + (n > 1 ? T.sols : T.sol) + '</em>';
-    t.onclick = () => { activeCat = c.id; document.getElementById("q").value = ""; filter(); dropCardHash(); document.getElementById("faq").scrollIntoView({behavior:"smooth"}); };
+    t.onclick = () => { activeCat = c.id; document.getElementById("q").value = ""; filter(); dropCardHash(); document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); };
     grid.append(t);
   });
   const tb = el("button", "tile"); tb.type = "button";
   tb.innerHTML = '<span class="ic img"><img src="icons/cat-avant.webp" alt="" width="84" height="84" loading="lazy"></span><b>' + esc(T.beforeH) + '</b><small>' + esc(T.beforeP) + '</small><em>&nbsp;</em>';
-  tb.onclick = () => document.getElementById("avant").scrollIntoView({behavior:"smooth"});
+  tb.onclick = () => document.getElementById("avant").scrollIntoView({behavior: scrollMode()});
   grid.append(tb);
 
   const tabs = document.getElementById("tabs"); tabs.innerHTML = "";
@@ -1520,20 +1520,23 @@ function filter(){
       b.onclick = () => openCard(o.r.id, true);
       sug.append(b);
     });
-    if (shown.length > 5) { const m = el("button", "sg more", esc(T.seeAll.replace("{n}", shown.length))); m.type = "button"; m.onclick = () => document.getElementById("faq").scrollIntoView({behavior:"smooth"}); sug.append(m); }
+    if (shown.length > 5) { const m = el("button", "sg more", esc(T.seeAll.replace("{n}", shown.length))); m.type = "button"; m.onclick = () => document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); sug.append(m); }
   }
   sug.hidden = !sug.children.length;
 }
 
 /* Anciens liens encore valides après un changement de titre */
 const SLUG_ALIASES = {"acces-controle-aux-dossiers-anti-ransomware":"acces-controle-aux-dossiers-bloque-le-jeu-acces-refuse", "avoir-l-animation-d-ouverture-des-caisses":"pas-d-animation-quand-tu-ouvres-une-caisse", "les-assets-restent-bloques-a-0":"les-assets-restent-bloques-a-0-ou-1", "verifier-qu-on-a-bien-le-dernier-correctif-2-0-43":"verifier-qu-on-a-bien-le-dernier-correctif", "le-launcher-est-en-francais-mais-le-jeu-en-anglais":"changer-la-langue-du-jeu-francais-anglais-chinois"};
+// défilement doux, ou direct quand le système demande moins d'animations (un behavior "smooth" écrit en dur passerait avant le CSS prefers-reduced-motion)
+function scrollMode(){ return matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"; }
 function openCard(id, scroll){
   id = SLUG_ALIASES[id] || id;
   const r = document.getElementById(id); if (!r || !r.classList.contains("row")) return false;
   if (r.hidden) { document.getElementById("q").value = ""; activeCat = "all"; filter(); }
   r.querySelector("details").open = true;
   r.classList.remove("flash"); void r.offsetWidth; r.classList.add("flash");
-  if (scroll) r.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+  // fiche plus haute que l'écran avec sa marge du haut (scroll-margin-top, aussi comptée quand on centre) : son titre va à cette marge, sous la barre ; sinon la fiche est centrée
+  if (scroll) { const m = parseFloat(getComputedStyle(r).scrollMarginTop) || 0; r.scrollIntoView({behavior: scrollMode(), block: r.offsetHeight + m > innerHeight ? "start" : "center"}); }
   return true;
 }
 
@@ -1541,7 +1544,7 @@ document.getElementById("q").addEventListener("input", e => { filter(); if (!e.t
 // la première fiche ouverte par la recherche a mis son #lien dans l'adresse : champ vidé (au clavier, X, Échap ou tuile d'Accès rapide), plus aucune fiche n'est ouverte, l'adresse le perd.
 // Pas dans filter() : filter() passe avant l'ouverture d'un lien direct vers une fiche.
 function dropCardHash(){ try { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(SLUG_ALIASES[id] || id)?.classList.contains("row")) history.replaceState(null, "", location.pathname + location.search); } catch (_) {} }
-document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); const f = document.querySelector("#sug .sg:not(.more)"); if (f) f.click(); else document.getElementById("faq").scrollIntoView({behavior:"smooth"}); } if (e.key === "Escape") { document.getElementById("sug").hidden = true; if (e.target.value) { e.preventDefault(); clearField(e.target); } } });
+document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); const f = document.querySelector("#sug .sg:not(.more)"); if (f) f.click(); else document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); } if (e.key === "Escape") { document.getElementById("sug").hidden = true; if (e.target.value) { e.preventDefault(); clearField(e.target); } } });
 /* Effacer la recherche : bouton X et Échap dans la barre, bouton X dans la fenêtre de recherche et dans Réponses rapides, bouton « Effacer la recherche » quand rien n'est trouvé.
    Le champ se vide comme si on effaçait le texte au clavier, et la page ne bouge pas. */
 function clearField(q){ q.value = ""; q.dispatchEvent(new Event("input")); }
