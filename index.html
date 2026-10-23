@@ -496,6 +496,15 @@ main{counter-reset:sec}
 .note{border-radius:0;border-left:2px solid var(--line-3)}
 .vid{border-radius:0}
 code.p{border-radius:2px}
+/* cadres de code : un clic copie le texte, « Copié ✓ » s'affiche au-dessus du cadre */
+code.p[role="button"]{cursor:pointer;transition:border-color .3s,color .3s}
+code.p[role="button"]:hover{border-color:var(--red-line)}
+code.p.ok,code.p[role="button"].ok{border-color:rgba(127,217,154,.5);color:var(--ok)} /* aussi sous le pointeur ou après un tap : plus fort que le :hover */
+.chip-tip{position:absolute;z-index:40;left:0;top:0;pointer-events:none;padding:3px 9px;border-radius:2px;border:1px solid rgba(127,217,154,.5);background:var(--s2);color:var(--ok);font-family:var(--f-label);font-weight:600;font-size:14px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity .2s}
+.chip-tip.ok{opacity:1}
+.chip-tip.up{transform:translateY(-100%)}
+.chip-tip.r{transform:translateX(-100%)}
+.chip-tip.r.up{transform:translate(-100%,-100%)}
 .share{justify-self:start;border-radius:2px;font-family:var(--f-label);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.07em}
 .share:focus-visible{outline:2px solid var(--red-hi);outline-offset:2px}
 .empty{border-radius:0}
@@ -706,6 +715,7 @@ const UI = {
     faqH:"Problèmes et solutions", faqP:"Clique sur un problème pour voir comment le régler.", all:"Tout",
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
     linksH:"Liens utiles", linksP:"Téléchargements, chemins de fichiers et adresses à connaître.",
+    copyCode:"Copier",
     st:{ok:"Confirmé",lead:"Piste",known:"Connu, pas de fix"}, one:"résultat", many:"résultats", sol:"solution", sols:"solutions",
     empty:"Rien trouvé. Essaie juste le code d'erreur, ou un mot plus court. Toujours rien ? Demande sur le <a href=\"https://discord.gg/rotk\" target=\"_blank\" rel=\"noopener\">Discord officiel</a>.",
     foot1:"Wiki communautaire non officiel, écrit par Warline avec l'aide de <a href=\"https://github.com/Wazlyy\" target=\"_blank\" rel=\"noopener\">Wazlyy</a>, à partir de cas réels du Discord et du code public du launcher.", foot3:"Envie de corriger ou d'ajouter une fiche ? Le wiki est open source sur <a href=\"https://github.com/Warlinee/h1-guide\" target=\"_blank\" rel=\"noopener\">GitHub</a>, propose tes modifs.",
@@ -720,6 +730,7 @@ const UI = {
     faqH:"Problems and fixes", faqP:"Click a problem to see how to fix it.", all:"All",
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
     linksH:"Useful links", linksP:"Downloads, file paths and addresses worth knowing.",
+    copyCode:"Copy",
     st:{ok:"Confirmed",lead:"Lead",known:"Known, no fix"}, one:"result", many:"results", sol:"fix", sols:"fixes",
     empty:"Nothing found. Try just the error code, or a shorter word. Still nothing? Ask on the <a href=\"https://discord.gg/rotk\" target=\"_blank\" rel=\"noopener\">official Discord</a>.",
     foot1:"Unofficial community wiki, written by Warline with help from <a href=\"https://github.com/Wazlyy\" target=\"_blank\" rel=\"noopener\">Wazlyy</a>, from real Discord cases and the launcher's public code.", foot3:"Want to fix or add a card? The wiki is open source on <a href=\"https://github.com/Warlinee/h1-guide\" target=\"_blank\" rel=\"noopener\">GitHub</a>, send your changes.",
@@ -1030,9 +1041,27 @@ function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.c
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
 function codeify(s){
   // un chemin ou un lien s'arrête aussi au premier caractère chinois (texte zh sans espace après le chemin), et un chemin ne garde pas le point de la phrase
-  return esc(s).replace(/([A-Z]:\\Program Files\\ROTK Launcher\\ROTK Launcher\.exe|ROTK Launcher\.exe|(?:[A-Z]:\\Program Files\\ROTK Launcher|%APPDATA%\\ROTK Launcher)(?:[^\s,)\u3000-\u9fff\uff00-\uffef]*[^\s,).\u3000-\u9fff\uff00-\uffef])?|[A-Z]:\\[^\s,)\u3000-\u9fff\uff00-\uffef]*[^\s,).\u3000-\u9fff\uff00-\uffef]|%APPDATA%[^\s,)\u3000-\u9fff\uff00-\uffef]*|\b[\w.-]+\.(?:exe|dll|xml|log|json|ini)(?:\.old)?\b|\.ROTK-assets|0x[0-9A-Fa-f]{5,}|--no-sandbox)/g, '<code class="p">$1</code>')
+  // la ligne de launch-failed (chemin entre guillemets puis --no-sandbox) fait un seul cadre : un clic copie la ligne exacte, guillemets et deux tirets compris
+  return esc(s).replace(/(&quot;[A-Z]:\\Program Files\\ROTK Launcher\\ROTK Launcher\.exe&quot; --no-sandbox|[A-Z]:\\Program Files\\ROTK Launcher\\ROTK Launcher\.exe|ROTK Launcher\.exe|(?:[A-Z]:\\Program Files\\ROTK Launcher|%APPDATA%\\ROTK Launcher)(?:[^\s,)\u3000-\u9fff\uff00-\uffef]*[^\s,).\u3000-\u9fff\uff00-\uffef])?|[A-Z]:\\[^\s,)\u3000-\u9fff\uff00-\uffef]*[^\s,).\u3000-\u9fff\uff00-\uffef]|%APPDATA%[^\s,)\u3000-\u9fff\uff00-\uffef]*|\b[\w.-]+\.(?:exe|dll|xml|log|json|ini)(?:\.old)?\b|\.ROTK-assets|0x[0-9A-Fa-f]{5,}|--no-sandbox)/g, '<code class="p" role="button" tabindex="0" title="' + esc(UI[lang].copyCode) + '">$1</code>')
     .replace(/https:\/\/[^\s<\u3000-\u9fff\uff00-\uffef]*[^\s<.,;:!?)\u3000-\u9fff\uff00-\uffef]/g, u => '<a class="lk" href="' + u + '" target="_blank" rel="noopener">' + u.replace(/^https:\/\//, "") + '</a>');
 }
+/* Cadres de code : un clic, un tap, Entrée ou Espace copie le texte exact, et « Copié ✓ » s'affiche au-dessus du cadre (lu aussi par les lecteurs d'écran).
+   Le cadre reste un <code> dans la phrase, avec role="button" : un vrai <button> ne se coupe pas en fin de ligne et passerait tout entier à la ligne suivante. Dans une fiche fermée, il n'est pas atteignable au clavier. */
+const chipTip = el("span", "chip-tip"); chipTip.setAttribute("role", "status"); document.body.append(chipTip);
+function copyChip(c){
+  if (c.classList.contains("ok")) return; // déjà copié à l'instant (double clic)
+  const b = c.getClientRects()[0], bar = document.querySelector(".topnav").getBoundingClientRect().bottom;
+  const up = b.top - 40 > bar, right = b.left > innerWidth / 2; // au-dessus du cadre, sauf s'il est juste sous la barre du haut ; ancré à droite dans la moitié droite de l'écran
+  chipTip.textContent = ""; chipTip.classList.remove("ok"); chipTip.classList.toggle("up", up); chipTip.classList.toggle("r", right);
+  chipTip.style.left = (right ? b.right : b.left) + scrollX + "px"; chipTip.style.top = (up ? b.top - 6 : b.bottom + 6) + scrollY + "px";
+  c.classList.add("ok"); setTimeout(() => c.classList.remove("ok"), 1600);
+  copyText(c.textContent, chipTip, UI[lang]);
+}
+// un glisser dans un cadre (pour sélectionner un bout du chemin) ne copie rien : seulement un clic ou un tap sur place, ou Entrée
+let chipDown = null; document.addEventListener("mousedown", e => { chipDown = [e.clientX, e.clientY]; }, true);
+document.addEventListener("click", e => { const c = e.target.closest && e.target.closest('code.p[role="button"]'), d = chipDown; chipDown = null; if (!c || e.detail && d && Math.hypot(e.clientX - d[0], e.clientY - d[1]) > 4 || !getSelection().isCollapsed) return; copyChip(c); });
+document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches('code.p[role="button"]')) { e.preventDefault(); copyChip(e.target); } });
+document.addEventListener("mousedown", e => { if (e.detail > 1 && e.target.closest && e.target.closest('code.p[role="button"]')) e.preventDefault(); }); // double clic sur un cadre : pas de mot sélectionné
 const dateL = d => lang === "zh" ? d.replace(/^(\d+)\/(\d+)\/(\d+)$/, "$3/$2/$1") : d; // 21/10/2026 devient 2026/10/21 en chinois
 const techTags = (k) => k.filter(t => /^[\x20-\x7E]+$/.test(t) && /[0-9.\\=%_]|^[A-Z0-9 ]+$/.test(t)).slice(0, 2);
 
@@ -1140,6 +1169,7 @@ function render(){
   if (typeof notesRender === "function" && !document.getElementById("notes").hidden) notesRender();
   document.querySelectorAll(".notes-btn").forEach(b => b.classList.toggle("unseen", typeof notesUnseen === "function" && notesUnseen()));
   const fs = document.getElementById("findSteps"); fs.innerHTML = ""; T.findSteps.forEach(x => fs.append(el("li", null, x)));
+  fs.querySelectorAll("code.p").forEach(c => { c.setAttribute("role", "button"); c.tabIndex = 0; c.title = T.copyCode; }); // rotk-shotgun-sprint.ini se copie comme les cadres des fiches
 }
 
 /* Recherche : sans accents, mots courants FR/EN ignorés, synonymes du Discord, résultats classés. */
@@ -1397,7 +1427,8 @@ const SUP_GENERAL = [
 function cardLink(id, l){ return location.origin + location.pathname + (l === "fr" ? "" : "?lang=" + l) + "#" + id; }
 async function copyText(t, btn, T){
   try { await navigator.clipboard.writeText(t); } catch (e) { const a = document.createElement("textarea"); a.value = t; document.body.append(a); a.select(); try { document.execCommand("copy"); } catch (_) {} a.remove(); }
-  const old = btn.textContent; btn.textContent = T.supCopied; btn.classList.add("ok"); setTimeout(() => { btn.textContent = old; btn.classList.remove("ok"); }, 1600);
+  // recliqué pendant son « Copié ✓ » (double clic, autre cadre copié juste après) : le bouton garde son texte d'origine et un seul minuteur
+  const old = btn._old ?? btn.textContent; btn._old = old; clearTimeout(btn._t); btn.textContent = T.supCopied; btn.classList.add("ok"); btn._t = setTimeout(() => { btn.textContent = old; btn.classList.remove("ok"); delete btn._old; }, 1600);
 }
 // réponses à copier : FR et EN, plus ZH en chinois quand la réponse est traduite
 function supTexts(o, link){ const t = [["fr", o.fr + link("fr")], ["en", o.en + link("en")]]; if (lang === "zh" && o.zh !== o.en) t.push(["zh", o.zh + link("zh")]); return t; }
