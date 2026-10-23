@@ -337,6 +337,7 @@ section.block{scroll-margin-top:84px}
 .sug{position:relative;margin-top:8px;z-index:2;background:rgba(14,14,16,.97);border:1px solid var(--line-3);border-radius:18px;padding:6px;box-shadow:0 24px 60px -20px rgba(0,0,0,.9);text-align:left}
 .sg{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-size:14.5px;color:var(--text)}
 .sg:hover,.sg:focus-visible{background:rgba(255,255,255,.07)}
+.sg:focus-visible{background:linear-gradient(90deg,rgba(225,6,0,.16),rgba(225,6,0,.05));box-shadow:inset 0 0 0 1px rgba(255,59,47,.28)} /* suggestion choisie au clavier : comme dans la fenêtre de recherche */
 .sg .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sg .vv{font-size:11px;color:var(--red-hi)}
 .sg.more{justify-content:center;color:var(--dim);font-size:13.5px}
@@ -1076,7 +1077,7 @@ function nowRender(){
     li.innerHTML = '<span class="now-dot" aria-hidden="true"></span><p>' + x[lang] + '</p>';
     if (x.c && document.getElementById(x.c)) {
       const a = el("a", "now-go", esc(L.see)); a.href = "#" + x.c;
-      a.onclick = e => { e.preventDefault(); openCard(x.c, true); };
+      a.onclick = e => { e.preventDefault(); visitCard(x.c); };
       li.append(a);
     }
     ul.append(li);
@@ -1365,7 +1366,7 @@ function installRender(){
       const r = document.getElementById(id); if (!r) return;
       const x = r._x, b = el("button", "ilink"); b.type = "button";
       b.innerHTML = (x.v ? '<span class="iv">▶</span>' : '<span class="dot ' + STATUS[x.s] + '"></span>') + '<span>' + esc(x.t[lang].replace(/[«»"“”]/g, "").trim()) + '</span>';
-      b.onclick = () => openCard(id, true);
+      b.onclick = () => visitCard(id);
       links.append(b);
     });
     if (links.children.length) li.append(links);
@@ -1517,7 +1518,7 @@ function filter(){
     shown.slice(0, 5).forEach(o => {
       const b = el("button", "sg"); b.type = "button";
       b.innerHTML = '<span class="dot ' + STATUS[o.r._x.s] + '"></span><span class="tt">' + esc(o.r._x.t[lang]) + '</span>' + (o.r._x.v ? '<span class="vv">▶</span>' : '');
-      b.onclick = () => openCard(o.r.id, true);
+      b.onclick = () => { sug.hidden = true; visitCard(o.r.id); dropDbl(); };
       sug.append(b);
     });
     if (shown.length > 5) { const m = el("button", "sg more", esc(T.seeAll.replace("{n}", shown.length))); m.type = "button"; m.onclick = () => document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); sug.append(m); }
@@ -1539,12 +1540,30 @@ function openCard(id, scroll){
   if (scroll) { const m = parseFloat(getComputedStyle(r).scrollMarginTop) || 0; r.scrollIntoView({behavior: scrollMode(), block: r.offsetHeight + m > innerHeight ? "start" : "center"}); }
   return true;
 }
+/* Fiche ouverte exprès (suggestion, Entrée, fenêtre de recherche, État actuel, Première installation, barre du haut) : la page va jusqu'à la fiche
+   et le focus passe sur son titre sans redéfiler. Sur téléphone le clavier se ferme, au clavier et au lecteur d'écran on arrive dans la fiche.
+   Pas pour la fiche qui s'ouvre toute seule pendant la frappe. */
+function visitCard(id){
+  if (!openCard(id, true)) return false;
+  document.getElementById(SLUG_ALIASES[id] || id).querySelector("summary").focus({preventScroll: true});
+  return true;
+}
+// double clic ou double tap sur une suggestion : la liste se ferme au premier clic, le second tomberait sur ce qui passe alors sous le doigt (lien du haut, bouton capture) et ne fait rien
+function dropDbl(){ const g = ev => { removeEventListener("click", g, true); if (ev.detail > 1) { ev.preventDefault(); ev.stopPropagation(); } }; addEventListener("click", g, true); setTimeout(() => removeEventListener("click", g, true), 600); }
 
 document.getElementById("q").addEventListener("input", e => { filter(); if (!e.target.value.trim() || !document.querySelector("#list details[open]")) dropCardHash(); }); // recherche qui n'ouvre aucune fiche (pas sûre, 0xC0000005, rien trouvé) : l'adresse perd aussi le #lien écrit par une lettre tapée avant
 // la première fiche ouverte par la recherche a mis son #lien dans l'adresse : champ vidé (au clavier, X, Échap ou tuile d'Accès rapide), plus aucune fiche n'est ouverte, l'adresse le perd.
 // Pas dans filter() : filter() passe avant l'ouverture d'un lien direct vers une fiche.
 function dropCardHash(){ try { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(SLUG_ALIASES[id] || id)?.classList.contains("row")) history.replaceState(null, "", location.pathname + location.search); } catch (_) {} }
 document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); const f = document.querySelector("#sug .sg:not(.more)"); if (f) f.click(); else document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); } if (e.key === "Escape") { document.getElementById("sug").hidden = true; if (e.target.value) { e.preventDefault(); clearField(e.target); } } });
+// flèches : du champ vers les suggestions, puis de l'une à l'autre en boucle comme dans la fenêtre de recherche ; Échap revient dans le champ
+document.getElementById("q").addEventListener("keydown", e => { if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return; const s = document.querySelectorAll("#sug .sg"); if (!s.length) return; e.preventDefault(); document.getElementById("sug").hidden = false; s[e.key === "ArrowDown" ? 0 : s.length - 1].focus(); });
+document.getElementById("sug").addEventListener("keydown", e => {
+  const s = [...document.querySelectorAll("#sug .sg")], i = s.indexOf(document.activeElement); if (i < 0) return;
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); s[(i + (e.key === "ArrowDown" ? 1 : s.length - 1)) % s.length].focus(); }
+  else if (e.key === "Escape") { e.preventDefault(); document.getElementById("q").focus(); document.getElementById("sug").hidden = true; }
+  else if ((e.key.length === 1 && e.key !== " " || e.key === "Backspace") && !e.ctrlKey && !e.metaKey && !e.altKey) document.getElementById("q").focus(); // une lettre tapée sur une suggestion va dans le champ (Espace ouvre encore la suggestion)
+});
 /* Effacer la recherche : bouton X et Échap dans la barre, bouton X dans la fenêtre de recherche et dans Réponses rapides, bouton « Effacer la recherche » quand rien n'est trouvé.
    Le champ se vide comme si on effaçait le texte au clavier, et la page ne bouge pas. */
 function clearField(q){ q.value = ""; q.dispatchEvent(new Event("input")); }
@@ -1668,7 +1687,7 @@ function palHide(back){
 function palOpen(id){
   palHide(false);
   try { history.replaceState(null, "", location.pathname + location.search + "#" + id); } catch (e) {}
-  setTimeout(() => openCard(id, true), 60);
+  setTimeout(() => visitCard(id), 60);
 }
 document.getElementById("palQ").addEventListener("input", () => { document.getElementById("pal").classList.remove("ocr"); palSel = 0; palRender(); });
 document.getElementById("palQ").addEventListener("keydown", e => {
@@ -1853,7 +1872,7 @@ whenReady(() => {
   // un clic ouvre toujours la cible, même si l'adresse ne change pas
   links.forEach(a => a.addEventListener("click", e => {
     const el = tgt(a);
-    if (el && el.classList.contains("row")) { e.preventDefault(); try { history.replaceState(null, "", location.pathname + location.search + a.hash); } catch (_) {} openCard(el.id, true); setTimeout(pick, 700); }
+    if (el && el.classList.contains("row")) { e.preventDefault(); try { history.replaceState(null, "", location.pathname + location.search + a.hash); } catch (_) {} visitCard(el.id); setTimeout(pick, 700); }
   }));
   const slot = document.getElementById("tnSlot");
   new IntersectionObserver(([e]) => nav.classList.toggle("stuck", !e.isIntersecting && e.boundingClientRect.top < 0), {threshold: 0, rootMargin: "-10px 0px 0px 0px"}).observe(slot);
