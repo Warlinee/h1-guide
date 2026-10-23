@@ -654,6 +654,7 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
     <div class="tabs" id="tabs" role="group" data-al="tabsL"></div>
     <p class="legend" data-i="legend"></p>
     <p class="approx" id="fixq" hidden></p>
+    <p class="approx" id="early" hidden data-i="ocrEarly"></p>
     <p class="approx" id="approx" hidden data-i="approx"></p>
     <div class="list" id="list"></div>
     <div class="empty" id="empty" hidden><span data-i="empty"></span><button class="share" type="button" id="emptyClear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg><span data-i="clearQ"></span></button></div>
@@ -1176,7 +1177,9 @@ const words = s => norm(s).split(/[^a-z0-9.=_\\:+-]+/).map(w => w.replace(/^[.=_
 function codeAlts(t){
   if (t.length < 5 || !/\d/.test(t) || !/^[a-z0-9]+$/.test(t)) return [];
   const f = t.replace(/o/g, "0").replace(/[il]/g, "1");
-  return [f, /^0x[0-9a-f]{5,}$/.test(f) ? f.slice(2) : /^[0-9a-f]{5,}$/.test(f) ? "0x" + f : ""].filter(a => a && a !== t);
+  // un décalage de l'Observateur d'événements a 16 chiffres (0x0000000002a31abc) : aussi sans ses zéros de tête, s'il reste au moins 5 chiffres
+  const z = /^0x0[0-9a-f]+$/.test(f) ? f.slice(2).replace(/^0+/, "") : "";
+  return [f, /^0x[0-9a-f]{5,}$/.test(f) ? f.slice(2) : /^[0-9a-f]{5,}$/.test(f) ? "0x" + f : "", z.length >= 5 ? "0x" + z : "", z.length >= 5 ? z : ""].filter(a => a && a !== t);
 }
 function queryTokens(q){
   let s = norm(q); PHRASES.forEach(([re, to]) => s = s.replace(re, " " + to + " "));
@@ -1469,6 +1472,14 @@ function row(x, T){
   return r;
 }
 
+// message collé (4 mots ou plus) : seulement les fiches qui ont au moins la moitié du score de la meilleure, au lieu de toutes celles qui ont un mot en commun
+function keepBest(ok, groups){
+  if (groups.length < 4 || !ok.length) return ok;
+  const best = Math.max(...ok.map(o => o.score));
+  return ok.filter(o => o.score >= best / 2);
+}
+// 0xC0000005 sans 0x2a31abc : même règle que le lecteur de captures (ocrMatch), pas de fiche publique pour ce crash
+const earlyCrash = groups => { const a = groups.flatMap(g => g.cjk ? [] : [g.own, ...g.alts]); return a.some(w => /^(0x)?c0000005$/.test(w)) && !a.some(w => w.includes("2a31abc")); };
 function filter(){
   const T = UI[lang];
   const q = document.getElementById("q").value.trim();
@@ -1481,18 +1492,22 @@ function filter(){
   if (groups.length) {
     let ok = res.filter(o => o.matched === groups.length);
     if (!ok.length) { strict = false; ok = res.filter(o => o.matched > 0); }
+    ok = keepBest(ok, groups);
     const keep = new Set(ok.map(o => o.r));
     res.forEach(o => { o.show = keep.has(o.r); });
   } else res.forEach(o => { o.show = !q && (activeCat === "all" || o.r.dataset.cat === activeCat); }); // du texte sans aucun mot cherchable (que des mots courants, du chinois hors 中文, un terme absent des fiches) : rien trouvé
   const shown = res.filter(o => o.show).sort((a, b) => b.score - a.score);
   rows.forEach(r => { r.hidden = true; r.style.order = ""; r._silent = true; r.querySelector("details").open = false; r._silent = false; });
   shown.forEach((o, i) => { o.r.hidden = false; if (groups.length) o.r.style.order = i; });
-  if (groups.length && shown[0]) { shown[0].r._silent = true; shown[0].r.querySelector("details").open = true; shown[0].r._silent = false; }
+  // message collé : la première fiche ne s'ouvre seule que si elle a au moins 40 % des mots ; 0xC0000005 sans 0x2a31abc : la réponse du lecteur de captures, rien ne s'ouvre
+  const early = earlyCrash(groups), sure = shown[0] && (groups.length < 4 || shown[0].matched / groups.length >= .4) && !early;
+  if (groups.length && sure) { shown[0].r._silent = true; shown[0].r.querySelector("details").open = true; shown[0].r._silent = false; }
   const seen = {}; shown.forEach(o => seen[o.r.dataset.cat] = true);
   document.querySelectorAll("#list .group").forEach(g => g.hidden = groups.length > 0 || !seen[g.dataset.group] || activeCat !== "all");
   document.getElementById("count").textContent = shown.length + " " + (shown.length > 1 ? T.many : T.one);
   document.getElementById("empty").hidden = shown.length !== 0;
-  document.getElementById("approx").hidden = strict || !shown.length;
+  document.getElementById("approx").hidden = strict || groups.length >= 4 && sure || !shown.length; // message collé dont la fiche est sûre : pas de « Pas de correspondance exacte »
+  document.getElementById("early").hidden = !early;
   const fx = document.getElementById("fixq"); fx.hidden = !(groups.fixed && groups.fixed.length && shown.length);
   if (!fx.hidden) fx.textContent = T.fixedQ.replace("{q}", fixedQuery(q, groups.fixed));
   document.getElementById("qClear").hidden = !document.getElementById("q").value;
@@ -1522,7 +1537,7 @@ function openCard(id, scroll){
   return true;
 }
 
-document.getElementById("q").addEventListener("input", e => { filter(); if (!e.target.value.trim()) dropCardHash(); });
+document.getElementById("q").addEventListener("input", e => { filter(); if (!e.target.value.trim() || !document.querySelector("#list details[open]")) dropCardHash(); }); // recherche qui n'ouvre aucune fiche (pas sûre, 0xC0000005, rien trouvé) : l'adresse perd aussi le #lien écrit par une lettre tapée avant
 // la première fiche ouverte par la recherche a mis son #lien dans l'adresse : champ vidé (au clavier, X, Échap ou tuile d'Accès rapide), plus aucune fiche n'est ouverte, l'adresse le perd.
 // Pas dans filter() : filter() passe avant l'ouverture d'un lien direct vers une fiche.
 function dropCardHash(){ try { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(SLUG_ALIASES[id] || id)?.classList.contains("row")) history.replaceState(null, "", location.pathname + location.search); } catch (_) {} }
@@ -1606,6 +1621,7 @@ function palResults(q){
   let res = rows.map(r => ({r, ...scoreRow(r._idx, groups)}));
   let ok = res.filter(o => o.matched === groups.length), exact = true;
   if (!ok.length) { ok = res.filter(o => o.matched > 0); exact = false; }
+  ok = keepBest(ok, groups);
   return {items: ok.sort((a, b) => b.score - a.score).slice(0, 8).map(o => o.r), exact, empty: false, fixed: groups.fixed.length ? fixedQuery(q, groups.fixed) : ""};
 }
 function palRender(){
