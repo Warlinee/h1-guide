@@ -317,6 +317,7 @@ section.block{scroll-margin-top:84px}
 .hero-cta{display:inline-block;margin-top:22px;font-size:14.5px;color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
 .hero-cta b{color:#fff;font-weight:600}
 .hero-cta:hover{color:#fff;border-bottom-color:var(--red-line)}
+.hero-cta.err{margin-top:10px} /* second lien sous celui de l'installation : vers les types de problème (#acces) */
 .isteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 14px}
 .istep{position:relative;display:flex;flex-direction:column;gap:8px;padding:16px 20px 20px;border-radius:20px;border:1px solid var(--line);background:radial-gradient(14rem 9rem at 20% 0%,rgba(225,6,0,.10),transparent 70%),var(--s1)}
 .iart{width:112px;height:112px;margin:-4px 0 -6px -10px;mix-blend-mode:lighten}
@@ -615,6 +616,7 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
     <button class="shot" type="button" id="shotBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><path d="M8.5 6 10 3.8h4L15.5 6"/><circle cx="12" cy="13" r="3.6"/></svg><span data-i="shotT"></span></button>
     <input type="file" id="shotFile" accept="image/*" hidden>
     <a class="hero-cta" href="#installation" data-i="installCta"></a>
+    <a class="hero-cta err" href="#acces" data-i="errCta"></a>
   </div>
 </header>
 
@@ -716,6 +718,7 @@ const UI = {
     beforeH:"Avant de demander de l'aide", beforeP:"Ce qu'il faut toujours préciser, et ce qu'il ne faut jamais faire.",
     linksH:"Liens utiles", linksP:"Téléchargements, chemins de fichiers et adresses à connaître.",
     copyCode:"Copier",
+    errCta:"Une erreur ? <b>Choisis le type de problème</b>&nbsp;↓",
     st:{ok:"Confirmé",lead:"Piste",known:"Connu, pas de fix"}, one:"résultat", many:"résultats", sol:"solution", sols:"solutions",
     empty:"Rien trouvé. Essaie juste le code d'erreur, ou un mot plus court. Toujours rien ? Demande sur le <a href=\"https://discord.gg/rotk\" target=\"_blank\" rel=\"noopener\">Discord officiel</a>.",
     foot1:"Wiki communautaire non officiel, écrit par Warline avec l'aide de <a href=\"https://github.com/Wazlyy\" target=\"_blank\" rel=\"noopener\">Wazlyy</a>, à partir de cas réels du Discord et du code public du launcher.", foot3:"Envie de corriger ou d'ajouter une fiche ? Le wiki est open source sur <a href=\"https://github.com/Warlinee/h1-guide\" target=\"_blank\" rel=\"noopener\">GitHub</a>, propose tes modifs.",
@@ -731,6 +734,7 @@ const UI = {
     beforeH:"Before asking for help", beforeP:"What to always tell, and what never to do.",
     linksH:"Useful links", linksP:"Downloads, file paths and addresses worth knowing.",
     copyCode:"Copy",
+    errCta:"Got an error? <b>Pick the kind of problem</b> ↓",
     st:{ok:"Confirmed",lead:"Lead",known:"Known, no fix"}, one:"result", many:"results", sol:"fix", sols:"fixes",
     empty:"Nothing found. Try just the error code, or a shorter word. Still nothing? Ask on the <a href=\"https://discord.gg/rotk\" target=\"_blank\" rel=\"noopener\">official Discord</a>.",
     foot1:"Unofficial community wiki, written by Warline with help from <a href=\"https://github.com/Wazlyy\" target=\"_blank\" rel=\"noopener\">Wazlyy</a>, from real Discord cases and the launcher's public code.", foot3:"Want to fix or add a card? The wiki is open source on <a href=\"https://github.com/Warlinee/h1-guide\" target=\"_blank\" rel=\"noopener\">GitHub</a>, send your changes.",
