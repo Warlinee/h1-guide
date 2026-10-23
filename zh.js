@@ -588,6 +588,7 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"\"Check you have the latest patch\" video redone for 2.0.45: the proxySha256= line must start with 3D2319E6, with FFE3456B (2.0.44) and 7DE5B115 (2.0.43) in the table. The same video is used in the trio reboot card.": "重做了“确认你装的是最新补丁”的视频，改成 2.0.45 版：proxySha256= 这一行要以 3D2319E6 开头，表格里还列出了 FFE3456B（2.0.44）和 7DE5B115（2.0.43）。三排复活条目里用的也是这个视频。",
 "Language card rewritten: since launcher 2.0.44, the game uses the launcher's language (French, English or Chinese). Its old link still works.": "重写了语言条目：从 2.0.44 版启动器开始，游戏使用启动器的语言（法语、英语或中文）。这个条目的旧链接仍然可以用。",
 "\"Not enough disk space for the assets\" card: the launcher wants 3 times the download size free.": "新增“Not enough disk space for the assets”（资源文件磁盘空间不足）条目：启动器要求有下载大小 3 倍的可用空间。",
 "Free space to plan for: 15 GB for a first install, not 4 to 5 GB (First install path and assets card).": "需要预留的空间：第一次安装要 15 GB，而不是 4 到 5 GB（已在“首次安装”和资源文件条目里更正）。",
