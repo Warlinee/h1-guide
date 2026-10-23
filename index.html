@@ -212,7 +212,8 @@ html.support-mode .hero{padding-bottom:6px}
 .sup-search input::-webkit-search-cancel-button{display:none}
 .sup-sub{margin:26px 0 12px;font-size:15px;font-weight:600;color:var(--dim)}
 .sup-list{display:grid;gap:10px}
-.sup-it{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+#support .approx{margin:0 2px 12px}
+.sup-it{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:14px 16px;scroll-margin-top:16px}
 .sup-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:8px}
 .sup-top h3{margin:0;flex:1;min-width:220px;font-size:15.5px;font-weight:600}
 .sup-open{font-size:13px;color:var(--red-hi);text-decoration:none}
@@ -347,11 +348,12 @@ section.block{scroll-margin-top:84px}
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:14px 2px 0;font-size:13px;color:var(--muted)}
 .legend .dot{margin-right:-8px}
 .approx{margin:12px 2px 0;font-size:14px;color:var(--amber)}
+.sug .sg-early{margin:6px 12px 8px} /* 0xC0000005 sans 0x2a31abc : le conseil du lecteur de captures en tête des suggestions */
 .share{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 12px;border-radius:999px;border:1px solid var(--line-2);font-size:13px;color:var(--dim);cursor:pointer}
 .share svg{width:15px;height:15px}
 .share:hover{border-color:var(--line-3);color:#fff}
 .share.ok{border-color:rgba(127,217,154,.5);color:var(--ok)}
-.row.flash{animation:flash 1.6s var(--ease)}
+.row.flash,.sup-it.flash{animation:flash 1.6s var(--ease)}
 @keyframes flash{0%,40%{box-shadow:0 0 0 2px var(--red-hi),0 0 40px rgba(255,59,47,.35)}100%{box-shadow:none}}
 .row{scroll-margin-top:120px}
 .group{font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px;margin:18px 0 2px}
@@ -553,6 +555,7 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
 .clr svg{width:16px;height:16px;color:inherit}
 .search .clr{margin:0 -4px}
 .sup-search .clr{margin-right:-8px}
+.sup-search .count{margin:0 -8px 0 4px}
 .empty .share{display:flex;width:max-content;max-width:100%;margin:14px auto 0}
 /* Chinois : polices système seulement, aucune police téléchargée. Nos polices n'ont que le latin, les caractères chinois passent à YaHei (Windows), PingFang (Mac) ou Noto (Linux, Android). */
 :root{--zh:"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","Source Han Sans SC",sans-serif}
@@ -628,10 +631,13 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
 <main class="wrap" id="contenu" tabindex="-1">
   <section class="block" id="support" hidden>
     <div class="block-head"><div><h1 data-i="supH"></h1><p data-i="supP"></p></div></div>
-    <label class="sup-search" for="supQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><input id="supQ" type="search" autocomplete="off" data-al="supSearchL"><button class="clr" type="button" id="supClear" data-al="clearQ" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></label>
+    <label class="sup-search" for="supQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><input id="supQ" type="search" autocomplete="off" data-al="supSearchL"><button class="clr" type="button" id="supClear" data-al="clearQ" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><span class="count" id="supCount" aria-live="polite" hidden></span></label>
     <h2 class="sup-sub" data-i="supGen"></h2>
     <div class="sup-list" id="supGeneral"></div>
     <h2 class="sup-sub" data-i="supCards"></h2>
+    <p class="approx" id="supFixq" hidden></p>
+    <p class="approx" id="supEarly" hidden data-i="ocrEarly"></p>
+    <p class="approx" id="supApprox" hidden data-i="approx"></p>
     <div class="sup-list" id="supCards"></div>
   </section>
   <section class="now" id="etat" aria-labelledby="nowH">
@@ -1241,6 +1247,7 @@ function queryTokens(q){
   const group = t => SYNMAP.has(t) ? {own:t, alts:SYNMAP.get(t), syn:true} : {own:t, alts:[t, ...codeAlts(t)]};
   const found = g => rows.some(r => hit(r._idx.t, g) || hit(r._idx.k, g) || hit(r._idx.b, g));
   const out = [], fixed = [], typed = new Set(toks).size < 4; // un message collé (4 mots ou plus) est recopié tel quel : ses mots ne sont pas corrigés
+  let guess = false; // un mot remplacé par le mot le plus proche des fiches (pas un code, pas le tiret ni le s final) : la recherche n'est pas sûre, rien ne s'ouvre tout seul
   for (const t of new Set(toks)) {
     let g = group(t);
     if (typed && !found(g)) {
@@ -1249,6 +1256,7 @@ function queryTokens(q){
         // seulement une terminaison en moins (bloquee pour bloque, refusees pour refuse) : le mot tapé était juste, pas de ligne « Résultats pour »
         const end = t.startsWith(f.w) && /^(e|es|ee|ees)$/.test(t.slice(f.w.length));
         if (!end) fixed.push([t, f.w]);
+        if (!end && f.d && !/\d/.test(t)) guess = true; // internet devient interdit, réseau reseat : la liste et la ligne « Résultats pour », sans fiche ouverte
         g = group(f.w);
       }
     }
@@ -1258,7 +1266,7 @@ function queryTokens(q){
   // Seulement sans autre mot cherchable : « crash in game » reste une recherche de crash.
   const ph = " " + raw.join(" ") + " ", kp = !toks.length && kps.find(p => ph.includes(" " + p + " "));
   if (kp) out.push({own:kp, alts:[], kp:true});
-  const groups = out.concat(zhTokens(q)); groups.fixed = fixed;
+  const groups = out.concat(zhTokens(q)); groups.fixed = fixed; groups.guess = guess;
   return groups;
 }
 /* Un mot qu'aucune fiche ne contient (bitdefnder, raccourcis, anti-virus) : on essaie le mot à tirets collé, le mot sans son s final,
@@ -1486,25 +1494,33 @@ function supItem(title, texts, T, meta){
   });
   return d;
 }
+/* Recherche des réponses : la même que la barre de recherche pour les réponses des fiches (rankRows : tous les mots, sinon les plus proches, message collé réduit aux meilleures),
+   avec les mêmes lignes au-dessus (« Résultats pour », 0xC0000005, « Pas de correspondance exacte ») et le nombre de réponses dans le champ.
+   Les réponses générales gardent leur règle : tous les mots. Du texte sans aucun mot cherchable ne trouve rien, comme dans la barre. */
 function supportRender(){
   if (!SUPPORT) return;
-  const T = UI[lang];
-  document.getElementById("supQ").placeholder = T.supSearchL;
-  document.getElementById("supClear").hidden = !document.getElementById("supQ").value;
-  const q = document.getElementById("supQ").value.trim();
+  const T = UI[lang], sq = document.getElementById("supQ");
+  sq.placeholder = T.supSearchL;
+  document.getElementById("supClear").hidden = !sq.value;
+  const q = sq.value.trim();
   const groups = q ? queryTokens(q) : [];
+  const gen = !q ? SUP_GENERAL : SUP_GENERAL.filter(x => groups.length && groups.every(gr => gr.cjk ? hitZh(x.t.zh + " " + x.r.zh, gr) : (norm(x.t.fr + " " + x.t.en + " " + x.r.fr + " " + x.r.en)).split(/[^a-z0-9.@-]+/).some(w => w.startsWith(gr.own) || gr.alts.includes(w))));
   const g = document.getElementById("supGeneral"); g.innerHTML = "";
-  SUP_GENERAL.filter(x => !groups.length || groups.every(gr => gr.cjk ? hitZh(x.t.zh + " " + x.r.zh, gr) : (norm(x.t.fr + " " + x.t.en + " " + x.r.fr + " " + x.r.en)).split(/[^a-z0-9.@-]+/).some(w => w.startsWith(gr.own) || gr.alts.includes(w))))
-    .forEach(x => g.append(supItem(x.t[lang], supTexts(x.r, () => ""), T)));
+  gen.forEach(x => g.append(supItem(x.t[lang], supTexts(x.r, () => ""), T)));
+  const rows = [...document.querySelectorAll("#list .row")].filter(r => r._x.m);
+  const rk = groups.length ? rankRows(rows, groups) : {list: q ? [] : rows.map(r => ({r})), strict: true, sure: false};
   const c = document.getElementById("supCards"); c.innerHTML = "";
-  let rows = [...document.querySelectorAll("#list .row")].filter(r => r._x.m);
-  if (groups.length) rows = rows.map(r => ({r, ...scoreRow(r._idx, groups)})).filter(o => o.matched === groups.length).sort((a, b) => b.score - a.score).map(o => o.r);
-  rows.forEach(r => {
+  rk.list.forEach(({r}) => {
     const x = r._x;
-    const meta = '<span class="tag st ' + STATUS[x.s] + '">' + esc(T.st[x.s]) + '</span><a class="sup-open" href="#' + r.id + '">' + esc(T.supOpen) + '</a>';
-    c.append(supItem(x.t[lang], supTexts(x.m, l => " " + shareURL(r.id, l)), T, meta));
+    // « Voir la fiche » : l'adresse de la fiche dans la page normale, sans ?support
+    const meta = '<span class="tag st ' + STATUS[x.s] + '">' + esc(T.st[x.s]) + '</span><a class="sup-open" href="' + esc(cardLink(r.id, lang)) + '">' + esc(T.supOpen) + '</a>';
+    const it = supItem(x.t[lang], supTexts(x.m, l => " " + shareURL(r.id, l)), T, meta); it.id = "sup-" + r.id;
+    c.append(it);
   });
-  if (!rows.length) c.append(el("p", "empty", esc(T.supNone)));
+  if (!rk.list.length) c.append(el("p", "empty", esc(T.supNone)));
+  const n = gen.length + rk.list.length, ct = document.getElementById("supCount");
+  ct.hidden = !q; ct.textContent = n + " " + ((lang === "en" ? n !== 1 : n > 1) ? T.many : T.one);
+  searchLines(["supFixq", "supEarly", "supApprox"], q, groups, rk);
 }
 if (SUPPORT) {
   document.documentElement.classList.add("support-mode");
@@ -1555,6 +1571,28 @@ function keepBest(ok, groups){
 }
 // 0xC0000005 sans 0x2a31abc : même règle que le lecteur de captures (ocrMatch), pas de fiche publique pour ce crash
 const earlyCrash = groups => { const a = groups.flatMap(g => g.cjk ? [] : [g.own, ...g.alts]); return a.some(w => /^(0x)?c0000005$/.test(w)) && !a.some(w => w.includes("2a31abc")); };
+/* La recherche des fiches, pour la barre, la fenêtre de recherche et Réponses rapides : les fiches qui ont tous les mots, sinon celles qui en ont au moins un (strict false),
+   puis keepBest, triées par score. sure : la première peut s'ouvrir seule. Jamais avec un mot deviné (guess). Moins de 4 mots : oui. Un message collé : la première fiche
+   doit avoir au moins 40 % des mots, dont au moins 2 dans son titre ou ses mots-clés hors rotk et launcher, que presque tous les messages du launcher contiennent
+   (« La clé launcher ROTK a été refusée » n'ouvre plus la fiche du dossier du launcher). En chinois, 5 caractères font déjà 4 paires : seulement les 40 %. */
+const GENERIC = new Set(["rotk", "launcher", "jeu", "game"]);
+const strongWords = (idx, groups) => groups.filter(g => !GENERIC.has(g.own) && (g.kp ? idx.kp.has(g.own) : !g.cjk && (hit(idx.t, g) || hit(idx.k, g)))).length;
+function rankRows(rows, groups){
+  const res = rows.map(r => ({r, ...scoreRow(r._idx, groups)}));
+  let ok = res.filter(o => o.matched === groups.length), strict = true;
+  if (!ok.length) { strict = false; ok = res.filter(o => o.matched > 0); }
+  const list = keepBest(ok, groups).sort((a, b) => b.score - a.score);
+  return {list, strict, sure: !!list[0] && !groups.guess && (groups.length < 4 || list[0].matched / groups.length >= .4 && (groups.some(g => g.cjk) || strongWords(list[0].r._idx, groups) >= 2))};
+}
+// les lignes au-dessus des résultats (barre de recherche, Réponses rapides) : « Résultats pour » quand un mot a été corrigé, 0xC0000005, « Pas de correspondance exacte »
+function searchLines([fixq, early, approx], q, groups, rk){
+  const T = UI[lang], e = earlyCrash(groups), n = rk.list.length, fx = document.getElementById(fixq);
+  fx.hidden = !(groups.fixed && groups.fixed.length && n);
+  if (!fx.hidden) fx.textContent = T.fixedQ.replace("{q}", fixedQuery(q, groups.fixed));
+  document.getElementById(early).hidden = !e;
+  document.getElementById(approx).hidden = rk.strict || groups.length >= 4 && rk.sure && !e || !n; // message collé dont la fiche est sûre : pas de « Pas de correspondance exacte »
+}
+let searchOpened = false; // la recherche a ouvert sa première fiche toute seule : Entrée ouvre cette fiche, sinon Entrée va aux résultats
 function filter(){
   const T = UI[lang];
   const q = document.getElementById("q").value.trim();
@@ -1562,29 +1600,18 @@ function filter(){
   if (q) activeCat = "all";
   document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cat === activeCat)));
   const rows = [...document.querySelectorAll("#list .row")];
-  let res = rows.map(r => ({r, ...(groups.length ? scoreRow(r._idx, groups) : {score:0, matched:0})}));
-  let strict = true;
-  if (groups.length) {
-    let ok = res.filter(o => o.matched === groups.length);
-    if (!ok.length) { strict = false; ok = res.filter(o => o.matched > 0); }
-    ok = keepBest(ok, groups);
-    const keep = new Set(ok.map(o => o.r));
-    res.forEach(o => { o.show = keep.has(o.r); });
-  } else res.forEach(o => { o.show = !q && (activeCat === "all" || o.r.dataset.cat === activeCat); }); // du texte sans aucun mot cherchable (que des mots courants, du chinois hors 中文, un terme absent des fiches) : rien trouvé
-  const shown = res.filter(o => o.show).sort((a, b) => b.score - a.score);
+  // du texte sans aucun mot cherchable (que des mots courants, du chinois hors 中文, un terme absent des fiches) : rien trouvé
+  const rk = groups.length ? rankRows(rows, groups) : {list: q ? [] : rows.filter(r => activeCat === "all" || r.dataset.cat === activeCat).map(r => ({r, score:0, matched:0})), strict: true, sure: false}, shown = rk.list;
   rows.forEach(r => { r.hidden = true; r.style.order = ""; r._silent = true; r.querySelector("details").open = false; r._silent = false; });
   shown.forEach((o, i) => { o.r.hidden = false; if (groups.length) o.r.style.order = i; });
-  // message collé : la première fiche ne s'ouvre seule que si elle a au moins 40 % des mots ; 0xC0000005 sans 0x2a31abc : la réponse du lecteur de captures, rien ne s'ouvre
-  const early = earlyCrash(groups), sure = shown[0] && (groups.length < 4 || shown[0].matched / groups.length >= .4) && !early;
-  if (groups.length && sure) { shown[0].r._silent = true; shown[0].r.querySelector("details").open = true; shown[0].r._silent = false; }
+  // la première fiche ne s'ouvre seule que si rankRows la dit sûre (pas de mot deviné ; message collé : 40 % des mots, dont 2 forts) ; 0xC0000005 sans 0x2a31abc : la réponse du lecteur de captures, rien ne s'ouvre
+  searchOpened = !!(groups.length && rk.sure && !earlyCrash(groups));
+  if (searchOpened) { shown[0].r._silent = true; shown[0].r.querySelector("details").open = true; shown[0].r._silent = false; }
   const seen = {}; shown.forEach(o => seen[o.r.dataset.cat] = true);
   document.querySelectorAll("#list .group").forEach(g => g.hidden = groups.length > 0 || !seen[g.dataset.group] || activeCat !== "all");
-  document.getElementById("count").textContent = shown.length + " " + (shown.length > 1 ? T.many : T.one);
+  document.getElementById("count").textContent = shown.length + " " + ((lang === "en" ? shown.length !== 1 : shown.length > 1) ? T.many : T.one); // 0 results en anglais, 0 résultat en français
   document.getElementById("empty").hidden = shown.length !== 0;
-  document.getElementById("approx").hidden = strict || groups.length >= 4 && sure || !shown.length; // message collé dont la fiche est sûre : pas de « Pas de correspondance exacte »
-  document.getElementById("early").hidden = !early;
-  const fx = document.getElementById("fixq"); fx.hidden = !(groups.fixed && groups.fixed.length && shown.length);
-  if (!fx.hidden) fx.textContent = T.fixedQ.replace("{q}", fixedQuery(q, groups.fixed));
+  searchLines(["fixq", "early", "approx"], q, groups, rk);
   document.getElementById("qClear").hidden = !document.getElementById("q").value;
   // suggestions sous la barre de recherche
   const sug = document.getElementById("sug"); sug.innerHTML = "";
@@ -1597,6 +1624,7 @@ function filter(){
     });
     if (shown.length > 5) { const m = el("button", "sg more", esc(T.seeAll.replace("{n}", shown.length))); m.type = "button"; m.onclick = () => document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); sug.append(m); }
   }
+  if (earlyCrash(groups) && sug.children.length) sug.prepend(el("p", "approx sg-early", esc(T.ocrEarly))); // 0xC0000005 sans 0x2a31abc : le conseil du lecteur de captures aussi là où on regarde en tapant
   sug.hidden = !sug.children.length;
 }
 
@@ -1604,14 +1632,31 @@ function filter(){
 const SLUG_ALIASES = {"acces-controle-aux-dossiers-anti-ransomware":"acces-controle-aux-dossiers-bloque-le-jeu-acces-refuse", "avoir-l-animation-d-ouverture-des-caisses":"pas-d-animation-quand-tu-ouvres-une-caisse", "les-assets-restent-bloques-a-0":"les-assets-restent-bloques-a-0-ou-1", "verifier-qu-on-a-bien-le-dernier-correctif-2-0-43":"verifier-qu-on-a-bien-le-dernier-correctif", "le-launcher-est-en-francais-mais-le-jeu-en-anglais":"changer-la-langue-du-jeu-francais-anglais-chinois"};
 // défilement doux, ou direct quand le système demande moins d'animations (un behavior "smooth" écrit en dur passerait avant le CSS prefers-reduced-motion)
 function scrollMode(){ return matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"; }
+// fiche (ou réponse rapide) plus haute que l'écran avec sa marge du haut (scroll-margin-top, aussi comptée quand on centre) : son titre va à cette marge, sous la barre ; sinon elle est centrée
+function scrollBox(r){ const m = parseFloat(getComputedStyle(r).scrollMarginTop) || 0; r.scrollIntoView({behavior: scrollMode(), block: r.offsetHeight + m > innerHeight ? "start" : "center"}); }
+function flashBox(r){ r.classList.remove("flash"); void r.offsetWidth; r.classList.add("flash"); }
 function openCard(id, scroll){
   id = SLUG_ALIASES[id] || id;
   const r = document.getElementById(id); if (!r || !r.classList.contains("row")) return false;
+  if (SUPPORT) return supGo(r, scroll, false);
   if (r.hidden) { document.getElementById("q").value = ""; activeCat = "all"; filter(); }
   r.querySelector("details").open = true;
-  r.classList.remove("flash"); void r.offsetWidth; r.classList.add("flash");
-  // fiche plus haute que l'écran avec sa marge du haut (scroll-margin-top, aussi comptée quand on centre) : son titre va à cette marge, sous la barre ; sinon la fiche est centrée
-  if (scroll) { const m = parseFloat(getComputedStyle(r).scrollMarginTop) || 0; r.scrollIntoView({behavior: scrollMode(), block: r.offsetHeight + m > innerHeight ? "start" : "center"}); }
+  flashBox(r);
+  if (scroll) scrollBox(r);
+  return true;
+}
+/* Réponses rapides (?support) : les fiches y sont cachées. Ouvrir une fiche (fenêtre de recherche, lecteur de captures, État actuel, patch notes, #lien à l'arrivée ou tapé, Retour)
+   va à sa réponse rapide (#sup-<slug>) : si la recherche des réponses la cache, elle se vide ; la page va jusqu'à la réponse, elle clignote comme une fiche, et le focus passe sur
+   son premier bouton Copier. Rien n'est ajouté à l'historique. Une fiche sans réponse rapide s'ouvre dans la page normale, comme le lien « Voir la fiche » d'une réponse :
+   ouverte exprès (push), une nouvelle entrée ; sinon (#lien, Retour) l'entrée est remplacée, pour que Retour ne revienne pas sur une page qui repart aussitôt. */
+function supGo(r, scroll, push){
+  if (!r._x.m) { const u = cardLink(r.id, lang); if (push) location.assign(u); else location.replace(u); return true; }
+  const sq = document.getElementById("supQ");
+  if (!document.getElementById("sup-" + r.id) && sq.value) clearField(sq);
+  const it = document.getElementById("sup-" + r.id); if (!it) return false;
+  if (scroll) scrollBox(it);
+  flashBox(it);
+  it.querySelector(".sup-copy").focus({preventScroll: true});
   return true;
 }
 /* Fiche ouverte exprès (suggestion, Entrée, fenêtre de recherche, État actuel, Première installation, barre du haut, « Voir aussi », patch notes) : la page va jusqu'à la fiche
@@ -1619,7 +1664,8 @@ function openCard(id, scroll){
    Pas pour la fiche qui s'ouvre toute seule pendant la frappe. */
 function visitCard(id){
   const r = document.getElementById(SLUG_ALIASES[id] || id); if (!r || !r.classList.contains("row")) return false;
-  if (!SUPPORT) cardPush(r.id); // avant le défilement : l'entrée qu'on quitte garde sa position
+  if (SUPPORT) return supGo(r, true, true); // Réponses rapides : la réponse rapide de la fiche, sans entrée d'historique
+  cardPush(r.id); // avant le défilement : l'entrée qu'on quitte garde sa position
   openCard(r.id, true);
   r.querySelector("summary").focus({preventScroll: true});
   return true;
@@ -1631,7 +1677,9 @@ document.getElementById("q").addEventListener("input", e => { filter(); if (!e.t
 // la première fiche ouverte par la recherche a mis son #lien dans l'adresse : champ vidé (au clavier, X, Échap ou tuile d'Accès rapide), plus aucune fiche n'est ouverte, l'adresse le perd.
 // Pas dans filter() : filter() passe avant l'ouverture d'un lien direct vers une fiche.
 function dropCardHash(){ try { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(SLUG_ALIASES[id] || id)?.classList.contains("row")) history.replaceState(history.state, "", location.pathname + location.search); } catch (_) {} }
-document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); const f = document.querySelector("#sug .sg:not(.more)"); if (f) f.click(); else document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); } if (e.key === "Escape") { document.getElementById("sug").hidden = true; if (e.target.value) { e.preventDefault(); clearField(e.target); } } });
+// Entrée ouvre la fiche que la recherche a ouverte toute seule. Sinon (pas sûre, mot deviné, 0xC0000005, rien trouvé), le clavier se ferme et la page va aux résultats et à leurs lignes ;
+// une suggestion se choisit toujours exprès (tap, flèches)
+document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); const f = searchOpened && document.querySelector("#sug .sg:not(.more)"); if (f) f.click(); else { e.target.blur(); document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); } } if (e.key === "Escape") { document.getElementById("sug").hidden = true; if (e.target.value) { e.preventDefault(); clearField(e.target); } } });
 // flèches : du champ vers les suggestions, puis de l'une à l'autre en boucle comme dans la fenêtre de recherche ; Échap revient dans le champ
 document.getElementById("q").addEventListener("keydown", e => { if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return; const s = document.querySelectorAll("#sug .sg"); if (!s.length) return; e.preventDefault(); document.getElementById("sug").hidden = false; s[e.key === "ArrowDown" ? 0 : s.length - 1].focus(); });
 document.getElementById("sug").addEventListener("keydown", e => {
@@ -1694,8 +1742,8 @@ addEventListener("pagehide", () => { try { history.scrollRestoration = "auto"; }
 // Sans fiche dans l'adresse, les fiches se referment et la page revient où elle était, avec la recherche d'alors. Retour sur une section (#acces...) quittée pour une fiche : cette fiche se referme aussi.
 // La fenêtre de recherche ou les patch notes ouvertes se ferment. Le focus suit la fiche rouverte, comme avec visitCard ; sans fiche, il quitte le champ (le clavier du téléphone se ferme) ou la fiche refermée.
 addEventListener("popstate", e => {
+  if (SUPPORT) return; // ?support : le hashchange ci-dessous envoie un #lien de fiche (Retour, Suivant, adresse tapée) vers sa réponse rapide, après le passage du navigateur sur ce #lien
   popSeen = true;
-  if (SUPPORT) return; // ?support : le hashchange ci-dessous envoie toujours un lien de fiche vers sa page
   const leaving = entryCard, id = cardEntry();
   if (pageURL() !== location.pathname + location.search) { try { history.replaceState(history.state, "", pageURL() + location.hash); } catch (_) {} }
   if (!document.getElementById("pal").hidden) palHide(false);
@@ -1712,7 +1760,7 @@ addEventListener("popstate", e => {
   const y = e.state && e.state.y, t = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1)));
   if (typeof y === "number") scrollTo({top: y, behavior: scrollMode()}); else if (t) t.scrollIntoView({behavior: scrollMode()});
 });
-window.addEventListener("hashchange", () => { const seen = popSeen; popSeen = false; if (location.hash === "#patch-notes") { notesShow(); return; } if (SUPPORT) { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(id)?.classList.contains("row")) { location.href = cardLink(id, lang); return; } } if (!seen) openCard(decodeURIComponent(location.hash.slice(1)), true); });
+window.addEventListener("hashchange", () => { const seen = popSeen; popSeen = false; if (location.hash === "#patch-notes") { notesShow(); return; } if (!seen) openCard(decodeURIComponent(location.hash.slice(1)), true); });
 /* Version chinoise (bouton 中文, ?lang=zh) : les textes sont dans zh.js, chargé seulement en chinois.
    zh.js associe chaque texte anglais à sa traduction : un texte pas encore traduit, ou dont l'anglais a changé depuis, s'affiche en anglais.
    Nouvel objet avec des textes fr/en : ajoute-le à ZH_ROOTS. zhStatus() dans la console liste ce qui reste à traduire. */
@@ -1753,8 +1801,9 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
 }));
 whenReady(() => {
   render();
-  // lien direct : la fiche s'ouvre sans nouvelle entrée (un ancien lien est remplacé par le nouveau dans l'adresse)
-  if (location.hash) setTimeout(() => { if (openCard(decodeURIComponent(location.hash.slice(1)), true)) { try { history.scrollRestoration = "manual"; } catch (e) {} } cardEntry(); }, 60);
+  // lien direct : la fiche s'ouvre sans nouvelle entrée (un ancien lien est remplacé par le nouveau dans l'adresse). On attend d'abord les polices (1,5 s au plus) :
+  // arrivées pendant le défilement (première visite sur téléphone), elles décaleraient le texte et la fiche ou la réponse rapide finirait hors de l'écran
+  if (location.hash) { void document.body.offsetHeight; Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(ok => setTimeout(ok, 1500))]).then(() => setTimeout(() => { if (openCard(decodeURIComponent(location.hash.slice(1)), true)) { try { history.scrollRestoration = "manual"; } catch (e) {} } cardEntry(); }, 60)); }
 });
 
 /* Barre de navigation : bouton recherche et section active */
@@ -1773,19 +1822,18 @@ function palResults(q){
   const groups = q.trim() ? queryTokens(q) : [];
   if (!q.trim()) return {items: PAL_POPULAR.map(id => document.getElementById(id)).filter(Boolean), exact: true, empty: true};
   if (!groups.length) return {items: [], exact: true, empty: false};
-  let res = rows.map(r => ({r, ...scoreRow(r._idx, groups)}));
-  let ok = res.filter(o => o.matched === groups.length), exact = true;
-  if (!ok.length) { ok = res.filter(o => o.matched > 0); exact = false; }
-  ok = keepBest(ok, groups);
-  return {items: ok.sort((a, b) => b.score - a.score).slice(0, 8).map(o => o.r), exact, empty: false, fixed: groups.fixed.length ? fixedQuery(q, groups.fixed) : ""};
+  // mêmes règles que la barre : pas de « Pas de correspondance exacte » au-dessus de la fiche sûre d'un message collé, et le conseil du lecteur pour 0xC0000005 sans 0x2a31abc
+  const {list, strict, sure} = rankRows(rows, groups), early = earlyCrash(groups);
+  return {items: list.slice(0, 8).map(o => o.r), exact: strict || groups.length >= 4 && sure && !early, empty: false, fixed: groups.fixed.length ? fixedQuery(q, groups.fixed) : "", early};
 }
 function palRender(){
   const T = UI[lang], q = document.getElementById("palQ").value;
-  const {items, exact, empty, fixed} = palResults(q);
+  const {items, exact, empty, fixed, early} = palResults(q);
   palItems = items; palSel = Math.min(palSel, Math.max(0, items.length - 1));
   document.getElementById("palH").textContent = empty ? T.palPop : items.length ? (fixed ? T.fixedQ.replace("{q}", fixed) : exact ? T.palRes : T.approx) : "";
   const list = document.getElementById("palList"); list.innerHTML = "";
   if (!items.length) list.append(el("p", "pal-none", T.empty));
+  if (early && items.length) list.append(el("p", "pal-none", esc(T.ocrEarly)));
   if (fixed && !exact && items.length) list.append(el("p", "pal-none", esc(T.approx))); // mot corrigé sans correspondance exacte : la ligne de la barre sous « Résultats pour »
   items.forEach((r, i) => {
     const x = r._x, cat = CATS.find(c => c.id === x.c);

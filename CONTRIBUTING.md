@@ -22,7 +22,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 | Fiches problème / solution | tableau `F` |
 | « Avant de demander » | `RULES` |
 | Liens utiles | `LINKS` |
-| Recherche (sans accents, synonymes, classement) | `norm`, `STOP`, `SYN`, `queryTokens`, `scoreRow`, `filter()` |
+| Recherche (sans accents, synonymes, fautes de frappe, classement) | `norm`, `STOP`, `SYN`, `queryTokens`, `nearWord` (fautes de frappe), `scoreRow`, `rankRows` (classement commun à la barre, à la fenêtre de recherche et à Réponses rapides), `searchLines`, `filter()` |
 | Liens directs vers une fiche | `#slug` du titre FR, voir `slugOf()` et `openCard()` |
 | Aperçus Discord des liens de fiche | pages `c/<slug>.html`, `c/<slug>.en.html` et `c/<slug>.zh.html`, générées par `tools/build_card_pages.py` ; `404.html` renvoie vers la fiche si une page manque |
 | Réponses rapides pour le support (`?support`) | champ `m` de chaque fiche + `SUP_GENERAL` : pas de lien depuis la page publique, `noindex` |
