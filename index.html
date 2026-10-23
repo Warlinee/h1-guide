@@ -1451,6 +1451,7 @@ function row(x, T){
   if (x.v) tags.append(el("span", "tag vtag", VTXT.tag[lang]));
   techTags(x.k).forEach(k => tags.append(el("span", "tag", esc(k))));
   s.append(tags); d.append(s);
+  s.addEventListener("click", () => { if (!d.open) cardPush(r.id); else cardShut(r.id); }); // titre touché : l'état d'avant le clic dit si la fiche s'ouvre ou se referme
   const b = el("div", "body");
   const steps = x.f[lang], ol = el(steps.length > 1 ? "ol" : "ul");
   steps.forEach(st => ol.append(el("li", null, codeify(st)))); b.append(ol);
@@ -1468,7 +1469,7 @@ function row(x, T){
   rep.href = "https://github.com/Warlinee/h1-guide/issues/new?title=" + encodeURIComponent(T.reportT + x.t.fr) + "&body=" + encodeURIComponent(T.reportB.replace("{u}", shareURL(r.id, lang)));
   rep.target = "_blank"; rep.rel = "noopener";
   const acts = el("div", "acts"); acts.append(share, rep); b.append(acts);
-  d.addEventListener("toggle", () => { if (!d.open) return; const v = b.querySelector("video[data-src]"); if (v) { v.poster = v.dataset.src + ".jpg"; v.src = v.dataset.src + ".mp4"; v.removeAttribute("data-src"); } if (!r._silent) { try { history.replaceState(null, "", location.pathname + location.search + "#" + r.id); } catch (e) {} } });
+  d.addEventListener("toggle", () => { if (!d.open) return; const v = b.querySelector("video[data-src]"); if (v) { v.poster = v.dataset.src + ".jpg"; v.src = v.dataset.src + ".mp4"; v.removeAttribute("data-src"); } if (!r._silent) { try { history.replaceState(history.state, "", location.pathname + location.search + "#" + r.id); } catch (e) {} } });
   d.append(b); r.append(d);
   return r;
 }
@@ -1544,8 +1545,10 @@ function openCard(id, scroll){
    et le focus passe sur son titre sans redéfiler. Sur téléphone le clavier se ferme, au clavier et au lecteur d'écran on arrive dans la fiche.
    Pas pour la fiche qui s'ouvre toute seule pendant la frappe. */
 function visitCard(id){
-  if (!openCard(id, true)) return false;
-  document.getElementById(SLUG_ALIASES[id] || id).querySelector("summary").focus({preventScroll: true});
+  const r = document.getElementById(SLUG_ALIASES[id] || id); if (!r || !r.classList.contains("row")) return false;
+  if (!SUPPORT) cardPush(r.id); // avant le défilement : l'entrée qu'on quitte garde sa position
+  openCard(r.id, true);
+  r.querySelector("summary").focus({preventScroll: true});
   return true;
 }
 // double clic ou double tap sur une suggestion : la liste se ferme au premier clic, le second tomberait sur ce qui passe alors sous le doigt (lien du haut, bouton capture) et ne fait rien
@@ -1554,7 +1557,7 @@ function dropDbl(){ const g = ev => { removeEventListener("click", g, true); if 
 document.getElementById("q").addEventListener("input", e => { filter(); if (!e.target.value.trim() || !document.querySelector("#list details[open]")) dropCardHash(); }); // recherche qui n'ouvre aucune fiche (pas sûre, 0xC0000005, rien trouvé) : l'adresse perd aussi le #lien écrit par une lettre tapée avant
 // la première fiche ouverte par la recherche a mis son #lien dans l'adresse : champ vidé (au clavier, X, Échap ou tuile d'Accès rapide), plus aucune fiche n'est ouverte, l'adresse le perd.
 // Pas dans filter() : filter() passe avant l'ouverture d'un lien direct vers une fiche.
-function dropCardHash(){ try { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(SLUG_ALIASES[id] || id)?.classList.contains("row")) history.replaceState(null, "", location.pathname + location.search); } catch (_) {} }
+function dropCardHash(){ try { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(SLUG_ALIASES[id] || id)?.classList.contains("row")) history.replaceState(history.state, "", location.pathname + location.search); } catch (_) {} }
 document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); const f = document.querySelector("#sug .sg:not(.more)"); if (f) f.click(); else document.getElementById("faq").scrollIntoView({behavior: scrollMode()}); } if (e.key === "Escape") { document.getElementById("sug").hidden = true; if (e.target.value) { e.preventDefault(); clearField(e.target); } } });
 // flèches : du champ vers les suggestions, puis de l'une à l'autre en boucle comme dans la fenêtre de recherche ; Échap revient dans le champ
 document.getElementById("q").addEventListener("keydown", e => { if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return; const s = document.querySelectorAll("#sug .sg"); if (!s.length) return; e.preventDefault(); document.getElementById("sug").hidden = false; s[e.key === "ArrowDown" ? 0 : s.length - 1].focus(); });
@@ -1580,7 +1583,63 @@ document.getElementById("emptyClear").addEventListener("click", () => {
 });
 document.addEventListener("click", e => { if (!e.target.closest(".search-wrap")) document.getElementById("sug").hidden = true; });
 document.getElementById("q").addEventListener("focus", () => { if (document.getElementById("sug").children.length) document.getElementById("sug").hidden = false; });
-window.addEventListener("hashchange", () => { if (location.hash === "#patch-notes") { notesShow(); return; } if (SUPPORT) { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(id)?.classList.contains("row")) { location.href = cardLink(id, lang); return; } } openCard(decodeURIComponent(location.hash.slice(1)), true); });
+/* Historique : ouvrir une fiche exprès (titre touché, visitCard) ajoute une entrée, donc Retour revient à la fiche d'avant au lieu de quitter le wiki.
+   La fiche ouverte toute seule par la recherche et le lien direct à l'arrivée ne font que remplacer l'adresse (replaceState), sans entrée.
+   entryHash = le #lien de l'entrée actuelle, sans celui que la recherche a pu y écrire entre-temps. */
+const PAGE = Math.random().toString(36).slice(2); // les entrées ajoutées par cette page (pas par une version rechargée)
+let entryHash = location.hash, entryCard = null, skipPop = false, popSeen = false;
+function cardOf(h){ try { const id = decodeURIComponent(h.slice(1)), r = document.getElementById(SLUG_ALIASES[id] || id); return r && r.classList.contains("row") ? r.id : null; } catch (_) { return null; } }
+function cardEntry(){ entryCard = cardOf(location.hash); entryHash = entryCard ? "#" + entryCard : location.hash === "#patch-notes" ? "" : location.hash; return entryCard; }
+// l'adresse de la page sans un ?lang= qui n'est plus la langue affichée (langue changée puis Retour) : les nouvelles entrées et F5 restent dans la langue choisie
+function pageURL(){ const s = location.search.slice(1).split("&").filter(x => x && !(/^lang=/.test(x) && x !== "lang=" + lang)).join("&"); return location.pathname + (s ? "?" + s : ""); }
+function cardPush(id){
+  const url = pageURL();
+  try {
+    if (entryHash === "#" + id) { history.replaceState(history.state, "", url + entryHash); return; } // déjà l'entrée de cette fiche : pas de doublon
+    // l'entrée quittée retrouve son adresse et garde sa position et sa recherche ; Retour sur elle passe par le popstate ci-dessous, pas par le navigateur
+    history.replaceState(Object.assign({}, history.state, {y: Math.round(scrollY), q: document.getElementById("q").value}), "", url + entryHash);
+    history.scrollRestoration = "manual";
+    history.pushState({card: id, page: PAGE}, "", url + "#" + id);
+    history.scrollRestoration = "manual";
+    entryHash = "#" + id; entryCard = id;
+  } catch (e) {}
+}
+// Titre touché pour refermer : si l'entrée actuelle vient d'être ajoutée pour cette fiche, on revient d'un pas (la page ne bouge pas, et Retour ne rouvrira pas une fiche refermée).
+// Sinon (lien direct, fiche ouverte par la recherche), son #lien quitte juste l'adresse.
+function cardShut(id){
+  const st = history.state;
+  try {
+    if (st && st.card === id && st.page === PAGE && entryHash === "#" + id) { skipPop = true; history.back(); }
+    else if (cardOf(location.hash) === id) { history.replaceState(st, "", location.pathname + location.search); if (entryCard === id) { entryCard = null; entryHash = ""; } }
+  } catch (e) {}
+}
+// une entrée quittée pour une fiche garde sa position : quand on y revient et qu'on fait défiler la page, elle suit (Retour depuis un lien de section ramène là où on était, pas à l'ancienne position)
+let yTimer = 0; addEventListener("scroll", () => { clearTimeout(yTimer); yTimer = setTimeout(() => { const st = history.state; if (st && typeof st.y === "number" && !SUPPORT) { try { history.replaceState(Object.assign({}, st, {y: Math.round(scrollY), q: document.getElementById("q").value}), ""); } catch (_) {} } }, 400); }, {passive: true});
+// F5 ou départ du site : le navigateur garde la position de la page (cardPush la remet en "manual" à la prochaine fiche)
+addEventListener("pagehide", () => { try { history.scrollRestoration = "auto"; } catch (e) {} });
+// Retour, Suivant ou #lien tapé dans l'adresse : la fiche de la nouvelle adresse s'ouvre et la page va jusqu'à elle, celle qu'on quitte se referme, sans nouvelle entrée.
+// Sans fiche dans l'adresse, les fiches se referment et la page revient où elle était, avec la recherche d'alors. Retour sur une section (#acces...) quittée pour une fiche : cette fiche se referme aussi.
+// La fenêtre de recherche ou les patch notes ouvertes se ferment. Le focus suit la fiche rouverte, comme avec visitCard ; sans fiche, il quitte le champ (le clavier du téléphone se ferme) ou la fiche refermée.
+addEventListener("popstate", e => {
+  popSeen = true;
+  if (SUPPORT) return; // ?support : le hashchange ci-dessous envoie toujours un lien de fiche vers sa page
+  const leaving = entryCard, id = cardEntry();
+  if (pageURL() !== location.pathname + location.search) { try { history.replaceState(history.state, "", pageURL() + location.hash); } catch (_) {} }
+  if (!document.getElementById("pal").hidden) palHide(false);
+  if (!document.getElementById("notes").hidden && location.hash !== "#patch-notes") notesHide();
+  if (skipPop) { skipPop = false; return; }
+  if (id) { if (leaving && leaving !== id) document.getElementById(leaving)?.querySelector("details").removeAttribute("open"); if (openCard(id, true)) document.getElementById(id).querySelector("summary").focus({preventScroll: true}); return; }
+  if (location.hash === "#patch-notes") return;
+  const q = document.getElementById("q");
+  if (e.state && typeof e.state.q === "string" && e.state.q !== q.value) { q.value = e.state.q; filter(); document.getElementById("sug").hidden = true; }
+  if (location.hash.length < 2) document.querySelectorAll("#list details[open]").forEach(d => d.open = false);
+  else if (leaving && e.state && typeof e.state.y === "number") document.getElementById(leaving)?.querySelector("details").removeAttribute("open"); // entrée quittée par une fiche (pas un clic sur un lien de section)
+  const a = document.activeElement;
+  if (a && a.matches && a.matches("input")) a.blur(); else if (a && a.closest && a.closest("#list details:not([open])")) document.getElementById("contenu").focus({preventScroll: true});
+  const y = e.state && e.state.y, t = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (typeof y === "number") scrollTo({top: y, behavior: scrollMode()}); else if (t) t.scrollIntoView({behavior: scrollMode()});
+});
+window.addEventListener("hashchange", () => { const seen = popSeen; popSeen = false; if (location.hash === "#patch-notes") { notesShow(); return; } if (SUPPORT) { const id = decodeURIComponent(location.hash.slice(1)); if (document.getElementById(id)?.classList.contains("row")) { location.href = cardLink(id, lang); return; } } if (!seen) openCard(decodeURIComponent(location.hash.slice(1)), true); });
 /* Version chinoise (bouton 中文, ?lang=zh) : les textes sont dans zh.js, chargé seulement en chinois.
    zh.js associe chaque texte anglais à sa traduction : un texte pas encore traduit, ou dont l'anglais a changé depuis, s'affiche en anglais.
    Nouvel objet avec des textes fr/en : ajoute-le à ZH_ROOTS. zhStatus() dans la console liste ce qui reste à traduire. */
@@ -1613,7 +1672,7 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
   if (b.dataset.lang === "zh") await loadZh();
   lang = b.dataset.lang; try { localStorage.setItem("h1wiki-lang", lang); } catch (e) {}
   // l'adresse perd ?lang= mais garde le reste (?support)
-  if (urlLang) { try { const s = location.search.slice(1).split("&").filter(x => x && !/^lang=/.test(x)).join("&"); history.replaceState(null, "", location.pathname + (s ? "?" + s : "") + location.hash); } catch (e) {} }
+  if (urlLang) { try { const s = location.search.slice(1).split("&").filter(x => x && !/^lang=/.test(x)).join("&"); history.replaceState(history.state, "", location.pathname + (s ? "?" + s : "") + location.hash); } catch (e) {} }
   // language switch : la fiche ouverte (celle du #hash) reste ouverte, sans scroll
   const cur = [...document.querySelectorAll("#list .row")].find(o => location.hash === "#" + o.id && o.querySelector("details").open);
   const q = document.getElementById("q").value; render(); document.getElementById("q").value = q; filter();
@@ -1621,7 +1680,8 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
 }));
 whenReady(() => {
   render();
-  if (location.hash) setTimeout(() => openCard(decodeURIComponent(location.hash.slice(1)), true), 60);
+  // lien direct : la fiche s'ouvre sans nouvelle entrée (un ancien lien est remplacé par le nouveau dans l'adresse)
+  if (location.hash) setTimeout(() => { if (openCard(decodeURIComponent(location.hash.slice(1)), true)) { try { history.scrollRestoration = "manual"; } catch (e) {} } cardEntry(); }, 60);
 });
 
 /* Barre de navigation : bouton recherche et section active */
@@ -1686,7 +1746,6 @@ function palHide(back){
 }
 function palOpen(id){
   palHide(false);
-  try { history.replaceState(null, "", location.pathname + location.search + "#" + id); } catch (e) {}
   setTimeout(() => visitCard(id), 60);
 }
 document.getElementById("palQ").addEventListener("input", () => { document.getElementById("pal").classList.remove("ocr"); palSel = 0; palRender(); });
@@ -1872,7 +1931,7 @@ whenReady(() => {
   // un clic ouvre toujours la cible, même si l'adresse ne change pas
   links.forEach(a => a.addEventListener("click", e => {
     const el = tgt(a);
-    if (el && el.classList.contains("row")) { e.preventDefault(); try { history.replaceState(null, "", location.pathname + location.search + a.hash); } catch (_) {} visitCard(el.id); setTimeout(pick, 700); }
+    if (el && el.classList.contains("row")) { e.preventDefault(); visitCard(el.id); setTimeout(pick, 700); }
   }));
   const slot = document.getElementById("tnSlot");
   new IntersectionObserver(([e]) => nav.classList.toggle("stuck", !e.isIntersecting && e.boundingClientRect.top < 0), {threshold: 0, rootMargin: "-10px 0px 0px 0px"}).observe(slot);
