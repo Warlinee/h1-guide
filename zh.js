@@ -173,7 +173,7 @@ t: {
 "New: the game is in French when the launcher is in French (since 2.0.44). For an English game, set the launcher to English.": "新变化：启动器是法语时，游戏也会是法语（2.0.44 起）。想要英文游戏，就把启动器切换成英语。",
 "Fixed: trio reboot leaving you spectating, and aiming (ADS) near cover.": "已修复：三排复活后一直停留在观战状态，以及靠近掩体时开镜（ADS）的问题。",
 "Getting out of a vehicle at the wrong spot while driving or turning: fix shipped in 2.0.44, not confirmed in game yet.": "行驶中或转弯时离开载具，位置不对：2.0.44 已发布修复，但还没在游戏里确认有效。",
-"Grenade held up like binoculars while walking: fix shipped in 2.0.45, not confirmed in game yet.": "走路时手雷像望远镜一样举在眼前：2.0.45 已发布修复，但还没在游戏里确认有效。",
+"Shot that locks then fires on its own when you aim while moving: fix shipped in 2.0.45, not confirmed in game yet.": "移动中瞄准时开枪会卡住、然后自己打出去：2.0.45 已发布修复，但还没在游戏里确认有效。",
 "A ROTK folder right on a drive (like D:\\ROTK) blocks the install with \"Access denied\". Fix on the way: until then, pick a folder like D:\\Games.": "ROTK 文件夹直接放在磁盘根目录下（比如 D:\\ROTK）时，安装会因“Access denied”（拒绝访问）而失败。修复正在路上：在那之前，请选 D:\\Games 这样的文件夹。",
 "Launcher error messages with garbled characters: still there in 2.0.45, also with the launcher in English or Chinese.": "启动器报错信息出现乱码：2.0.45 里仍然存在，启动器是英文或中文界面时也会出现。",
 "New account: a ~10 min tutorial and Steam level 1 are required before matches.": "新账号：打对局之前，必须先完成约 10 分钟的新手教程，并且 Steam 等级达到 1 级。",
@@ -346,7 +346,7 @@ t: {
 "Older: update the launcher, then fully close the game and launch it again.": "版本更旧的话：先更新启动器，然后彻底关闭游戏，再重新启动。",
 "To check the game patch is in place: after launching the game, open your game folder, right-click rotk-shotgun-sprint.ini > Open with > Notepad.": "确认游戏补丁是否生效：启动游戏后，打开你的游戏文件夹，右键点击 rotk-shotgun-sprint.ini > “打开方式” > “记事本”。",
 "If the proxySha256= line starts with 3D2319E6, that's the 2.0.45 game patch. If it starts with FFE3456B (2.0.44) or 7DE5B115 (2.0.43), relaunch the game from the updated launcher.": "如果 proxySha256= 这一行以 3D2319E6 开头，那就是 2.0.45 的游戏补丁。如果以 FFE3456B（2.0.44）或 7DE5B115（2.0.43）开头，就用更新后的启动器重新启动游戏。",
-"No rotk-shotgun-sprint.ini? That doesn't mean you're outdated: the launcher only writes it when the game patch is turned on for that launch, the server decides. Fixes (trio reboot, vehicle exit, aiming, grenade held like binoculars while walking) only load after closing and relaunching the game.": "没有 rotk-shotgun-sprint.ini 文件？这不代表你的版本过旧：只有当次启动启用了游戏补丁，启动器才会写入这个文件，这由服务器决定。修复内容（三排复活、离开载具、瞄准、走路时手雷像望远镜一样举在眼前）只有在关闭并重新启动游戏后才会加载。",
+"No rotk-shotgun-sprint.ini? That doesn't mean you're outdated: the launcher only writes it when the game patch is turned on for that launch, the server decides. Fixes (trio reboot, vehicle exit, aiming, shot locking when aiming while moving) only load after closing and relaunching the game.": "没有 rotk-shotgun-sprint.ini 文件？这不代表你的版本过旧：只有当次启动启用了游戏补丁，启动器才会写入这个文件，这由服务器决定。修复内容（三排复活、离开载具、瞄准、移动中瞄准时开枪卡住）只有在关闭并重新启动游戏后才会加载。",
 "check the version top right in the launcher, u need BUILD 2.0.45. to check the game patch, open rotk-shotgun-sprint.ini with notepad: if proxySha256= starts with 3D2319E6 it's the 2.0.45 one (no .ini doesn't always mean ur outdated)": "看启动器右上角的版本号，得是“版本 2.0.45”（BUILD 2.0.45）。想确认游戏补丁的话，用记事本打开 rotk-shotgun-sprint.ini 看看：如果 proxySha256= 开头是 3D2319E6 就是 2.0.45 的补丁（没有 .ini 文件也不一定是版本旧）",
 
 // Fiche : les-droits-administrateur-n-ont-pas-pu-etre-verifies
