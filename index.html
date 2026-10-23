@@ -1143,7 +1143,8 @@ function render(){
 const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’'`´«»"()\[\],;!?]/g, " ");
 const STOP = new Set(("le la les l de des du d un une et ou a au aux en je j tu il elle on nous vous ils ne n pas plus mon ma mes ton ta tes son sa ses se s " +
   "ce c ca cela ceci qui que qu quoi est es suis sont ai as avoir etre avec sans sur sous dans par pour mais tout tous toujours jamais rien quand comment pourquoi y " +
-  "jeu game the an and or of to in on at my is are it its i im i'm can cant can't not no dont don't doesnt wont won't do does did with for this that me you your u ur when why how get got").split(" "));
+  "jeu game the an and or of to in on at my is are it its i im can cant not no dont doesnt wont do does did with for this that me you your u ur when why how get got " +
+  "don doesn didn won isn aren wasn weren couldn wouldn shouldn haven hasn t m ll ve").split(" ")); // norm() change l'apostrophe en espace : doesn't donne doesn et t, i'm donne i et m, m'entend donne m et entend
 const SYN = [
   ["vocal","voice","micro","mic","micros","entend","entends","entendre","hear","parle","parler","talk","proximite","proximity","vivox","son","sound","audio","ptt"],
   ["crash","crashe","crashes","crashing","plante","plantage","ferme","close","closes","closed"],
@@ -1180,7 +1181,7 @@ function queryTokens(q){
   // un chemin collé qu'aucune fiche ne contient (D:\Jeux\ROTK\H1Z1.exe) se cherche par ses morceaux, sans la lettre du disque
   let all = null; const known = w => (all = all || [...document.querySelectorAll("#list .row")].flatMap(r => r._idx.all)).some(x => x.startsWith(w));
   const toks = norm(s).split(/[^a-z0-9.=_\\:+-]+/).map(trim).flatMap(w => w.includes("\\") && !known(w) ? w.split("\\").map(trim).filter(p => !/^[a-z]$/.test(p)) : [w]).filter(Boolean).filter(w => SYNMAP.has(w) || !STOP.has(w));
-  return [...new Set(toks)].map(t => SYNMAP.has(t) ? {own:t, alts:SYNMAP.get(t)} : {own:t, alts:[t, ...codeAlts(t)]}).concat(zhTokens(q));
+  return [...new Set(toks)].map(t => SYNMAP.has(t) ? {own:t, alts:SYNMAP.get(t), syn:true} : {own:t, alts:[t, ...codeAlts(t)]}).concat(zhTokens(q));
 }
 /* Recherche en chinois (pas d'espaces entre les mots) : les synonymes de zh.js d'abord, puis le reste coupé en paires de caractères.
    Une paire absente de toutes les fiches (à cheval sur deux mots) ou trop courante (ZH.stop) est ignorée. Un groupe chinois a cjk:true et se cherche dans le texte zh. */
@@ -1206,13 +1207,25 @@ function indexRow(x){
   idx.zt = (x.t.zh || "").toLowerCase(); idx.zb = x.f.zh ? (x.f.zh.join(" ") + " " + (x.n ? x.n.zh : "")).toLowerCase() : "";
   return idx;
 }
-// un mot à tirets se trouve aussi par le début de ses morceaux : « sandbox » trouve no-sandbox (sans les synonymes : micro-freezes n'est pas du vocal)
-const hit = (set, g) => [...set].some(w => (g.own.length >= 3 ? w.startsWith(g.own) || (w.includes("-") && w.split("-").some(p => p.startsWith(g.own))) : w === g.own) || g.alts.some(a => w === a || w === a + "s"));
-const hitZh = (s, g) => g.alts.some(a => s.includes(a));
+// 2 : le mot tapé lui-même (ou son début à partir de 5 lettres tapées, ou le même code écrit autrement) ; 1 : un synonyme du mot tapé, ou le début d'un mot plus long quand on n'a tapé que 3 ou 4 lettres (cle dans clean).
+// Un mot à tirets se trouve aussi par le début de ses morceaux, au niveau d'un synonyme : « sandbox » trouve no-sandbox (sans les synonymes : micro-freezes n'est pas du vocal),
+// mais « micro » vise d'abord le micro, pas micro-freezes. Ainsi « norton » ouvre la fiche Norton avant les autres fiches antivirus.
+const hit = (set, g) => {
+  let lv = 0;
+  for (const w of set) {
+    if (g.own.length >= 3 ? w.startsWith(g.own) && (!w.includes("-") || g.own.includes("-")) : w === g.own) { if (w === g.own || g.own.length >= 5) return 2; lv = Math.max(lv, 1); }
+    if (g.alts.some(a => w === a || w === a + "s")) lv = Math.max(lv, g.syn ? 1 : 2);
+    else if (g.own.length >= 3 && w.includes("-") && w.split("-").some(p => p.startsWith(g.own))) lv = Math.max(lv, 1);
+  }
+  return lv;
+};
+const hitZh = (s, g) => s.includes(g.own) ? 2 : g.alts.some(a => s.includes(a)) ? 1 : 0;
+const LEVEL = {t:[0, 4.5, 6], k:[0, 3, 4], b:[0, 1, 1.5]}; // titre, mots-clés, texte : mot tapé 6 / 4 / 1,5, synonyme 4,5 / 3 / 1
 function scoreRow(idx, groups){
   let score = 0, matched = 0;
   for (const alts of groups) {
-    const s = alts.cjk ? (hitZh(idx.zt, alts) ? 6 : hitZh(idx.zb, alts) ? 1.5 : 0) : hit(idx.t, alts) ? 6 : hit(idx.k, alts) ? 4 : hit(idx.b, alts) ? 1.5 : 0;
+    const h = alts.cjk ? [hitZh(idx.zt, alts), 0, hitZh(idx.zb, alts)] : [hit(idx.t, alts), hit(idx.k, alts), hit(idx.b, alts)];
+    const s = h[0] ? LEVEL.t[h[0]] : h[1] ? LEVEL.k[h[1]] : LEVEL.b[h[2]];
     if (s) { matched++; score += s; }
   }
   return {score, matched};
