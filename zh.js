@@ -17,6 +17,7 @@ t: {
 "The most common launcher and game problems, with what actually worked for players.": "启动器和游戏最常见的问题，以及玩家实际试过、真正有效的解决方法。",
 "Message or error code": "报错信息或错误代码",
 "Clear search": "清除搜索",
+"Results for \"{q}\"": "以下是“{q}”的搜索结果",
 "Common:": "常见：",
 "Skip to content": "跳到正文",
 "Report a mistake": "内容纠错",
