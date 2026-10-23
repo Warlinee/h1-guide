@@ -16,6 +16,7 @@ t: {
 "Help and fixes": "帮助与解决方法",
 "The most common launcher and game problems, with what actually worked for players.": "启动器和游戏最常见的问题，以及玩家实际试过、真正有效的解决方法。",
 "Message or error code": "报错信息或错误代码",
+"Clear search": "清除搜索",
 "Common:": "常见：",
 "Skip to content": "跳到正文",
 "Report a mistake": "内容纠错",
@@ -588,6 +589,7 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"Search: an X button clears what you typed in one click, in the search bar and in the search window. Esc empties the bar too, and when nothing is found, \"Clear search\" shows all the cards again.": "搜索：新增 X 按钮，在搜索栏和搜索窗口里点一下就能清除输入的内容。按 Esc 也能清空搜索栏；搜不到结果时，点“清除搜索”会重新显示所有条目。",
 "\"Check you have the latest patch\" video redone for 2.0.45: the proxySha256= line must start with 3D2319E6, with FFE3456B (2.0.44) and 7DE5B115 (2.0.43) in the table. The same video is used in the trio reboot card.": "重做了“确认你装的是最新补丁”的视频，改成 2.0.45 版：proxySha256= 这一行要以 3D2319E6 开头，表格里还列出了 FFE3456B（2.0.44）和 7DE5B115（2.0.43）。三排复活条目里用的也是这个视频。",
 "Language card rewritten: since launcher 2.0.44, the game uses the launcher's language (French, English or Chinese). Its old link still works.": "重写了语言条目：从 2.0.44 版启动器开始，游戏使用启动器的语言（法语、英语或中文）。这个条目的旧链接仍然可以用。",
 "\"Not enough disk space for the assets\" card: the launcher wants 3 times the download size free.": "新增“Not enough disk space for the assets”（资源文件磁盘空间不足）条目：启动器要求有下载大小 3 倍的可用空间。",
