@@ -365,6 +365,16 @@ t: {
 "In the French launcher this message reads \"Espace disque insuffisant pour les assets : … Go sont nécessaires.\", and the Chinese launcher shows it in English. During the client copy you get a different one, without \"for the assets\" (\"Espace disque insuffisant : … Go sont nécessaires.\" in French): then you need the size of the game's Steam folder free, plus 10% (at least 2 GB).": "资源文件的这条提示在法语启动器里是“Espace disque insuffisant pour les assets : … Go sont nécessaires.”，在中文启动器里则显示为英文。复制客户端时出现的是另一条不带“for the assets”的提示（中文启动器显示为“磁盘空间不足，需要 … GB。”，法语是“Espace disque insuffisant : … Go sont nécessaires.”）：这时需要 Steam 里游戏文件夹的大小再加 10%（至少 2 GB）的可用空间。",
 "the launcher wants 3 times the download size free on the game's drive: 15 GB for a first install, 5 GB for the 22/10 update. free some space on that drive then press play again": "启动器要求游戏所在的磁盘有下载大小 3 倍的可用空间：第一次安装要 15 GB，10 月 22 日的更新要 5 GB。在那个盘腾点空间出来，再点一次开始游戏",
 
+// Fiche : fetch-failed-dans-le-launcher
+"\"fetch failed\" in the launcher": "启动器里出现“fetch failed”",
+"Press Windows + R, type ncpa.cpl and press Enter: the Network Connections window opens.": "按 Windows + R，输入 ncpa.cpl 后回车，会打开“网络连接”窗口。",
+"Right-click the connection you use (Ethernet or Wi-Fi) > Properties.": "右键你正在用的连接（以太网或 WLAN）> 属性。",
+"Double-click \"Internet Protocol Version 4 (TCP/IPv4)\".": "双击“Internet 协议版本 4 (TCP/IPv4)”。",
+"Tick \"Use the following DNS server addresses\", put 1.1.1.1 in Preferred DNS server and 1.0.0.1 in Alternate DNS server, then OK and Close.": "选“使用下面的 DNS 服务器地址”，首选 DNS 服务器填 1.1.1.1，备用 DNS 服务器填 1.0.0.1，然后点确定，再点关闭。",
+"Close the launcher, open it again and press Play again.": "关掉启动器再重新打开，然后再点一次“开始游戏”（PLAY）。",
+"ROTK goes through Cloudflare: with Cloudflare's DNS (1.1.1.1), your PC finds its servers even when your router's DNS can't. The message can go on with ENOTFOUND, EAI_AGAIN or getaddrinfo, and \"Unable to resolve the ROTK account server address\" has the same cause. To go back: same window, \"Obtain DNS server address automatically\".": "ROTK 用的是 Cloudflare：换成 Cloudflare 的 DNS（1.1.1.1）后，就算你路由器的 DNS 找不到，电脑也能找到它的服务器。报错后面可能还跟着 ENOTFOUND、EAI_AGAIN 或 getaddrinfo，“无法解析 ROTK 账号服务器地址”也是同一个原因。想改回原来的设置：还是这个窗口，选“自动获得 DNS 服务器地址”。",
+"rotk goes through cloudflare, use their dns. windows + r > ncpa.cpl > right-click ur connection > properties > ipv4, set 1.1.1.1 and 1.0.0.1 as dns then restart the launcher": "rotk 用的是 cloudflare，换成它的 dns。windows + r > ncpa.cpl > 右键你的连接 > 属性 > ipv4，dns 填 1.1.1.1 和 1.0.0.1，然后重开启动器",
+
 // Fiche : verifier-qu-on-a-bien-le-dernier-correctif
 "Check you have the latest patch": "确认你装的是最新补丁",
 "Check the launcher version top right, next to the minimize button: BUILD 2.0.45. That's what counts.": "看启动器右上角、“最小化”按钮旁边的版本号：“版本 2.0.45”（BUILD 2.0.45）。以这个为准。",
@@ -613,6 +623,7 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"\"fetch failed\" in the launcher card: setting Cloudflare's DNS (1.1.1.1) in Windows fixes the error.": "新增条目“启动器里出现‘fetch failed’”：在 Windows 里把 DNS 改成 Cloudflare 的（1.1.1.1）就能解决这个报错。",
 "The upload button is easier to spot and says everything it accepts: screenshot, rotk-shotgun-sprint.log, H1Z1 PlayClient (Live).log, voice log or crash .dmp.": "上传按钮更醒目了，并写明了支持的文件：截图、rotk-shotgun-sprint.log、H1Z1 PlayClient (Live).log、语音日志或崩溃 .dmp。",
 "File reader: drop, paste or send a .log or a .dmp (crash) from the game with the screenshot button. The wiki spots known problems in it (refused patches, server closing the connection, voice, kind of crash, blue screen) and suggests the right card, with a summary without personal info to paste in a ticket. The file is read on your PC, nothing is sent.": "文件读取：用截图按钮拖入、粘贴或发送游戏的 .log 或 .dmp（崩溃文件）。Wiki 会找出已知问题（补丁被拒绝、服务器断开连接、语音、崩溃类型、蓝屏），推荐对应的条目，并给出不含个人信息的摘要，方便贴到工单里。文件在你的电脑上读取，不会上传。",
 "Search: the word you type now comes before its synonyms. \"norton\" opens the Norton card and \"vivox\" the Vivox SDK card, instead of another antivirus or voice card.": "搜索：你输入的词现在优先于它的同义词。搜“norton”会打开 Norton 条目，搜“vivox”会打开 Vivox SDK 条目，不再先打开别的杀毒软件或语音条目。",
