@@ -27,6 +27,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 | Aperçus Discord des liens de fiche | pages `c/<slug>.html`, `c/<slug>.en.html` et `c/<slug>.zh.html`, générées par `tools/build_card_pages.py` ; `404.html` renvoie vers la fiche si une page manque |
 | Réponses rapides pour le support (`?support`) | champ `m` de chaque fiche + `SUP_GENERAL` : pas de lien depuis la page publique, `noindex` |
 | Lecteur de captures (OCR dans le navigateur) | `ocrRun()`, `prepImage()`, `ocrMatch()` + les fichiers de `vendor/tesseract/` : pour les mettre à jour, suis `vendor/tesseract/README.md` |
+| Lecteur de fichiers (.log et .dmp lus dans le navigateur) | `fileRun()`, `dmpParse()` (minidump d'un programme), `kdmpParse()` (écran bleu), `dmpFacts()`, `logFacts()`, fiches visées dans `FILE_CARDS`. Les résultats ne citent jamais de nom de module ni de chemin du joueur ; le crash qui saute à l'adresse 0 juste après le lancement garde le conseil du lecteur de captures (pas de fiche publique) |
 | Patch notes (bouton dans la barre, `#patch-notes`) | tableau `PATCH_NOTES`, version la plus récente en premier : **ajoute une ligne à chaque changement visible**. `c` facultatif : slug de la fiche concernée, pour le lien « Voir la fiche » |
 
 ### Format d'une fiche (`F`)
