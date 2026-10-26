@@ -2,7 +2,7 @@
 
 Wiki communautaire FR/EN (et chinois) d'aide aux joueurs de ROTK (H1Z1). **Il n'est pas affilié à ROTK** et doit le rester visiblement : le bandeau « non officiel » reste, et aucune page ne doit imiter un outil ou une page du staff.
 
-Site en ligne : https://warlinee.github.io/h1-guide/ (GitHub Pages, branche `main`, racine du dépôt). Chaque push sur `main` est en ligne en environ 1 minute.
+Site en ligne : https://rotkguide.com/ (GitHub Pages avec domaine perso, branche `main`, racine du dépôt ; l'ancienne adresse warlinee.github.io/h1-guide redirige dessus). Chaque push sur `main` est en ligne en environ 1 minute.
 
 ## Comment travailler
 
