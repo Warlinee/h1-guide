@@ -367,13 +367,14 @@ t: {
 
 // Fiche : fetch-failed-dans-le-launcher
 "\"fetch failed\" in the launcher": "启动器里出现“fetch failed”",
-"Press Windows + R, type ncpa.cpl and press Enter: the Network Connections window opens.": "按 Windows + R，输入 ncpa.cpl 后回车，会打开“网络连接”窗口。",
-"Right-click the connection you use (Ethernet or Wi-Fi) > Properties.": "右键你正在用的连接（以太网或 WLAN）> 属性。",
-"Double-click \"Internet Protocol Version 4 (TCP/IPv4)\".": "双击“Internet 协议版本 4 (TCP/IPv4)”。",
-"Tick \"Use the following DNS server addresses\", put 1.1.1.1 in Preferred DNS server and 1.0.0.1 in Alternate DNS server, then OK and Close.": "选“使用下面的 DNS 服务器地址”，首选 DNS 服务器填 1.1.1.1，备用 DNS 服务器填 1.0.0.1，然后点确定，再点关闭。",
+"Press Windows + R, type ncpa.cpl and press Enter.": "按 Windows + R，输入 ncpa.cpl 后回车。",
+"Right-click your Ethernet or Wi-Fi adapter (the one you use) > Properties.": "右键你正在用的网卡（以太网或 WLAN）> 属性。",
+"Double-click the line ending with (TCP/IPv4).": "双击以 (TCP/IPv4) 结尾的那一行。",
+"Tick \"Use the following DNS server addresses\", put 1.1.1.1 and 1.0.0.1 (or 8.8.8.8 and 8.8.4.4), then OK and Close.": "选“使用下面的 DNS 服务器地址”，首选 DNS 服务器填 223.5.5.5，备用 DNS 服务器填 119.29.29.29，然后点确定，再点关闭。",
+"Windows + R, type cmd and press Enter. In the black window, type ipconfig /flushdns and press Enter: Windows forgets the old failure.": "按 Windows + R，输入 cmd 后回车。在黑色窗口里输入 ipconfig /flushdns 再回车：Windows 会清掉之前失败的记录。",
 "Close the launcher, open it again and press Play again.": "关掉启动器再重新打开，然后再点一次“开始游戏”（PLAY）。",
-"ROTK goes through Cloudflare: with Cloudflare's DNS (1.1.1.1), your PC finds its servers even when your router's DNS can't. The message can go on with ENOTFOUND, EAI_AGAIN or getaddrinfo, and \"Unable to resolve the ROTK account server address\" has the same cause. To go back: same window, \"Obtain DNS server address automatically\".": "ROTK 用的是 Cloudflare：换成 Cloudflare 的 DNS（1.1.1.1）后，就算你路由器的 DNS 找不到，电脑也能找到它的服务器。报错后面可能还跟着 ENOTFOUND、EAI_AGAIN 或 getaddrinfo，“无法解析 ROTK 账号服务器地址”也是同一个原因。想改回原来的设置：还是这个窗口，选“自动获得 DNS 服务器地址”。",
-"rotk goes through cloudflare, use their dns. windows + r > ncpa.cpl > right-click ur connection > properties > ipv4, set 1.1.1.1 and 1.0.0.1 as dns then restart the launcher": "rotk 用的是 cloudflare，换成它的 dns。windows + r > ncpa.cpl > 右键你的连接 > 属性 > ipv4，dns 填 1.1.1.1 和 1.0.0.1，然后重开启动器",
+"It happens when your router's DNS can't find the ROTK servers: any public DNS fixes it, Cloudflare's (1.1.1.1) as well as Google's (8.8.8.8). The message can go on with ENOTFOUND, EAI_AGAIN or getaddrinfo, and \"Unable to resolve the ROTK account server address\" has the same cause. If \"fetch failed\" shows up during UPDATING ASSETS, it's more likely the download getting interrupted: see the stuck assets card. If rotk.app doesn't load at all, try the 1.1.1.1 app in WARP mode. To go back: same window, \"Obtain DNS server address automatically\".": "原因是你路由器的 DNS 找不到 ROTK 的服务器：换成任何一个公共 DNS 都行。在国内用阿里 DNS（223.5.5.5）或腾讯 DNSPod（119.29.29.29），比 1.1.1.1 稳定。报错后面可能还跟着 ENOTFOUND、EAI_AGAIN 或 getaddrinfo，“无法解析 ROTK 账号服务器地址”也是同一个原因。如果“fetch failed”出现在 UPDATING ASSETS 的时候，多半是下载中断了：去看资源卡住的那一条。想改回原来的设置：还是这个窗口，选“自动获得 DNS 服务器地址”。",
+"it's often ur router's dns. windows + r > ncpa.cpl > right-click ur connection > properties > ipv4, set 1.1.1.1 and 1.0.0.1 as dns. then windows + r > cmd > ipconfig /flushdns and restart the launcher": "多半是你路由器的 dns 有问题。windows + r > ncpa.cpl > 右键你的网卡 > 属性 > ipv4，dns 填 223.5.5.5 和 119.29.29.29。然后 windows + r > cmd > ipconfig /flushdns，再重开启动器",
 
 // Fiche : verifier-qu-on-a-bien-le-dernier-correctif
 "Check you have the latest patch": "确认你装的是最新补丁",
@@ -623,7 +624,7 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
-"\"fetch failed\" in the launcher card: setting Cloudflare's DNS (1.1.1.1) in Windows fixes the error.": "新增条目“启动器里出现‘fetch failed’”：在 Windows 里把 DNS 改成 Cloudflare 的（1.1.1.1）就能解决这个报错。",
+"\"fetch failed\" in the launcher card: change the Windows DNS (1.1.1.1 or 8.8.8.8) then clear the DNS cache. It's a lead, not a confirmed fix yet.": "新增条目“启动器里出现‘fetch failed’”：把 Windows 的 DNS 换成公共 DNS，再清空 DNS 缓存。目前只是线索，还不是确认有效的解决方法。",
 "The upload button is easier to spot and says everything it accepts: screenshot, rotk-shotgun-sprint.log, H1Z1 PlayClient (Live).log, voice log or crash .dmp.": "上传按钮更醒目了，并写明了支持的文件：截图、rotk-shotgun-sprint.log、H1Z1 PlayClient (Live).log、语音日志或崩溃 .dmp。",
 "File reader: drop, paste or send a .log or a .dmp (crash) from the game with the screenshot button. The wiki spots known problems in it (refused patches, server closing the connection, voice, kind of crash, blue screen) and suggests the right card, with a summary without personal info to paste in a ticket. The file is read on your PC, nothing is sent.": "文件读取：用截图按钮拖入、粘贴或发送游戏的 .log 或 .dmp（崩溃文件）。Wiki 会找出已知问题（补丁被拒绝、服务器断开连接、语音、崩溃类型、蓝屏），推荐对应的条目，并给出不含个人信息的摘要，方便贴到工单里。文件在你的电脑上读取，不会上传。",
 "Search: the word you type now comes before its synonyms. \"norton\" opens the Norton card and \"vivox\" the Vivox SDK card, instead of another antivirus or voice card.": "搜索：你输入的词现在优先于它的同义词。搜“norton”会打开 Norton 条目，搜“vivox”会打开 Vivox SDK 条目，不再先打开别的杀毒软件或语音条目。",
