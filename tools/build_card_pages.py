@@ -36,7 +36,7 @@ def page(slug, card, lang):
     title = card["t"][lang]
     desc = summary(card["f"][lang])
     image = BASE + (f"videos/{card['v']}-{lang}.jpg" if card.get("v") else "og.png")
-    target = "../" + ("" if lang == "fr" else "?lang=" + lang) + "#" + slug
+    target = "../?lang=" + lang + "#" + slug
     own = BASE + "c/" + slug + SUFFIX[lang] + ".html"
     e = lambda s: html.escape(s, quote=True)
     return f"""<!doctype html>
@@ -75,7 +75,7 @@ NOT_FOUND = """<!doctype html>
 /* Lien de fiche sans page d'aperçu (fiche ajoutée sans relancer tools/build_card_pages.py) : on renvoie vers la fiche. */
 (function(){
   var m = location.pathname.match(/^(.*\\/)c\\/([a-z0-9-]+?)(?:\\.(en|zh))?(?:\\.html)?$/);
-  if (m) location.replace(m[1] + (m[3] ? "?lang=" + m[3] : "") + "#" + m[2]);
+  if (m) location.replace(m[1] + "?lang=" + (m[3] || "fr") + "#" + m[2]);
 })();
 </script>
 <style>body{margin:0;background:#0c0b09;color:#efede7;font:16px/1.6 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;text-align:center;padding:20px}a{color:#ff3b2f}</style>
