@@ -17,7 +17,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "c"
-BASE = "https://warlinee.github.io/h1-guide/"
+BASE = "https://rotkguide.com/"
 SITE = {"fr": "ROTK Wiki (non officiel)", "en": "ROTK Wiki (unofficial)", "zh": "ROTK Wiki（非官方）"}
 HTML_LANG = {"fr": "fr", "en": "en", "zh": "zh-CN"}
 LANGS = ("fr", "en", "zh")
@@ -36,7 +36,7 @@ def page(slug, card, lang):
     title = card["t"][lang]
     desc = summary(card["f"][lang])
     image = BASE + (f"videos/{card['v']}-{lang}.jpg" if card.get("v") else "og.png")
-    target = "../" + ("" if lang == "fr" else "?lang=" + lang) + "#" + slug
+    target = "../?lang=" + lang + "#" + slug
     own = BASE + "c/" + slug + SUFFIX[lang] + ".html"
     e = lambda s: html.escape(s, quote=True)
     return f"""<!doctype html>
@@ -75,12 +75,12 @@ NOT_FOUND = """<!doctype html>
 /* Lien de fiche sans page d'aperçu (fiche ajoutée sans relancer tools/build_card_pages.py) : on renvoie vers la fiche. */
 (function(){
   var m = location.pathname.match(/^(.*\\/)c\\/([a-z0-9-]+?)(?:\\.(en|zh))?(?:\\.html)?$/);
-  if (m) location.replace(m[1] + (m[3] ? "?lang=" + m[3] : "") + "#" + m[2]);
+  if (m) location.replace(m[1] + "?lang=" + (m[3] || "fr") + "#" + m[2]);
 })();
 </script>
 <style>body{margin:0;background:#0c0b09;color:#efede7;font:16px/1.6 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;text-align:center;padding:20px}a{color:#ff3b2f}</style>
 </head>
-<body><p>Page introuvable. <a href="/h1-guide/">Retour au wiki</a><br>Page not found. <a href="/h1-guide/?lang=en">Back to the wiki</a><br><span lang="zh-CN">找不到页面。<a href="/h1-guide/?lang=zh">返回 Wiki</a></span></p></body>
+<body><p>Page introuvable. <a href="/">Retour au wiki</a><br>Page not found. <a href="/?lang=en">Back to the wiki</a><br><span lang="zh-CN">找不到页面。<a href="/?lang=zh">返回 Wiki</a></span></p></body>
 </html>
 """
 
@@ -91,8 +91,8 @@ def main():
             browser = p.chromium.launch(channel="msedge")
         except Exception:
             browser = p.chromium.launch()
-        pg = browser.new_page()
-        # ?lang=zh : la page charge zh.js, chaque texte a alors sa version fr, en et zh
+        # navigateur en chinois (la page prend la langue du visiteur avant ?lang=) : elle charge zh.js, chaque texte a alors sa version fr, en et zh
+        pg = browser.new_page(locale="zh-CN")
         pg.goto((ROOT / "index.html").as_uri() + "?lang=zh")
         pg.wait_for_function("document.documentElement.lang === 'zh-CN' && document.querySelectorAll('#list .row').length > 0")
         cards = pg.evaluate("[...document.querySelectorAll('#list .row')].map(r => ({id: r.id, x: {t: r._x.t, f: r._x.f, v: r._x.v || null}}))")
