@@ -73,7 +73,7 @@ python -m http.server 8765
 
 Puis ouvre http://127.0.0.1:8765/ et vérifie :
 
-- la version FR et la version EN (`?lang=fr`, `?lang=en`), et la version chinoise (`?lang=zh`) ;
+- la version FR et la version EN, et la version chinoise (avec les drapeaux : `?lang=` ne sert que si le navigateur n'est ni en français, ni en anglais, ni en chinois) ;
 - un écran de 375 px de large (rien ne déborde sur le côté) ;
 - la console sans erreur ;
 - quelques recherches (« ecran noir », « pas de son », « crash ») ;

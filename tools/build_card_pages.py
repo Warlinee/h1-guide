@@ -91,8 +91,8 @@ def main():
             browser = p.chromium.launch(channel="msedge")
         except Exception:
             browser = p.chromium.launch()
-        pg = browser.new_page()
-        # ?lang=zh : la page charge zh.js, chaque texte a alors sa version fr, en et zh
+        # navigateur en chinois (la page prend la langue du visiteur avant ?lang=) : elle charge zh.js, chaque texte a alors sa version fr, en et zh
+        pg = browser.new_page(locale="zh-CN")
         pg.goto((ROOT / "index.html").as_uri() + "?lang=zh")
         pg.wait_for_function("document.documentElement.lang === 'zh-CN' && document.querySelectorAll('#list .row').length > 0")
         cards = pg.evaluate("[...document.querySelectorAll('#list .row')].map(r => ({id: r.id, x: {t: r._x.t, f: r._x.f, v: r._x.v || null}}))")
