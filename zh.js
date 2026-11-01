@@ -615,6 +615,15 @@ t: {
 "Settings > Antivirus > Scans and Risks: add the game and launcher folders to both exclusion lists.": "设置 > 防病毒 > 扫描和风险（英文版：Settings > Antivirus > Scans and Risks）：把游戏文件夹和启动器文件夹都加到两个排除列表里。",
 "norton prob quarantined it, restore it from history and add ur game and launcher folders as exclusions": "应该是 norton 把它隔离了，去历史记录里还原，再把游戏文件夹和启动器文件夹加到排除项",
 
+// Fiche : deconnecte-a-chaque-partie-apres-quelques-minutes-mcafee
+"Disconnected every match after a few minutes (McAfee)": "每局玩几分钟就掉线（McAfee）",
+"Press the Windows key and type \"McAfee\": if it shows up, it's installed. New PCs often come with a McAfee trial.": "按 Windows 键，输入“McAfee”：能搜到就说明装了。新电脑经常预装 McAfee 试用版。",
+"Windows Settings > Apps > Installed apps: search \"McAfee\", click \"…\" on the right > Uninstall.": "Windows 设置 > 应用 > 已安装的应用：搜索“McAfee”，点右边的“…” > 卸载。",
+"Do it again for every McAfee entry (WebAdvisor included), then restart the PC.": "每个 McAfee 条目都这样卸载一遍（包括 WebAdvisor），然后重启电脑。",
+"Windows Defender turns itself back on after the restart. Open the launcher again and play 2 or 3 matches.": "重启后 Windows Defender 会自动重新开启。再打开启动器，玩 2、3 局试试。",
+"It can cut out right after landing, after 2 minutes or when about 100 players are left. On Windows 10: Settings > Apps > Apps & features. Still disconnected without McAfee: \"You have been disconnected\" card.": "可能落地后马上掉线，也可能 2 分钟后，或者剩 100 人左右的时候。Windows 10：设置 > 应用 > 应用和功能。卸载 McAfee 后还是掉线：看“对局中提示‘你已与服务器断开连接’”条目。",
+"that's mcafee cutting the game's connection. uninstall it (settings > apps > installed apps, every mcafee entry), restart and defender takes over": "是 mcafee 把游戏连接断了。把它卸载（设置 > 应用 > 已安装的应用，每个 mcafee 都卸掉），重启后 defender 会接手",
+
 // Fiche : reshade-est-interdit
 "ReShade is forbidden": "禁止使用 ReShade",
 "ReShade is forbidden on ROTK (confirmed by the staff on 19/10). Uninstall it and remove its files from the game folder.": "ROTK 禁止使用 ReShade（官方人员已于 10 月 19 日确认）。卸载它，并把它的文件从游戏文件夹里删掉。",
@@ -624,6 +633,7 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"McAfee card: disconnected every match after a few minutes, fixed by uninstalling McAfee (often preinstalled on new PCs). The \"You have been disconnected\" card links to it.": "新增条目“每局玩几分钟就掉线（McAfee）”：卸载 McAfee 就能解决（新电脑经常预装）。“对局中提示‘你已与服务器断开连接’”条目也会链接到它。",
 "\"fetch failed\" in the launcher card: change the Windows DNS (1.1.1.1 or 8.8.8.8) then clear the DNS cache. It's a lead, not a confirmed fix yet.": "新增条目“启动器里出现‘fetch failed’”：把 Windows 的 DNS 换成公共 DNS，再清空 DNS 缓存。目前只是线索，还不是确认有效的解决方法。",
 "The upload button is easier to spot and says everything it accepts: screenshot, rotk-shotgun-sprint.log, H1Z1 PlayClient (Live).log, voice log or crash .dmp.": "上传按钮更醒目了，并写明了支持的文件：截图、rotk-shotgun-sprint.log、H1Z1 PlayClient (Live).log、语音日志或崩溃 .dmp。",
 "File reader: drop, paste or send a .log or a .dmp (crash) from the game with the screenshot button. The wiki spots known problems in it (refused patches, server closing the connection, voice, kind of crash, blue screen) and suggests the right card, with a summary without personal info to paste in a ticket. The file is read on your PC, nothing is sent.": "文件读取：用截图按钮拖入、粘贴或发送游戏的 .log 或 .dmp（崩溃文件）。Wiki 会找出已知问题（补丁被拒绝、服务器断开连接、语音、崩溃类型、蓝屏），推荐对应的条目，并给出不含个人信息的摘要，方便贴到工单里。文件在你的电脑上读取，不会上传。",
