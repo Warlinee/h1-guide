@@ -587,10 +587,11 @@ t: {
 
 // Fiche : reboot-en-trio-tu-restes-spectateur-invisible
 "Trio reboot: you stay spectating, invisible": "三排复活：一直处于观战状态，人物隐身",
-"Update the launcher (2.0.42 or newer, fix released 18/10) and relaunch the game.": "更新启动器（2.0.42 或更新的版本，10 月 18 日已发布修复），然后重新启动游戏。",
+"Update the launcher (latest version: 2.0.48) and relaunch the game.": "更新启动器（最新版本：2.0.48），然后重新启动游戏。",
 "If rotk-shotgun-sprint.log shows \"bridge allocation refused\": update the graphics driver and Windows.": "如果 rotk-shotgun-sprint.log 里出现“bridge allocation refused”：更新显卡驱动和 Windows。",
 "In game, reboot is now called \"Réintégration\" in French (\"RÉINTÉGRATION\" on the map) and \"召回\" in Chinese.": "游戏里的复活（reboot）现在中文显示为“召回”，法语显示为“Réintégration”（地图上是“RÉINTÉGRATION”）。",
-"update the launcher and relaunch the game, it's fixed since 18/10. if it continues, update ur graphics driver": "更新一下启动器再重开游戏，10 月 18 日就修好了。还这样的话就更新一下显卡驱动",
+"update the launcher (2.0.48) and relaunch the game. if it continues, update ur graphics driver": "把启动器更新到 2.0.48 再重开游戏。还这样的话就更新一下显卡驱动",
+"Trio reboot card: the launcher version to have is now 2.0.48.": "三排复活条目：现在需要的启动器版本是 2.0.48。",
 
 // Fiche : windows-defender
 "Windows Defender": "Windows Defender",
