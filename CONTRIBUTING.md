@@ -44,6 +44,7 @@ Tout le site tient dans **`index.html`** (HTML, CSS et JS, sans build ni dépend
 - `k` : mots-clés et codes (servent à la recherche et aux étiquettes).
 - `r` : facultatif. Slugs des fiches citées dans le texte (« fiche Windows Defender »), affichées en boutons « Voir aussi » à la fin de la fiche.
 - `v` : facultatif. Vidéo `videos/<v>-fr.mp4` / `-en.mp4` + affiche `.jpg`.
+- `nr` : facultatif. `nr:1` retire le bouton « Signaler une erreur » de la fiche (fiche des bans : il servait à contester des bans, issues #16 à #18).
 - Toujours remplir **FR et EN**.
 - Le chinois ne se remplit pas ici : il est dans `zh.js`, tenu par Wazlyy. Quand tu changes le texte anglais d'une fiche, ce texte repasse tout seul en anglais dans la version chinoise en attendant sa traduction : tu n'as rien à faire de plus.
 
