@@ -194,13 +194,13 @@ t: {
 // État actuel
 "Current status": "当前状态",
 "Updated ": "更新于 ",
-"Version to have: <b>launcher 2.0.45</b> (out since 22/10). Check \"BUILD 2.0.45\" top right in the launcher.": "需要的版本：<b>启动器 2.0.45</b>（10 月 22 日发布）。看启动器右上角的“版本 2.0.45”（BUILD 2.0.45）。",
+"Version to have: <b>launcher 2.0.48</b> (out since 29/10). Check \"BUILD 2.0.48\" top right in the launcher.": "需要的版本：<b>启动器 2.0.48</b>（10 月 29 日发布）。看启动器右上角的“版本 2.0.48”（BUILD 2.0.48）。",
 "New: the game is in French when the launcher is in French (since 2.0.44). For an English game, set the launcher to English.": "新变化：启动器是法语时，游戏也会是法语（2.0.44 起）。想要英文游戏，就把启动器切换成英语。",
 "Fixed: trio reboot leaving you spectating, and aiming (ADS) near cover.": "已修复：三排复活后一直停留在观战状态，以及靠近掩体时开镜（ADS）的问题。",
-"Getting out of a vehicle at the wrong spot while driving or turning: fix shipped in 2.0.44, not confirmed in game yet.": "行驶中或转弯时离开载具，位置不对：2.0.44 已发布修复，但还没在游戏里确认有效。",
-"Shot that locks then fires on its own when you aim while moving: fix shipped in 2.0.45, not confirmed in game yet.": "移动中瞄准时开枪会卡住、然后自己打出去：2.0.45 已发布修复，但还没在游戏里确认有效。",
+"Getting out of a vehicle at the wrong spot while driving or turning: the 2.0.44 fix was removed in 2.0.47, so it can happen again.": "行驶中或转弯时离开载具，位置不对：2.0.44 的修复已在 2.0.47 中移除，所以这个问题可能会再次出现。",
+"Shot that locks then fires on its own when you aim while moving: fix shipped in 2.0.45 and still there in 2.0.48, not confirmed in game yet.": "移动中瞄准时开枪会卡住、然后自己打出去：2.0.45 已发布修复，2.0.48 里仍然保留，但还没在游戏里确认有效。",
 "A ROTK folder right on a drive (like D:\\ROTK) blocks the install with \"Access denied\". Fix on the way: until then, pick a folder like D:\\Games.": "ROTK 文件夹直接放在磁盘根目录下（比如 D:\\ROTK）时，安装会因“Access denied”（拒绝访问）而失败。修复正在路上：在那之前，请选 D:\\Games 这样的文件夹。",
-"Launcher error messages with garbled characters: still there in 2.0.45, also with the launcher in English or Chinese.": "启动器报错信息出现乱码：2.0.45 里仍然存在，启动器是英文或中文界面时也会出现。",
+"Launcher error messages with garbled characters: still there in 2.0.48, also with the launcher in English or Chinese.": "启动器报错信息出现乱码：2.0.48 里仍然存在，启动器是英文或中文界面时也会出现。",
 "New account: a ~10 min tutorial and Steam level 1 are required before matches.": "新账号：打对局之前，必须先完成约 10 分钟的新手教程，并且 Steam 等级达到 1 级。",
 
 // Première installation
@@ -276,12 +276,12 @@ t: {
 
 // Fiche : messages-d-erreur-avec-des-accents-casses-pra-sent-na-a
 "Error messages with broken characters (prÃ©sent, nâ€™a pas pu…)": "错误提示里有乱码（prÃ©sent、nâ€™a pas pu…）",
-"Launcher display bug (since 2.0.43, still there in 2.0.45): the message means the same thing. With the launcher in English or Chinese, these messages show up too, in French with these broken characters.": "启动器的显示 bug（2.0.43 起出现，2.0.45 里仍然存在）：提示的意思没有变。启动器是英文或中文界面时，这些提示也会出现，而且是带乱码的法语。",
+"Launcher display bug (since 2.0.43, still there in 2.0.48): the message means the same thing. With the launcher in English or Chinese, these messages show up too, in French with these broken characters.": "启动器的显示 bug（2.0.43 起出现，2.0.48 里仍然存在）：提示的意思没有变。启动器是英文或中文界面时，这些提示也会出现，而且是带乱码的法语。",
 "\"Un dinput8.dll inconnu est prÃ©sent…\" (unknown dinput8.dll): a dinput8.dll the launcher doesn't recognize is in your game folder. Follow the dinput8.dll card.": "“Un dinput8.dll inconnu est prÃ©sent…”（未知的 dinput8.dll）：你的游戏文件夹里有一个启动器不认识的 dinput8.dll。按 dinput8.dll 条目操作。",
 "\"Le patch sprint ROTK embarquÃ© est absent ou modifiÃ©…\" (bundled patch missing or modified): the patch stored in the launcher's files is missing or changed, your antivirus may have quarantined it. Restore it (Windows Defender card) or reinstall the launcher.": "“Le patch sprint ROTK embarquÃ© est absent ou modifiÃ©…”（内置补丁丢失或被修改）：启动器文件里自带的补丁不见了或被改动了，可能被杀毒软件放进了隔离区。把它还原（看 Windows Defender 条目），或者重新安装启动器。",
 "\"Cette version de H1Z1 nâ€™est pas compatible avec le patch sprint ROTK…\" (H1Z1 version not compatible): the H1Z1.exe in your game folder isn't the expected one. Verify H1Z1 files in Steam, then redo the client setup (0x2a31abc card).": "“Cette version de H1Z1 nâ€™est pas compatible avec le patch sprint ROTK…”（H1Z1 版本不兼容）：你游戏文件夹里的 H1Z1.exe 不是启动器要求的那个。先在 Steam 里验证 H1Z1 的文件，再重新进行客户端安装（看 0x2a31abc 条目）。",
 "\"Le patch sprint ROTK nâ€™a pas pu Ãªtre installÃ©\" (or \"supprimÃ©\"), \"Le marqueur du patch sprint ROTK nâ€™a pas pu Ãªtre Ã©crit\" (could not be installed, removed or written): the launcher couldn't update its patch in your game folder. End H1Z1.exe (Task Manager > Details > End task) and try again. Still stuck: Controlled folder access card.": "“Le patch sprint ROTK nâ€™a pas pu Ãªtre installÃ©”（或“supprimÃ©”）、“Le marqueur du patch sprint ROTK nâ€™a pas pu Ãªtre Ã©crit”（无法安装、删除或写入）：启动器没能更新游戏文件夹里的补丁。结束 H1Z1.exe（“任务管理器” > “详细信息” > “结束任务”）后再试一次。还是不行：看“受控文件夹访问”条目。",
-"it's just a broken-characters bug in the launcher (still there in 2.0.45, in english and chinese too), the message means the same thing": "只是启动器的乱码 bug（2.0.45 里还在，英文和中文界面也一样），提示的意思还是一样的",
+"it's just a broken-characters bug in the launcher (still there in 2.0.48, in english and chinese too), the message means the same thing": "只是启动器的乱码 bug（2.0.48 里还在，英文和中文界面也一样），提示的意思还是一样的",
 
 // Fiche : le-launcher-ne-s-ouvre-pas-launch-failed
 "Launcher won't open: \"launch-failed\"": "启动器打不开：“launch-failed”",
@@ -378,12 +378,12 @@ t: {
 
 // Fiche : verifier-qu-on-a-bien-le-dernier-correctif
 "Check you have the latest patch": "确认你装的是最新补丁",
-"Check the launcher version top right, next to the minimize button: BUILD 2.0.45. That's what counts.": "看启动器右上角、“最小化”按钮旁边的版本号：“版本 2.0.45”（BUILD 2.0.45）。以这个为准。",
+"Check the launcher version top right, next to the minimize button: BUILD 2.0.48. That's what counts.": "看启动器右上角、“最小化”按钮旁边的版本号：“版本 2.0.48”（BUILD 2.0.48）。以这个为准。",
 "Older: update the launcher, then fully close the game and launch it again.": "版本更旧的话：先更新启动器，然后彻底关闭游戏，再重新启动。",
 "To check the game patch is in place: after launching the game, open your game folder, right-click rotk-shotgun-sprint.ini > Open with > Notepad.": "确认游戏补丁是否生效：启动游戏后，打开你的游戏文件夹，右键点击 rotk-shotgun-sprint.ini > “打开方式” > “记事本”。",
-"If the proxySha256= line starts with 3D2319E6, that's the 2.0.45 game patch. If it starts with FFE3456B (2.0.44) or 7DE5B115 (2.0.43), relaunch the game from the updated launcher.": "如果 proxySha256= 这一行以 3D2319E6 开头，那就是 2.0.45 的游戏补丁。如果以 FFE3456B（2.0.44）或 7DE5B115（2.0.43）开头，就用更新后的启动器重新启动游戏。",
-"No rotk-shotgun-sprint.ini? That doesn't mean you're outdated: the launcher only writes it when the game patch is turned on for that launch, the server decides. Fixes (trio reboot, vehicle exit, aiming, shot locking when aiming while moving) only load after closing and relaunching the game.": "没有 rotk-shotgun-sprint.ini 文件？这不代表你的版本过旧：只有当次启动启用了游戏补丁，启动器才会写入这个文件，这由服务器决定。修复内容（三排复活、离开载具、瞄准、移动中瞄准时开枪卡住）只有在关闭并重新启动游戏后才会加载。",
-"check the version top right in the launcher, u need BUILD 2.0.45. to check the game patch, open rotk-shotgun-sprint.ini with notepad: if proxySha256= starts with 3D2319E6 it's the 2.0.45 one (no .ini doesn't always mean ur outdated)": "看启动器右上角的版本号，得是“版本 2.0.45”（BUILD 2.0.45）。想确认游戏补丁的话，用记事本打开 rotk-shotgun-sprint.ini 看看：如果 proxySha256= 开头是 3D2319E6 就是 2.0.45 的补丁（没有 .ini 文件也不一定是版本旧）",
+"If the proxySha256= line starts with F6611F3A, that's the 2.0.48 game patch. If it starts with 48268B10 (2.0.47), F3A66A96 (2.0.46) or 3D2319E6 (2.0.45), relaunch the game from the updated launcher.": "如果 proxySha256= 这一行以 F6611F3A 开头，那就是 2.0.48 的游戏补丁。如果以 48268B10（2.0.47）、F3A66A96（2.0.46）或 3D2319E6（2.0.45）开头，就用更新后的启动器重新启动游戏。",
+"No rotk-shotgun-sprint.ini? That doesn't mean you're outdated: the launcher only writes it when the game patch is turned on for that launch, the server decides. Fixes (trio reboot, aiming, shot locking when aiming while moving) only load after closing and relaunching the game.": "没有 rotk-shotgun-sprint.ini 文件？这不代表你的版本过旧：只有当次启动启用了游戏补丁，启动器才会写入这个文件，这由服务器决定。修复内容（三排复活、瞄准、移动中瞄准时开枪卡住）只有在关闭并重新启动游戏后才会加载。",
+"check the version top right in the launcher, u need BUILD 2.0.48. to check the game patch, open rotk-shotgun-sprint.ini with notepad: if proxySha256= starts with F6611F3A it's the 2.0.48 one (no .ini doesn't always mean ur outdated)": "看启动器右上角的版本号，得是“版本 2.0.48”（BUILD 2.0.48）。想确认游戏补丁的话，用记事本打开 rotk-shotgun-sprint.ini 看看：如果 proxySha256= 开头是 F6611F3A 就是 2.0.48 的补丁（没有 .ini 文件也不一定是版本旧）",
 
 // Fiche : les-droits-administrateur-n-ont-pas-pu-etre-verifies
 "\"Administrator rights could not be verified\"": "“无法确认 Windows 管理员权限”",
@@ -634,6 +634,7 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"Launcher 2.0.48: version to have and game patch fingerprint (F6611F3A) in the latest patch card and in the Current status. The vehicle exit fix was removed in 2.0.47, it is no longer listed. Broken characters: still there in 2.0.48.": "启动器 2.0.48：“最新补丁”条目和“当前状态”里更新了需要的版本和游戏补丁指纹（F6611F3A）。离开载具的修复已在 2.0.47 中移除，不再列出。乱码：2.0.48 里仍然存在。",
 "McAfee card: disconnected every match after a few minutes, fixed by uninstalling McAfee (often preinstalled on new PCs). The \"You have been disconnected\" card links to it.": "新增条目“每局玩几分钟就掉线（McAfee）”：卸载 McAfee 就能解决（新电脑经常预装）。“对局中提示‘你已与服务器断开连接’”条目也会链接到它。",
 "\"fetch failed\" in the launcher card: change the Windows DNS (1.1.1.1 or 8.8.8.8) then clear the DNS cache. It's a lead, not a confirmed fix yet.": "新增条目“启动器里出现‘fetch failed’”：把 Windows 的 DNS 换成公共 DNS，再清空 DNS 缓存。目前只是线索，还不是确认有效的解决方法。",
 "The upload button is easier to spot and says everything it accepts: screenshot, rotk-shotgun-sprint.log, H1Z1 PlayClient (Live).log, voice log or crash .dmp.": "上传按钮更醒目了，并写明了支持的文件：截图、rotk-shotgun-sprint.log、H1Z1 PlayClient (Live).log、语音日志或崩溃 .dmp。",
