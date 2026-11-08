@@ -329,7 +329,7 @@ t: {
 // Fiche : installation-du-client-quel-dossier-choisir
 "Client setup: which folder to pick?": "客户端安装：该选哪个文件夹？",
 "\"H1Z1 CLIENT\": your Steam game folder. To find it: Steam > right-click Z1 Battle Royale > Manage > Browse local files. The launcher should say \"STEAM CLIENT DETECTED\".": "“H1Z1 客户端”（H1Z1 CLIENT）：选你 Steam 里的游戏文件夹。查找方法：Steam > 右键点击 Z1 Battle Royale > “管理” > “浏览本地文件”。启动器应该会显示“已检测到 Steam 客户端”。",
-"\"ROTK INSTALLATION\": a folder outside Steam, for example C:\\Games (the ROTK folder is created inside it for you). Never just C:\\ or D:\\, or a ROTK folder sitting right on the drive like D:\\ROTK (for now, on launcher 2.0.43, that fails with \"Access denied\", EPERM).": "“ROTK 安装位置”（ROTK INSTALLATION）：选一个 Steam 以外的文件夹，比如 C:\\Games 就行（ROTK 文件夹会自动在里面创建）。不要只选 C:\\ 或 D:\\ 这样的磁盘根目录，也不要用 D:\\ROTK 这种直接放在磁盘根目录下的 ROTK 文件夹（目前在 2.0.43 版启动器上会失败，提示“Access denied”，EPERM）。",
+"\"ROTK INSTALLATION\": a folder outside Steam, for example C:\\Games (the ROTK folder is created inside it for you). Never just C:\\ or D:\\, or a ROTK folder sitting right on the drive like D:\\ROTK (still the case on launcher 2.0.48: that fails with \"Access denied\", EPERM).": "“ROTK 安装位置”（ROTK INSTALLATION）：选一个 Steam 以外的文件夹，比如 C:\\Games 就行（ROTK 文件夹会自动在里面创建）。不要只选 C:\\ 或 D:\\ 这样的磁盘根目录，也不要用 D:\\ROTK 这种直接放在磁盘根目录下的 ROTK 文件夹（2.0.48 版启动器上仍然会失败，提示“Access denied”，EPERM）。",
 "\"STANDALONE CLIENT DETECTED\" when you wanted Steam: you picked an old copy. Pick the Steam game folder instead.": "想用 Steam 版却显示“已检测到独立客户端”：说明你选的是旧副本。改选 Steam 里的游戏文件夹。",
 "H1Z1 is called \"Z1 Battle Royale\" on Steam (free).": "H1Z1 在 Steam 上叫“Z1 Battle Royale”（免费）。",
 "for \"H1Z1 client\" pick ur steam h1z1 folder, and for the rotk install an empty folder outside steam like C:\\Games": "“H1Z1 客户端”选你 steam 里的 h1z1 文件夹，rotk 安装位置选一个 steam 以外的空文件夹，比如 C:\\Games",
@@ -635,6 +635,8 @@ t: {
 
 // Patch notes
 "Launcher 2.0.48: version to have and game patch fingerprint (F6611F3A) in the latest patch card and in the Current status. The vehicle exit fix was removed in 2.0.47, it is no longer listed. Broken characters: still there in 2.0.48.": "启动器 2.0.48：“最新补丁”条目和“当前状态”里更新了需要的版本和游戏补丁指纹（F6611F3A）。离开载具的修复已在 2.0.47 中移除，不再列出。乱码：2.0.48 里仍然存在。",
+"\"Check you have the latest patch\" video redone for 2.0.48: the proxySha256= line must start with F6611F3A, with 48268B10 (2.0.47) and F3A66A96 (2.0.46) in the table. The same video is used in the trio reboot card.": "重做了“确认你装的是最新补丁”的视频，改成 2.0.48 版：proxySha256= 这一行要以 F6611F3A 开头，表格里还列出了 48268B10（2.0.47）和 F3A66A96（2.0.46）。三排复活条目里用的也是这个视频。",
+"Client setup: a ROTK folder sitting right on a drive, like D:\\ROTK, still fails on launcher 2.0.48.": "客户端设置：直接放在磁盘根目录下的 ROTK 文件夹（比如 D:\\ROTK）在 2.0.48 版启动器上仍然会失败。",
 "McAfee card: disconnected every match after a few minutes, fixed by uninstalling McAfee (often preinstalled on new PCs). The \"You have been disconnected\" card links to it.": "新增条目“每局玩几分钟就掉线（McAfee）”：卸载 McAfee 就能解决（新电脑经常预装）。“对局中提示‘你已与服务器断开连接’”条目也会链接到它。",
 "\"fetch failed\" in the launcher card: change the Windows DNS (1.1.1.1 or 8.8.8.8) then clear the DNS cache. It's a lead, not a confirmed fix yet.": "新增条目“启动器里出现‘fetch failed’”：把 Windows 的 DNS 换成公共 DNS，再清空 DNS 缓存。目前只是线索，还不是确认有效的解决方法。",
 "The upload button is easier to spot and says everything it accepts: screenshot, rotk-shotgun-sprint.log, H1Z1 PlayClient (Live).log, voice log or crash .dmp.": "上传按钮更醒目了，并写明了支持的文件：截图、rotk-shotgun-sprint.log、H1Z1 PlayClient (Live).log、语音日志或崩溃 .dmp。",
