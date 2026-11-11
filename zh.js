@@ -342,11 +342,13 @@ t: {
 "ur launcher points to a folder that's gone. redo the client setup into an empty folder like C:\\Games\\ROTK2": "你的启动器指向的文件夹已经没了。重新装一次客户端，装到一个空文件夹，比如 C:\\Games\\ROTK2",
 
 // Fiche : le-bouton-affiche-in-game-alors-que-le-jeu-est-ferme
+"Click the \"IN GAME\" button. In the \"Close H1Z1\" window, click \"Close H1Z1\": the button goes back to \"PLAY\".": "点击“游戏中”（IN GAME）按钮。在“关闭 H1Z1”窗口里点击“关闭 H1Z1”（Close H1Z1），按钮会变回“开始游戏”（PLAY）。",
+"You restarted the launcher in between: click \"PLAY\". If it says H1Z1 from this installation is still running, click \"Close H1Z1\", then \"PLAY\" again.": "如果你中间重启过启动器：点击“开始游戏”（PLAY）。如果它提示此安装的 H1Z1 仍在运行，点击“关闭 H1Z1”（Close H1Z1），然后再点一次“开始游戏”。",
+"Nothing opens, or you see \"H1Z1 is already running from this installation\" or \"Windows refused to close H1Z1\": open Task Manager (Ctrl + Shift + Esc), Details tab, right-click H1Z1.exe and every ROTK Launcher.exe > End task.": "什么都没弹出来，或者看到“H1Z1 正在运行，请先关闭游戏。”或“Windows 拒绝关闭 H1Z1”：打开“任务管理器”（Ctrl + Shift + Esc），切到“详细信息”选项卡，右键点击 H1Z1.exe 和每一个 ROTK Launcher.exe > “结束任务”。",
+"In French, the button says \"EN JEU\". \"Close H1Z1\" loses the match in progress: only use it if the game window is gone or not responding.": "法语版启动器里，这个按钮显示为“EN JEU”。“关闭 H1Z1”会让正在进行的对局丢失：只在游戏窗口已经消失或无响应时使用。",
+"the launcher thinks the game is still running. click IN GAME then \"Close H1Z1\". if that doesn't work, task manager > details, end H1Z1.exe and ROTK Launcher.exe, or restart": "启动器以为游戏还在运行。点“游戏中”，再点“关闭 H1Z1”。不行的话，任务管理器 > 详细信息，结束 H1Z1.exe 和 ROTK Launcher.exe 进程，再不行就重启电脑",
 "The button shows \"IN GAME\" but the game is closed": "按钮显示“游戏中”（IN GAME），但游戏已经关了",
-"Right-click H1Z1.exe and every ROTK Launcher.exe > End task.": "右键点击 H1Z1.exe 和每一个 ROTK Launcher.exe > “结束任务”。",
 "Open the launcher again. Nothing in the list: restart the PC.": "重新打开启动器。列表里找不到它们的话：重启电脑。",
-"In French, the button says \"EN JEU\".": "法语版启动器里，这个按钮显示为“EN JEU”。",
-"the launcher thinks the game is still running. task manager > details, end H1Z1.exe and ROTK Launcher.exe, or restart": "启动器以为游戏还在运行。任务管理器 > 详细信息，结束 H1Z1.exe 和 ROTK Launcher.exe 进程，不行就重启电脑",
 
 // Fiche : les-assets-restent-bloques-a-0-ou-1
 "Assets stuck at 0% (or 1%)": "资源文件卡在 0%（或 1%）",
@@ -402,6 +404,7 @@ t: {
 "that's avg/avast's behavior shield, exclusions don't help for that one, turn it off while u play": "这是 avg/avast 的行为防护（behavior shield）在拦，加排除项也没用，玩的时候关掉它就行",
 
 // Fiche : report-not-sent-http-403-ou-503
+"Debug only covers one game: once the report is received (\"Report received by ROTK\"), it unticks itself. Until the report has gone through, it stays ticked so the launcher retries at startup. For another report, tick \"Debug and send session reports\" again before playing.": "“调试”只对一局游戏有效：报告被收到后（“ROTK 已收到报告”），它会自动取消勾选。报告发出去之前，它会一直保持勾选，好让启动器在启动时重试。想再发一份报告，就在游戏前重新勾选“调试并发送会话报告”（Debug and send session reports）。",
 "\"Report not sent\" (HTTP 403 or 503)": "“Report not sent”（报告未发送，HTTP 403 或 503）",
 "It's the server refusing the report, not your PC.": "是服务器拒收了报告，不是你电脑的问题。",
 "Leave Debug ticked in the launcher settings and restart the launcher later: it only retries at startup, with the latest report, kept on your PC meanwhile.": "在启动器设置里保持勾选“调试”（Debug），过一阵再重启启动器：它只会在启动时重试，发送的是最新一份报告，在那之前报告会一直保存在你电脑上。",
@@ -467,12 +470,13 @@ t: {
 "check proximity is enabled in esc > audio, and if ur proximity push to talk is on a mouse button move it to a keyboard key": "看下 esc > 音效 里邻近语音开了没，邻近的按键通话要是绑在鼠标键上，就改到键盘上",
 
 // Fiche : le-sdk-vivox-historique-est-introuvable
+"Open the game's Steam folder: Steam > right-click Z1 Battle Royale > Manage > Browse local files.": "打开 Steam 里的游戏文件夹：Steam > 右键点击 Z1 Battle Royale > 管理 > 浏览本地文件。",
+"Copy vivoxsdk_x64.dll and paste it into your ROTK game folder (the one with H1Z1.exe). If Windows asks, pick \"Replace the file in the destination\".": "复制 vivoxsdk_x64.dll，粘贴到你的 ROTK 游戏文件夹（有 H1Z1.exe 的那个）。如果 Windows 询问，选择“替换目标中的文件”。",
+"Press Play: the launcher puts its own voice file back by itself.": "点击“开始游戏”（PLAY）：启动器会自己把它的语音文件放回去。",
+"When your antivirus deletes vivoxsdk_x64.dll, the launcher already puts it back by itself when you press Play, from vivoxsdk_x64.original.dll. If this message still shows, that file is missing or damaged too: the copy from Steam replaces it. Reinstalling the launcher doesn't fix this.": "杀毒软件删掉 vivoxsdk_x64.dll 时，你点击“开始游戏”后启动器本来就会用 vivoxsdk_x64.original.dll 自动把它补回来。如果还是出现这个提示，说明这个文件也丢了或坏了：从 Steam 复制过来的文件可以代替它。重装启动器解决不了这个问题。",
+"ur antivirus removed a voice file of the game. copy vivoxsdk_x64.dll from the game's steam folder (steam > right-click z1 > manage > browse local files) into ur rotk folder, press play again, then add ur rotk folder to ur antivirus exclusions": "你的杀毒软件删了游戏的一个语音文件。从 steam 的游戏文件夹（steam > 右键 z1 > 管理 > 浏览本地文件）复制 vivoxsdk_x64.dll 到你的 rotk 文件夹，再点一次开始游戏，然后把 rotk 文件夹加进杀毒软件的排除项",
 "\"The legacy Vivox SDK could not be found\"": "“The legacy Vivox SDK could not be found”（找不到旧版 Vivox SDK）",
-"Copy vivoxsdk_x64.original.dll, paste it in the same folder, then rename the copy to vivoxsdk_x64.dll.": "复制 vivoxsdk_x64.original.dll 并粘贴到同一个文件夹里，然后把这个副本重命名为 vivoxsdk_x64.dll 即可。",
-"No .original.dll? Take vivoxsdk_x64.dll from the game's Steam folder.": "没有 .original.dll 文件？那就从 Steam 里的游戏文件夹拿一份 vivoxsdk_x64.dll 过来。",
 "Add your game folder to your antivirus exclusions so it doesn't come back.": "把游戏文件夹加到杀毒软件的排除项里，免得问题再出现。",
-"Reinstalling the launcher doesn't fix this. To see extensions and avoid creating a vivoxsdk_x64.dll.dll: File Explorer > View > Show > File name extensions.": "重装启动器解决不了这个问题。想看到文件扩展名、避免弄出 vivoxsdk_x64.dll.dll 这种文件：文件资源管理器 > 查看 > 显示 > 文件扩展名。",
-"ur antivirus removed a game file. in ur rotk folder, copy vivoxsdk_x64.original.dll, rename the copy to vivoxsdk_x64.dll and relaunch": "你的杀毒软件删了一个游戏文件。在你的 rotk 文件夹里把 vivoxsdk_x64.original.dll 复制一份，副本改名成 vivoxsdk_x64.dll 然后重新启动",
 
 // Fiche : chutes-de-fps-ou-saccades-en-combat
 "FPS drops or stutters in fights": "交火时掉帧或卡顿",
@@ -527,11 +531,11 @@ t: {
 "run hwinfo in sensors mode while u play and at the next freeze check the maximum column for cpu and gpu": "玩的时候开着 hwinfo 的传感器模式，下次卡死时看看 cpu 和 gpu 的 maximum 那一列",
 
 // Fiche : tuto-bloque-a-l-etape-du-carburant
+"The game's own instruction says so too since 11/11: \"Get in the stopped car and use the fuel can from your inventory.\" The tutorial is in the main menu (\"Operation Recruit\"), not in Combat Training.": "从 11 月 11 日起，游戏里的提示也这么说了：“坐进停稳的车内，从背包中使用油桶”。新手教程在主菜单里（“Operation Recruit”），不在“战斗训练”（Combat Training）里。",
 "Tutorial stuck at the fuel step": "新手教程卡在加油那一步",
 "Get IN the car first.": "一定要先坐进车里。",
 "Refuel from inside, using the fuel can in your inventory.": "坐在车里加油，用物品栏里的油桶。",
 "Tank full: drive a bit first.": "油箱已满：先开一会儿车。",
-"The \"on foot beside the car\" instruction is misleading. The tutorial is in the main menu (\"Operation Recruit\"), not in Combat Training.": "教程里“步行到车旁”的提示会误导人。新手教程在主菜单里（“Operation Recruit”），不在“战斗训练”（Combat Training）里。",
 "get in the car first, then refuel from inside with the fuel can. it doesn't work on foot next to the car": "先上车，然后坐在车里用油桶加油。站在车旁边是加不了的",
 
 // Fiche : le-perso-continue-d-avancer-tout-seul
@@ -634,6 +638,10 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"\"IN GAME\" card: click \"IN GAME\" > \"Close H1Z1\" to close an H1Z1 left open without a window.": "“游戏中”（IN GAME）条目：点“游戏中” > “关闭 H1Z1”，就能关掉没有窗口却还在运行的 H1Z1。",
+"Vivox card: the launcher puts vivoxsdk_x64.dll back by itself, the copy from Steam stays for when it can't.": "Vivox 条目：启动器会自己把 vivoxsdk_x64.dll 放回去，从 Steam 复制的方法留给它做不到的情况。",
+"\"Report not sent\" card: Debug unticks itself after each received report.": "“Report not sent”（报告未发送）条目：每次报告被收到后，“调试”会自动取消勾选。",
+"Fuel tutorial card: the game's instruction was fixed on 11/11.": "新手教程加油条目：游戏里的提示在 11 月 11 日改对了。",
 "Launcher 2.0.48: version to have and game patch fingerprint (F6611F3A) in the latest patch card and in the Current status. The vehicle exit fix was removed in 2.0.47, it is no longer listed. Broken characters: still there in 2.0.48.": "启动器 2.0.48：“最新补丁”条目和“当前状态”里更新了需要的版本和游戏补丁指纹（F6611F3A）。离开载具的修复已在 2.0.47 中移除，不再列出。乱码：2.0.48 里仍然存在。",
 "\"Check you have the latest patch\" video redone for 2.0.48: the proxySha256= line must start with F6611F3A, with 48268B10 (2.0.47) and F3A66A96 (2.0.46) in the table. The same video is used in the trio reboot card.": "重做了“确认你装的是最新补丁”的视频，改成 2.0.48 版：proxySha256= 这一行要以 F6611F3A 开头，表格里还列出了 48268B10（2.0.47）和 F3A66A96（2.0.46）。三排复活条目里用的也是这个视频。",
 "Client setup: a ROTK folder sitting right on a drive, like D:\\ROTK, still fails on launcher 2.0.48.": "客户端设置：直接放在磁盘根目录下的 ROTK 文件夹（比如 D:\\ROTK）在 2.0.48 版启动器上仍然会失败。",
