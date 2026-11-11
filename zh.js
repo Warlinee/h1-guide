@@ -652,6 +652,7 @@ t: {
 "reshade is forbidden on rotk: uninstall it and remove its files from the game folder. for colors, use \"image settings\" in the game settings (graphics tab), or raise ur gpu's vibrance": "rotk 禁止用 reshade：卸载掉，再把它的文件从游戏文件夹里删掉。想要颜色好看点，就用游戏设定里的“画面设置”（图像页），或者调高显卡的鲜艳度",
 
 // Patch notes
+"Chinese version: the 2.0.50 texts, the \"Asset download refused (HTTP 504)\" card, the Smart App Control note and the older patch notes are translated.": "中文版：2.0.50 的相关文字、“Asset download refused (HTTP 504)”条目、智能应用控制的说明和以前的更新日志都已翻译。",
 "\"No voice at all\" card: the PC clock no longer breaks voice since launcher 2.0.46, the steps are redone (wait for the reconnect, restart the game, Debug). The time.is link is removed.": "“语音完全没声”条目：从 2.0.46 版本的启动器开始，电脑时间不会再让语音失效，步骤已重写（等它重连、重启游戏、调试）。time.is 链接已删除。",
 "ReShade card: the quick reply now says it's forbidden. For colors, the game's \"Image Settings\" first, then the GPU vibrance.": "ReShade 条目：快捷回复现在明确说它是禁止使用的。调颜色先用游戏里的“画面设置”，其次才是显卡的鲜艳度。",
 "Launcher 2.0.50: version to have and new game patch fingerprint (701A216C) in the latest patch card and in the Current status. F6611F3A is now the 2.0.48 one. Broken characters: still there in 2.0.50.": "启动器 2.0.50：“最新补丁”条目和“当前状态”里更新了需要的版本和新的游戏补丁指纹（701A216C）。F6611F3A 现在是 2.0.48 的指纹。乱码：2.0.50 里仍然存在。",
