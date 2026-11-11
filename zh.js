@@ -652,6 +652,12 @@ t: {
 "reshade is forbidden on rotk: uninstall it and remove its files from the game folder. for colors, use \"image settings\" in the game settings (graphics tab), or raise ur gpu's vibrance": "rotk 禁止用 reshade：卸载掉，再把它的文件从游戏文件夹里删掉。想要颜色好看点，就用游戏设定里的“画面设置”（图像页），或者调高显卡的鲜艳度",
 
 // Patch notes
+"\"IN GAME\" video redone: click \"IN GAME\" then \"Close H1Z1\" as the first step. Task Manager stays as the last resort.": "重做了“游戏中”的视频：第一步先点“游戏中”，再点“关闭 H1Z1”。任务管理器留到最后再用。",
+"Vivox video redone: copy vivoxsdk_x64.dll from the game's Steam folder, press Play, then add the antivirus exclusion.": "重做了 Vivox 的视频：从游戏的 Steam 文件夹复制 vivoxsdk_x64.dll，点开始游戏，再在杀毒软件里加上排除项。",
+"JSON video redone in 5 steps: first close and reopen the launcher, which sets the file aside on its own since 2.0.49.": "JSON 的视频改成了 5 步：先关掉再打开启动器，从 2.0.49 起它会自己把这个文件放到一边。",
+"\"Check you have the latest patch\" video redone for 2.0.50: the proxySha256= line must start with 701A216C, with F6611F3A (2.0.48), 48268B10 (2.0.47) and F3A66A96 (2.0.46) in the table. The same video is used in the trio reboot card.": "重做了“确认你装的是最新补丁”的视频，改成 2.0.50 版：proxySha256= 这一行要以 701A216C 开头，表格里还列出了 F6611F3A（2.0.48）、48268B10（2.0.47）和 F3A66A96（2.0.46）。三排复活条目里用的也是这个视频。",
+"Fuel tutorial video: it was filmed before 11/11, the game's old instruction is now flagged in it. The move shown is still the right one.": "加油教程的视频：是 11/11 之前录的，里面的旧提示现在标出来了。视频里的操作还是对的。",
+"These 15 videos are also half the size (117 MB → 52 MB), so they load faster on phones.": "这 15 个视频的体积也小了一半多（117 MB → 52 MB），用手机打开更快。",
 "Chinese version: the 2.0.50 texts, the \"Asset download refused (HTTP 504)\" card, the Smart App Control note and the older patch notes are translated.": "中文版：2.0.50 的相关文字、“Asset download refused (HTTP 504)”条目、智能应用控制的说明和以前的更新日志都已翻译。",
 "\"No voice at all\" card: the PC clock no longer breaks voice since launcher 2.0.46, the steps are redone (wait for the reconnect, restart the game, Debug). The time.is link is removed.": "“语音完全没声”条目：从 2.0.46 版本的启动器开始，电脑时间不会再让语音失效，步骤已重写（等它重连、重启游戏、调试）。time.is 链接已删除。",
 "ReShade card: the quick reply now says it's forbidden. For colors, the game's \"Image Settings\" first, then the GPU vibrance.": "ReShade 条目：快捷回复现在明确说它是禁止使用的。调颜色先用游戏里的“画面设置”，其次才是显卡的鲜艳度。",
