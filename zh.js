@@ -61,7 +61,7 @@ t: {
 "Last time the server closed the connection: {t} (OtherSideTerminated). This also happens at the end of a normal match; if it's the time you got disconnected, the cut came from the server, not your line.": "服务器最后一次断开连接的时间：{t}（OtherSideTerminated）。正常对局结束时也会出现；如果正好是你掉线的时间，说明是服务器断开的，不是你的网络问题。",
 "Last voice session: no error reaching the voice server.": "最近一次语音会话：连接语音服务器没有出错。",
 "The server refuses to load your character (Failed character login): your PC and files aren't the cause.": "服务器拒绝加载你的角色（Failed character login）：和你的电脑、文件无关。",
-"Voice can't reach its server ({e}): most often a wrong PC clock, or an IPv6 connection that works badly.": "语音连不上它的服务器（{e}）：最常见的原因是电脑时间不准，或者 IPv6 连接不正常。",
+"Voice couldn't reach its server ({e}) during the last session.": "上一次游戏中语音连不上它的服务器（{e}）。",
 "Crash {code} in {at}, {s} s after launch.": "崩溃 {code}，位置 {at}，启动后 {s} 秒。",
 "Blue screen {code}, driver involved: {drv}.": "蓝屏 {code}，相关驱动：{drv}。",
 "Read on your PC, the screenshot isn't sent anywhere.": "在你的电脑上识别，截图不会上传到任何地方。目前只能识别英文和法文的截图。",
@@ -159,7 +159,6 @@ t: {
 
 // Liens utiles
 "Visual C++ x64 (Microsoft)": "Visual C++ x64 (Microsoft)",
-"Check your PC clock": "检查电脑时间",
 "Official ROTK site (account, key, outfit, cases)": "ROTK 官方网站（账号、密钥、服装、箱子）",
 "Game settings (UserOptions.ini), AngA's tool": "游戏设置（UserOptions.ini），AngA 的工具",
 "Official ROTK Discord (help, tickets, announcements)": "ROTK 官方 Discord（求助、工单、公告）",
@@ -183,7 +182,7 @@ t: {
 "Account and connection": "账号与连接",
 "Sign-up, Steam level, tutorial, G9 and disconnects.": "注册、Steam 等级、新手教程、G9 和掉线。",
 "Voice chat": "语音聊天",
-"Most often: the PC clock or an Audio setting.": "最常见的原因：电脑时间，或者“音效”里的某个设置。",
+"Most often: a game Audio setting or a Vivox file removed by the antivirus.": "最常见的原因：游戏“音效”里的某个设置，或者被杀毒软件删掉的 Vivox 文件。",
 "FPS, freezes, black screen": "FPS、卡死、黑屏",
 "Check temperatures early when it freezes.": "出现卡死时，尽早查一下温度。",
 "In-game bugs": "游戏内 bug",
@@ -469,10 +468,12 @@ t: {
 
 // Fiche : aucun-vocal-personne-ne-t-entend-tu-n-entends-personne
 "No voice at all: nobody hears you, you hear nobody": "语音完全没声：别人听不到你，你也听不到别人",
-"Go to time.is: it tells you if your PC clock is ahead or behind. 2 or 3 minutes off is enough to break voice.": "打开 time.is 网站，它会告诉你电脑时钟是快了还是慢了。差 2 到 3 分钟就足以让语音失效。",
-"Windows Settings > Time & language > Date & time: turn on \"Set time automatically\" and \"Set time zone automatically\".": "Windows 设置 > 时间和语言 > 日期和时间：打开“自动设置时间”和“自动设置时区”。",
-"Click \"Sync now\", then fully restart the game.": "点击“立即同步”，然后彻底重启游戏。",
-"check ur pc clock on time.is, even 2-3 min off breaks voice. turn on automatic time and time zone and sync": "去 time.is 看下你电脑时间准不准，差个 2-3 分钟语音就会挂。把自动设置时间和时区打开，再点同步",
+"If voice just dropped, wait a minute: it tries to reconnect by itself, several times, for about ten minutes.": "如果语音刚断开，等一分钟：它会自己尝试重连，前后大约十分钟内会试好几次。",
+"Still nothing: fully close the game and start it again from the launcher.": "还是不行：彻底关掉游戏，再从启动器重新启动。",
+"The launcher shows \"The legacy Vivox SDK could not be found\": follow the Vivox card.": "启动器显示“The legacy Vivox SDK could not be found”：按 Vivox 那个条目操作。",
+"Still nothing: tick \"Debug and send session reports\" in the launcher settings, play a match and close the game, then give the reference the launcher shows to an admin in the help channel of the Discord.": "还是不行：在启动器设置里勾选“调试并发送会话报告”（Debug and send session reports），打一局后关掉游戏，然后到 Discord 的求助频道把启动器显示的报告编号发给管理员。",
+"Since launcher 2.0.46, the PC clock no longer breaks voice: voice goes by the server's time, not the PC's. No need to touch the Windows time for this.": "从 2.0.46 版本的启动器开始，电脑时间不准不会再让语音失效：语音以服务器的时间为准，不再看电脑时间。不用为这个去改 Windows 的时间。",
+"since 2.0.46 the pc clock doesn't break voice anymore. if it just dropped wait a minute, it tries to reconnect by itself, otherwise restart the game. still nothing: tick debug in the launcher, play a match, close the game and give the report reference to an admin": "从 2.0.46 起电脑时间已经不会搞挂语音了。刚断的话等一分钟，它会自己试着重连，不行就重启游戏。还是不行：在启动器里勾上调试，打一局，关掉游戏，把报告编号发给管理员",
 
 // Fiche : le-vocal-de-groupe-marche-la-proximite-jamais
 "Group voice works, proximity never": "组队语音正常，邻近语音一直不行",
@@ -645,11 +646,14 @@ t: {
 "ReShade is forbidden": "禁止使用 ReShade",
 "ReShade is forbidden on ROTK (confirmed by the staff on 19/10). Uninstall it and remove its files from the game folder.": "ROTK 禁止使用 ReShade（官方人员已于 10 月 19 日确认）。卸载它，并把它的文件从游戏文件夹里删掉。",
 "Also avoid other tools that inject into the game (filters, in-game translators…).": "也不要用其他会注入游戏的工具（滤镜、游戏内翻译工具……）。",
-"For better colors: your GPU's vibrance (NVIDIA: digital vibrance, AMD: saturation), which doesn't touch the game.": "想要颜色更好看：用显卡的鲜艳度设置（NVIDIA：数字振动控制，AMD：饱和度），它不会动到游戏。",
-"For any other tool, ask the staff before using it.": "其他任何工具，使用前先问问官方人员。",
-"i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
+"For better colors: in the game settings, \"Graphics\" tab, the first row is \"Image Settings\". Set it to \"ON\", then click \"EDIT\" to pick a preset (Vivid, Contrast, Soft) or \"Custom\" to set the sliders.": "想要颜色更好看：在游戏“设定”的“图像”页，第一行就是“画面设置”。把它设为“开启”，再点“编辑”选一个预设（“鲜艳”“对比度”“柔和”），或者选“自定义”自己调滑块。",
+"Otherwise, your GPU's vibrance (NVIDIA: digital vibrance, AMD: saturation), which doesn't touch the game.": "不然就用显卡的鲜艳度设置（NVIDIA：数字振动控制，AMD：饱和度），它不会动到游戏。",
+"The \"Image Settings\" menu came with launcher 2.0.48 and saves into UserOptions.ini: if that file is read-only, it can't save anything. For any other tool, ask the staff before using it.": "“画面设置”菜单是跟 2.0.48 版本的启动器一起加入的，设置保存在 UserOptions.ini 里：如果这个文件是只读的，它什么都保存不了。其他任何工具，使用前先问问官方人员。",
+"reshade is forbidden on rotk: uninstall it and remove its files from the game folder. for colors, use \"image settings\" in the game settings (graphics tab), or raise ur gpu's vibrance": "rotk 禁止用 reshade：卸载掉，再把它的文件从游戏文件夹里删掉。想要颜色好看点，就用游戏设定里的“画面设置”（图像页），或者调高显卡的鲜艳度",
 
 // Patch notes
+"\"No voice at all\" card: the PC clock no longer breaks voice since launcher 2.0.46, the steps are redone (wait for the reconnect, restart the game, Debug). The time.is link is removed.": "“语音完全没声”条目：从 2.0.46 版本的启动器开始，电脑时间不会再让语音失效，步骤已重写（等它重连、重启游戏、调试）。time.is 链接已删除。",
+"ReShade card: the quick reply now says it's forbidden. For colors, the game's \"Image Settings\" first, then the GPU vibrance.": "ReShade 条目：快捷回复现在明确说它是禁止使用的。调颜色先用游戏里的“画面设置”，其次才是显卡的鲜艳度。",
 "Launcher 2.0.50: version to have and new game patch fingerprint (701A216C) in the latest patch card and in the Current status. F6611F3A is now the 2.0.48 one. Broken characters: still there in 2.0.50.": "启动器 2.0.50：“最新补丁”条目和“当前状态”里更新了需要的版本和新的游戏补丁指纹（701A216C）。F6611F3A 现在是 2.0.48 的指纹。乱码：2.0.50 里仍然存在。",
 "Client setup: a ROTK folder right on a drive (D:\\ROTK) works since 2.0.49. Same update in the \"Access denied to G:\\\" note of the Controlled folder access card.": "客户端设置：从 2.0.49 开始，直接放在磁盘根目录下的 ROTK 文件夹（D:\\ROTK）也可以用了。“受控文件夹访问”条目里关于“Access denied to G:\\”的说明也一起更新了。",
 "\"Unexpected token … is not valid JSON\": fixed in 2.0.49, the manual steps stay for cases that persist.": "“Unexpected token … is not valid JSON”：已在 2.0.49 修复，手动步骤保留给仍然解决不了的情况。",
