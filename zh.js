@@ -192,18 +192,21 @@ t: {
 "ROTK files aren't signed, antivirus software often blocks them.": "ROTK 的文件没有数字签名，杀毒软件经常会拦截它们。",
 
 // État actuel
+"Version to have: <b>launcher 2.0.50</b> (out since 11/11). Check \"BUILD 2.0.50\" top right in the launcher.": "需要的版本：<b>启动器 2.0.50</b>（11 月 11 日发布）。看启动器右上角的“版本 2.0.50”（BUILD 2.0.50）。",
+"\"An unknown dinput8.dll is present\" after the 11/11 update: close and reopen the launcher, it moves to 2.0.50 and the message goes away.": "11 月 11 日更新后出现“An unknown dinput8.dll is present”（存在未知的 dinput8.dll）：关掉启动器再重新打开，它会更新到 2.0.50，提示就会消失。",
+"Shot that locks then fires on its own when you aim while moving: fix shipped in 2.0.45 and still there in 2.0.50, not confirmed in game yet.": "移动中瞄准时开枪会卡住、然后自己打出去：2.0.45 已发布修复，2.0.50 里仍然保留，但还没在游戏里确认有效。",
+"Fixed in 2.0.49: a ROTK folder right on a drive (like D:\\ROTK) no longer blocks the install with \"Access denied\".": "已在 2.0.49 修复：ROTK 文件夹直接放在磁盘根目录下（比如 D:\\ROTK）时，安装不会再因“Access denied”（拒绝访问）而失败。",
+"Fixed in 2.0.49: \"Unexpected token … is not valid JSON\" no longer blocks the Play button.": "已在 2.0.49 修复：“Unexpected token … is not valid JSON”不会再卡住“开始游戏”按钮。",
+"Launcher error messages with garbled characters: still there in 2.0.50, also with the launcher in English or Chinese.": "启动器报错信息出现乱码：2.0.50 里仍然存在，启动器是英文或中文界面时也会出现。",
 "Current status": "当前状态",
 "Updated ": "更新于 ",
-"Version to have: <b>launcher 2.0.48</b> (out since 29/10). Check \"BUILD 2.0.48\" top right in the launcher.": "需要的版本：<b>启动器 2.0.48</b>（10 月 29 日发布）。看启动器右上角的“版本 2.0.48”（BUILD 2.0.48）。",
 "New: the game is in French when the launcher is in French (since 2.0.44). For an English game, set the launcher to English.": "新变化：启动器是法语时，游戏也会是法语（2.0.44 起）。想要英文游戏，就把启动器切换成英语。",
 "Fixed: trio reboot leaving you spectating, and aiming (ADS) near cover.": "已修复：三排复活后一直停留在观战状态，以及靠近掩体时开镜（ADS）的问题。",
 "Getting out of a vehicle at the wrong spot while driving or turning: the 2.0.44 fix was removed in 2.0.47, so it can happen again.": "行驶中或转弯时离开载具，位置不对：2.0.44 的修复已在 2.0.47 中移除，所以这个问题可能会再次出现。",
-"Shot that locks then fires on its own when you aim while moving: fix shipped in 2.0.45 and still there in 2.0.48, not confirmed in game yet.": "移动中瞄准时开枪会卡住、然后自己打出去：2.0.45 已发布修复，2.0.48 里仍然保留，但还没在游戏里确认有效。",
-"A ROTK folder right on a drive (like D:\\ROTK) blocks the install with \"Access denied\". Fix on the way: until then, pick a folder like D:\\Games.": "ROTK 文件夹直接放在磁盘根目录下（比如 D:\\ROTK）时，安装会因“Access denied”（拒绝访问）而失败。修复正在路上：在那之前，请选 D:\\Games 这样的文件夹。",
-"Launcher error messages with garbled characters: still there in 2.0.48, also with the launcher in English or Chinese.": "启动器报错信息出现乱码：2.0.48 里仍然存在，启动器是英文或中文界面时也会出现。",
 "New account: a ~10 min tutorial and Steam level 1 are required before matches.": "新账号：打对局之前，必须先完成约 10 分钟的新手教程，并且 Steam 等级达到 1 级。",
 
 // Première installation
+"On first launch: H1Z1 client = your Steam game folder, ROTK installation = a folder outside Steam (e.g. C:\\Games or D:\\Games). Then \"Create separate copy\". Plan for the size of the game's Steam folder plus 15 GB free on that drive: right after the copy, the launcher also downloads the assets.": "第一次启动时：“H1Z1 客户端”（H1Z1 CLIENT）选你 Steam 里的游戏文件夹，“ROTK 安装位置”（ROTK INSTALLATION）选 Steam 以外的文件夹（例如 C:\\Games 或 D:\\Games）。然后点“创建独立副本”（CREATE SEPARATE COPY）。在这个磁盘上预留 Steam 里游戏文件夹的大小再加 15 GB 的可用空间：复制完成后，启动器紧接着还会下载资源文件。",
 "Get Steam ready": "准备好 Steam",
 "Install H1Z1 on Steam (listed as \"Z1 Battle Royale\", free). Your Steam account needs level 1 or more, with the profile set to Public.": "在 Steam 上安装 H1Z1（在 Steam 上叫“Z1 Battle Royale”，免费）。你的 Steam 账号需要至少 1 级，并且个人资料要设为“公开”。",
 "Create your ROTK account": "注册你的 ROTK 账号",
@@ -211,7 +214,6 @@ t: {
 "Install the launcher": "安装启动器",
 "Download the launcher from rotk.app and install it. If Windows or your antivirus blocks it, check the cards below.": "从 rotk.app 下载启动器并安装。如果 Windows 或杀毒软件拦截了它，看下面的条目。",
 "Set up the client": "设置客户端",
-"On first launch: H1Z1 client = your Steam game folder, ROTK installation = a folder outside Steam (e.g. C:\\Games, never just C:\\ or D:\\ROTK directly). Then \"Create separate copy\". Plan for the size of the game's Steam folder plus 15 GB free on that drive: right after the copy, the launcher also downloads the assets.": "第一次启动时：“H1Z1 客户端”（H1Z1 CLIENT）选你 Steam 里的游戏文件夹，“ROTK 安装位置”（ROTK INSTALLATION）选 Steam 以外的文件夹（例如 C:\\Games，千万不要只选 C:\\，也不要直接选 D:\\ROTK）。然后点“创建独立副本”（CREATE SEPARATE COPY）。在这个磁盘上预留 Steam 里游戏文件夹的大小再加 15 GB 的可用空间：复制完成后，启动器紧接着还会下载资源文件。",
 "Add your key": "添加你的密钥",
 "In the launcher, click \"Add ROTK key\", paste the key from step 2 and save it.": "在启动器里点“添加 ROTK 密钥”（ADD ROTK KEY），粘贴第 2 步拿到的密钥，然后保存。",
 "Play your first match": "打你的第一局",
@@ -234,11 +236,11 @@ t: {
 "Video tutorial: ": "视频教程：",
 
 // Fiche : ferme-pendant-son-initialisation-0xc0e90002
+"On an up-to-date Windows 11 (April 2026 update or newer), you can turn it back on later from the same menu, but it will block ROTK again. On older versions, Windows won't let you turn it back on without resetting the PC.": "在已更新的 Windows 11 上（2026 年 4 月更新或更新的版本），之后可以在同一个菜单里重新打开它，但它会再次拦截 ROTK。在更旧的版本上，不重置电脑的话，Windows 不会让你再把它打开。",
 "\"Closed during initialization\" (0xC0E90002)": "“H1Z1 在初始化时关闭”，Windows 代码 0xC0E90002",
 "Open Windows Security (Windows key, type \"Windows Security\").": "打开“Windows 安全中心”（按 Windows 键，输入“Windows 安全中心”）。",
 "Go to App & browser control, then Smart App Control settings.": "进入“应用和浏览器控制”，然后点“智能应用控制设置”。",
 "Select Off, then launch the game again from the launcher.": "选择“关闭”，然后从启动器重新启动游戏。",
-"Once it's off, Windows won't let you turn it back on without resetting the PC.": "关闭之后，不重置电脑的话，Windows 不会让你再把它打开。",
 "that's smart app control blocking a rotk file. windows security > app & browser control > smart app control settings > off, then relaunch": "是智能应用控制拦了一个 rotk 文件。Windows 安全中心 > 应用和浏览器控制 > 智能应用控制设置 > 关闭，然后重开游戏",
 
 // Fiche : crash-dans-msvcp140-dll-ou-runtime-visual-c-trop-ancien
@@ -266,22 +268,22 @@ t: {
 "verify h1z1 files in steam, then redo the client install in the launcher into a new empty folder like C:\\Games\\ROTK2 (the launcher puts the game in ROTK2\\ROTK)": "先在 steam 里验证 h1z1 的文件，然后在启动器里重新装一次客户端，装到一个新的空文件夹，比如 C:\\Games\\ROTK2 就行，启动器会把游戏放进 ROTK2\\ROTK 里",
 
 // Fiche : un-dinput8-dll-inconnu-est-present-dans-le-client-rotk
+"Often left by ReShade (forbidden) or a mod. It's the one in the game folder, not in the launcher's files. Shown to everyone with the 11/11 update: close and reopen the launcher, it updates itself and the message goes away.": "通常是 ReShade（禁止使用）或某个模组留下的。要处理的是游戏文件夹里的那个，不是启动器文件里的那个。11 月 11 日更新后所有人都出现过这个提示：关掉启动器再重新打开，它会自己更新，提示就会消失。",
 "\"An unknown dinput8.dll is present in the ROTK client\"": "“An unknown dinput8.dll is present in the ROTK client”（有未知的 dinput8.dll 文件）",
 "Close the launcher and the game.": "关闭启动器和游戏。",
 "Open your game folder (the one with H1Z1.exe).": "打开你的游戏文件夹（有 H1Z1.exe 的那个）。",
 "Cut dinput8.dll and paste it somewhere else, like the Desktop.": "把 dinput8.dll 剪切，粘贴到别的地方，比如“桌面”。",
 "Open the launcher again: it puts its own dinput8.dll back.": "重新打开启动器：它会放回自己的 dinput8.dll 文件。",
-"Often left by ReShade (forbidden) or a mod. It's the one in the game folder, not in the launcher's files.": "通常是 ReShade（禁止使用）或某个模组留下的。要处理的是游戏文件夹里的那个，不是启动器文件里的那个。",
 "close the launcher and game, move dinput8.dll out of ur rotk folder (where H1Z1.exe is) and relaunch, the launcher puts its own back": "关掉启动器和游戏，把 dinput8.dll 从你的 rotk 文件夹（就是有 H1Z1.exe 的那个）移出去，再打开启动器，它会放回自己的那个",
 
 // Fiche : messages-d-erreur-avec-des-accents-casses-pra-sent-na-a
+"Launcher display bug (since 2.0.43, still there in 2.0.50): the message means the same thing. With the launcher in English or Chinese, these messages show up too, in French with these broken characters.": "启动器的显示 bug（2.0.43 起出现，2.0.50 里仍然存在）：提示的意思没有变。启动器是英文或中文界面时，这些提示也会出现，而且是带乱码的法语。",
+"it's just a broken-characters bug in the launcher (still there in 2.0.50, in english and chinese too), the message means the same thing": "只是启动器的乱码 bug（2.0.50 里还在，英文和中文界面也一样），提示的意思还是一样的",
 "Error messages with broken characters (prÃ©sent, nâ€™a pas pu…)": "错误提示里有乱码（prÃ©sent、nâ€™a pas pu…）",
-"Launcher display bug (since 2.0.43, still there in 2.0.48): the message means the same thing. With the launcher in English or Chinese, these messages show up too, in French with these broken characters.": "启动器的显示 bug（2.0.43 起出现，2.0.48 里仍然存在）：提示的意思没有变。启动器是英文或中文界面时，这些提示也会出现，而且是带乱码的法语。",
 "\"Un dinput8.dll inconnu est prÃ©sent…\" (unknown dinput8.dll): a dinput8.dll the launcher doesn't recognize is in your game folder. Follow the dinput8.dll card.": "“Un dinput8.dll inconnu est prÃ©sent…”（未知的 dinput8.dll）：你的游戏文件夹里有一个启动器不认识的 dinput8.dll。按 dinput8.dll 条目操作。",
 "\"Le patch sprint ROTK embarquÃ© est absent ou modifiÃ©…\" (bundled patch missing or modified): the patch stored in the launcher's files is missing or changed, your antivirus may have quarantined it. Restore it (Windows Defender card) or reinstall the launcher.": "“Le patch sprint ROTK embarquÃ© est absent ou modifiÃ©…”（内置补丁丢失或被修改）：启动器文件里自带的补丁不见了或被改动了，可能被杀毒软件放进了隔离区。把它还原（看 Windows Defender 条目），或者重新安装启动器。",
 "\"Cette version de H1Z1 nâ€™est pas compatible avec le patch sprint ROTK…\" (H1Z1 version not compatible): the H1Z1.exe in your game folder isn't the expected one. Verify H1Z1 files in Steam, then redo the client setup (0x2a31abc card).": "“Cette version de H1Z1 nâ€™est pas compatible avec le patch sprint ROTK…”（H1Z1 版本不兼容）：你游戏文件夹里的 H1Z1.exe 不是启动器要求的那个。先在 Steam 里验证 H1Z1 的文件，再重新进行客户端安装（看 0x2a31abc 条目）。",
 "\"Le patch sprint ROTK nâ€™a pas pu Ãªtre installÃ©\" (or \"supprimÃ©\"), \"Le marqueur du patch sprint ROTK nâ€™a pas pu Ãªtre Ã©crit\" (could not be installed, removed or written): the launcher couldn't update its patch in your game folder. End H1Z1.exe (Task Manager > Details > End task) and try again. Still stuck: Controlled folder access card.": "“Le patch sprint ROTK nâ€™a pas pu Ãªtre installÃ©”（或“supprimÃ©”）、“Le marqueur du patch sprint ROTK nâ€™a pas pu Ãªtre Ã©crit”（无法安装、删除或写入）：启动器没能更新游戏文件夹里的补丁。结束 H1Z1.exe（“任务管理器” > “详细信息” > “结束任务”）后再试一次。还是不行：看“受控文件夹访问”条目。",
-"it's just a broken-characters bug in the launcher (still there in 2.0.48, in english and chinese too), the message means the same thing": "只是启动器的乱码 bug（2.0.48 里还在，英文和中文界面也一样），提示的意思还是一样的",
 
 // Fiche : le-launcher-ne-s-ouvre-pas-launch-failed
 "Launcher won't open: \"launch-failed\"": "启动器打不开：“launch-failed”",
@@ -293,13 +295,14 @@ t: {
 "known bug, no fix yet. open command prompt as admin and paste \"C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe\" --no-sandbox (with the quotes, type the dashes by hand). if u installed the launcher somewhere else, right-click its shortcut > open file location to get the right folder": "已知 bug，暂时没修。用管理员身份打开命令提示符，粘贴 \"C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe\" --no-sandbox 就行，引号要带上，两个短横线自己手打。如果启动器装在别的地方，右键它的快捷方式 > 打开文件所在的位置，就能找到正确的文件夹",
 
 // Fiche : unexpected-token-is-not-valid-json-en-cliquant-sur-jouer
+"Since version 2.0.49, the launcher sets this file aside on its own: close and reopen it so it updates, then press Play. If the message stays, do the next steps.": "从 2.0.49 版开始，启动器会自己把这个文件放到一边：关掉启动器再重新打开，让它更新，然后点“开始游戏”（PLAY）。如果提示还在，就按下面的步骤做。",
+"Corrupted keybind save file. Reinstalling the launcher doesn't touch it. Fixed in 2.0.49: the launcher renames the damaged file to .corrupt and carries on.": "按键设置的保存文件损坏了。重装启动器也不会动它。已在 2.0.49 修复：启动器会把损坏的文件改名为 .corrupt，然后继续运行。",
+"corrupted keybind file, fixed since 2.0.49: close and reopen the launcher so it updates. if it stays, close the launcher, win+R, paste %APPDATA%\\ROTK Launcher\\logs, open the folder inside then input-profile, rename weapon-stance.v1.json to weapon-stance.v1.json.old and relaunch": "按键文件坏了，2.0.49 起已经修复：关掉启动器再重开，让它更新。还不行的话，关掉启动器，win+R，粘贴 %APPDATA%\\ROTK Launcher\\logs 打开，进里面那个文件夹，再进 input-profile，把 weapon-stance.v1.json 改名成 weapon-stance.v1.json.old 然后重开",
 "\"Unexpected token … is not valid JSON\" when pressing Play": "点“开始游戏”时提示“Unexpected token … is not valid JSON”",
 "Fully close the launcher.": "彻底关闭启动器。",
 "Press Windows + R, paste %APPDATA%\\ROTK Launcher\\logs and click OK.": "按 Windows + R，粘贴 %APPDATA%\\ROTK Launcher\\logs 然后点“确定”。",
 "Open the folder with the odd name (a long string of letters and numbers), then the input-profile folder.": "打开那个名字很奇怪的文件夹（一长串字母和数字），再打开 input-profile 文件夹。",
 "Right-click weapon-stance.v1.json > Rename, add .old at the end (weapon-stance.v1.json.old), then open the launcher again.": "右键点击 weapon-stance.v1.json > “重命名”，在末尾加上 .old（变成 weapon-stance.v1.json.old），然后重新打开启动器。",
-"Corrupted keybind save file. Reinstalling the launcher doesn't touch it.": "按键设置的保存文件损坏了。重装启动器也不会动它。",
-"corrupted keybind file. close the launcher, win+R, paste %APPDATA%\\ROTK Launcher\\logs, open the folder inside then input-profile, rename weapon-stance.v1.json to weapon-stance.v1.json.old and relaunch": "按键文件坏了。关掉启动器，win+R，粘贴 %APPDATA%\\ROTK Launcher\\logs 打开，进里面那个文件夹，再进 input-profile，把 weapon-stance.v1.json 改名成 weapon-stance.v1.json.old 然后重开",
 
 // Fiche : la-mise-a-jour-bloque-rotk-ne-peut-pas-etre-ferme
 "Update stuck: \"ROTK cannot be closed, click Retry\"": "更新卡住：“ROTK 无法关闭，请点击重试”",
@@ -327,9 +330,9 @@ t: {
 "ur game is inside the launcher folder, the update stops so it doesn't delete it. move C:\\Program Files\\ROTK Launcher\\ROTK to C:\\Games\\ROTK, select it again in the launcher and rerun the update": "你的游戏在启动器文件夹里，更新停下来是为了不把它删掉。把 C:\\Program Files\\ROTK Launcher\\ROTK 移到 C:\\Games\\ROTK 然后在启动器里重新选它，再跑一次更新",
 
 // Fiche : installation-du-client-quel-dossier-choisir
+"\"ROTK INSTALLATION\": a folder outside Steam, for example C:\\Games (the ROTK folder is created inside it for you). Since launcher 2.0.49, a ROTK folder sitting right on a drive like D:\\ROTK works too (before, it failed with \"Access denied\", EPERM).": "“ROTK 安装位置”（ROTK INSTALLATION）：选一个 Steam 以外的文件夹，比如 C:\\Games 就行（ROTK 文件夹会自动在里面创建）。从 2.0.49 版启动器开始，像 D:\\ROTK 这样直接放在磁盘根目录下的 ROTK 文件夹也可以用了（以前会失败，提示“Access denied”，EPERM）。",
 "Client setup: which folder to pick?": "客户端安装：该选哪个文件夹？",
 "\"H1Z1 CLIENT\": your Steam game folder. To find it: Steam > right-click Z1 Battle Royale > Manage > Browse local files. The launcher should say \"STEAM CLIENT DETECTED\".": "“H1Z1 客户端”（H1Z1 CLIENT）：选你 Steam 里的游戏文件夹。查找方法：Steam > 右键点击 Z1 Battle Royale > “管理” > “浏览本地文件”。启动器应该会显示“已检测到 Steam 客户端”。",
-"\"ROTK INSTALLATION\": a folder outside Steam, for example C:\\Games (the ROTK folder is created inside it for you). Never just C:\\ or D:\\, or a ROTK folder sitting right on the drive like D:\\ROTK (still the case on launcher 2.0.48: that fails with \"Access denied\", EPERM).": "“ROTK 安装位置”（ROTK INSTALLATION）：选一个 Steam 以外的文件夹，比如 C:\\Games 就行（ROTK 文件夹会自动在里面创建）。不要只选 C:\\ 或 D:\\ 这样的磁盘根目录，也不要用 D:\\ROTK 这种直接放在磁盘根目录下的 ROTK 文件夹（2.0.48 版启动器上仍然会失败，提示“Access denied”，EPERM）。",
 "\"STANDALONE CLIENT DETECTED\" when you wanted Steam: you picked an old copy. Pick the Steam game folder instead.": "想用 Steam 版却显示“已检测到独立客户端”：说明你选的是旧副本。改选 Steam 里的游戏文件夹。",
 "H1Z1 is called \"Z1 Battle Royale\" on Steam (free).": "H1Z1 在 Steam 上叫“Z1 Battle Royale”（免费）。",
 "for \"H1Z1 client\" pick ur steam h1z1 folder, and for the rotk install an empty folder outside steam like C:\\Games": "“H1Z1 客户端”选你 steam 里的 h1z1 文件夹，rotk 安装位置选一个 steam 以外的空文件夹，比如 C:\\Games",
@@ -378,14 +381,23 @@ t: {
 "It happens when your router's DNS can't find the ROTK servers: any public DNS fixes it, Cloudflare's (1.1.1.1) as well as Google's (8.8.8.8). The message can go on with ENOTFOUND, EAI_AGAIN or getaddrinfo, and \"Unable to resolve the ROTK account server address\" has the same cause. If \"fetch failed\" shows up during UPDATING ASSETS, it's more likely the download getting interrupted: see the stuck assets card. If rotk.app doesn't load at all, try the 1.1.1.1 app in WARP mode. To go back: same window, \"Obtain DNS server address automatically\".": "原因是你路由器的 DNS 找不到 ROTK 的服务器：换成任何一个公共 DNS 都行。在国内用阿里 DNS（223.5.5.5）或腾讯 DNSPod（119.29.29.29），比 1.1.1.1 稳定。报错后面可能还跟着 ENOTFOUND、EAI_AGAIN 或 getaddrinfo，“无法解析 ROTK 账号服务器地址”也是同一个原因。如果“fetch failed”出现在 UPDATING ASSETS 的时候，多半是下载中断了：去看资源卡住的那一条。想改回原来的设置：还是这个窗口，选“自动获得 DNS 服务器地址”。",
 "it's often ur router's dns. windows + r > ncpa.cpl > right-click ur connection > properties > ipv4, set 1.1.1.1 and 1.0.0.1 as dns. then windows + r > cmd > ipconfig /flushdns and restart the launcher": "多半是你路由器的 dns 有问题。windows + r > ncpa.cpl > 右键你的网卡 > 属性 > ipv4，dns 填 223.5.5.5 和 119.29.29.29。然后 windows + r > cmd > ipconfig /flushdns，再重开启动器",
 
+// Fiche : asset-download-refused-http-504
+"\"Asset download refused (HTTP 504)\"": "“Asset download refused (HTTP 504)”（资源下载被拒绝，HTTP 504）",
+"It's not your PC: the asset server didn't answer in time, for example right after a big update when everyone downloads at once.": "不是你电脑的问题：资源服务器没有及时响应，比如大更新刚发布、所有人同时下载的时候。",
+"Fully close the launcher (Task Manager > Details > ROTK Launcher.exe > End task), open it again and press Play.": "彻底关闭启动器（任务管理器 > 详细信息 > ROTK Launcher.exe > “结束任务”），重新打开后点“开始游戏”（PLAY）。",
+"Still the error: press PLAY again after 2-3 minutes. Packs already finished are kept, the download picks up where it stopped.": "还是报错：过 2-3 分钟再点一次“开始游戏”。已经下载完的资源包会保留，下载会从中断的地方继续。",
+"Still stuck after several tries: check the announcements on the Discord in case the servers have an issue.": "试了几次还是卡住：看看 Discord 上的公告，可能是服务器出了问题。",
+"No need to empty asset-cache or reinstall for this error. If the download starts again then sticks at 0%, check the stuck assets card.": "遇到这个报错不用清空 asset-cache，也不用重装。如果下载重新开始后又卡在 0%，看“资源文件卡在 0%（或 1%）”条目。",
+"it's the asset server timing out, not ur pc. fully close the launcher, relaunch and press play again in 2-3 min, the download picks up where it stopped": "是资源服务器超时了，不是你电脑的问题。彻底关掉启动器，重开后过 2-3 分钟再点开始游戏，下载会从中断的地方继续",
+
 // Fiche : verifier-qu-on-a-bien-le-dernier-correctif
+"Check the launcher version top right, next to the minimize button: BUILD 2.0.50. That's what counts.": "看启动器右上角、“最小化”按钮旁边的版本号：“版本 2.0.50”（BUILD 2.0.50）。以这个为准。",
+"If the proxySha256= line starts with 701A216C, that's the 2.0.50 game patch (the same as in 2.0.49). If it starts with F6611F3A (2.0.48), 48268B10 (2.0.47) or F3A66A96 (2.0.46), relaunch the game from the updated launcher.": "如果 proxySha256= 这一行以 701A216C 开头，那就是 2.0.50 的游戏补丁（和 2.0.49 的一样）。如果以 F6611F3A（2.0.48）、48268B10（2.0.47）或 F3A66A96（2.0.46）开头，就用更新后的启动器重新启动游戏。",
+"check the version top right in the launcher, u need BUILD 2.0.50. to check the game patch, open rotk-shotgun-sprint.ini with notepad: if proxySha256= starts with 701A216C it's the 2.0.50 one (no .ini doesn't always mean ur outdated)": "看启动器右上角的版本号，得是“版本 2.0.50”（BUILD 2.0.50）。想确认游戏补丁的话，用记事本打开 rotk-shotgun-sprint.ini 看看：如果 proxySha256= 开头是 701A216C 就是 2.0.50 的补丁（没有 .ini 文件也不一定是版本旧）",
 "Check you have the latest patch": "确认你装的是最新补丁",
-"Check the launcher version top right, next to the minimize button: BUILD 2.0.48. That's what counts.": "看启动器右上角、“最小化”按钮旁边的版本号：“版本 2.0.48”（BUILD 2.0.48）。以这个为准。",
 "Older: update the launcher, then fully close the game and launch it again.": "版本更旧的话：先更新启动器，然后彻底关闭游戏，再重新启动。",
 "To check the game patch is in place: after launching the game, open your game folder, right-click rotk-shotgun-sprint.ini > Open with > Notepad.": "确认游戏补丁是否生效：启动游戏后，打开你的游戏文件夹，右键点击 rotk-shotgun-sprint.ini > “打开方式” > “记事本”。",
-"If the proxySha256= line starts with F6611F3A, that's the 2.0.48 game patch. If it starts with 48268B10 (2.0.47), F3A66A96 (2.0.46) or 3D2319E6 (2.0.45), relaunch the game from the updated launcher.": "如果 proxySha256= 这一行以 F6611F3A 开头，那就是 2.0.48 的游戏补丁。如果以 48268B10（2.0.47）、F3A66A96（2.0.46）或 3D2319E6（2.0.45）开头，就用更新后的启动器重新启动游戏。",
 "No rotk-shotgun-sprint.ini? That doesn't mean you're outdated: the launcher only writes it when the game patch is turned on for that launch, the server decides. Fixes (trio reboot, aiming, shot locking when aiming while moving) only load after closing and relaunching the game.": "没有 rotk-shotgun-sprint.ini 文件？这不代表你的版本过旧：只有当次启动启用了游戏补丁，启动器才会写入这个文件，这由服务器决定。修复内容（三排复活、瞄准、移动中瞄准时开枪卡住）只有在关闭并重新启动游戏后才会加载。",
-"check the version top right in the launcher, u need BUILD 2.0.48. to check the game patch, open rotk-shotgun-sprint.ini with notepad: if proxySha256= starts with F6611F3A it's the 2.0.48 one (no .ini doesn't always mean ur outdated)": "看启动器右上角的版本号，得是“版本 2.0.48”（BUILD 2.0.48）。想确认游戏补丁的话，用记事本打开 rotk-shotgun-sprint.ini 看看：如果 proxySha256= 开头是 F6611F3A 就是 2.0.48 的补丁（没有 .ini 文件也不一定是版本旧）",
 
 // Fiche : les-droits-administrateur-n-ont-pas-pu-etre-verifies
 "\"Administrator rights could not be verified\"": "“无法确认 Windows 管理员权限”",
@@ -590,11 +602,11 @@ t: {
 "since 2.0.44 the game follows the launcher language. change it with the flag top right in the launcher (next to BUILD), then close and relaunch the game": "从 2.0.44 开始游戏跟着启动器的语言走。在启动器右上角（“版本”旁边）点国旗切换语言，然后关掉游戏再重开",
 
 // Fiche : reboot-en-trio-tu-restes-spectateur-invisible
+"Update the launcher (latest version: 2.0.50) and relaunch the game.": "更新启动器（最新版本：2.0.50），然后重新启动游戏。",
+"update the launcher (2.0.50) and relaunch the game. if it continues, update ur graphics driver": "把启动器更新到 2.0.50 再重开游戏。还这样的话就更新一下显卡驱动",
 "Trio reboot: you stay spectating, invisible": "三排复活：一直处于观战状态，人物隐身",
-"Update the launcher (latest version: 2.0.48) and relaunch the game.": "更新启动器（最新版本：2.0.48），然后重新启动游戏。",
 "If rotk-shotgun-sprint.log shows \"bridge allocation refused\": update the graphics driver and Windows.": "如果 rotk-shotgun-sprint.log 里出现“bridge allocation refused”：更新显卡驱动和 Windows。",
 "In game, reboot is now called \"Réintégration\" in French (\"RÉINTÉGRATION\" on the map) and \"召回\" in Chinese.": "游戏里的复活（reboot）现在中文显示为“召回”，法语显示为“Réintégration”（地图上是“RÉINTÉGRATION”）。",
-"update the launcher (2.0.48) and relaunch the game. if it continues, update ur graphics driver": "把启动器更新到 2.0.48 再重开游戏。还这样的话就更新一下显卡驱动",
 "Trio reboot card: the launcher version to have is now 2.0.48.": "三排复活条目：现在需要的启动器版本是 2.0.48。",
 
 // Fiche : windows-defender
@@ -606,12 +618,12 @@ t: {
 "add ur game folder and C:\\Program Files\\ROTK Launcher as exclusions in windows security, and restore the file from protection history if it's gone": "在 windows 安全中心里把你的游戏文件夹和 C:\\Program Files\\ROTK Launcher 加到排除项，文件没了的话去保护历史记录里还原",
 
 // Fiche : acces-controle-aux-dossiers-bloque-le-jeu-acces-refuse
+"If \"Controlled folder access\" is already Off, it's not this: check your antivirus (Defender, Norton, Avast cards). If the message says \"Access denied to G:\\ (EPERM, mkdir)\" (just a drive letter), it's the bug with a folder sitting right on a drive, fixed in launcher 2.0.49: close and reopen the launcher so it updates. Otherwise, redo the client setup into a folder like G:\\Games (\"Client setup\" card).": "如果“受控文件夹访问”已经是“关”，那就不是这个原因：检查你的杀毒软件（看 Defender、Norton、Avast 条目）。如果提示是“Access denied to G:\\ (EPERM, mkdir)”（只有一个盘符），那是 ROTK 文件夹直接放在磁盘根目录下的 bug，已在 2.0.49 版启动器修复：关掉启动器再重新打开，让它更新。否则就重新进行客户端设置，装到 G:\\Games 这样的文件夹里（见“客户端安装”条目）。",
 "Controlled folder access blocks the game (\"Access denied\", EPERM)": "受控文件夹访问阻止了游戏（“Access denied”，EPERM）",
 "Go to Virus & threat protection, then at the very bottom: Manage ransomware protection.": "进入“病毒和威胁防护”，然后拉到最下面：“管理勒索软件防护”。",
 "If \"Controlled folder access\" is On: click Allow an app through Controlled folder access.": "如果“受控文件夹访问”是“开”：点击“允许应用通过受控文件夹访问”。",
 "Add an allowed app > Browse all apps: pick H1Z1.exe in your ROTK game folder (e.g. C:\\Games\\ROTK\\H1Z1.exe).": "添加允许的应用 > 浏览所有应用：在你的 ROTK 游戏文件夹里选择 H1Z1.exe 文件（例如 C:\\Games\\ROTK\\H1Z1.exe 这个路径）。",
 "Do it again for C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe, then relaunch the launcher.": "对 C:\\Program Files\\ROTK Launcher\\ROTK Launcher.exe 再做一次，然后重新打开启动器。",
-"If \"Controlled folder access\" is already Off, it's not this: check your antivirus (Defender, Norton, Avast cards). If the message says \"Access denied to G:\\ (EPERM, mkdir)\" (just a drive letter), it's your install folder: redo the client setup into a folder like G:\\Games (\"Client setup\" card).": "如果“受控文件夹访问”已经是“关”，那就不是这个原因：检查你的杀毒软件（看 Defender、Norton、Avast 条目）。如果提示是“Access denied to G:\\ (EPERM, mkdir)”（只有一个盘符），问题出在你的安装文件夹：重新进行“客户端设置”（CLIENT SETUP），装到 G:\\Games 这样的文件夹里（见“客户端安装”条目）。",
 "in ransomware protection > allow an app, add ur H1Z1.exe and ROTK Launcher.exe": "去勒索软件防护 > 允许应用通过受控文件夹访问，把你的 H1Z1.exe 和 ROTK Launcher.exe 加进去",
 
 // Fiche : norton
@@ -638,6 +650,18 @@ t: {
 "i wouldn't, reshade injects into the game. for colors, raise ur gpu's vibrance instead": "我不建议用，reshade 会注入游戏。想要颜色好看点，调高显卡的鲜艳度就行",
 
 // Patch notes
+"Launcher 2.0.50: version to have and new game patch fingerprint (701A216C) in the latest patch card and in the Current status. F6611F3A is now the 2.0.48 one. Broken characters: still there in 2.0.50.": "启动器 2.0.50：“最新补丁”条目和“当前状态”里更新了需要的版本和新的游戏补丁指纹（701A216C）。F6611F3A 现在是 2.0.48 的指纹。乱码：2.0.50 里仍然存在。",
+"Client setup: a ROTK folder right on a drive (D:\\ROTK) works since 2.0.49. Same update in the \"Access denied to G:\\\" note of the Controlled folder access card.": "客户端设置：从 2.0.49 开始，直接放在磁盘根目录下的 ROTK 文件夹（D:\\ROTK）也可以用了。“受控文件夹访问”条目里关于“Access denied to G:\\”的说明也一起更新了。",
+"\"Unexpected token … is not valid JSON\": fixed in 2.0.49, the manual steps stay for cases that persist.": "“Unexpected token … is not valid JSON”：已在 2.0.49 修复，手动步骤保留给仍然解决不了的情况。",
+"Unknown dinput8.dll: the message everyone saw with 2.0.49 goes away by reopening the launcher (2.0.50).": "未知的 dinput8.dll：2.0.49 时大家都看到的这个提示，重新打开启动器（2.0.50）就会消失。",
+"Ban card: no more “Report a mistake” button. A ban can only be contested by email at banappeals@rotk.app, the wiki can't do anything about it.": "封禁条目：去掉了“内容纠错”按钮。封禁只能通过邮件 banappeals@rotk.app 申诉，Wiki 对此无能为力。",
+"\"Asset download refused (HTTP 504)\" card: the asset server times out, fully close the launcher and press PLAY again after 2-3 minutes: the download picks up where it stopped.": "“Asset download refused (HTTP 504)”条目：资源服务器超时，彻底关闭启动器，过 2-3 分钟再点“开始游戏”：下载会从中断的地方继续。",
+"Smart App Control card: on an up-to-date Windows 11 (April 2026 update or newer), you can turn it back on from the same menu, without resetting the PC.": "智能应用控制条目：在已更新的 Windows 11 上（2026 年 4 月更新或更新的版本），可以在同一个菜单里重新打开它，不用重置电脑。",
+"A wiki link opens in the language of whoever clicks it: the flag they already picked, otherwise their browser language. An English player who gets a French link sees the card in English. The address also shows the page language.": "Wiki 链接会用点击者的语言打开：先看对方已经选过的国旗，没有的话就用浏览器语言。英语玩家收到法语链接时，看到的是英语版条目。地址栏里也会显示页面语言。",
+"New wiki logo: the ROTK skull on a page with a folded corner, top left and in the navigation bar. The wiki is still unofficial.": "新的 Wiki 标志：折了一角的页面上印着 ROTK 骷髅，放在左上角和导航栏里。这个 Wiki 仍然是非官方的。",
+"The browser tab icon uses the new logo too.": "浏览器标签页图标也换成了新标志。",
+"The navigation bar now lines up with the top of the page, from the logo to the flags. On medium screens, Search and Patch notes turn into icons so every link stays visible, and on phones the flags no longer go off screen.": "导航栏现在和页面顶部对齐，从标志一直到国旗。在中等尺寸的屏幕上，“搜索”和“更新日志”会变成图标，所有链接都能看到；在手机上，国旗也不会再跑出屏幕。",
+"The wiki has its own address: rotkguide.com. Old warlinee.github.io/h1-guide links still work and bring you there.": "Wiki 有了自己的地址：rotkguide.com。旧的 warlinee.github.io/h1-guide 链接仍然能用，会自动跳转过来。",
 "\"IN GAME\" card: click \"IN GAME\" > \"Close H1Z1\" to close an H1Z1 left open without a window.": "“游戏中”（IN GAME）条目：点“游戏中” > “关闭 H1Z1”，就能关掉没有窗口却还在运行的 H1Z1。",
 "Vivox card: the launcher puts vivoxsdk_x64.dll back by itself, the copy from Steam stays for when it can't.": "Vivox 条目：启动器会自己把 vivoxsdk_x64.dll 放回去，从 Steam 复制的方法留给它做不到的情况。",
 "\"Report not sent\" card: Debug unticks itself after each received report.": "“Report not sent”（报告未发送）条目：每次报告被收到后，“调试”会自动取消勾选。",
