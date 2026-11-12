@@ -9,7 +9,7 @@ syn: [["闪退", "崩溃", "崩了", "秒退"], ["打不开", "启动不了", "�
 stop: ["怎么", "么办", "为什", "什么", "一直", "我的", "可以", "请问", "不了", "还是", "就是", "这个", "那个", "没有", "总是", "老是", "一下", "求助", "大佬", "兄弟", "帮忙", "问题", "游戏", "不能", "无法", "出现", "显示", "的", "了", "吗", "呢", "啊", "吧", "我", "你", "是", "在", "有", "和", "就", "都", "也", "很", "还", "又", "被", "把", "个", "一", "不"],
 t: {
 // Interface
-"<b>Unofficial wiki.</b> Made by a volunteer player from real Discord cases. This is not a ROTK website: bans, tickets and announcements go through the official channels.": "<b>非官方 Wiki。</b>由一名志愿玩家根据 Discord 上的真实案例整理。这不是 ROTK 的网站：封禁、工单和公告请走官方渠道。",
+"<b>Haven't answered the ROTK survey yet?</b> 11 questions, 3 min, until Nov 15: 3,000 Crowns for you, plus crates and ROTK sets in the draw. <a href=\"https://rotk.app/surveys?lang=en\" target=\"_blank\" rel=\"noopener\">Answer the survey</a>": "<b>还没填 ROTK 问卷？</b>11 道题，约 3 分钟，截止 11/15：填完送你 3,000 Crowns，还能参加抽奖赢箱子和 ROTK 套装。<a href=\"https://rotk.app/surveys\" target=\"_blank\" rel=\"noopener\">去填问卷</a>",
 "ROTK Wiki": "ROTK Wiki",
 "Unofficial": "非官方",
 "Community wiki, unofficial": "社区 Wiki，非官方",
@@ -120,6 +120,7 @@ t: {
 "<span class=\"dot s-ok\"></span>Confirmed: fixed it for players <span class=\"dot s-lead\"></span>Lead: worth trying, not sure yet <span class=\"dot s-known\"></span>Known, no fix: known bug, nothing to do on your side for now": "<span class=\"dot s-ok\"></span>已确认：已经帮玩家解决了问题 <span class=\"dot s-lead\"></span>线索：值得一试，但还不确定 <span class=\"dot s-known\"></span>已知问题，暂无修复：已知 bug，目前你这边不用做任何事",
 "Categories": "分类",
 "Notice": "声明",
+"ROTK survey": "ROTK 问卷",
 "Official ROTK site, rotk.app (new tab)": "ROTK 官方网站 rotk.app（新标签页）",
 "Official ROTK Discord (new tab)": "ROTK 官方 Discord（新标签页）",
 "Error code": "错误代码",
